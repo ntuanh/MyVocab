@@ -1,0 +1,122 @@
+/* General Styling */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#chat-container {
+    width: 100%;
+    max-width: 600px;
+    height: 90vh;
+    max-height: 800px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#chat-header {
+    background-color: #4A90E2; /* A nice blue */
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#chat-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+#chat-box {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Styling for messages */
+.message {
+    display: flex;
+    max-width: 80%;
+}
+
+.message p {
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: 18px;
+    line-height: 1.4;
+}
+
+.bot-message {
+    align-self: flex-start;
+}
+
+.bot-message p {
+    background-color: #e9e9eb;
+    color: #000;
+}
+
+.user-message {
+    align-self: flex-end;
+}
+
+.user-message p {
+    background-color: #4A90E2;
+    color: white;
+}
+
+/* Typing indicator */
+.typing-indicator p {
+    font-style: italic;
+    color: #888;
+    background-color: transparent !important;
+}
+
+#input-container {
+    border-top: 1px solid #ddd;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+#chat-form {
+    display: flex;
+    gap: 10px;
+}
+
+#user-input {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 1rem;
+}
+
+#user-input:focus {
+    outline: none;
+    border-color: #4A90E2;
+}
+
+#chat-form button {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#chat-form button:hover {
+    background-color: #357ABD;
+}
