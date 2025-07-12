@@ -13,14 +13,12 @@ A modern web-based chatbot application built with Flask and Google's Gemini AI. 
 
 ## 🛠️ Tech Stack
 
-<div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
-  <img src="https://techstack-generator.vercel.app/python-icon.svg" alt="Python" width="100" height="100" />
-  <img src="https://techstack-generator.vercel.app/flask-icon.svg" alt="Flask" width="100" height="100" />
-  <img src="https://techstack-generator.vercel.app/html5-icon.svg" alt="HTML5" width="100" height="100" />
-  <img src="https://techstack-generator.vercel.app/css3-icon.svg" alt="CSS3" width="100" height="100" />
-  <img src="https://techstack-generator.vercel.app/javascript-icon.svg" alt="JavaScript" width="100" height="100" />
-  <img src="https://techstack-generator.vercel.app/google-icon.svg" alt="Google AI" width="100" height="100" />
-</div>
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Google AI](https://img.shields.io/badge/Google%20AI-4285F4?style=for-the-badge&logo=google&logoColor=white)
 
 ### Backend
 - **Python 3.x**: Core programming language
