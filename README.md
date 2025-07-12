@@ -13,6 +13,15 @@ A modern web-based chatbot application built with Flask and Google's Gemini AI. 
 
 ## 🛠️ Tech Stack
 
+<div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+  <img src="https://techstack-generator.vercel.app/python-icon.svg" alt="Python" width="100" height="100" />
+  <img src="https://techstack-generator.vercel.app/flask-icon.svg" alt="Flask" width="100" height="100" />
+  <img src="https://techstack-generator.vercel.app/html5-icon.svg" alt="HTML5" width="100" height="100" />
+  <img src="https://techstack-generator.vercel.app/css3-icon.svg" alt="CSS3" width="100" height="100" />
+  <img src="https://techstack-generator.vercel.app/javascript-icon.svg" alt="JavaScript" width="100" height="100" />
+  <img src="https://techstack-generator.vercel.app/google-icon.svg" alt="Google AI" width="100" height="100" />
+</div>
+
 ### Backend
 - **Python 3.x**: Core programming language
 - **Flask**: Lightweight web framework for API endpoints
