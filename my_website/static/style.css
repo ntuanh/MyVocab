@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 :root {
-    --bg-color: #E8E8E8; /* Nền xanh lá mạ trong ảnh */
+    --bg-color: #6A8E7F; /* Nền xanh lá cây trong ảnh */
     --panel-blue: #A0D2EB;
     --panel-pink: #E4AEC5;
+    --panel-dark-blue: #4A5899;
     --panel-dark: #444;
     --text-color: #333;
+    --light-text-color: #fff;
     --border-radius: 20px;
 }
 
@@ -22,16 +24,18 @@ body {
 
 #app-container {
     display: grid;
-    grid-template-columns: 1fr 2fr; /* Chia 2 cột */
-    gap: 2rem;
+    grid-template-columns: 1.2fr 2fr 1fr;
+    gap: 1.5rem;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
+    height: 90vh;
 }
 
-#left-panel, #main-content {
+#left-panel, #main-content, #right-panel {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
+    overflow: hidden;
 }
 
 .panel {
@@ -40,6 +44,7 @@ body {
     border-radius: var(--border-radius);
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     color: var(--text-color);
+    overflow-y: auto;
 }
 
 .panel h3 {
@@ -47,12 +52,20 @@ body {
     border-bottom: 2px solid rgba(0,0,0,0.1);
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
+    position: sticky;
+    top: -1.5rem;
+    background-color: inherit;
+    padding-top: 1.5rem;
+}
+.panel p {
+    margin-bottom: 0;
 }
 
 #search-container {
     background-color: var(--panel-dark);
     padding: 1rem;
     border-radius: var(--border-radius);
+    flex-shrink: 0;
 }
 
 #search-form {
@@ -63,9 +76,7 @@ body {
     padding: 0.5rem 1rem;
 }
 
-#search-form i {
-    color: #999;
-}
+#search-form i { color: #999; }
 
 #word-input {
     border: none;
@@ -82,23 +93,41 @@ body {
     align-items: center;
     background-color: var(--panel-blue);
     color: rgba(0,0,0,0.5);
+    font-style: italic;
+    padding: 0;
+    overflow: hidden;
 }
 
-/* Màu sắc cho các panel chính */
+#word-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    border-radius: var(--border-radius);
+    background-color: #eee; /* Nền cho ảnh khi đang tải */
+}
+
+/* Màu sắc cho các panel */
 #definition-panel { background-color: var(--panel-blue); }
-#vietnamese-panel, #example-panel { background-color: var(--panel-pink); }
+#vietnamese-panel, #example-panel, #ipa-panel, #synonym-panel { background-color: var(--panel-pink); }
+#family-panel {
+    background-color: var(--panel-dark-blue);
+    color: var(--light-text-color);
+}
+#family-panel h3 {
+    border-bottom-color: rgba(255,255,255,0.2);
+    background-color: var(--panel-dark-blue);
+}
 
 /* Styling cho phần nghĩa bị ẩn */
 #vietnamese-panel.hidden {
     position: relative;
     cursor: pointer;
 }
-
 #vietnamese-panel.hidden p {
     filter: blur(5px);
     user-select: none;
 }
-
 #vietnamese-panel.hidden::after {
     content: 'Nhấn để xem nghĩa';
     position: absolute;
@@ -110,7 +139,23 @@ body {
     border-radius: 10px;
     font-weight: 500;
 }
+#vietnamese-panel.revealed::after { display: none; }
 
-#vietnamese-panel.revealed::after {
-    display: none;
+/* Styling cho danh sách tag */
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.tag {
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+#synonym-panel .tag {
+    background-color: rgba(0,0,0,0.1);
+}
+#family-panel .tag {
+    background-color: rgba(255,255,255,0.2);
 }

@@ -9,6 +9,7 @@
 </head>
 <body>
     <div id="app-container">
+        <!-- CỘT BÊN TRÁI -->
         <aside id="left-panel">
             <div id="search-container">
                 <form id="search-form">
@@ -17,11 +18,12 @@
                 </form>
             </div>
             <div id="image-panel" class="panel">
-                <!-- Phần hình ảnh sẽ được thêm sau -->
-                <p>Image Placeholder</p>
+                <!-- Sửa lỗi: Đã xóa thẻ <p> thừa ở đây -->
+                <img id="word-image" src="" alt="Image for the searched word">
             </div>
         </aside>
 
+        <!-- CỘT Ở GIỮA -->
         <main id="main-content">
             <div id="vietnamese-panel" class="panel pink hidden">
                 <h3>Nghĩa Tiếng Việt</h3>
@@ -36,6 +38,22 @@
                 <p id="example-sentence">...</p>
             </div>
         </main>
+
+        <!-- CỘT BÊN PHẢI -->
+        <aside id="right-panel">
+            <div id="ipa-panel" class="panel pink">
+                <h3>IPA</h3>
+                <p id="pronunciation-ipa">...</p>
+            </div>
+            <div id="synonym-panel" class="panel pink">
+                <h3>Similar Meaning</h3>
+                <div id="synonym-list" class="tag-list"></div>
+            </div>
+            <div id="family-panel" class="panel dark-blue">
+                <h3>Family Words</h3>
+                <div id="family-list" class="tag-list"></div>
+            </div>
+        </aside>
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
