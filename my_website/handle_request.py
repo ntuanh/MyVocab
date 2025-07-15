@@ -1,85 +1,67 @@
 # my_website/handle_request.py
 
 import os
-import google.generativeai as genai
+import requests
+from flask import jsonify  # Import jsonify để tạo phản hồi JSON
 from dotenv import load_dotenv
 from pathlib import Path
+from googletrans import Translator
 
-# --- PHẦN CẤU HÌNH - CHỈ CHẠY 1 LẦN KHI FILE ĐƯỢC IMPORT ---
-
-# 1. Chỉ định đường dẫn tới file .env một cách chính xác
+# --- CẤU HÌNH ---
 env_path = Path(__file__).parent.parent / ".env"
-
-# 2. Chỉ cần gọi load_dotenv MỘT LẦN với đường dẫn đã chỉ định
 load_dotenv(dotenv_path=env_path)
-
-# 3. Cấu hình API key và khởi tạo model
-# Đặt khối này ở cấp độ module để nó chỉ chạy một lần.
-model = None  # Khởi tạo model là None trước
-try:
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        # Ném ra lỗi để dừng chương trình nếu không có key, giúp debug dễ hơn
-        raise ValueError("CRITICAL: Not found GEMINI_API_KEY. Check file .env and path pls!.")
-
-    genai.configure(api_key=api_key)
-
-    # Sử dụng model mới nhất, nhanh và hiệu quả cho chatbot
-    model = genai.GenerativeModel('gemini-1.5-flash-latest')
-    print("INFO: Gemini model loaded successfully.")
-
-except (ValueError, AttributeError) as e:
-    # In ra lỗi nghiêm trọng nếu không thể cấu hình
-    print(e)
+API_BASE_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
+translator = Translator()
 
 
-# --- PHẦN HÀM XỬ LÝ (PHIÊN BẢN SỬA LỖI MỚI NHẤT) ---
-
-def get_gemini_response(user_message, chat_history):
+def get_dictionary_data(user_word):
     """
-    Nhận một từ tiếng Anh từ người dùng và trả về 5 thông tin chi tiết về từ đó.
+    Lấy dữ liệu từ điển và trả về một đối tượng dictionary của Python.
     """
-    if model is None:
-        print("ERROR: Model is not initialized.")
-        return "Xin lỗi, hệ thống đang gặp lỗi cấu hình.", []
-
-    # --- BƯỚC 1: PYTHON KIỂM TRA TÍNH HỢP LỆ CỦA INPUT ---
-    # Kiểm tra xem user_message có phải là một từ đơn và chỉ chứa chữ cái không
-    if ' ' in user_message.strip() or not user_message.isalpha():
-        # Nếu có dấu cách hoặc có ký tự không phải chữ cái, trả về lỗi ngay lập tức
-        return "Vui lòng chỉ nhập một từ tiếng Anh hợp lệ (không chứa số, ký tự đặc biệt hoặc dấu cách).", []
-
-    # --- BƯỚC 2: TẠO PROMPT ĐƠN GIẢN HÓA CHO AI ---
-    # Chúng ta đã xóa câu lệnh điều kiện "If the input is invalid..."
-    system_prompt = f"""
-    You are an expert English-Vietnamese dictionary assistant.
-    A user has provided the English word: "{user_message}".
-    Your only task is to provide 5 specific pieces of information about this word.
-    Format the output using Markdown, with each point on a new line.
-
-    1.  **Nghĩa Tiếng Việt:** (Provide common Vietnamese meaning(s)).
-    2.  **English Definition:** (Provide a clear English-English definition).
-    3.  **Example Sentence:** (Provide a practical example sentence in English).
-    4.  **Word Family:** (List related words like nouns, verbs, adjectives).
-    5.  **Pronunciation (IPA):** (Provide the IPA transcription).
-
-    Do not add any other text, conversation, or introduction.
-    """
+    word_to_lookup = user_word.strip().lower()
+    if ' ' in word_to_lookup:
+        # Thay vì trả về chuỗi, trả về JSON lỗi
+        return jsonify({'error': "Vui lòng chỉ nhập một từ tiếng Anh."}), 400
 
     try:
-        response = model.generate_content(system_prompt)
+        url = API_BASE_URL + word_to_lookup
+        response = requests.get(url, timeout=10)
 
-        # ... (Phần code xử lý response an toàn giữ nguyên như cũ) ...
-        print("DEBUG: Full Gemini Response:", response)
+        if response.status_code == 404:
+            return jsonify({'error': f"Không tìm thấy từ '{word_to_lookup}' trong từ điển."}), 404
 
-        if response.candidates and response.candidates[0].content.parts:
-            bot_text = response.text
-        else:
-            bot_text = "Xin lỗi, không thể xử lý từ này. Vui lòng thử một từ khác."
-            print("WARN: Response was blocked or empty. Feedback:", response.prompt_feedback)
+        response.raise_for_status()
+        data = response.json()[0]
 
-        return bot_text, []
+        # Bóc tách dữ liệu
+        meaning = data.get('meanings', [{}])[0]
+        definition_obj = meaning.get('definitions', [{}])[0]
+        definition = definition_obj.get('definition', 'N/A')
+        example = definition_obj.get('example', 'N/A')
 
+        # Dịch định nghĩa sang tiếng Việt
+        vietnamese_meaning = "N/A"
+        if definition != 'N/A':
+            try:
+                translation = translator.translate(definition, src='en', dest='vi')
+                vietnamese_meaning = translation.text
+            except Exception as e:
+                print(f"Lỗi dịch: {e}")
+
+        # Tạo một dictionary để trả về
+        result_data = {
+            "word": data.get('word', user_word),
+            "vietnamese_meaning": vietnamese_meaning,
+            "english_definition": definition,
+            "example": example
+            # Các trường khác sẽ được thêm sau (image, synonyms, family_words)
+        }
+
+        # Trả về dữ liệu dưới dạng JSON
+        return jsonify(result_data)
+
+    except requests.exceptions.RequestException as e:
+        return jsonify({'error': "Lỗi kết nối, không thể truy cập từ điển."}), 500
     except Exception as e:
-        print(f"Đã xảy ra lỗi nghiêm trọng khi gọi Gemini API: {e}")
-        return "Xin lỗi, tôi đang gặp sự cố hệ thống.", []
+        print(f"Lỗi xử lý: {e}")
+        return jsonify({'error': "Đã có lỗi xảy ra trong quá trình xử lý."}), 500

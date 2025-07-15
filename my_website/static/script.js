@@ -1,70 +1,63 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const chatForm = document.getElementById('chat-form');
-    const userInput = document.getElementById('user-input');
-    const chatBox = document.getElementById('chat-box');
+    // Lấy các element cần thiết
+    const searchForm = document.getElementById('search-form');
+    const wordInput = document.getElementById('word-input');
 
-    // Hàm để thêm tin nhắn vào giao diện
-    function addMessage(text, sender) {
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add('message', `${sender}-message`);
+    const vietnamesePanel = document.getElementById('vietnamese-panel');
+    const vietnameseMeaningEl = document.getElementById('vietnamese-meaning');
+    const definitionEl = document.getElementById('english-definition');
+    const exampleEl = document.getElementById('example-sentence');
 
-    const messageP = document.createElement('p');
+    // Hàm cập nhật giao diện
+    function updateUI(data) {
+        definitionEl.textContent = data.english_definition || 'N/A';
+        exampleEl.textContent = data.example || 'N/A';
+        vietnameseMeaningEl.textContent = data.vietnamese_meaning || 'N/A';
 
-    if (sender === 'bot') {
-        // Nếu là tin nhắn của bot, dùng Marked.js để chuyển Markdown thành HTML
-        messageP.innerHTML = marked.parse(text);
-    } else {
-        // Nếu là tin nhắn người dùng, chỉ hiển thị văn bản thuần
-        messageP.textContent = text;
+        // Reset lại trạng thái của panel tiếng Việt
+        vietnamesePanel.classList.add('hidden');
+        vietnamesePanel.classList.remove('revealed');
     }
 
-    messageDiv.appendChild(messageP);
-    chatBox.appendChild(messageDiv);
+    // Xử lý sự kiện tìm kiếm
+    searchForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const word = wordInput.value.trim();
+        if (!word) return;
 
-    // Tự động cuộn xuống tin nhắn mới nhất
-    chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    // Hàm để xử lý khi form được gửi
-    chatForm.addEventListener('submit', async (e) => {
-        e.preventDefault(); // Ngăn trang web tải lại
-
-        const userMessage = userInput.value.trim();
-        if (userMessage === '') return;
-
-        // Hiển thị ngay tin nhắn của người dùng
-        addMessage(userMessage, 'user');
-
-        // Xóa nội dung trong ô nhập liệu
-        userInput.value = '';
+        // Hiển thị trạng thái loading
+        definitionEl.textContent = 'Searching...';
+        exampleEl.textContent = '...';
+        vietnameseMeaningEl.textContent = '...';
 
         try {
-            // Gửi request đến backend (endpoint /chat)
             const response = await fetch('/chat', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                // Gửi tin nhắn dưới dạng JSON
-                body: JSON.stringify({
-                    message: userMessage,
-                    user_id: 'default_user' // Trong ứng dụng thực tế, đây nên là một ID duy nhất cho mỗi người dùng
-                }),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: word })
             });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
             const data = await response.json();
-            const botResponse = data.response;
 
-            // Hiển thị câu trả lời của bot
-            addMessage(botResponse, 'bot');
-
+            if (response.ok) {
+                updateUI(data);
+            } else {
+                // Hiển thị lỗi từ server
+                definitionEl.textContent = data.error || 'An unknown error occurred.';
+                exampleEl.textContent = 'N/A';
+                vietnameseMeaningEl.textContent = 'N/A';
+            }
         } catch (error) {
-            console.error('Error:', error);
-            addMessage('Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại.', 'bot');
+            console.error('Fetch Error:', error);
+            definitionEl.textContent = 'Failed to connect to the server.';
+        }
+    });
+
+    // Xử lý sự kiện nhấn để xem nghĩa
+    vietnamesePanel.addEventListener('click', () => {
+        if (vietnamesePanel.classList.contains('hidden')) {
+            vietnamesePanel.classList.remove('hidden');
+            vietnamesePanel.classList.add('revealed');
         }
     });
 });

@@ -1,122 +1,116 @@
-/* General Styling */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+    --bg-color: #E8E8E8; /* Nền xanh lá mạ trong ảnh */
+    --panel-blue: #A0D2EB;
+    --panel-pink: #E4AEC5;
+    --panel-dark: #444;
+    --text-color: #333;
+    --border-radius: 20px;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f0f2f5;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
     margin: 0;
+    padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
-#chat-container {
+#app-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Chia 2 cột */
+    gap: 2rem;
     width: 100%;
-    max-width: 600px;
-    height: 90vh;
-    max-height: 800px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+}
+
+#left-panel, #main-content {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    gap: 2rem;
 }
 
-#chat-header {
-    background-color: #4A90E2; /* A nice blue */
-    color: white;
-    padding: 15px 20px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.panel {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    color: var(--text-color);
 }
 
-#chat-header h2 {
-    margin: 0;
-    font-size: 1.2rem;
+.panel h3 {
+    margin-top: 0;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
-#chat-box {
-    flex-grow: 1;
-    padding: 20px;
-    overflow-y: auto;
+#search-container {
+    background-color: var(--panel-dark);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+}
+
+#search-form {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
 }
 
-/* Styling for messages */
-.message {
-    display: flex;
-    max-width: 80%;
+#search-form i {
+    color: #999;
 }
 
-.message p {
-    margin: 0;
-    padding: 10px 15px;
-    border-radius: 18px;
-    line-height: 1.4;
-}
-
-.bot-message {
-    align-self: flex-start;
-}
-
-.bot-message p {
-    background-color: #e9e9eb;
-    color: #000;
-}
-
-.user-message {
-    align-self: flex-end;
-}
-
-.user-message p {
-    background-color: #4A90E2;
-    color: white;
-}
-
-/* Typing indicator */
-.typing-indicator p {
-    font-style: italic;
-    color: #888;
-    background-color: transparent !important;
-}
-
-#input-container {
-    border-top: 1px solid #ddd;
-    padding: 15px;
-    background-color: #f9f9f9;
-}
-
-#chat-form {
-    display: flex;
-    gap: 10px;
-}
-
-#user-input {
-    flex-grow: 1;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    padding: 10px 15px;
-    font-size: 1rem;
-}
-
-#user-input:focus {
-    outline: none;
-    border-color: #4A90E2;
-}
-
-#chat-form button {
-    background-color: #4A90E2;
-    color: white;
+#word-input {
     border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    outline: none;
+    width: 100%;
+    font-size: 1.1rem;
+    padding-left: 0.75rem;
 }
 
-#chat-form button:hover {
-    background-color: #357ABD;
+#image-panel {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--panel-blue);
+    color: rgba(0,0,0,0.5);
+}
+
+/* Màu sắc cho các panel chính */
+#definition-panel { background-color: var(--panel-blue); }
+#vietnamese-panel, #example-panel { background-color: var(--panel-pink); }
+
+/* Styling cho phần nghĩa bị ẩn */
+#vietnamese-panel.hidden {
+    position: relative;
+    cursor: pointer;
+}
+
+#vietnamese-panel.hidden p {
+    filter: blur(5px);
+    user-select: none;
+}
+
+#vietnamese-panel.hidden::after {
+    content: 'Nhấn để xem nghĩa';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.7);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+#vietnamese-panel.revealed::after {
+    display: none;
 }

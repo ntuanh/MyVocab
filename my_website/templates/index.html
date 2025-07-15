@@ -3,33 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini Simple Chatbot</title>
-    <!-- Link đến file CSS trong thư mục static -->
+    <title>MyVocab - Từ điển thông minh</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
-    <div id="chat-container">
-        <div id="chat-header">
-            <h2>Gemini Chatbot</h2>
-        </div>
-        <div id="chat-box">
-            <!-- Tin nhắn chào mừng ban đầu -->
-            <div class="message bot-message">
-                <p>Chào bạn! Tôi có thể giúp bạn tra từ vựng , lưu từ , cung cấp ví dụ , gia đình từ , và kiểm tra </p>
-
+    <div id="app-container">
+        <aside id="left-panel">
+            <div id="search-container">
+                <form id="search-form">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="word-input" placeholder="Search for a word..." autocomplete="off">
+                </form>
             </div>
-        </div>
-        <div id="input-container">
-            <form id="chat-form">
-                <input type="text" id="user-input" placeholder="Nhập tin nhắn của bạn..." autocomplete="off" required>
-                <button type="submit">Gửi</button>
-            </form>
-        </div>
+            <div id="image-panel" class="panel">
+                <!-- Phần hình ảnh sẽ được thêm sau -->
+                <p>Image Placeholder</p>
+            </div>
+        </aside>
+
+        <main id="main-content">
+            <div id="vietnamese-panel" class="panel pink hidden">
+                <h3>Nghĩa Tiếng Việt</h3>
+                <p id="vietnamese-meaning">...</p>
+            </div>
+            <div id="definition-panel" class="panel blue">
+                <h3>English Definition</h3>
+                <p id="english-definition">Nhập một từ vào ô tìm kiếm để bắt đầu.</p>
+            </div>
+            <div id="example-panel" class="panel pink">
+                <h3>Example</h3>
+                <p id="example-sentence">...</p>
+            </div>
+        </main>
     </div>
 
-    <!-- Link đến file JavaScript trong thư mục static -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
