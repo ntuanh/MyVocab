@@ -29,22 +29,17 @@ document.addEventListener('DOMContentLoaded', () => {
      * @param {object} data - Đối tượng JSON chứa thông tin từ vựng
      */
     function updateUI(data) {
-        // Lưu dữ liệu từ hiện tại để có thể dùng cho việc lưu trữ
         currentWordData = data;
 
-        // Cập nhật các panel chính
-        definitionEl.textContent = data.english_definition || 'N/A';
+        definitionEl.innerHTML = data.english_definition || 'N/A'; // Dùng innerHTML để render link nếu có
         exampleEl.textContent = data.example || 'N/A';
         vietnameseMeaningEl.textContent = data.vietnamese_meaning || 'N/A';
 
-        // Reset trạng thái ẩn/hiện của panel nghĩa tiếng Việt
         vietnamesePanel.classList.add('hidden');
         vietnamesePanel.classList.remove('revealed');
 
-        // Cập nhật các panel bên phải
         ipaEl.textContent = data.pronunciation_ipa || 'N/A';
 
-        // Tạo tag cho từ đồng nghĩa
         synonymListEl.innerHTML = '';
         if (data.synonyms && data.synonyms.length > 0) {
             data.synonyms.forEach(word => {
@@ -57,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
             synonymListEl.innerHTML = 'N/A';
         }
 
-        // Tạo tag cho họ từ
         familyListEl.innerHTML = '';
         if (data.family_words && data.family_words.length > 0) {
              data.family_words.forEach(word => {
@@ -70,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
             familyListEl.innerHTML = 'N/A';
         }
 
-        // Cập nhật hình ảnh
         if (data.image_url) {
             imageEl.src = data.image_url;
             imageEl.alt = `Image for '${data.word}'`;
@@ -82,14 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
             imageEl.alt = 'No image found';
         }
 
-        // Cập nhật trạng thái nút "Save" dựa trên dữ liệu từ backend
         if (data.is_saved) {
-            // Nếu từ này đã được lưu từ trước, hiển thị trạng thái "Saved"
-            saveButton.disabled = true; // Bạn có thể đặt là false nếu muốn cho phép lưu lại
+            saveButton.disabled = true;
             saveButton.classList.add('saved');
             saveButton.innerHTML = '<i class="fas fa-check"></i> Saved!';
         } else {
-            // Nếu đây là từ mới, cho phép lưu
             saveButton.disabled = false;
             saveButton.classList.remove('saved');
             saveButton.innerHTML = '<i class="fas fa-rocket"></i> Save';
@@ -98,10 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Reset giao diện về trạng thái ban đầu hoặc đang loading
-     * @param {string} message - Tin nhắn để hiển thị trong ô định nghĩa
+     * @param {string} message - Tin nhắn để hiển thị trong ô định nghĩa (có thể chứa HTML)
      */
     function resetUI(message) {
-        definitionEl.textContent = message;
+        definitionEl.innerHTML = message; // Dùng innerHTML để hiển thị link gợi ý
         exampleEl.textContent = '...';
         vietnameseMeaningEl.textContent = '...';
         ipaEl.textContent = '...';
@@ -111,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         imageEl.alt = 'Image for the searched word';
         imagePanel.style.backgroundColor = 'var(--panel-blue)';
 
-        // Vô hiệu hóa và reset nút Save
         currentWordData = null;
         saveButton.disabled = true;
         saveButton.classList.remove('saved');
@@ -138,11 +127,34 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 updateUI(data);
             } else {
-                resetUI(data.error || 'An unknown error occurred.');
+                let errorMessage = data.error || 'An unknown error occurred.';
+
+                // Kiểm tra xem có trường 'suggestion' trong phản hồi lỗi không
+                if (data.suggestion) {
+                    // Tạo một liên kết HTML có thể click để tra từ gợi ý
+                    errorMessage += ` <br>Bạn có muốn tra từ: <a href="#" class="suggestion-link" data-word="${data.suggestion}">${data.suggestion}</a>?`;
+                }
+
+                resetUI(errorMessage);
             }
         } catch (error) {
             console.error('Fetch Error:', error);
             resetUI('Failed to connect to the server.');
+        }
+    });
+
+    // Thêm một trình xử lý sự kiện tập trung vào document.body
+    // để bắt các click trên các link gợi ý được tạo động
+    document.body.addEventListener('click', (e) => {
+        // Kiểm tra xem phần tử được click có phải là link gợi ý không
+        if (e.target.classList.contains('suggestion-link')) {
+            e.preventDefault(); // Ngăn hành vi mặc định của thẻ <a> (tải lại trang)
+            const suggestedWord = e.target.dataset.word;
+
+            // Tự động điền từ gợi ý vào ô search
+            wordInput.value = suggestedWord;
+            // Kích hoạt lại sự kiện 'submit' của form để bắt đầu một cuộc tra cứu mới
+            searchForm.dispatchEvent(new Event('submit', { cancelable: true }));
         }
     });
 
@@ -173,14 +185,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 saveButton.classList.add('saved');
                 saveButton.innerHTML = '<i class="fas fa-check"></i> Saved!';
-                // Cập nhật lại trạng thái đã lưu cho dữ liệu hiện tại
                 currentWordData.is_saved = true;
             } else {
                 alert(`Error: ${result.error}`);
                 saveButton.disabled = false;
                 saveButton.textContent = 'Save';
             }
-
         } catch (error) {
             console.error('Save Error:', error);
             alert('Failed to save word. Please check the server.');
@@ -189,5 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Gọi resetUI lúc ban đầu để thiết lập trạng thái ban đầu
     resetUI('Nhập một từ vào ô tìm kiếm để bắt đầu.');
 });

@@ -198,3 +198,15 @@ body {
     color: white;
     transform: scale(1.05);
 }
+
+/* Thêm vào cuối file style.css */
+.suggestion-link {
+    font-weight: 600;
+    color: var(--panel-dark-blue);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.suggestion-link:hover {
+    color: #000;
+}
