@@ -185,3 +185,50 @@ def get_image_from_pexels(query):
     except Exception as e:
         print(f"Lỗi Pexels: {e}")
     return None
+
+# Thêm hàm này vào cuối file handle_request.py
+
+def get_all_saved_words():
+    """Đọc và trả về tất cả các từ trong file saved_words.json."""
+    try:
+        if SAVED_WORDS_FILE.exists():
+            with open(SAVED_WORDS_FILE, 'r', encoding='utf-8') as f:
+                saved_data = json.load(f)
+            return jsonify(saved_data)
+        else:
+            # Trả về một danh sách rỗng nếu file không tồn tại
+            return jsonify([])
+    except Exception as e:
+        print(f"Lỗi khi đọc file đã lưu: {e}")
+        return jsonify({"error": "Không thể đọc dữ liệu đã lưu."}), 500
+
+
+# Thêm vào cuối file handle_request.py
+
+def delete_word_from_file(word_to_delete):
+    """Xóa một từ khỏi file saved_words.json."""
+    try:
+        if not SAVED_WORDS_FILE.exists():
+            return jsonify({"error": "File không tồn tại."}), 404
+
+        with open(SAVED_WORDS_FILE, 'r', encoding='utf-8') as f:
+            saved_data = json.load(f)
+
+        # Tạo một danh sách mới không chứa từ cần xóa
+        # So sánh chữ thường để đảm bảo tìm đúng
+        original_length = len(saved_data)
+        new_data = [item for item in saved_data if item.get('word', '').lower() != word_to_delete.lower()]
+
+        # Kiểm tra xem có thực sự xóa được từ nào không
+        if len(new_data) == original_length:
+            return jsonify({"error": "Không tìm thấy từ để xóa."}), 404
+
+        # Ghi lại file với danh sách mới
+        with open(SAVED_WORDS_FILE, 'w', encoding='utf-8') as f:
+            json.dump(new_data, f, ensure_ascii=False, indent=4)
+
+        return jsonify({"status": "success", "message": f"Đã xóa từ '{word_to_delete}'."})
+
+    except Exception as e:
+        print(f"Lỗi khi xóa file: {e}")
+        return jsonify({'error': 'Lỗi server khi xóa từ.'}), 500

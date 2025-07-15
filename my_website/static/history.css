@@ -1,0 +1,114 @@
+/* history.css */
+
+body {
+    padding: 0;
+    align-items: flex-start; /* Cho phép cuộn */
+}
+
+#history-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+#history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+#history-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: var(--panel-dark-blue);
+}
+
+.back-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.back-link:hover {
+    color: var(--panel-pink);
+}
+.back-link i {
+    margin-right: 0.5rem;
+}
+
+.word-card {
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.word-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.word-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.word-ipa {
+    font-size: 1rem;
+    color: #777;
+}
+
+.word-card-body p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.word-card-body strong {
+    color: var(--panel-dark-blue);
+}
+
+.loading-text {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+/* Thêm vào cuối file history.css */
+
+.word-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+.delete-btn i {
+    margin-right: 0.5rem;
+}

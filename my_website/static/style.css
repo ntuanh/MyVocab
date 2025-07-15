@@ -210,3 +210,13 @@ body {
 .suggestion-link:hover {
     color: #000;
 }
+
+#data-button {
+    background-color: var(--panel-blue);
+    color: var(--text-color);
+    text-decoration: none;
+}
+#data-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
