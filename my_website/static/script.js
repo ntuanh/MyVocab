@@ -18,19 +18,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const synonymListEl = document.getElementById('synonym-list');
     const familyListEl = document.getElementById('family-list');
 
+    // Nút Save
+    const saveButton = document.getElementById('save-button');
+
+    // Biến tạm để lưu dữ liệu của từ đang hiển thị
+    let currentWordData = null;
+
     /**
-     * Cập nhật toàn bộ giao diện với dữ liệu mới từ API
+     * Cập nhật toàn bộ giao diện với dữ liệu mới từ API hoặc từ cache
      * @param {object} data - Đối tượng JSON chứa thông tin từ vựng
      */
     function updateUI(data) {
+        // Lưu dữ liệu từ hiện tại để có thể dùng cho việc lưu trữ
+        currentWordData = data;
+
+        // Cập nhật các panel chính
         definitionEl.textContent = data.english_definition || 'N/A';
         exampleEl.textContent = data.example || 'N/A';
         vietnameseMeaningEl.textContent = data.vietnamese_meaning || 'N/A';
+
+        // Reset trạng thái ẩn/hiện của panel nghĩa tiếng Việt
         vietnamesePanel.classList.add('hidden');
         vietnamesePanel.classList.remove('revealed');
 
+        // Cập nhật các panel bên phải
         ipaEl.textContent = data.pronunciation_ipa || 'N/A';
 
+        // Tạo tag cho từ đồng nghĩa
         synonymListEl.innerHTML = '';
         if (data.synonyms && data.synonyms.length > 0) {
             data.synonyms.forEach(word => {
@@ -43,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             synonymListEl.innerHTML = 'N/A';
         }
 
+        // Tạo tag cho họ từ
         familyListEl.innerHTML = '';
         if (data.family_words && data.family_words.length > 0) {
              data.family_words.forEach(word => {
@@ -60,11 +75,24 @@ document.addEventListener('DOMContentLoaded', () => {
             imageEl.src = data.image_url;
             imageEl.alt = `Image for '${data.word}'`;
             imageEl.style.display = 'block';
-            imagePanel.style.backgroundColor = 'transparent'; // Nền trong suốt để ảnh nổi bật
+            imagePanel.style.backgroundColor = 'transparent';
         } else {
             imageEl.style.display = 'none';
-            imagePanel.style.backgroundColor = 'var(--panel-blue)'; // Hiện lại màu nền
+            imagePanel.style.backgroundColor = 'var(--panel-blue)';
             imageEl.alt = 'No image found';
+        }
+
+        // Cập nhật trạng thái nút "Save" dựa trên dữ liệu từ backend
+        if (data.is_saved) {
+            // Nếu từ này đã được lưu từ trước, hiển thị trạng thái "Saved"
+            saveButton.disabled = true; // Bạn có thể đặt là false nếu muốn cho phép lưu lại
+            saveButton.classList.add('saved');
+            saveButton.innerHTML = '<i class="fas fa-check"></i> Saved!';
+        } else {
+            // Nếu đây là từ mới, cho phép lưu
+            saveButton.disabled = false;
+            saveButton.classList.remove('saved');
+            saveButton.innerHTML = '<i class="fas fa-rocket"></i> Save';
         }
     }
 
@@ -82,9 +110,15 @@ document.addEventListener('DOMContentLoaded', () => {
         imageEl.style.display = 'none';
         imageEl.alt = 'Image for the searched word';
         imagePanel.style.backgroundColor = 'var(--panel-blue)';
+
+        // Vô hiệu hóa và reset nút Save
+        currentWordData = null;
+        saveButton.disabled = true;
+        saveButton.classList.remove('saved');
+        saveButton.innerHTML = '<i class="fas fa-rocket"></i> Save';
     }
 
-    // Xử lý sự kiện tìm kiếm
+    // Xử lý sự kiện tìm kiếm từ
     searchForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const word = wordInput.value.trim();
@@ -119,4 +153,42 @@ document.addEventListener('DOMContentLoaded', () => {
             vietnamesePanel.classList.add('revealed');
         }
     });
+
+    // Xử lý sự kiện click nút Save
+    saveButton.addEventListener('click', async () => {
+        if (!currentWordData) return;
+
+        saveButton.disabled = true;
+        saveButton.textContent = 'Saving...';
+
+        try {
+            const response = await fetch('/save_word', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(currentWordData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                saveButton.classList.add('saved');
+                saveButton.innerHTML = '<i class="fas fa-check"></i> Saved!';
+                // Cập nhật lại trạng thái đã lưu cho dữ liệu hiện tại
+                currentWordData.is_saved = true;
+            } else {
+                alert(`Error: ${result.error}`);
+                saveButton.disabled = false;
+                saveButton.textContent = 'Save';
+            }
+
+        } catch (error) {
+            console.error('Save Error:', error);
+            alert('Failed to save word. Please check the server.');
+            saveButton.disabled = false;
+            saveButton.textContent = 'Save';
+        }
+    });
+
+    // Gọi resetUI lúc ban đầu để vô hiệu hóa nút save
+    resetUI('Nhập một từ vào ô tìm kiếm để bắt đầu.');
 });

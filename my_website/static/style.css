@@ -159,3 +159,42 @@ body {
 #family-panel .tag {
     background-color: rgba(255,255,255,0.2);
 }
+
+/* Thêm vào cuối file style.css */
+
+#action-buttons {
+    display: flex;
+    justify-content: flex-start; /* Hoặc center, flex-end tùy ý */
+    gap: 1rem;
+    margin-top: -0.5rem; /* Điều chỉnh khoảng cách với panel trên */
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+#save-button {
+    background-color: var(--panel-pink);
+    color: var(--text-color);
+}
+
+#save-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+#save-button.saved {
+    background-color: #90ee90; /* Màu xanh lá cây khi đã lưu */
+    color: white;
+    transform: scale(1.05);
+}
