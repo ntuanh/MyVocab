@@ -5,17 +5,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hàm để thêm tin nhắn vào giao diện
     function addMessage(text, sender) {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message', `${sender}-message`);
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', `${sender}-message`);
 
-        const messageP = document.createElement('p');
+    const messageP = document.createElement('p');
+
+    if (sender === 'bot') {
+        // Nếu là tin nhắn của bot, dùng Marked.js để chuyển Markdown thành HTML
+        messageP.innerHTML = marked.parse(text);
+    } else {
+        // Nếu là tin nhắn người dùng, chỉ hiển thị văn bản thuần
         messageP.textContent = text;
+    }
 
-        messageDiv.appendChild(messageP);
-        chatBox.appendChild(messageDiv);
+    messageDiv.appendChild(messageP);
+    chatBox.appendChild(messageDiv);
 
-        // Tự động cuộn xuống tin nhắn mới nhất
-        chatBox.scrollTop = chatBox.scrollHeight;
+    // Tự động cuộn xuống tin nhắn mới nhất
+    chatBox.scrollTop = chatBox.scrollHeight;
     }
 
     // Hàm để xử lý khi form được gửi

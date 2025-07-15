@@ -33,27 +33,53 @@ except (ValueError, AttributeError) as e:
     print(e)
 
 
-# --- PHẦN HÀM XỬ LÝ ---
+# --- PHẦN HÀM XỬ LÝ (PHIÊN BẢN SỬA LỖI MỚI NHẤT) ---
 
 def get_gemini_response(user_message, chat_history):
     """
-    Gửi tin nhắn của người dùng và lịch sử chat đến Gemini để nhận phản hồi.
+    Nhận một từ tiếng Anh từ người dùng và trả về 5 thông tin chi tiết về từ đó.
     """
-    # Kiểm tra xem model đã được khởi tạo thành công chưa
     if model is None:
-        print("ERROR: Model is not initialized due to configuration error.")
-        return "Xin lỗi, hệ thống đang gặp lỗi cấu hình. Vui lòng liên hệ quản trị viên.", chat_history
+        print("ERROR: Model is not initialized.")
+        return "Xin lỗi, hệ thống đang gặp lỗi cấu hình.", []
+
+    # --- BƯỚC 1: PYTHON KIỂM TRA TÍNH HỢP LỆ CỦA INPUT ---
+    # Kiểm tra xem user_message có phải là một từ đơn và chỉ chứa chữ cái không
+    if ' ' in user_message.strip() or not user_message.isalpha():
+        # Nếu có dấu cách hoặc có ký tự không phải chữ cái, trả về lỗi ngay lập tức
+        return "Vui lòng chỉ nhập một từ tiếng Anh hợp lệ (không chứa số, ký tự đặc biệt hoặc dấu cách).", []
+
+    # --- BƯỚC 2: TẠO PROMPT ĐƠN GIẢN HÓA CHO AI ---
+    # Chúng ta đã xóa câu lệnh điều kiện "If the input is invalid..."
+    system_prompt = f"""
+    You are an expert English-Vietnamese dictionary assistant.
+    A user has provided the English word: "{user_message}".
+    Your only task is to provide 5 specific pieces of information about this word.
+    Format the output using Markdown, with each point on a new line.
+
+    1.  **Nghĩa Tiếng Việt:** (Provide common Vietnamese meaning(s)).
+    2.  **English Definition:** (Provide a clear English-English definition).
+    3.  **Example Sentence:** (Provide a practical example sentence in English).
+    4.  **Word Family:** (List related words like nouns, verbs, adjectives).
+    5.  **Pronunciation (IPA):** (Provide the IPA transcription).
+
+    Do not add any other text, conversation, or introduction.
+    """
 
     try:
-        # Bắt đầu phiên chat với lịch sử đã có
-        chat_session = model.start_chat(history=chat_history)
+        response = model.generate_content(system_prompt)
 
-        # Gửi tin nhắn mới
-        response = chat_session.send_message(user_message)
+        # ... (Phần code xử lý response an toàn giữ nguyên như cũ) ...
+        print("DEBUG: Full Gemini Response:", response)
 
-        # Trả về câu trả lời của bot và lịch sử mới nhất
-        return response.text, chat_session.history
+        if response.candidates and response.candidates[0].content.parts:
+            bot_text = response.text
+        else:
+            bot_text = "Xin lỗi, không thể xử lý từ này. Vui lòng thử một từ khác."
+            print("WARN: Response was blocked or empty. Feedback:", response.prompt_feedback)
+
+        return bot_text, []
 
     except Exception as e:
-        print(f"Đã xảy ra lỗi khi gọi Gemini API: {e}")
-        return "Xin lỗi, tôi đang gặp sự cố. Vui lòng thử lại sau.", chat_history
+        print(f"Đã xảy ra lỗi nghiêm trọng khi gọi Gemini API: {e}")
+        return "Xin lỗi, tôi đang gặp sự cố hệ thống.", []
