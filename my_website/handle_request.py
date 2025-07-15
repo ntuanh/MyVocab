@@ -10,7 +10,7 @@ import json
 import datetime
 from concurrent.futures import ThreadPoolExecutor
 
-# --- CẤU HÌNH ---
+# --- CẤU HÌNH ----
 # Đường dẫn đến file lưu trữ
 SAVED_WORDS_FILE = Path(__file__).parent.parent / "saved_words.json"
 

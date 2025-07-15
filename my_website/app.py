@@ -6,7 +6,6 @@ from handle_request import get_dictionary_data, save_word_to_file
 
 app = Flask(__name__)
 
-# --- ĐÂY LÀ ROUTE BỊ THIẾU HOẶC SAI ---
 @app.route('/')
 def index():
     """

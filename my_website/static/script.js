@@ -189,6 +189,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Gọi resetUI lúc ban đầu để vô hiệu hóa nút save
     resetUI('Nhập một từ vào ô tìm kiếm để bắt đầu.');
 });
