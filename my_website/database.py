@@ -10,7 +10,7 @@ def init_db():
     conn = sqlite3.connect(DATABASE_FILE)
     cursor = conn.cursor()
 
-    # 1. Bảng `words`
+    # SỬA LỖI: Cung cấp đầy đủ các cột cho bảng 'words'
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS words (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -23,7 +23,6 @@ def init_db():
         )
     ''')
 
-    # 2. Bảng `topics` để lưu các chủ đề
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS topics (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,7 +30,6 @@ def init_db():
         )
     ''')
 
-    # 3. Bảng `word_topics` để liên kết từ và chủ đề (quan hệ nhiều-nhiều)
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS word_topics (
             word_id INTEGER,
@@ -42,16 +40,15 @@ def init_db():
         )
     ''')
 
-    # Thêm một vài chủ đề mặc định nếu bảng topics rỗng
     cursor.execute("SELECT COUNT(*) FROM topics")
     if cursor.fetchone()[0] == 0:
-        # Chỉ tạo một chủ đề mặc định là "Daily life"
-        cursor.execute("INSERT OR IGNORE INTO topics (name) VALUES (?)", ('Daily life',))
+        default_topics = ['Daily life', 'Work', 'Cooking', 'Travel', 'Technology']
+        for topic in default_topics:
+            cursor.execute("INSERT OR IGNORE INTO topics (name) VALUES (?)", (topic,))
 
     conn.commit()
     conn.close()
     print("INFO: Database with topics initialized successfully.")
-
 def add_new_topic(topic_name):
     """Thêm một chủ đề mới vào database nếu nó chưa tồn tại."""
     conn = sqlite3.connect(DATABASE_FILE)
@@ -96,10 +93,22 @@ def save_word(word_data, topic_ids=None):
     conn = sqlite3.connect(DATABASE_FILE)
     cursor = conn.cursor()
     word_to_save = word_data.get('word')
+
+    print(f"\n--- Inside database.save_word ---")
+    print(f"Word to save: {word_to_save}")
+    print(f"Received topic_ids: {topic_ids}")
+
+    if not word_to_save:
+        print("ERROR in DB: word_to_save is None. Returning error.")
+        return {"status": "error", "message": "Word data is invalid."}
+
     try:
+        cursor.execute("PRAGMA foreign_keys = ON")
+
+        # --- SỬA LỖI CÚ PHÁP SQL Ở ĐÂY ---
         cursor.execute('''
-            INSERT OR IGNORE INTO words (word, vietnamese_meaning, english_definition, example, image_url)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT OR IGNORE INTO words (word, vietnamese_meaning, english_definition, example, image_url, priority_score)
+            VALUES (?, ?, ?, ?, ?, 1)
         ''', (
             word_to_save,
             word_data.get('vietnamese_meaning'),
@@ -112,29 +121,40 @@ def save_word(word_data, topic_ids=None):
 
         cursor.execute("SELECT id FROM words WHERE word = ?", (word_to_save,))
         word_id = cursor.fetchone()[0]
+        print(f"Found/Inserted word with ID: {word_id}")
 
-        if not topic_ids:  # Nếu người dùng không chọn topic nào
-            # Tìm ID của topic 'Daily life'
-            cursor.execute("SELECT id FROM topics WHERE name = ?", ('Daily life',))
-            default_topic = cursor.fetchone()
-            if default_topic:
-                topic_ids = [default_topic[0]]
+        if topic_ids is not None:
+            print(f"Processing topics for word ID {word_id} with topic IDs: {topic_ids}")
+            cursor.execute("DELETE FROM word_topics WHERE word_id = ?", (word_id,))
+            print(f"Deleted old topics for word ID {word_id}")
+            if topic_ids:
+                for topic_id in topic_ids:
+                    cursor.execute("INSERT INTO word_topics (word_id, topic_id) VALUES (?, ?)",
+                                   (word_id, int(topic_id)))
+                    print(f"Linked word ID {word_id} with topic ID {topic_id}")
             else:
-                # Trường hợp hi hữu 'Daily life' không tồn tại
-                topic_ids = []
+                # Logic gán chủ đề mặc định nếu không có topic nào được chọn
+                print("No topic IDs provided, linking to default 'Daily life'.")
+                cursor.execute("SELECT id FROM topics WHERE name = ?", ('Daily life',))
+                default_topic = cursor.fetchone()
+                if default_topic:
+                    cursor.execute("INSERT INTO word_topics (word_id, topic_id) VALUES (?, ?)",
+                                   (word_id, default_topic[0]))
+                    print(f"Linked word ID {word_id} with default topic ID {default_topic[0]}")
 
         conn.commit()
+        print("Transaction committed.")
 
         if was_newly_inserted:
             return {"status": "success", "message": "Word saved!"}
         else:
             return {"status": "updated", "message": "Word topics updated."}
-    except sqlite3.Error as e:
-        print(f"Lỗi DB khi lưu từ: {e}")
-        return {"status": "error", "message": "Failed to save word."}
+
+    except Exception as e:
+        print(f"DATABASE EXCEPTION in save_word: {e}")
+        return {"status": "error", "message": "Failed to save word due to a database error."}
     finally:
         conn.close()
-
 
 def get_all_topics():
     """

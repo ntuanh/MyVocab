@@ -76,12 +76,27 @@ def lookup_route():
 @app.route('/save_word', methods=['POST'])
 def save_word_route():
     """API để lưu một từ và các chủ đề liên quan."""
+    print("\n--- Received request on /save_word ---")  # Báo hiệu đã nhận được request
+
     data = request.get_json()
+    print(f"Request JSON data: {data}")  # In ra toàn bộ dữ liệu frontend gửi lên
+
     word_data = data.get('word_data')
-    topic_ids = data.get('topic_ids', [])  # Lấy danh sách topic_id, mặc định là rỗng
+    topic_ids = data.get('topic_ids', [])
+
+    # In ra các biến đã được bóc tách
+    print(f"Extracted word_data: {word_data}")
+    print(f"Extracted topic_ids: {topic_ids}")
+
     if not word_data or not isinstance(word_data, dict):
+        print("ERROR: word_data is invalid or missing. Aborting.")
         return jsonify({"error": "Dữ liệu từ không hợp lệ hoặc bị thiếu."}), 400
+
+    # Gọi hàm lưu và xem kết quả
+    print("Calling database.save_word...")
     result = save_word(word_data, topic_ids)
+    print(f"Result from database.save_word: {result}")
+
     return jsonify(result)
 
 @app.route('/manage_topics')
