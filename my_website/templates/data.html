@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyVocab - Saved Words</title>
+    <!-- Link đến file CSS chung -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Link đến thư viện icon Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="data-body">
+
+    <div id="data-container">
+        <h1 class="data-title">Saved Words</h1>
+        <p class="data-subtitle">Đây là tất cả các từ bạn đã lưu. Những từ có điểm ưu tiên (Priority Score) cao hơn sẽ xuất hiện thường xuyên hơn trong bài kiểm tra.</p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Word</th>
+                        <th>Definition</th>
+                        <th>Priority Score</th>
+                        <th>Actions</th> <!-- Cột mới cho các hành động -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dùng vòng lặp Jinja2 để duyệt qua danh sách 'words' mà app.py gửi sang -->
+                    {% for word in words %}
+                    <!-- Thêm thuộc tính data-id vào thẻ <tr> để JavaScript có thể xác định hàng này -->
+                    <tr data-id="{{ word.id }}">
+                        <td>{{ word.word }}</td>
+                        <td>{{ word.english_definition }}</td>
+                        <td style="text-align: center;">{{ word.priority_score }}</td>
+                        <td>
+                            <!-- Nút xóa với class và data-id để JavaScript bắt sự kiện -->
+                            <button class="delete-btn" data-id="{{ word.id }}">Delete</button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <!-- Hiển thị dòng này nếu không có từ nào được lưu -->
+                    <tr>
+                        <td colspan="4" style="text-align: center;">You haven't saved any words yet. Go back and save some!</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="/" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Dictionary
+        </a>
+    </div>
+
+    <!-- Link đến file JavaScript mới để xử lý logic cho trang này -->
+    <script src="{{ url_for('static', filename='data.js') }}"></script>
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 id="modal-title">Confirm Deletion</h3>
+            <p id="modal-text">Are you sure you want to delete this word?</p>
+            <div class="modal-actions">
+                <button id="modal-btn-cancel" class="modal-btn">Cancel</button>
+                <button id="modal-btn-confirm" class="modal-btn confirm">Delete</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

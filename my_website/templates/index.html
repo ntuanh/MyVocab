@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyVocab - Từ điển thông minh</title>
+    <!-- Link đến file CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Link đến thư viện icon Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -18,12 +20,12 @@
                 </form>
             </div>
             <div id="image-panel" class="panel">
-                <!-- Sửa lỗi: Đã xóa thẻ <p> thừa ở đây -->
                 <img id="word-image" src="" alt="Image for the searched word">
             </div>
+            <!-- CÁC NÚT HÀNH ĐỘNG MỚI -->
         </aside>
 
-        <!-- CỘT Ở GIỮA --->
+        <!-- CỘT Ở GIỮA -->
         <main id="main-content">
             <div id="vietnamese-panel" class="panel pink hidden">
                 <h3>Nghĩa Tiếng Việt</h3>
@@ -37,18 +39,19 @@
                 <h3>Example</h3>
                 <p id="example-sentence">...</p>
             </div>
-
-            <!-- NÚT SAVE MỚI -->
-            <div id="action-buttons">
-                <button id="save-button" class="action-btn" title="Save this word">
-                    <i class="fas fa-rocket"></i> Save
+            <div id="actions-panel">
+                <button id="save-btn" class="action-btn">
+                    <i class="fas fa-save"></i> Save Word
                 </button>
-                <a href="/history" id="data-button" class="action-btn" title="View saved words">
-                    <i class="fas fa-database"></i> Data
+                <a href="/exam" class="action-btn exam-link">
+                    <i class="fas fa-graduation-cap"></i> Go to Exam
+                </a>
+                <a href="/data" class="action-btn data-link">
+                    <i class="fas fa-database"></i> View Data
                 </a>
             </div>
-
         </main>
+
         <!-- CỘT BÊN PHẢI -->
         <aside id="right-panel">
             <div id="ipa-panel" class="panel pink">
@@ -66,6 +69,10 @@
         </aside>
     </div>
 
+    <!-- Link đến file JavaScript -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <div id="toast-notification" class="toast hidden">
+        <span id="toast-message"></span>
+    </div>
 </body>
 </html>
