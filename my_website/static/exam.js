@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /**
-     * Hàm gửi yêu cầu cập nhật điểm lên server sau khi đã biết đúng/sai
+     * update score to server
      */
     async function updateScoreOnServer(wordId, isCorrect) {
         try {

@@ -476,7 +476,7 @@ tbody tr:hover {
 }
 
 .modal-btn.confirm {
-    background-color: #dc3545; /* Màu đỏ */
+    background-color: #dc3545; /* red */
     color: white;
 }
 
@@ -484,7 +484,6 @@ tbody tr:hover {
     background-color: #c82333;
 }
 
-/* --- Styling cho nút Next Word (MỚI) --- */
 #feedback-card #next-word-btn {
     background-color: #fff;
     color: var(--text-color);
