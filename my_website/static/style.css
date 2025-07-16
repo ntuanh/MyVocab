@@ -483,3 +483,45 @@ tbody tr:hover {
 .modal-btn.confirm:hover {
     background-color: #c82333;
 }
+
+/* --- Styling cho nút Next Word (MỚI) --- */
+#feedback-card #next-word-btn {
+    background-color: #fff;
+    color: var(--text-color);
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 0.7rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem; /* Tạo khoảng cách với text ở trên */
+    transition: all 0.2s ease-in-out;
+}
+
+#feedback-card #next-word-btn:hover {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Tùy chỉnh màu chữ cho từng loại feedback */
+#feedback-card.correct #next-word-btn {
+    color: #155724; /* Màu xanh lá đậm */
+    border-color: #155724;
+}
+
+#feedback-card.correct #next-word-btn:hover {
+     background-color: #155724;
+     color: white;
+}
+
+#feedback-card.incorrect #next-word-btn {
+    color: #721c24; /* Màu đỏ đậm */
+    border-color: #721c24;
+}
+
+#feedback-card.incorrect #next-word-btn:hover {
+    background-color: #721c24;
+    color: white;
+}

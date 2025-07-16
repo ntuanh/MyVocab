@@ -59,6 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         if (!currentWord || answerInput.disabled) return;
 
+        const userAnswer_1 = answerInput.value.trim(); // Lấy và làm sạch input
+        if (userAnswer_1 === '') {
+            alert("Please enter your answer!"); // Hoặc có thể hiển thị một thông báo tinh tế hơn
+            return;
+        }
+
         const userAnswer = answerInput.value.trim().toLowerCase(); // Chuyển câu trả lời về chữ thường
         if (!userAnswer) return; // Không làm gì nếu người dùng không nhập
 
