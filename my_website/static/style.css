@@ -524,3 +524,31 @@ tbody tr:hover {
     background-color: #721c24;
     color: white;
 }
+
+/* Hiệu ứng rung cho ô input khi nhập rỗng */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shake 0.5s;
+}
+/* ... (các style cũ) ... */
+
+/* --- Styling cho Feedback Card (Cập nhật) --- */
+#feedback-card {
+    background-color: #f0f0f0; /* Màu nền trung tính mặc định */
+    color: #555;
+    text-align: center;
+}
+
+#motivational-quote p {
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+#answer-feedback.hidden {
+    display: none;
+}
