@@ -74,5 +74,25 @@
     <div id="toast-notification" class="toast hidden">
         <span id="toast-message"></span>
     </div>
+    <div id="save-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3>Save '<span id="modal-word-to-save"></span>'</h3>
+            <p>Select topics for this word. If none are selected, it will be saved to "Daily life".</p>
+
+            <div id="modal-topic-list" class="topic-list-container">
+                <!-- JavaScript sẽ điền các checkbox chủ đề vào đây -->
+            </div>
+
+            <div id="add-topic-container">
+                <input type="text" id="new-topic-input" placeholder="Or create a new topic...">
+                <button id="add-topic-btn">Add</button>
+            </div>
+
+            <div class="modal-actions">
+                <button id="modal-btn-cancel-save" class="modal-btn">Cancel</button>
+                <button id="modal-btn-confirm-save" class="modal-btn confirm">Confirm Save</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

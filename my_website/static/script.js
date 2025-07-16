@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Lấy các element cần thiết từ DOM
+    // --- LẤY TẤT CẢ CÁC ELEMENTS CẦN THIẾT TỪ DOM ---
+    // Thanh tìm kiếm
     const searchForm = document.getElementById('search-form');
     const wordInput = document.getElementById('word-input');
 
     // Panel bên trái
     const imageEl = document.getElementById('word-image');
     const imagePanel = document.getElementById('image-panel');
-    const saveBtn = document.getElementById('save-btn'); // Nút Save mới
+    const saveBtn = document.getElementById('save-btn');
 
     // Panel chính
     const vietnamesePanel = document.getElementById('vietnamese-panel');
@@ -19,75 +20,73 @@ document.addEventListener('DOMContentLoaded', () => {
     const synonymListEl = document.getElementById('synonym-list');
     const familyListEl = document.getElementById('family-list');
 
+    // Modal lưu từ
+    const saveModal = document.getElementById('save-modal');
+    const modalWordEl = document.getElementById('modal-word-to-save');
+    const modalTopicList = document.getElementById('modal-topic-list');
+    const newTopicInput = document.getElementById('new-topic-input');
+    const addTopicBtn = document.getElementById('add-topic-btn');
+    const cancelSaveBtn = document.getElementById('modal-btn-cancel-save');
+    const confirmSaveBtn = document.getElementById('modal-btn-confirm-save');
+
+    // Toast Notification
     const toast = document.getElementById('toast-notification');
     const toastMessage = document.getElementById('toast-message');
-    let toastTimeout; // Biến để quản lý thời gian hiển thị
+    let toastTimeout;
 
-    // Biến để lưu trữ dữ liệu của từ vừa tra thành công
+    // Biến toàn cục để lưu trữ dữ liệu của từ đang được hiển thị
     let currentWordData = null;
 
+    // --- ĐỊNH NGHĨA CÁC HÀM XỬ LÝ ---
+
     /**
-     * Cập nhật toàn bộ giao diện với dữ liệu mới từ API
-     * @param {object} data - Đối tượng JSON chứa thông tin từ vựng
+     * Hiển thị một thông báo nhỏ (toast) ở cuối màn hình.
+     * @param {string} message - Nội dung thông báo.
+     * @param {string} type - Loại thông báo ('success' hoặc 'error').
      */
-
-     function showToast(message, type = 'success') {
-        // Xóa timeout cũ nếu có
+    function showToast(message, type = 'success') {
         clearTimeout(toastTimeout);
-
-        // Cập nhật nội dung và class
         toastMessage.textContent = message;
-        toast.className = 'toast'; // Reset class
-        toast.classList.add(type); // Thêm class 'success' hoặc 'error'
-        toast.classList.add('show');
-
-        // Tự động ẩn sau 3 giây
+        toast.className = 'toast';
+        toast.classList.add(type, 'show');
         toastTimeout = setTimeout(() => {
             toast.classList.remove('show');
         }, 3000);
     }
 
+    /**
+     * Cập nhật toàn bộ giao diện với dữ liệu mới từ API hoặc cache.
+     * @param {object} data - Đối tượng JSON chứa thông tin từ vựng.
+     */
     function updateUI(data) {
-        // Lưu dữ liệu của từ hiện tại vào biến toàn cục
+        // LUÔN LUÔN cập nhật currentWordData với dữ liệu mới nhất.
         currentWordData = data;
 
-        // Cập nhật các panel
         definitionEl.textContent = data.english_definition || 'N/A';
         exampleEl.textContent = data.example || 'N/A';
         vietnameseMeaningEl.textContent = data.vietnamese_meaning || 'N/A';
         ipaEl.textContent = data.pronunciation_ipa || 'N/A';
 
-        // Reset lại trạng thái của panel tiếng Việt
         vietnamesePanel.classList.add('hidden');
         vietnamesePanel.classList.remove('revealed');
 
-        // Xóa nội dung cũ và tạo tag mới cho từ đồng nghĩa
-        synonymListEl.innerHTML = '';
-        if (data.synonyms && data.synonyms.length > 0) {
-            data.synonyms.forEach(word => {
-                const tag = document.createElement('span');
-                tag.className = 'tag';
-                tag.textContent = word;
-                synonymListEl.appendChild(tag);
-            });
-        } else {
-            synonymListEl.innerHTML = 'N/A';
-        }
+        const createTagList = (element, list) => {
+            element.innerHTML = '';
+            if (list && list.length > 0) {
+                list.forEach(item => {
+                    const tag = document.createElement('span');
+                    tag.className = 'tag';
+                    tag.textContent = item;
+                    element.appendChild(tag);
+                });
+            } else {
+                element.innerHTML = 'N/A';
+            }
+        };
 
-        // Tạo tag cho họ từ
-        familyListEl.innerHTML = '';
-        if (data.family_words && data.family_words.length > 0) {
-             data.family_words.forEach(word => {
-                const tag = document.createElement('span');
-                tag.className = 'tag';
-                tag.textContent = word;
-                familyListEl.appendChild(tag);
-            });
-        } else {
-            familyListEl.innerHTML = 'N/A';
-        }
+        createTagList(synonymListEl, data.synonyms);
+        createTagList(familyListEl, data.family_words);
 
-        // Cập nhật hình ảnh
         if (data.image_url) {
             imageEl.src = data.image_url;
             imageEl.alt = `Image for '${data.word}'`;
@@ -96,9 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             imageEl.style.display = 'none';
             imagePanel.style.backgroundColor = 'var(--panel-blue)';
-            imageEl.alt = 'No image found';
         }
-         if (data.is_saved) {
+
+        // Cập nhật trạng thái nút Save dựa trên cờ 'is_saved'
+        if (data.is_saved) {
             saveBtn.disabled = true;
             saveBtn.innerHTML = '<i class="fas fa-check"></i> Already Saved';
         } else {
@@ -108,54 +108,76 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Reset giao diện về trạng thái ban đầu hoặc đang loading
-     * @param {string} message - Tin nhắn để hiển thị trong ô định nghĩa
+     * Reset giao diện về trạng thái ban đầu hoặc đang loading.
      */
     function resetUI(message) {
         currentWordData = null; // Xóa dữ liệu từ cũ
         definitionEl.textContent = message;
-        exampleEl.textContent = '...';
-        vietnameseMeaningEl.textContent = '...';
-        ipaEl.textContent = '...';
-        synonymListEl.innerHTML = '';
-        familyListEl.innerHTML = '';
+        ['example-sentence', 'vietnamese-meaning', 'pronunciation-ipa'].forEach(id => {
+            document.getElementById(id).textContent = '...';
+        });
+        ['synonym-list', 'family-list'].forEach(id => {
+            document.getElementById(id).innerHTML = '';
+        });
         imageEl.style.display = 'none';
-        imageEl.alt = 'Image for the searched word';
         imagePanel.style.backgroundColor = 'var(--panel-blue)';
         saveBtn.disabled = false;
         saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Word';
     }
 
-    // Xử lý sự kiện tìm kiếm
+    /**
+     * Hiển thị modal để chọn chủ đề khi lưu từ.
+     */
+    async function showSaveModal() {
+        if (!currentWordData) return;
+        modalWordEl.textContent = currentWordData.word;
+
+        try {
+            const response = await fetch('/get_topics');
+            const topics = await response.json();
+
+            modalTopicList.innerHTML = '';
+            topics.forEach(topic => {
+                const topicDiv = document.createElement('div');
+                topicDiv.className = 'topic-checkbox';
+                topicDiv.innerHTML = `
+                    <input type="checkbox" id="modal-topic-${topic.id}" name="modal-topics" value="${topic.id}">
+                    <label for="modal-topic-${topic.id}">${topic.name}</label>
+                `;
+                modalTopicList.appendChild(topicDiv);
+            });
+            saveModal.classList.remove('hidden');
+        } catch (error) {
+            showToast("Could not load topics.", "error");
+        }
+    }
+
+    // --- GÁN CÁC SỰ KIỆN ---
+
+    // Sự kiện tìm kiếm
     searchForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const word = wordInput.value.trim();
         if (!word) return;
-
         resetUI('Searching...');
-
         try {
-            // Gọi đến endpoint /lookup mới
             const response = await fetch('/lookup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: word })
             });
-
             const data = await response.json();
-
             if (response.ok) {
                 updateUI(data);
             } else {
                 resetUI(data.error || 'An unknown error occurred.');
             }
         } catch (error) {
-            console.error('Fetch Error:', error);
             resetUI('Failed to connect to the server.');
         }
     });
 
-    // Xử lý sự kiện nhấn để xem nghĩa
+    // Sự kiện nhấn để xem nghĩa
     vietnamesePanel.addEventListener('click', () => {
         if (vietnamesePanel.classList.contains('hidden')) {
             vietnamesePanel.classList.remove('hidden');
@@ -163,44 +185,68 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Xử lý sự kiện nhấn nút Save
-    saveBtn.addEventListener('click', async () => {
+    // Sự kiện cho nút Save chính: chỉ mở modal
+    saveBtn.addEventListener('click', () => {
         if (!currentWordData || !currentWordData.word) {
             showToast('Please search for a word first!', 'error');
             return;
         }
+        showSaveModal();
+    });
 
-        // Vô hiệu hóa nút để tránh nhấn nhiều lần
-        saveBtn.disabled = true;
-        saveBtn.textContent = 'Saving...';
+    // Sự kiện cho nút "Add Topic" trong modal
+    addTopicBtn.addEventListener('click', async () => {
+        const newTopicName = newTopicInput.value.trim();
+        if (!newTopicName) return;
+        try {
+            const response = await fetch('/add_topic', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ topic_name: newTopicName })
+            });
+            const newTopic = await response.json();
+            if (newTopic && newTopic.id) {
+                const topicDiv = document.createElement('div');
+                topicDiv.className = 'topic-checkbox';
+                topicDiv.innerHTML = `
+                    <input type="checkbox" id="modal-topic-${newTopic.id}" name="modal-topics" value="${newTopic.id}" checked>
+                    <label for="modal-topic-${newTopic.id}">${newTopic.name}</label>
+                `;
+                modalTopicList.appendChild(topicDiv);
+                newTopicInput.value = '';
+            }
+        } catch (error) {
+            showToast("Failed to add topic.", "error");
+        }
+    });
 
+    // Sự kiện cho nút "Confirm Save" trong modal
+    confirmSaveBtn.addEventListener('click', async () => {
+        const selectedCheckboxes = document.querySelectorAll('input[name="modal-topics"]:checked');
+        const selectedTopicIds = Array.from(selectedCheckboxes).map(cb => cb.value);
         try {
             const response = await fetch('/save_word', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(currentWordData)
+                body: JSON.stringify({
+                    word_data: currentWordData,
+                    topic_ids: selectedTopicIds
+                })
             });
             const result = await response.json();
-
-            // Thay thế alert bằng toast
-            if (response.ok && result.status !== 'error') {
-                showToast(result.message, 'success');
-                // Cập nhật trạng thái nút ngay lập tức
+            showToast(result.message, result.status);
+            saveModal.classList.add('hidden');
+            if (result.status !== 'error') {
+                saveBtn.disabled = true;
                 saveBtn.innerHTML = '<i class="fas fa-check"></i> Already Saved';
-            } else {
-                showToast(result.message || 'An error occurred.', 'error');
-                // Nếu lỗi, kích hoạt lại nút
-                saveBtn.disabled = false;
-                saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Word';
             }
-
         } catch (error) {
-            console.error('Save Error:', error);
-            // Thay thế alert bằng toast
-            showToast('Failed to connect to server.', 'error');
-            // Kích hoạt lại nút
-            saveBtn.disabled = false;
-            saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Word';
+            showToast("Failed to save.", "error");
         }
+    });
+
+    // Sự kiện cho nút "Cancel" trong modal
+    cancelSaveBtn.addEventListener('click', () => {
+        saveModal.classList.add('hidden');
     });
 });

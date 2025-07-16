@@ -15,6 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackTextEl = document.getElementById('feedback-text');
     const nextWordBtn = document.getElementById('next-word-btn');
 
+    const topicSelectionContainer = document.getElementById('topic-selection-container');
+    const topicForm = document.getElementById('topic-form');
+
+    const examContainer = document.getElementById('exam-container');
+    const questionWordEl = document.getElementById('question-word');
+
+    const answerForm = document.getElementById('answer-form');
+    const changeTopicsBtn = document.getElementById('change-topics-btn');
+
+    let currentWord = null;
+    let selectedTopicIds = [];
+
     // Biến toàn cục để lưu thông tin từ hiện tại
     let currentWord = null;
 
@@ -23,6 +35,57 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Dọn dẹp và reset giao diện về trạng thái bắt đầu một câu hỏi mới.
      */
+
+     async function startExam() {
+        // Ẩn màn hình chọn, hiện màn hình kiểm tra
+        topicSelectionContainer.classList.add('hidden');
+        examContainer.classList.remove('hidden');
+
+        await getNewWord(); // Tải từ đầu tiên
+    }
+
+     async function getNewWord() {
+        // ... (hàm resetExamUI và getNewWord giữ nguyên như cũ,
+        // nhưng lời gọi fetch sẽ được sửa đổi) ...
+
+        try {
+            // Sửa lại lời gọi fetch để gửi topic_ids
+            const response = await fetch('/get_exam_word', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ topic_ids: selectedTopicIds }) // Gửi danh sách ID
+            });
+
+            if (!response.ok) {
+                // ... (xử lý lỗi như cũ) ...
+            }
+            // ... (xử lý kết quả như cũ) ...
+        } catch (error) {
+            // ...
+        }
+    }
+
+    topicForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Lấy tất cả các checkbox đã được tick
+        const checkedBoxes = document.querySelectorAll('input[name="topics"]:checked');
+
+        // Chuyển NodeList thành một mảng các giá trị (ID)
+        selectedTopicIds = Array.from(checkedBoxes).map(cb => cb.value);
+
+        console.log("Starting exam with topic IDs:", selectedTopicIds);
+
+        // Bắt đầu bài kiểm tra
+        startExam();
+    });
+
+    changeTopicsBtn.addEventListener('click', () => {
+        examContainer.classList.add('hidden');
+        topicSelectionContainer.classList.remove('hidden');
+        selectedTopicIds = []; // Reset lại danh sách đã chọn
+    });
+
     function resetExamUI() {
         // Ẩn phần phản hồi và hiện lại câu trích dẫn
         answerFeedback.classList.add('hidden');

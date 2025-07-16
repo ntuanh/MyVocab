@@ -9,10 +9,30 @@
     <!-- Link đến thư viện icon Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+<!-- my_website/templates/exam.html -->
 <body class="exam-body">
 
-    <!-- ĐẢM BẢO TOÀN BỘ NỘI DUNG NÀY NẰM BÊN TRONG THẺ BODY -->
-    <div id="exam-container">
+    <!-- MÀN HÌNH CHỌN CHỦ ĐỀ (HIỂN THỊ BAN ĐẦU) -->
+    <div id="topic-selection-container" class="panel">
+        <h1 class="exam-title">Choose Your Topics</h1>
+        <p class="data-subtitle">Select topics to review, or leave blank to review all words.</p>
+        <form id="topic-form">
+            <div id="topic-list-container">
+                <!-- JavaScript sẽ điền các checkbox chủ đề vào đây -->
+                {% for topic in topics %}
+                <div class="topic-checkbox">
+                    <input type="checkbox" id="topic-{{ topic.id }}" name="topics" value="{{ topic.id }}">
+                    <label for="topic-{{ topic.id }}">{{ topic.name }}</label>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" id="start-exam-btn">Start Exam</button>
+        </form>
+        <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dictionary</a>
+    </div>
+
+    <!-- GIAO DIỆN KIỂM TRA CHÍNH (SẼ BỊ ẨN BAN ĐẦU) -->
+    <div id="exam-container" class="hidden">
         <h1 class="exam-title">Vocabulary Exam</h1>
 
         <div id="question-card" class="panel">
@@ -31,11 +51,9 @@
         </form>
 
         <div id="feedback-card" class="panel">
-            <!-- Phần hiển thị mặc định (câu trích dẫn) -->
             <div id="motivational-quote">
-                <p>"Learn more, earn more."</p>
+                <p>"The beautiful thing about learning is that no one can take it away from you."</p>
             </div>
-            <!-- Phần hiển thị sau khi trả lời (sẽ bị ẩn ban đầu) -->
             <div id="answer-feedback" class="hidden">
                 <h3 id="feedback-title"></h3>
                 <p id="feedback-text"></p>
@@ -43,11 +61,9 @@
             <button id="next-word-btn">Next Word</button>
         </div>
 
-        <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dictionary</a>
+        <button id="change-topics-btn" class="back-link">Change Topics</button>
     </div>
 
-    <!-- Link đến file JavaScript riêng cho trang exam -->
     <script src="{{ url_for('static', filename='exam.js') }}"></script>
-
 </body>
 </html>

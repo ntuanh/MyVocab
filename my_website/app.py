@@ -1,85 +1,138 @@
 # my_website/app.py
+
 from flask import Flask, render_template, request, jsonify
+
+# Import tất cả các hàm cần thiết từ các file khác
 from handle_request import get_dictionary_data
-# Import các hàm từ database.py
-from database import init_db, save_word, get_word_for_exam, update_word_score , get_all_saved_words , delete_word_by_id
-from database import get_correct_answer_by_id
+from database import (
+    init_db,
+    save_word,
+    get_word_for_exam,
+    update_word_score,
+    get_all_saved_words,
+    delete_word_by_id,
+    get_correct_answer_by_id,
+    get_all_topics,
+    add_new_topic
+)
 
+# Khởi tạo ứng dụng Flask
 app = Flask(__name__)
-# Khởi tạo database khi ứng dụng bắt đầu
-init_db()
+
+# Khởi tạo database một lần duy nhất khi ứng dụng bắt đầu
+# Thao tác này sẽ tạo file myvocab.db và các bảng nếu chúng chưa tồn tại.
+with app.app_context():
+    init_db()
 
 
-# --- Endpoint tra từ điển (giữ nguyên) ---
+# --- CÁC ROUTE ĐỂ RENDER TRANG (HTML) ---
+
 @app.route('/')
 def index():
+    """Render trang tra từ điển chính."""
     return render_template('index.html')
 
 
-@app.route('/lookup', methods=['POST'])  # Đổi tên endpoint cho rõ ràng
-def lookup():
+@app.route('/add_topic', methods=['POST'])
+def add_topic_route():
     data = request.get_json()
-    user_message = data.get('message')
-    return get_dictionary_data(user_message)
+    topic_name = data.get('topic_name')
+    if not topic_name:
+        return jsonify({"error": "Topic name cannot be empty."}), 400
 
-
-# --- Các Endpoint mới cho chức năng Lưu và Kiểm tra ---
-
-@app.route('/save_word', methods=['POST'])
-def save_word_route():
-    word_data = request.get_json()
-    result = save_word(word_data)
-    return jsonify(result)
+    new_topic = add_new_topic(topic_name.strip())
+    if new_topic:
+        return jsonify(new_topic), 201  # 201 Created
+    else:
+        return jsonify({"error": "Failed to create topic."}), 500
 
 @app.route('/exam')
 def exam_page():
-    return render_template('exam.html')
+    """Render trang kiểm tra từ vựng."""
+    # Lấy danh sách chủ đề để truyền sang cho trang exam
+    topics = get_all_topics()
+    return render_template('exam.html', topics=topics)
 
-@app.route('/delete_word/<int:word_id>', methods=['DELETE'])
-def delete_word_route(word_id):
-    """Endpoint để xóa một từ."""
-    result = delete_word_by_id(word_id)
-    return jsonify(result)
 
 @app.route('/data')
 def data_page():
-    """Trang hiển thị tất cả các từ đã lưu."""
+    """Render trang hiển thị tất cả các từ đã lưu."""
     saved_words = get_all_saved_words()
     return render_template('data.html', words=saved_words)
 
-@app.route('/get_exam_word', methods=['GET'])
+
+# --- CÁC ENDPOINT API (TRẢ VỀ DỮ LIỆU JSON) ---
+
+@app.route('/lookup', methods=['POST'])
+def lookup_route():
+    """API để tra cứu một từ."""
+    data = request.get_json()
+    user_message = data.get('message')
+    # get_dictionary_data đã trả về một phản hồi JSON hoàn chỉnh
+    return get_dictionary_data(user_message)
+
+
+@app.route('/save_word', methods=['POST'])
+def save_word_route():
+    """API để lưu một từ và các chủ đề liên quan."""
+    data = request.get_json()
+    word_data = data.get('word_data')
+    topic_ids = data.get('topic_ids', [])  # Lấy danh sách topic_id, mặc định là rỗng
+    if not word_data or not isinstance(word_data, dict):
+        return jsonify({"error": "Dữ liệu từ không hợp lệ hoặc bị thiếu."}), 400
+    result = save_word(word_data, topic_ids)
+    return jsonify(result)
+
+
+@app.route('/get_exam_word', methods=['POST'])
 def get_exam_word_route():
-    word = get_word_for_exam()
+    """API để lấy một từ để kiểm tra, có thể lọc theo chủ đề."""
+    data = request.get_json()
+    topic_ids = data.get('topic_ids', None)
+
+    word = get_word_for_exam(topic_ids)
+
     if word:
         return jsonify(word)
-    return jsonify({"error": "Không có từ nào để kiểm tra. Hãy lưu một vài từ trước!"}), 404
+
+    # Sửa lỗi: Đảm bảo chuỗi được đóng đúng cách
+    return jsonify({"error": "Không có từ nào phù hợp với chủ đề đã chọn."}), 404
 
 
 @app.route('/submit_answer', methods=['POST'])
 def submit_answer_route():
+    """API để cập nhật điểm sau khi người dùng trả lời."""
     data = request.get_json()
     word_id = data.get('id')
-    user_answer = data.get('answer')
-
-    # Logic kiểm tra đơn giản (so sánh chuỗi sau khi làm sạch)
-    # Trong thực tế, có thể cần logic so sánh linh hoạt hơn
-    # Ở đây chúng ta sẽ lấy đáp án đúng từ DB và để frontend so sánh
-    is_correct = data.get('is_correct')  # Giả sử frontend tự quyết định đúng/sai trước
+    is_correct = data.get('is_correct')
     result = update_word_score(word_id, is_correct)
-
     return jsonify(result)
 
 
 @app.route('/get_answer/<int:word_id>', methods=['GET'])
 def get_answer_route(word_id):
-    """Endpoint để lấy đáp án đúng cho một từ."""
+    """API để lấy đáp án đúng cho một từ."""
     correct_answer = get_correct_answer_by_id(word_id)
 
     if correct_answer is not None:
         return jsonify({"correct_answer": correct_answer})
-    else:
-        return jsonify({"error": "Word not found in database."}), 404
+    return jsonify({"error": "Word not found in database."}), 404
 
 
+@app.route('/delete_word/<int:word_id>', methods=['DELETE'])
+def delete_word_route(word_id):
+    """API để xóa một từ."""
+    result = delete_word_by_id(word_id)
+    return jsonify(result)
+
+
+@app.route('/get_topics', methods=['GET'])
+def get_topics_route():
+    """API để lấy danh sách tất cả các chủ đề."""
+    topics = get_all_topics()
+    return jsonify(topics)
+
+
+# Đoạn này để có thể chạy server trực tiếp bằng lệnh `python my_website/app.py`
 if __name__ == '__main__':
     app.run(debug=True)

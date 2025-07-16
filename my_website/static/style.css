@@ -552,3 +552,84 @@ tbody tr:hover {
 #answer-feedback.hidden {
     display: none;
 }
+
+/* ... (các style cũ) ... */
+
+/* --- Styling cho Màn hình chọn chủ đề --- */
+#topic-selection-container {
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+}
+#topic-selection-container.hidden, #exam-container.hidden {
+    display: none;
+}
+
+#topic-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.topic-checkbox {
+    background-color: #f8f9fa;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.topic-checkbox input[type="checkbox"] {
+    margin-right: 0.75rem;
+    width: 18px;
+    height: 18px;
+}
+
+.topic-checkbox label {
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#start-exam-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--panel-dark-blue);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+#start-exam-btn:hover {
+    background-color: #3b467a;
+}
+
+/* style.css */
+/* ... */
+#add-topic-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+}
+#new-topic-input {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+#add-topic-btn {
+    border: none;
+    background-color: var(--panel-dark-blue);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}

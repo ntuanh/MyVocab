@@ -6,10 +6,11 @@ DATABASE_FILE = 'myvocab.db'
 
 
 def init_db():
-    """Khởi tạo database và bảng nếu chưa tồn tại."""
+    """Khởi tạo database và các bảng nếu chưa tồn tại."""
     conn = sqlite3.connect(DATABASE_FILE)
     cursor = conn.cursor()
-    # Tạo bảng words
+
+    # 1. Bảng `words`
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS words (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,37 +22,113 @@ def init_db():
             priority_score INTEGER DEFAULT 1
         )
     ''')
+
+    # 2. Bảng `topics` để lưu các chủ đề
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS topics (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL UNIQUE
+        )
+    ''')
+
+    # 3. Bảng `word_topics` để liên kết từ và chủ đề (quan hệ nhiều-nhiều)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS word_topics (
+            word_id INTEGER,
+            topic_id INTEGER,
+            FOREIGN KEY (word_id) REFERENCES words (id) ON DELETE CASCADE,
+            FOREIGN KEY (topic_id) REFERENCES topics (id) ON DELETE CASCADE,
+            PRIMARY KEY (word_id, topic_id)
+        )
+    ''')
+
+    # Thêm một vài chủ đề mặc định nếu bảng topics rỗng
+    cursor.execute("SELECT COUNT(*) FROM topics")
+    if cursor.fetchone()[0] == 0:
+        # Chỉ tạo một chủ đề mặc định là "Daily life"
+        cursor.execute("INSERT OR IGNORE INTO topics (name) VALUES (?)", ('Daily life',))
+
     conn.commit()
     conn.close()
-    print("INFO: Database initialized successfully.")
+    print("INFO: Database with topics initialized successfully.")
 
-
-# Sửa lại hàm save_word để không lưu lại từ đã có
-def save_word(word_data):
-    """Lưu một từ mới. Nếu từ đã tồn tại, không làm gì cả."""
+def add_new_topic(topic_name):
+    """Thêm một chủ đề mới vào database nếu nó chưa tồn tại."""
     conn = sqlite3.connect(DATABASE_FILE)
     cursor = conn.cursor()
     try:
-        # Dùng INSERT OR IGNORE.
-        # Nếu từ (do có ràng buộc UNIQUE) đã tồn tại, lệnh này sẽ được bỏ qua.
+        # Dùng INSERT OR IGNORE để không báo lỗi nếu tên chủ đề đã có
+        cursor.execute("INSERT OR IGNORE INTO topics (name) VALUES (?)", (topic_name,))
+        conn.commit()
+
+        # Lấy lại topic vừa được thêm (hoặc đã tồn tại) để trả về ID
+        cursor.execute("SELECT id, name FROM topics WHERE name = ?", (topic_name,))
+        new_topic = cursor.fetchone()
+        conn.row_factory = sqlite3.Row
+        cursor.execute("SELECT id, name FROM topics WHERE name = ?", (topic_name,))
+
+        return dict(cursor.fetchone())
+
+    except sqlite3.Error as e:
+        print(f"Lỗi DB khi thêm chủ đề: {e}")
+        return None
+    finally:
+        conn.close()
+
+
+def find_word_in_db(word_to_find):
+    """Tìm một từ trong database và trả về dữ liệu của nó nếu có."""
+    conn = sqlite3.connect(DATABASE_FILE)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    try:
+        cursor.execute("SELECT * FROM words WHERE word = ?", (word_to_find,))
+        word_data = cursor.fetchone()
+        if word_data:
+            return dict(word_data)
+        return None
+    finally:
+        conn.close()
+
+
+def save_word(word_data, topic_ids=None):
+    """Lưu một từ mới hoặc cập nhật chủ đề cho từ đã có."""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    word_to_save = word_data.get('word')
+    try:
         cursor.execute('''
             INSERT OR IGNORE INTO words (word, vietnamese_meaning, english_definition, example, image_url)
             VALUES (?, ?, ?, ?, ?)
         ''', (
-            word_data.get('word'),
+            word_to_save,
             word_data.get('vietnamese_meaning'),
             word_data.get('english_definition'),
             word_data.get('example'),
             word_data.get('image_url')
         ))
+
+        was_newly_inserted = cursor.rowcount > 0
+
+        cursor.execute("SELECT id FROM words WHERE word = ?", (word_to_save,))
+        word_id = cursor.fetchone()[0]
+
+        if not topic_ids:  # Nếu người dùng không chọn topic nào
+            # Tìm ID của topic 'Daily life'
+            cursor.execute("SELECT id FROM topics WHERE name = ?", ('Daily life',))
+            default_topic = cursor.fetchone()
+            if default_topic:
+                topic_ids = [default_topic[0]]
+            else:
+                # Trường hợp hi hữu 'Daily life' không tồn tại
+                topic_ids = []
+
         conn.commit()
-        # rowcount > 0 có nghĩa là một hàng mới đã được chèn vào
-        if cursor.rowcount > 0:
-            print(f"INFO: Word '{word_data.get('word')}' saved.")
+
+        if was_newly_inserted:
             return {"status": "success", "message": "Word saved!"}
         else:
-            print(f"INFO: Word '{word_data.get('word')}' already exists.")
-            return {"status": "exists", "message": "Word already saved."}
+            return {"status": "updated", "message": "Word topics updated."}
     except sqlite3.Error as e:
         print(f"Lỗi DB khi lưu từ: {e}")
         return {"status": "error", "message": "Failed to save word."}
@@ -59,35 +136,46 @@ def save_word(word_data):
         conn.close()
 
 
-def get_word_for_exam():
-    """Lấy một từ để kiểm tra, ưu tiên từ có điểm cao."""
+def get_all_topics():
+    """Lấy tất cả các chủ đề từ DB, sắp xếp theo tên."""
+    conn = sqlite3.connect(DATABASE_FILE)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    try:
+        cursor.execute("SELECT id, name FROM topics ORDER BY name ASC")
+        return [dict(row) for row in cursor.fetchall()]
+    finally:
+        conn.close()
+
+
+def get_word_for_exam(topic_ids=None):
+    """Lấy một từ để kiểm tra, có thể lọc theo chủ đề."""
     conn = sqlite3.connect(DATABASE_FILE)
     cursor = conn.cursor()
     try:
-        # Lấy tất cả các từ và điểm của chúng
-        cursor.execute("SELECT id, word, image_url, priority_score FROM words")
+        query = "SELECT DISTINCT w.id, w.word, w.image_url, w.priority_score FROM words w"
+        params = []
+
+        if topic_ids:
+            placeholders = ','.join(['?'] * len(topic_ids))
+            query += f" JOIN word_topics wt ON w.id = wt.word_id WHERE wt.topic_id IN ({placeholders})"
+            params.extend(topic_ids)
+
+        cursor.execute(query, params)
         all_words = cursor.fetchall()
 
-        if not all_words:
-            return None
+        if not all_words: return None
 
-        # Tạo một danh sách "xổ số" dựa trên điểm ưu tiên
-        # Từ có điểm 3 sẽ xuất hiện 3 lần trong danh sách này
-        weighted_list = []
-        for word_id, word, image_url, score in all_words:
-            weighted_list.extend([(word_id, word, image_url)] * score)
+        weighted_list = [item for item in all_words for _ in range(item[3])]  # item[3] là priority_score
 
-        # Chọn ngẫu nhiên một từ từ danh sách đã được "làm nặng"
-        chosen_word_id, chosen_word, chosen_image_url = random.choice(weighted_list)
+        if not weighted_list: return None
 
+        chosen_word_data = random.choice(weighted_list)
         return {
-            "id": chosen_word_id,
-            "word": chosen_word,
-            "image_url": chosen_image_url
+            "id": chosen_word_data[0],
+            "word": chosen_word_data[1],
+            "image_url": chosen_word_data[2]
         }
-    except Exception as e:
-        print(f"Lỗi DB khi lấy từ kiểm tra: {e}")
-        return None
     finally:
         conn.close()
 
@@ -97,84 +185,19 @@ def update_word_score(word_id, is_correct):
     conn = sqlite3.connect(DATABASE_FILE)
     cursor = conn.cursor()
     try:
-        # Lấy điểm hiện tại
         cursor.execute("SELECT priority_score FROM words WHERE id = ?", (word_id,))
-        current_score = cursor.fetchone()[0]
+        result = cursor.fetchone()
+        if not result: return {"status": "error", "message": "Word not found."}
 
-        if is_correct:
-            # Nếu đúng, trừ 1 điểm, nhưng không thấp hơn 1
-            new_score = max(1, current_score - 1)
-        else:
-            # Nếu sai, cộng 1 điểm
-            new_score = current_score + 1
+        current_score = result[0]
+        new_score = max(1, current_score - 1) if is_correct else current_score + 1
 
         cursor.execute("UPDATE words SET priority_score = ? WHERE id = ?", (new_score, word_id))
         conn.commit()
-
-        # Kiểm tra câu trả lời
-        cursor.execute("SELECT vietnamese_meaning FROM words WHERE id = ?", (word_id,))
-        correct_answer = cursor.fetchone()[0]
-
-        return {"status": "success", "new_score": new_score, "correct_answer": correct_answer}
-    except Exception as e:
-        print(f"Lỗi DB khi cập nhật điểm: {e}")
-        return {"status": "error", "message": "Failed to update score."}
-    finally:
-        conn.close()
-def get_all_saved_words():
-    """Lấy tất cả các từ đã được lưu, sắp xếp theo điểm ưu tiên giảm dần."""
-    conn = sqlite3.connect(DATABASE_FILE)
-    # Trả về kết quả dưới dạng dictionary để dễ dùng
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    try:
-        cursor.execute("SELECT * FROM words ORDER BY priority_score DESC")
-        words = [dict(row) for row in cursor.fetchall()]
-        return words
-    except Exception as e:
-        print(f"Lỗi DB khi lấy tất cả từ: {e}")
-        return []
+        return {"status": "success", "new_score": new_score}
     finally:
         conn.close()
 
-# my_website/database.py
-# ... (thêm vào cuối file) ...
-
-def delete_word_by_id(word_id):
-    """Xóa một từ khỏi database dựa trên ID của nó."""
-    conn = sqlite3.connect(DATABASE_FILE)
-    cursor = conn.cursor()
-    try:
-        cursor.execute("DELETE FROM words WHERE id = ?", (word_id,))
-        conn.commit()
-        # rowcount sẽ trả về số dòng đã bị ảnh hưởng (xóa)
-        if cursor.rowcount > 0:
-            return {"status": "success", "message": "Word deleted successfully."}
-        else:
-            return {"status": "error", "message": "Word not found."}
-    except Exception as e:
-        print(f"Lỗi DB khi xóa từ: {e}")
-        return {"status": "error", "message": "Failed to delete word."}
-    finally:
-        conn.close()
-
-# HÀM MỚI ĐỂ TÌM TỪ
-def find_word_in_db(word_to_find):
-    """Tìm một từ trong database và trả về dữ liệu của nó nếu có."""
-    conn = sqlite3.connect(DATABASE_FILE)
-    conn.row_factory = sqlite3.Row # Để có thể truy cập cột bằng tên
-    cursor = conn.cursor()
-    try:
-        cursor.execute("SELECT * FROM words WHERE word = ?", (word_to_find,))
-        word_data = cursor.fetchone()
-        if word_data:
-            return dict(word_data) # Chuyển đổi thành dictionary
-        return None
-    except Exception as e:
-        print(f"Lỗi DB khi tìm từ: {e}")
-        return None
-    finally:
-        conn.close()
 
 def get_correct_answer_by_id(word_id):
     """Lấy nghĩa tiếng Việt của một từ dựa trên ID."""
@@ -183,12 +206,30 @@ def get_correct_answer_by_id(word_id):
     try:
         cursor.execute("SELECT vietnamese_meaning FROM words WHERE id = ?", (word_id,))
         result = cursor.fetchone()
-        if result:
-            return result[0] # Trả về chuỗi nghĩa tiếng Việt
-        else:
-            return None # Trả về None nếu không tìm thấy
-    except Exception as e:
-        print(f"Lỗi DB khi lấy đáp án: {e}")
-        return None
+        return result[0] if result else None
+    finally:
+        conn.close()
+
+
+def get_all_saved_words():
+    """Lấy tất cả các từ đã được lưu để hiển thị."""
+    conn = sqlite3.connect(DATABASE_FILE)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    try:
+        cursor.execute("SELECT * FROM words ORDER BY priority_score DESC, word ASC")
+        return [dict(row) for row in cursor.fetchall()]
+    finally:
+        conn.close()
+
+
+def delete_word_by_id(word_id):
+    """Xóa một từ khỏi database dựa trên ID của nó."""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    try:
+        cursor.execute("DELETE FROM words WHERE id = ?", (word_id,))
+        conn.commit()
+        return {"status": "success"} if cursor.rowcount > 0 else {"status": "error"}
     finally:
         conn.close()
