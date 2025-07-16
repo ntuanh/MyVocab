@@ -221,30 +221,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Sự kiện cho nút "Confirm Save" trong modal
-    confirmSaveBtn.addEventListener('click', async () => {
-        const selectedCheckboxes = document.querySelectorAll('input[name="modal-topics"]:checked');
-        const selectedTopicIds = Array.from(selectedCheckboxes).map(cb => cb.value);
-        try {
-            const response = await fetch('/save_word', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    word_data: currentWordData,
-                    topic_ids: selectedTopicIds
-                })
-            });
-            const result = await response.json();
-            showToast(result.message, result.status);
-            saveModal.classList.add('hidden');
-            if (result.status !== 'error') {
-                saveBtn.disabled = true;
-                saveBtn.innerHTML = '<i class="fas fa-check"></i> Already Saved';
-            }
-        } catch (error) {
-            showToast("Failed to save.", "error");
-        }
-    });
+confirmSaveBtn.addEventListener('click', async () => {
+    // 1. Lấy tất cả các checkbox chủ đề đang được tick
+    const selectedCheckboxes = document.querySelectorAll('input[name="modal-topics"]:checked');
 
+    // 2. Chuyển chúng thành một mảng các giá trị (ID của topic)
+    const selectedTopicIds = Array.from(selectedCheckboxes).map(cb => cb.value);
+
+    // Dòng debug để bạn có thể xem trong Console của trình duyệt (F12)
+    console.log("Attempting to save word with Topic IDs:", selectedTopicIds);
+
+    // Đảm bảo có dữ liệu từ để lưu
+    if (!currentWordData) {
+        showToast("No word data to save. Please try searching again.", "error");
+        return;
+    }
+
+    // Vô hiệu hóa nút để tránh nhấn nhiều lần
+    confirmSaveBtn.disabled = true;
+
+    try {
+        // 3. Gửi yêu cầu lên server với cả word_data và topic_ids
+        const response = await fetch('/save_word', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                word_data: currentWordData,
+                topic_ids: selectedTopicIds // <<-- GỬI ĐÚNG DỮ LIỆU NÀY LÊN
+            })
+        });
+
+        const result = await response.json();
+
+        showToast(result.message, result.status === 'error' ? 'error' : 'success');
+        saveModal.classList.add('hidden'); // Ẩn modal sau khi lưu
+
+        if (result.status !== 'error') {
+            // Cập nhật lại trạng thái của nút Save chính
+            saveBtn.disabled = true;
+            saveBtn.innerHTML = '<i class="fas fa-check"></i> Already Saved';
+        }
+
+    } catch (error) {
+        showToast("Failed to save word.", "error");
+    } finally {
+        // Kích hoạt lại nút confirm trong mọi trường hợp
+        confirmSaveBtn.disabled = false;
+    }
+});
     // Sự kiện cho nút "Cancel" trong modal
     cancelSaveBtn.addEventListener('click', () => {
         saveModal.classList.add('hidden');

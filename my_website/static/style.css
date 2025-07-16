@@ -633,3 +633,10 @@ tbody tr:hover {
     border-radius: 8px;
     cursor: pointer;
 }
+
+/* Styling cho badge đếm số lượng từ */
+.word-count-badge {
+    color: #888;
+    font-size: 0.85rem;
+    margin-left: 0.25rem;
+}

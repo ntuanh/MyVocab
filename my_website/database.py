@@ -137,13 +137,36 @@ def save_word(word_data, topic_ids=None):
 
 
 def get_all_topics():
-    """Lấy tất cả các chủ đề từ DB, sắp xếp theo tên."""
+    """
+    Lấy tất cả các chủ đề từ DB và đếm số lượng từ trong mỗi chủ đề.
+    """
     conn = sqlite3.connect(DATABASE_FILE)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     try:
-        cursor.execute("SELECT id, name FROM topics ORDER BY name ASC")
-        return [dict(row) for row in cursor.fetchall()]
+        # Câu lệnh SQL để JOIN 3 bảng và đếm
+        # LEFT JOIN đảm bảo các chủ đề không có từ nào vẫn được hiển thị (với count = 0)
+        query = """
+            SELECT 
+                t.id, 
+                t.name, 
+                COUNT(wt.word_id) as word_count
+            FROM 
+                topics t
+            LEFT JOIN 
+                word_topics wt ON t.id = wt.topic_id
+            GROUP BY 
+                t.id
+            ORDER BY 
+                t.name ASC
+        """
+        cursor.execute(query)
+        # Chuyển kết quả thành danh sách các dictionary
+        topics = [dict(row) for row in cursor.fetchall()]
+        return topics
+    except Exception as e:
+        print(f"Lỗi DB khi lấy chủ đề và số lượng từ: {e}")
+        return []
     finally:
         conn.close()
 
@@ -231,5 +254,22 @@ def delete_word_by_id(word_id):
         cursor.execute("DELETE FROM words WHERE id = ?", (word_id,))
         conn.commit()
         return {"status": "success"} if cursor.rowcount > 0 else {"status": "error"}
+    finally:
+        conn.close()
+
+def delete_topic_by_id(topic_id):
+    """Xóa một chủ đề và tất cả các liên kết của nó với các từ."""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    try:
+        # Bật khóa ngoại để lệnh ON DELETE CASCADE hoạt động
+        cursor.execute("PRAGMA foreign_keys = ON")
+        # Khi xóa một topic, tất cả các bản ghi trong word_topics có topic_id này sẽ bị xóa theo
+        cursor.execute("DELETE FROM topics WHERE id = ?", (topic_id,))
+        conn.commit()
+        return {"status": "success"} if cursor.rowcount > 0 else {"status": "error", "message": "Topic not found."}
+    except Exception as e:
+        print(f"Lỗi DB khi xóa chủ đề: {e}")
+        return {"status": "error", "message": "Failed to delete topic."}
     finally:
         conn.close()

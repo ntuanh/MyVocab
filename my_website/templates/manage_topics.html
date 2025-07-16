@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyVocab - Manage Topics</title>
+    <!-- Link đến file CSS chung -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Link đến thư viện icon Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="data-body">
+
+    <div id="data-container">
+        <h1 class="data-title">Manage Topics</h1>
+        <p class="data-subtitle">Đây là danh sách các chủ đề bạn đã tạo. Bạn có thể xóa các chủ đề không cần thiết.</p>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Topic Name</th>
+                        <th>Word Count</th> <!-- Cột mới: Số lượng từ -->
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dùng vòng lặp Jinja2 để duyệt qua danh sách 'topics' mà app.py gửi sang -->
+                    {% for topic in topics %}
+                    <!-- Thêm thuộc tính data-id vào thẻ <tr> để JavaScript có thể xác định hàng này -->
+                    <tr data-id="{{ topic.id }}">
+                        <td>{{ topic.name }}</td>
+                        <!-- Hiển thị số lượng từ cho mỗi chủ đề -->
+                        <td style="text-align: center;">{{ topic.word_count }}</td>
+                        <td>
+                            <!-- Chỉ hiển thị nút xóa cho các chủ đề không phải là chủ đề mặc định -->
+                            {% if topic.name != 'Daily life' %}
+                            <button class="delete-btn topic-delete-btn" data-id="{{ topic.id }}">Delete</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <!-- Hiển thị dòng này nếu không có chủ đề nào (trường hợp hi hữu) -->
+                    <tr>
+                        <td colspan="3" style="text-align: center;">No topics found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="/" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Dictionary
+        </a>
+    </div>
+
+    <!-- JavaScript để xử lý sự kiện xóa -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.topic-delete-btn').forEach(button => {
+                button.addEventListener('click', async (event) => {
+                    const topicId = event.target.dataset.id;
+                    const row = document.querySelector(`tr[data-id="${topicId}"]`);
+                    const topicName = row ? row.querySelector('td:first-child').textContent : 'this topic';
+
+                    // Sử dụng modal xác nhận tùy chỉnh (nếu bạn đã tạo) hoặc confirm() mặc định
+                    if (confirm(`Are you sure you want to delete the topic "${topicName}"? All word associations will be lost.`)) {
+                        try {
+                            const response = await fetch(`/delete_topic/${topicId}`, { 
+                                method: 'DELETE' 
+                            });
+                            const result = await response.json();
+
+                            if (response.ok && result.status === 'success') {
+                                if (row) {
+                                    row.remove();
+                                }
+                            } else {
+                                alert(result.error || 'Failed to delete topic.');
+                            }
+                        } catch (error) {
+                            console.error('Delete topic error:', error);
+                            alert('An error occurred.');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

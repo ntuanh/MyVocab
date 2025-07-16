@@ -18,11 +18,13 @@
         <p class="data-subtitle">Select topics to review, or leave blank to review all words.</p>
         <form id="topic-form">
             <div id="topic-list-container">
-                <!-- JavaScript sẽ điền các checkbox chủ đề vào đây -->
                 {% for topic in topics %}
                 <div class="topic-checkbox">
                     <input type="checkbox" id="topic-{{ topic.id }}" name="topics" value="{{ topic.id }}">
-                    <label for="topic-{{ topic.id }}">{{ topic.name }}</label>
+                    <!-- Sửa lại label để hiển thị số lượng từ -->
+                    <label for="topic-{{ topic.id }}">
+                        {{ topic.name }} <span class="word-count-badge">({{ topic.word_count }})</span>
+                    </label>
                 </div>
                 {% endfor %}
             </div>

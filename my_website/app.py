@@ -13,7 +13,8 @@ from database import (
     delete_word_by_id,
     get_correct_answer_by_id,
     get_all_topics,
-    add_new_topic
+    add_new_topic,
+    delete_topic_by_id
 )
 
 # Khởi tạo ứng dụng Flask
@@ -83,6 +84,20 @@ def save_word_route():
     result = save_word(word_data, topic_ids)
     return jsonify(result)
 
+@app.route('/manage_topics')
+def manage_topics_page():
+    """Render trang quản lý các chủ đề."""
+    topics = get_all_topics()
+    return render_template('manage_topics.html', topics=topics)
+
+@app.route('/delete_topic/<int:topic_id>', methods=['DELETE'])
+def delete_topic_route(topic_id):
+    """API để xóa một chủ đề."""
+    # Thêm một lớp bảo vệ để không cho xóa chủ đề mặc định
+    if topic_id == 1: # Giả sử 'Daily life' có ID là 1
+        return jsonify({"error": "Cannot delete the default topic."}), 403
+    result = delete_topic_by_id(topic_id)
+    return jsonify(result)
 
 @app.route('/get_exam_word', methods=['POST'])
 def get_exam_word_route():
