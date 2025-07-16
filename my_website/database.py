@@ -175,3 +175,20 @@ def find_word_in_db(word_to_find):
         return None
     finally:
         conn.close()
+
+def get_correct_answer_by_id(word_id):
+    """Lấy nghĩa tiếng Việt của một từ dựa trên ID."""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    try:
+        cursor.execute("SELECT vietnamese_meaning FROM words WHERE id = ?", (word_id,))
+        result = cursor.fetchone()
+        if result:
+            return result[0] # Trả về chuỗi nghĩa tiếng Việt
+        else:
+            return None # Trả về None nếu không tìm thấy
+    except Exception as e:
+        print(f"Lỗi DB khi lấy đáp án: {e}")
+        return None
+    finally:
+        conn.close()

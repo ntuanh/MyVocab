@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, jsonify
 from handle_request import get_dictionary_data
 # Import các hàm từ database.py
 from database import init_db, save_word, get_word_for_exam, update_word_score , get_all_saved_words , delete_word_by_id
+from database import get_correct_answer_by_id
 
 app = Flask(__name__)
 # Khởi tạo database khi ứng dụng bắt đầu
@@ -67,6 +68,17 @@ def submit_answer_route():
     result = update_word_score(word_id, is_correct)
 
     return jsonify(result)
+
+
+@app.route('/get_answer/<int:word_id>', methods=['GET'])
+def get_answer_route(word_id):
+    """Endpoint để lấy đáp án đúng cho một từ."""
+    correct_answer = get_correct_answer_by_id(word_id)
+
+    if correct_answer is not None:
+        return jsonify({"correct_answer": correct_answer})
+    else:
+        return jsonify({"error": "Word not found in database."}), 404
 
 
 if __name__ == '__main__':

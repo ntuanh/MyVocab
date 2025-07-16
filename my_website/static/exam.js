@@ -59,61 +59,52 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         if (!currentWord || answerInput.disabled) return;
 
-        const userAnswer = answerInput.value.trim();
-        answerInput.disabled = true; // Vô hiệu hóa ô nhập liệu khi đang chờ kết quả
+        const userAnswer = answerInput.value.trim().toLowerCase(); // Chuyển câu trả lời về chữ thường
+        if (!userAnswer) return; // Không làm gì nếu người dùng không nhập
 
-        // --- LOGIC KIỂM TRA ĐÚNG/SAI (SỬA LỖI Ở ĐÂY) ---
-        // Chúng ta cần server cho biết đáp án đúng là gì.
-        // Nhưng để đơn giản hóa, chúng ta sẽ gửi câu trả lời của người dùng lên,
-        // và yêu cầu server cập nhật điểm dựa trên logic so sánh (tạm thời)
-        // Đây là một cách tiếp cận khác:
+        answerInput.disabled = true;
 
         try {
-            // Lấy đáp án đúng từ server và cập nhật điểm
-            const response = await fetch('/submit_answer', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    id: currentWord.id,
-                    // is_correct sẽ được quyết định sau khi có đáp án đúng
-                    // Để đơn giản, ta vẫn gửi 1 giá trị tạm
-                    is_correct: false // Giá trị này sẽ được tính lại
-                })
-            });
+            // Gọi server để lấy đáp án đúng
+            const response = await fetch(`/get_answer/${currentWord.id}`); // Giả sử có một endpoint mới
             const result = await response.json();
 
-            if (result.status !== 'success') {
-                throw new Error(result.message || 'Lỗi khi cập nhật điểm.');
+            if (!response.ok) {
+                throw new Error(result.error || "Không thể lấy đáp án.");
             }
 
-            const correctAnswer = result.correct_answer;
+            const correctAnswer = result.correct_answer.toLowerCase(); // Lấy đáp án đúng và chuyển về chữ thường
             let isCorrect = false;
 
-            // Logic so sánh câu trả lời (có thể cải tiến)
-            // So sánh không phân biệt hoa thường và bỏ qua các chi tiết nhỏ
-            if (userAnswer.toLowerCase().includes(correctAnswer.toLowerCase().substring(0, 10))) {
+            // --- LOGIC SO SÁNH LINH HOẠT ---
+            // Tách đáp án đúng thành các phần riêng lẻ (dựa trên dấu phẩy hoặc dấu chấm phẩy)
+            const correctParts = correctAnswer.split(/,|;/).map(part => part.trim());
+
+            // Kiểm tra xem câu trả lời của người dùng có trùng với BẤT KỲ phần nào của đáp án đúng không
+            if (correctParts.includes(userAnswer)) {
                 isCorrect = true;
             }
 
-            // Hiển thị phản hồi
+            // --- Hiển thị phản hồi ---
             feedbackCard.classList.remove('hidden');
             if (isCorrect) {
                 feedbackTitleEl.textContent = "Correct!";
                 feedbackCard.className = 'panel feedback-card correct';
-                feedbackTextEl.textContent = `Good job!`;
-                // Gửi yêu cầu cập nhật điểm thực sự
-                updateScoreOnServer(currentWord.id, true);
+                // Chỉ hiển thị "Good job!" khi đúng
+                feedbackTextEl.textContent = "Good job!";
             } else {
                 feedbackTitleEl.textContent = "Incorrect!";
                 feedbackCard.className = 'panel feedback-card incorrect';
-                feedbackTextEl.textContent = `Đáp án đúng là: ${correctAnswer}`;
-                // Gửi yêu cầu cập nhật điểm thực sự
-                updateScoreOnServer(currentWord.id, false);
+                // Chỉ hiển thị đáp án đúng khi sai
+                feedbackTextEl.textContent = `Đáp án đúng là: ${result.correct_answer}`;
             }
+
+            // Gửi kết quả đúng/sai lên server để cập nhật điểm
+            updateScoreOnServer(currentWord.id, isCorrect);
 
         } catch (error) {
             console.error('Error submitting answer:', error);
-            alert('Không thể gửi câu trả lời.');
+            alert(error.message);
             answerInput.disabled = false;
         }
     });
