@@ -90,24 +90,22 @@ body {
 
 #image-panel {
     flex-grow: 1;
-    display: flex;
+    display: flex; /* Quan trọng */
     justify-content: center;
     align-items: center;
     background-color: var(--panel-blue);
-    color: rgba(0,0,0,0.5);
-    font-style: italic;
     padding: 0;
     overflow: hidden;
-    min-height: 200px ;
+    min-height: 200px;
 }
 
 #word-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    display: none;
+    object-fit: cover; /* Giúp ảnh lấp đầy panel mà không bị méo */
     border-radius: var(--border-radius);
-    background-color: #eee; /* Nền cho ảnh khi đang tải */
+    background-color: #eee;
+    /* KHÔNG có 'display: none' ở đây. JavaScript sẽ điều khiển việc này. */
 }
 
 /* Màu sắc cho các panel */
