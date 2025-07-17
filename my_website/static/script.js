@@ -88,12 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
         createTagList(familyListEl, data.family_words);
 
         if (data.image_url) {
-            imageEl.src = data.image_url;
-            imageEl.alt = `Image for '${data.word}'`;
-            imageEl.style.display = 'block';
+            // Nếu có URL ảnh
+            imagePanel.innerHTML = ''; // Xóa sạch nội dung cũ (placeholder text)
+            const img = document.createElement('img');
+            img.id = 'word-image';
+            img.src = data.image_url;
+            img.alt = `Image illustrating '${data.word}'`;
+            imagePanel.appendChild(img);
             imagePanel.style.backgroundColor = 'transparent';
         } else {
-            imageEl.style.display = 'none';
+            // Nếu không có URL ảnh
+            imagePanel.innerHTML = '<p>No Image Found</p>'; // Hiển thị lại placeholder
             imagePanel.style.backgroundColor = 'var(--panel-blue)';
         }
 
@@ -123,6 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
         imagePanel.style.backgroundColor = 'var(--panel-blue)';
         saveBtn.disabled = false;
         saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Word';
+
+        imagePanel.innerHTML = '<p>Image Placeholder</p>';
+        imagePanel.style.backgroundColor = 'var(--panel-blue)';
     }
 
     /**

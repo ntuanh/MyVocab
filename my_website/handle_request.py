@@ -11,12 +11,25 @@ from concurrent.futures import ThreadPoolExecutor  # Giữ lại để tối ưu
 from database import find_word_in_db
 
 # --- CẤU HÌNH ---
+# env_path = Path(__file__).parent.parent / ".env"
+# load_dotenv(dotenv_path=env_path)
+print("Attempting to load .env file...")
 env_path = Path(__file__).parent.parent / ".env"
-load_dotenv(dotenv_path=env_path)
+if env_path.exists():
+    load_dotenv(dotenv_path=env_path)
+    print(".env file loaded.")
+else:
+    print("WARNING: .env file not found!")
 
 # API Keys & URLs
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 PEXELS_API_KEY = os.environ.get("PEXELS_API_KEY")
+
+if not PEXELS_API_KEY:
+    print("CRITICAL ERROR: PEXELS_API_KEY is NOT loaded from environment!")
+else:
+    print(f"PEXELS_API_KEY loaded successfully, ending with ...{PEXELS_API_KEY[-4:]}")
+
 DICT_API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
 PEXELS_API_URL = "https://api.pexels.com/v1/search"
 
@@ -142,20 +155,37 @@ def get_data_from_dictionary_api(word):
 
 
 def get_image_from_pexels(query):
-    """Hàm gọi Pexels API. Trả về None nếu có lỗi."""
-    if not PEXELS_API_KEY: return None
-    headers = {"Authorization": PEXELS_API_KEY}
-    params = {"query": query, "per_page": 1, "orientation": "landscape"}
-    try:
-        response = requests.get(PEXELS_API_URL, headers=headers, params=params, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-        if data.get('photos'):
-            return data['photos'][0]['src']['large']
-    except Exception as e:
-        print(f"Lỗi Pexels cho từ '{query}': {e}")
-    return None
+    """Sử dụng logic đã được chứng minh là đúng."""
+    print(f"--- Inside get_image_from_pexels for '{query}' ---")
 
-# Các hàm liên quan đến database/file JSON của bạn có thể giữ nguyên và đặt ở đây
-# Ví dụ: find_word_in_file, save_word_to_file, get_all_saved_words, delete_word_from_file...
-# Tôi sẽ không thêm chúng vào đây để tránh làm bạn rối, bạn chỉ cần giữ nguyên chúng như file cũ.
+    # Kiểm tra lại biến PEXELS_API_KEY một lần nữa bên trong hàm
+    if not PEXELS_API_KEY:
+        print("ERROR: PEXELS_API_KEY is None inside the function.")
+        return None
+
+    url = "https://api.pexels.com/v1/search"
+    headers = {"Authorization": PEXELS_API_KEY}
+    params = {"query": query, "per_page": 1}
+
+    try:
+        response = requests.get(url, headers=headers, params=params, timeout=10)
+        print(f"PEXELS response status for '{query}': {response.status_code}")
+
+        if response.status_code == 200:
+            data = response.json()
+            if data.get("photos"):
+                image_url = data["photos"][0]["src"]["large"]
+                print(f"SUCCESS: Found image for '{query}': {image_url}")
+                return image_url
+            else:
+                print(f"WARN: No Pexels images found for '{query}'.")
+                return None
+        else:
+            print(f"ERROR: Pexels API returned status {response.status_code}. Response: {response.text}")
+            return None
+    except Exception as e:
+        print(f"CRITICAL ERROR in get_image_from_pexels: {e}")
+        return None
+
+
+

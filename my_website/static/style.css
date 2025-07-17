@@ -29,13 +29,15 @@ body {
     width: 100%;
     max-width: 1400px;
     height: 90vh;
+    grid-template-rows: 1fr;
 }
 
 #left-panel, #main-content, #right-panel {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    overflow: hidden;
+    overflow: auto;
+    min-height: 0;
 }
 
 .panel {
@@ -44,7 +46,7 @@ body {
     border-radius: var(--border-radius);
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     color: var(--text-color);
-    overflow-y: auto;
+    /*overflow-y: auto;*/
 }
 
 .panel h3 {
@@ -96,6 +98,7 @@ body {
     font-style: italic;
     padding: 0;
     overflow: hidden;
+    min-height: 200px ;
 }
 
 #word-image {
