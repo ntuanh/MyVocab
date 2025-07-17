@@ -1,96 +1,107 @@
-# MyVocab - Gemini-Powered Smart Dictionary
+# MyVocab - Beginner's Guide
 
-A modern web-based English vocabulary assistant. Instantly look up English words, see their definitions, Vietnamese meanings, example sentences, pronunciation (IPA), related words, and even an image—all in a beautiful, easy-to-use interface powered by Google Gemini AI.
-
-## 🛠️ Tech Stack
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Google AI](https://img.shields.io/badge/Google%20AI-4285F4?style=for-the-badge&logo=google&logoColor=white)
+Welcome to **MyVocab**! This is a simple, modern web app to help you learn English vocabulary, powered by Google Gemini AI.
 
 ---
 
-## 👩‍💻 How to Use MyVocab (For Clients & End-Users)
+## 🚀 Quick Start (For Beginners)
 
-### 1. Requirements
-- **A modern web browser** (Chrome, Edge, Firefox, Safari, etc.)
-- **Python 3.7+** installed on your computer
+### 1. What You Need
+- **A computer with Windows, macOS, or Linux**
+- **Python 3.7 or newer** ([Download Python here](https://www.python.org/downloads/))
 - **A Google Gemini API key** (see below)
+- **Internet connection**
 
-### 2. One-Time Setup
+---
 
-#### a. Download the App
-- Get the project files from your provider (or download from GitHub if public).
+### 2. Download the Project
+- Download or clone the project files to a folder on your computer (e.g., `MyVocab`).
 
-#### b. Get a Gemini API Key
-- Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
-- Sign in with your Google account and create a new API key
-- Copy the key
+---
 
-#### c. Start the App
-1. **Open a terminal/command prompt** in the project folder (`MyVocab`).
-2. **Create a file named `.env`** (if not already present) and add this line:
+### 3. Get Your Gemini API Key
+1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Sign in with your Google account
+3. Create a new API key and copy it
+
+---
+
+### 4. Set Up Your Python Environment
+
+#### a. Open a Terminal or Command Prompt
+- On Windows: Press `Win + R`, type `cmd`, and press Enter
+- On macOS: Open `Terminal` from Applications
+- On Linux: Open your terminal app
+
+#### b. Go to the Project Folder
+Type the following command (replace the path if needed):
+```sh
+cd path/to/MyVocab
+```
+
+#### c. Create a Virtual Environment (Recommended)
+```sh
+python -m venv .venv
+```
+
+#### d. Activate the Virtual Environment
+- **On Windows:**
+  ```sh
+  .venv\Scripts\activate
+  ```
+- **On macOS/Linux:**
+  ```sh
+  source .venv/bin/activate
+  ```
+
+#### e. Install the Required Packages
+```sh
+pip install -r requirements.txt
+```
+
+---
+
+### 5. Add Your API Key
+1. In the main project folder, create a file named `.env`
+2. Open `.env` in a text editor and add this line:
    ```env
    GEMINI_API_KEY=your_gemini_api_key_here
    ```
    Replace `your_gemini_api_key_here` with your actual key.
-3. **(First time only) Install requirements:**
-   ```bash
-   python -m venv .venv
-   # Activate the virtual environment:
-   # On Windows:
-   .venv\Scripts\activate
-   # On macOS/Linux:
-   source .venv/bin/activate
-   pip install flask google-generativeai python-dotenv
-   ```
-4. **Run the app:**
-   ```bash
+
+---
+
+### 6. Run the App
+1. Make sure your virtual environment is activated
+2. Start the app:
+   ```sh
    cd my_website
    python app.py
    ```
-
-### 3. Open the App in Your Browser
-- Go to [http://localhost:5000](http://localhost:5000)
+3. Open your web browser and go to [http://localhost:5000](http://localhost:5000)
 
 ---
 
-## 🌟 What Can You Do With MyVocab?
-
-- **Search for any English word** in the search box.
-- Instantly see:
-  - **English definition** (clear, modern, and easy to understand)
-  - **Vietnamese meaning** (hidden by default—click to reveal)
-  - **Example sentence**
-  - **IPA pronunciation**
-  - **Related words** (family words)
-  - **Image** representing the word (if available)
-  - **Similar meaning words** (synonyms, if available)
-- **Mobile-friendly**: Works on phones, tablets, and computers.
+## 📝 How to Use
+- Type an English word in the search box and press Enter
+- See the definition, Vietnamese meaning, example sentence, pronunciation, related words, and an image
+- Save words, manage topics, and test yourself with quizzes
 
 ---
 
-## 🖼️ App Interface Overview
-
-- **Left panel**: Search bar and image for the word
-- **Center panel**: English definition, example, and Vietnamese meaning (click to reveal)
-- **Right panel**: Pronunciation (IPA), similar words, and family words
-
----
-
-## ❓ FAQ & Troubleshooting
-
-- **"GEMINI_API_KEY not found"**: Make sure your `.env` file is in the main project folder and contains your API key.
-- **App doesn't load or shows errors**: Check that Python is installed, dependencies are installed, and the API key is valid.
-- **No image or some fields show N/A**: Not all words have images or all data available.
+## ❓ Troubleshooting
+- **Python not found?** Make sure you installed Python and added it to your PATH
+- **Module not found?** Run `pip install -r requirements.txt` again
+- **API key error?** Double-check your `.env` file and make sure there are no spaces or typos
+- **App not loading?** Check the terminal for errors and make sure you are in the correct folder
 
 ---
 
-**Enjoy learning new words with MyVocab!**
+## 💡 Tips
+- Always activate your virtual environment before running the app
+- You can stop the app anytime by pressing `Ctrl + C` in the terminal
+- If you want to install new packages, use `pip install package_name` while your virtual environment is active
 
 ---
 
-_For advanced customization or developer setup, see the original README or contact your provider._
+**Enjoy learning with MyVocab!**
