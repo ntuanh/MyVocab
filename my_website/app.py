@@ -1,6 +1,7 @@
 # my_website/app.py
 
 from flask import Flask, render_template, request, jsonify
+import os
 
 # Import tất cả các hàm cần thiết từ các file khác
 from .handle_request import get_dictionary_data
@@ -18,7 +19,12 @@ from .database import (
 )
 
 # Khởi tạo ứng dụng Flask
-app = Flask(__name__)
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+app = Flask(__name__,
+            static_folder=os.path.join(BASE_DIR, 'static'),
+            template_folder=os.path.join(BASE_DIR, 'templates'))
 
 # Khởi tạo database một lần duy nhất khi ứng dụng bắt đầu
 # Thao tác này sẽ tạo file myvocab.db và các bảng nếu chúng chưa tồn tại.
