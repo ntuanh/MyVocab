@@ -164,5 +164,5 @@ def get_topics_route():
 
 
 # Đoạn này để có thể chạy server trực tiếp bằng lệnh `python my_website/app.py`
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
