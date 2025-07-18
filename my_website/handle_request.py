@@ -8,7 +8,7 @@ from pathlib import Path
 import google.generativeai as genai
 import json
 from concurrent.futures import ThreadPoolExecutor  # Giữ lại để tối ưu tốc độ
-from database import find_word_in_db
+from .database import find_word_in_db
 
 # --- CẤU HÌNH ---
 # env_path = Path(__file__).parent.parent / ".env"

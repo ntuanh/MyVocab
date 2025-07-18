@@ -3,8 +3,8 @@
 from flask import Flask, render_template, request, jsonify
 
 # Import tất cả các hàm cần thiết từ các file khác
-from handle_request import get_dictionary_data
-from database import (
+from .handle_request import get_dictionary_data
+from .database import (
     init_db,
     save_word,
     get_word_for_exam,
