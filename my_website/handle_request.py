@@ -1,5 +1,5 @@
 # my_website/handle_request.py
-# PHIÊN BẢN HOÀN THIỆN - Đã khôi phục chức năng IPA
+# PHIÊN BẢN HOÀN THIỆN CUỐI CÙNG - Đã thêm Từ đồng nghĩa (Similar Meaning)
 
 import os
 import requests
@@ -15,7 +15,6 @@ from .database import find_word_in_db
 # --- CẤU HÌNH ---
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 PEXELS_API_KEY = os.environ.get("PEXELS_API_KEY")
-# THÊM MỚI: URL cho Dictionary API
 DICT_API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
 
 # Khởi tạo các client/model một lần duy nhất
@@ -93,20 +92,27 @@ def get_image_from_pexels(query):
         return None
 
 
-# <<< THÊM MỚI: Hàm để lấy dữ liệu IPA >>>
+# <<< SỬA ĐỔI: Hàm này giờ sẽ lấy cả IPA và Synonyms >>>
 def get_data_from_dictionary_api(word):
-    """Lấy dữ liệu phiên âm (IPA) từ Free Dictionary API."""
+    """Lấy dữ liệu IPA và từ đồng nghĩa từ Free Dictionary API."""
+    default_result = {"pronunciation": "N/A", "synonyms": []}
     try:
         response = requests.get(f"{DICT_API_URL}{word}", timeout=10)
         if response.status_code == 200:
             data = response.json()[0]
-            # Tìm phiên âm IPA trong danh sách phonetics
+
+            # Lấy IPA
             pronunciation = next((p['text'] for p in data.get('phonetics', []) if p.get('text')), "N/A")
-            return {"pronunciation": pronunciation}
+
+            # Lấy Synonyms từ phần nghĩa đầu tiên
+            first_meaning = data.get('meanings', [{}])[0]
+            synonyms = first_meaning.get('synonyms', [])[:5]  # Lấy tối đa 5 từ đồng nghĩa
+
+            return {"pronunciation": pronunciation, "synonyms": synonyms}
     except Exception as e:
         print(f"ERROR calling Dictionary API for '{word}': {e}")
-    # Nếu có lỗi hoặc không tìm thấy, trả về giá trị mặc định
-    return {"pronunciation": "N/A"}
+
+    return default_result
 
 
 # --- HÀM XỬ LÝ CHÍNH ---
@@ -124,15 +130,14 @@ def get_dictionary_data(user_word):
 
     print(f"INFO: Fetching '{word_to_lookup}' from APIs.")
     try:
-        # <<< SỬA ĐỔI: Thêm 1 worker và gọi cả 3 API >>>
         with ThreadPoolExecutor(max_workers=3) as executor:
             gemini_future = executor.submit(get_content_from_gemini, word_to_lookup)
             image_future = executor.submit(get_image_from_pexels, word_to_lookup)
-            dict_api_future = executor.submit(get_data_from_dictionary_api, word_to_lookup)  # Thêm vào
+            dict_api_future = executor.submit(get_data_from_dictionary_api, word_to_lookup)
 
             gemini_data = gemini_future.result()
             image_url = image_future.result()
-            dict_data = dict_api_future.result()  # Lấy kết quả
+            dict_data = dict_api_future.result()
 
         english_definition = gemini_data.get("english_definition")
         vietnamese_meaning = gemini_data.get("vietnamese_meaning")
@@ -150,11 +155,11 @@ def get_dictionary_data(user_word):
             "vietnamese_meaning": vietnamese_meaning or "N/A",
             "english_definition": english_definition or "N/A",
             "example": example or "N/A",
-            # <<< SỬA ĐỔI: Sử dụng kết quả từ dict_data >>>
             "pronunciation_ipa": dict_data.get("pronunciation", "N/A"),
             "family_words": family_words,
             "image_url": image_url,
-            "synonyms": [],
+            # <<< SỬA ĐỔI: Sử dụng kết quả synonyms từ dict_data >>>
+            "synonyms": dict_data.get("synonyms", []),
             "is_saved": False
         }
         return jsonify(result_data)
