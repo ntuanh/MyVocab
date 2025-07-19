@@ -2,7 +2,7 @@
 
 body {
     padding: 0;
-    align-items: flex-start; /* Cho phép cuộn */
+    align-items: flex-start; /* Let the page scroll if needed */
 }
 
 #history-container {
@@ -85,7 +85,7 @@ body {
     color: #888;
 }
 
-/* Thêm vào cuối file history.css */
+/* Added this at the end of history.css for some extra polish */
 
 .word-card-footer {
     display: flex;

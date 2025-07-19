@@ -1,5 +1,3 @@
-
-
 import os
 import psycopg2
 from psycopg2.extras import RealDictCursor  # This makes query results act like Python dicts, which is way easier to work with

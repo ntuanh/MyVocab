@@ -1,26 +1,24 @@
-// my_website/static/script.js
-
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. LẤY TẤT CẢ CÁC ELEMENTS CẦN THIẾT TỪ DOM ---
+    // --- 1. get all of ELEMENTS from DOM ---
     const searchForm = document.getElementById('search-form');
     const wordInput = document.getElementById('word-input');
 
-    // Panel bên trái
+    // Panel left
     const imagePanel = document.getElementById('image-panel');
     const saveBtn = document.getElementById('save-btn');
 
-    // Panel chính
+    // Panel center
     const vietnamesePanel = document.getElementById('vietnamese-panel');
     const vietnameseMeaningEl = document.getElementById('vietnamese-meaning');
     const definitionEl = document.getElementById('english-definition');
     const exampleEl = document.getElementById('example-sentence');
 
-    // Panel bên phải
+    // Panel right
     const ipaEl = document.getElementById('pronunciation-ipa');
     const synonymListEl = document.getElementById('synonym-list');
     const familyListEl = document.getElementById('family-list');
 
-    // Modal lưu từ
+    // Modal save words
     const saveModal = document.getElementById('save-modal');
     const modalWordEl = document.getElementById('modal-word-to-save');
     const modalTopicList = document.getElementById('modal-topic-list');
@@ -34,10 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const toastMessage = document.getElementById('toast-message');
     let toastTimeout;
 
-    // Biến toàn cục để lưu trữ dữ liệu của từ đang được hiển thị
     let currentWordData = null;
 
-    // --- 2. ĐỊNH NGHĨA TẤT CẢ CÁC HÀM XỬ LÝ ---
+    // --- 2. Define handle functions ---
 
     function showToast(message, type = 'success') {
         clearTimeout(toastTimeout);
@@ -141,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- 3. GÁN CÁC SỰ KIỆN ---
+    // --- 3. assign events ---
 
     searchForm.addEventListener('submit', async (e) => {
         e.preventDefault();

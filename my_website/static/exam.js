@@ -1,11 +1,11 @@
 // my_website/static/exam.js
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. LẤY TẤT CẢ CÁC ELEMENTS ---
-    // Màn hình chọn chủ đề
+    // --- 1. GRAB ALL THE ELEMENTS I NEED ---
+    // Topic selection screen
     const topicSelectionContainer = document.getElementById('topic-selection-container');
     const topicForm = document.getElementById('topic-form');
 
-    // Màn hình kiểm tra
+    // Exam screen
     const examContainer = document.getElementById('exam-container');
     const questionWordEl = document.getElementById('question-word');
     const hintCard = document.getElementById('hint-card');
@@ -20,14 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextWordBtn = document.getElementById('next-word-btn');
     const changeTopicsBtn = document.getElementById('change-topics-btn');
 
-    // --- 2. KHAI BÁO CÁC BIẾN TRẠNG THÁI ---
+    // --- 2. STATE VARIABLES ---
     let currentWord = null;
     let selectedTopicIds = [];
 
-    // --- 3. ĐỊNH NGHĨA TẤT CẢ CÁC HÀM XỬ LÝ ---
+    // --- 3. ALL THE HANDLER FUNCTIONS ---
 
     /**
-     * Dọn dẹp giao diện để chuẩn bị cho câu hỏi mới.
+     * Reset the UI for a new question. (Keeps things tidy!)
      */
     function resetExamUI() {
         answerFeedback.classList.add('hidden');
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Lấy từ mới từ server dựa trên các chủ đề đã chọn.
+     * Fetch a new word from the server, based on the topics the user picked.
      */
     async function getNewWord() {
         resetExamUI();
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const data = await response.json();
             if (!response.ok) {
-                questionWordEl.textContent = data.error || 'Lỗi khi tải từ!';
+                questionWordEl.textContent = data.error || 'Error loading word!';
                 answerInput.disabled = true;
                 return;
             }
@@ -67,12 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Error fetching word:', error);
-            questionWordEl.textContent = 'Không thể tải từ để kiểm tra.';
+            questionWordEl.textContent = 'Could not load a word for the quiz.';
         }
     }
 
     /**
-     * Gửi yêu cầu cập nhật điểm lên server.
+     * Tell the server to update the score for this word (right or wrong answer)
      */
     async function updateScoreOnServer(wordId, isCorrect) {
         try {
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Xử lý logic khi người dùng gửi câu trả lời.
+     * Handle what happens when the user submits an answer.
      */
     async function handleAnswerSubmit(e) {
         e.preventDefault();
@@ -120,19 +120,19 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 feedbackTitleEl.textContent = "Incorrect!";
                 feedbackCard.className = 'panel feedback-card incorrect';
-                feedbackTextEl.textContent = `Đáp án đúng là: ${result.correct_answer}`;
+                feedbackTextEl.textContent = `The correct answer is: ${result.correct_answer}`;
             }
             updateScoreOnServer(currentWord.id, isCorrect);
         } catch (error) {
             console.error('Error submitting answer:', error);
-            alert(error.message || "Có lỗi xảy ra khi kiểm tra đáp án.");
+            alert(error.message || "Something went wrong while checking the answer.");
             answerInput.disabled = false;
         }
     }
 
-    // --- 4. GÁN CÁC SỰ KIỆN CHO CÁC ELEMENT ---
+    // --- 4. WIRE UP ALL THE EVENTS ---
 
-    // Sự kiện cho form chọn chủ đề
+    // When the user submits the topic selection form
     topicForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const checkedBoxes = document.querySelectorAll('input[name="topics"]:checked');
@@ -142,10 +142,10 @@ document.addEventListener('DOMContentLoaded', () => {
         getNewWord();
     });
 
-    // Sự kiện cho form trả lời
+    // When the user submits their answer
     answerForm.addEventListener('submit', handleAnswerSubmit);
 
-    // Sự kiện cho các nút
+    // Button events
     nextWordBtn.addEventListener('click', getNewWord);
     changeTopicsBtn.addEventListener('click', () => {
         examContainer.classList.add('hidden');
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 5. BẮT ĐẦU ---
-    // Giao diện mặc định là màn hình chọn chủ đề, nên không cần gọi gì ở đây cả.
-    // Người dùng sẽ tự bắt đầu bằng cách nhấn nút "Start Exam".
+    // --- 5. LET'S GET STARTED! ---
+    // The default UI is the topic selection screen, so I don't need to do anything here.
+    // The user will kick things off by hitting "Start Exam".
 });

@@ -1,64 +1,64 @@
 // my_website/static/data.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Lấy các element của Modal
+    // Grab all the modal elements I'll need
     const confirmModal = document.getElementById('confirm-modal');
     const modalText = document.getElementById('modal-text');
     const cancelBtn = document.getElementById('modal-btn-cancel');
     const confirmBtn = document.getElementById('modal-btn-confirm');
 
-    // Biến để lưu trữ hàm sẽ được thực thi khi người dùng nhấn "Confirm"
+    // I'll use this to store whatever function should run when the user hits "Confirm"
     let onConfirmAction = null;
 
-    // Hàm để hiển thị modal
+    // Show the confirmation modal with a custom message and action
     function showConfirmModal(word, onConfirm) {
         modalText.textContent = `Are you sure you want to delete the word "${word}"? This action cannot be undone.`;
-        onConfirmAction = onConfirm; // Lưu lại hành động cần thực hiện
+        onConfirmAction = onConfirm; // Save the action for later
         confirmModal.classList.remove('hidden');
     }
 
-    // Hàm để ẩn modal
+    // Hide the modal and reset the action
     function hideConfirmModal() {
         confirmModal.classList.add('hidden');
-        onConfirmAction = null; // Reset hành động
+        onConfirmAction = null; // Just in case
     }
 
-    // Gán sự kiện cho các nút trong modal
+    // Wire up the modal buttons
     cancelBtn.addEventListener('click', hideConfirmModal);
     confirmBtn.addEventListener('click', () => {
         if (onConfirmAction) {
-            onConfirmAction(); // Thực thi hành động đã lưu
+            onConfirmAction(); // Do whatever the user wanted
         }
-        hideConfirmModal(); // Sau đó ẩn modal đi
+        hideConfirmModal(); // Always hide the modal after
     });
-    // Cũng có thể đóng modal khi click ra ngoài
+    // Also let users close the modal by clicking the overlay
     confirmModal.addEventListener('click', (event) => {
         if(event.target === confirmModal) {
             hideConfirmModal();
         }
     });
 
-    // Lấy tất cả các nút xóa
+    // Find all the delete buttons in the table
     const deleteButtons = document.querySelectorAll('.delete-btn');
 
-    // Thêm sự kiện click cho mỗi nút xóa
+    // Attach a click event to each delete button
     deleteButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             const wordId = event.target.dataset.id;
             const row = document.querySelector(`tr[data-id="${wordId}"]`);
             const word = row ? row.querySelector('td:first-child').textContent : 'this word';
 
-            // Hiển thị modal thay vì confirm()
+            // Instead of using confirm(), show my custom modal
             showConfirmModal(word, () => {
-                // Hành động này sẽ được gọi khi người dùng nhấn "Delete" trong modal
+                // This runs if the user confirms the delete
                 deleteWord(wordId, row);
             });
         });
     });
 
     /**
-     * Hàm để thực hiện việc xóa thực sự
-     * @param {string} wordId - ID của từ cần xóa
-     * @param {HTMLElement} rowElement - Dòng <tr> tương ứng trong bảng
+     * Actually delete the word from the server and UI
+     * @param {string} wordId - The ID of the word to delete
+     * @param {HTMLElement} rowElement - The <tr> for that word in the table
      */
     async function deleteWord(wordId, rowElement) {
         try {
@@ -68,12 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (response.ok && result.status === 'success') {
-                // Nếu xóa thành công, xóa hàng đó khỏi bảng trên giao diện
+                // If it worked, remove the row from the table
                 if (rowElement) {
                     rowElement.remove();
                 }
-                // Có thể thêm một toast notification ở đây để thông báo thành công
-                // alert(result.message); // Tạm thời dùng alert
+                // You could show a toast here if you want
+                // alert(result.message); // For now, just an alert
             } else {
                 alert(result.message || 'Failed to delete word.');
             }
