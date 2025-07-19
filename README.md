@@ -1,107 +1,149 @@
-# MyVocab - Beginner's Guide
+# MyVocab
 
-Welcome to **MyVocab**! This is a simple, modern web app to help you learn English vocabulary, powered by Google Gemini AI.
-
----
-
-## 🚀 Quick Start (For Beginners)
-
-### 1. What You Need
-- **A computer with Windows, macOS, or Linux**
-- **Python 3.7 or newer** ([Download Python here](https://www.python.org/downloads/))
-- **A Google Gemini API key** (see below)
-- **Internet connection**
+**MyVocab** is a modern, AI-powered web app to help you learn English vocabulary efficiently. It provides definitions, Vietnamese translations, example sentences, pronunciation, synonyms, related words, and images for any English word. You can save words, organize them by topics, and test yourself with quizzes. Powered by Google Gemini AI and built with Flask.
 
 ---
 
-### 2. Download the Project
-- Download or clone the project files to a folder on your computer (e.g., `MyVocab`).
+## Features
+
+- 🔍 **Smart Dictionary**: Get English definitions, Vietnamese meanings, example sentences, IPA pronunciation, synonyms, related words, and an image for any English word.
+- 🏷️ **Topic Management**: Organize your vocabulary by custom topics.
+- 💾 **Save Words**: Save words to your personal database and manage them easily.
+- 📝 **Quiz Mode**: Test your knowledge with topic-based quizzes.
+- 🌐 **Modern UI**: Responsive, clean, and intuitive interface.
+- 🤖 **AI Integration**: Uses Google Gemini for rich, contextual word data.
+- 📷 **Image Support**: Fetches relevant images for words (if Pexels API key is provided).
 
 ---
 
-### 3. Get Your Gemini API Key
-1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Sign in with your Google account
-3. Create a new API key and copy it
+## Demo
+
+![screenshot or gif here if available]
 
 ---
 
-### 4. Set Up Your Python Environment
+## Quick Start
 
-#### a. Open a Terminal or Command Prompt
-- On Windows: Press `Win + R`, type `cmd`, and press Enter
-- On macOS: Open `Terminal` from Applications
-- On Linux: Open your terminal app
+### 1. Prerequisites
 
-#### b. Go to the Project Folder
-Type the following command (replace the path if needed):
+- Python 3.12+
+- A Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
+- (Optional) A Pexels API key for images ([Get one here](https://www.pexels.com/api/))
+
+### 2. Installation
+
 ```sh
-cd path/to/MyVocab
+<code_block_to_apply_changes_from>
 ```
 
-#### c. Create a Virtual Environment (Recommended)
-```sh
-python -m venv .venv
+### 3. Configuration
+
+Create a `.env` file in the project root:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+# Optional for images:
+PEXELS_API_KEY=your_pexels_api_key_here
 ```
 
-#### d. Activate the Virtual Environment
-- **On Windows:**
-  ```sh
-  .venv\Scripts\activate
-  ```
-- **On macOS/Linux:**
-  ```sh
-  source .venv/bin/activate
-  ```
+### 4. Run the App
 
-#### e. Install the Required Packages
 ```sh
-pip install -r requirements.txt
+cd my_website
+python app.py
+```
+
+Visit [http://localhost:5000](http://localhost:5000) in your browser.
+
+---
+
+## Usage
+
+- **Search**: Enter an English word and press Enter.
+- **View Details**: See definition, translation, example, IPA, synonyms, related words, and image.
+- **Save**: Click "Save Word" and assign it to topics.
+- **Manage Topics**: Add or remove topics as you like.
+- **Quiz**: Go to "Exam" to test yourself on saved words by topic.
+- **Data**: View and manage all your saved words.
+
+---
+
+## Project Structure
+
+```
+MyVocab/
+│
+├── api/                  # Vercel/production entrypoint
+│   └── index.py
+│
+├── my_website/           # Main Flask app
+│   ├── app.py            # Flask app and routes
+│   ├── handle_request.py # AI, translation, and API logic
+│   ├── database.py       # SQLite DB logic
+│   ├── static/           # JS, CSS, client assets
+│   └── templates/        # HTML templates (Jinja2)
+│
+├── requirements.txt      # Python dependencies
+├── myvocab.db            # SQLite database (auto-created)
+└── README.md
 ```
 
 ---
 
-### 5. Add Your API Key
-1. In the main project folder, create a file named `.env`
-2. Open `.env` in a text editor and add this line:
-   ```env
-   GEMINI_API_KEY=your_gemini_api_key_here
-   ```
-   Replace `your_gemini_api_key_here` with your actual key.
+## Tech Stack
+
+- **Backend**: Python, Flask, SQLite
+- **Frontend**: HTML, CSS (Poppins font, responsive grid), JavaScript (vanilla)
+- **AI/ML**: Google Gemini API, Google Translate API
+- **Deployment**: Vercel-ready (via `api/index.py`)
 
 ---
 
-### 6. Run the App
-1. Make sure your virtual environment is activated
-2. Start the app:
-   ```sh
-   cd my_website
-   python app.py
-   ```
-3. Open your web browser and go to [http://localhost:5000](http://localhost:5000)
+## API & Database
+
+- **Dictionary Lookup**: `/lookup` (POST)
+- **Save Word**: `/save_word` (POST)
+- **Get Topics**: `/get_topics` (GET)
+- **Add Topic**: `/add_topic` (POST)
+- **Delete Topic**: `/delete_topic/<id>` (DELETE)
+- **Quiz**: `/get_exam_word` (POST), `/submit_answer` (POST)
+- **Data**: `/data` (HTML), `/get_all_saved_words` (internal)
+
+**Database schema**:
+- `words`: id, word, vietnamese_meaning, english_definition, example, image_url, priority_score
+- `topics`: id, name
+- `word_topics`: word_id, topic_id
 
 ---
 
-## 📝 How to Use
-- Type an English word in the search box and press Enter
-- See the definition, Vietnamese meaning, example sentence, pronunciation, related words, and an image
-- Save words, manage topics, and test yourself with quizzes
+## Dependencies
+
+- Flask
+- gunicorn
+- python-dotenv
+- google-generativeai
+- googletrans==4.0.0-rc1
+- requests
 
 ---
 
-## ❓ Troubleshooting
-- **Python not found?** Make sure you installed Python and added it to your PATH
-- **Module not found?** Run `pip install -r requirements.txt` again
-- **API key error?** Double-check your `.env` file and make sure there are no spaces or typos
-- **App not loading?** Check the terminal for errors and make sure you are in the correct folder
+## Troubleshooting
+
+- **Python not found**: Ensure Python 3.12+ is installed and in your PATH.
+- **Module not found**: Run `pip install -r requirements.txt` again.
+- **API key error**: Check your `.env` file for typos or missing keys.
+- **App not loading**: Check terminal for errors and ensure you are in the correct folder.
 
 ---
 
-## 💡 Tips
-- Always activate your virtual environment before running the app
-- You can stop the app anytime by pressing `Ctrl + C` in the terminal
-- If you want to install new packages, use `pip install package_name` while your virtual environment is active
+## License
+
+[MIT](LICENSE) (or your chosen license)
 
 ---
 
 **Enjoy learning with MyVocab!**
+
+---
+
+Would you like me to write this new README to your `README.md` file? If you want to customize any section, let me know!
