@@ -1,11 +1,11 @@
 # File: my_website/app.py
-# Phiên bản hoàn chỉnh, đã sửa lỗi và tối ưu cho Vercel.
+# This is my main Flask app for MyVocab. I've tweaked and optimized it for Vercel deployment.
 
 import os
 from flask import Flask, render_template, request, jsonify
 
-# --- CÁC DÒNG IMPORT ---
-# Import các hàm cần thiết từ các file khác trong cùng package.
+# --- IMPORTS ---
+# Grabbing all the helper functions I need from my other modules in this package.
 from .handle_request import get_dictionary_data
 from .database import (
     init_db,
@@ -20,47 +20,48 @@ from .database import (
     delete_topic_by_id
 )
 
-# --- KHỞI TẠO FLASK APP ---
+# --- FLASK APP SETUP ---
+# Setting up the Flask app, making sure it knows where to find my static files and templates.
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__,
             static_folder=os.path.join(BASE_DIR, 'static'),
             template_folder=os.path.join(BASE_DIR, 'templates'))
 
 
-# --- CÁC ROUTE ĐỂ RENDER TRANG (HTML) ---
+# --- PAGE ROUTES (RENDER HTML) ---
 
 @app.route('/')
 def index():
-    """Render trang tra từ điển chính."""
+    """This is the main dictionary page – where the magic starts."""
     return render_template('index.html')
 
 
 @app.route('/exam')
 def exam_page():
-    """Render trang kiểm tra từ vựng."""
+    """Quiz time! This page lets you test your vocab knowledge."""
     topics = get_all_topics()
     return render_template('exam.html', topics=topics)
 
 
 @app.route('/data')
 def data_page():
-    """Render trang hiển thị tất cả các từ đã lưu."""
+    """Here's where you can see all the words you've saved so far."""
     saved_words = get_all_saved_words()
     return render_template('data.html', words=saved_words)
 
 
 @app.route('/manage_topics')
 def manage_topics_page():
-    """Render trang quản lý các chủ đề."""
+    """Manage your custom topics here. Add, remove, or just browse them."""
     topics = get_all_topics()
     return render_template('manage_topics.html', topics=topics)
 
 
-# --- CÁC ENDPOINT API (TRẢ VỀ DỮ LIỆU JSON) ---
+# --- API ENDPOINTS (RETURN JSON) ---
 
 @app.route('/lookup', methods=['POST'])
 def lookup_route():
-    """API để tra cứu một từ."""
+    """POST here to look up a word. Returns all the juicy details."""
     data = request.get_json()
     user_message = data.get('message')
     if not user_message:
@@ -70,13 +71,13 @@ def lookup_route():
 
 @app.route('/save_word', methods=['POST'])
 def save_word_route():
-    """API để lưu một từ và các chủ đề liên quan."""
+    """Save a word (and its topics) to your personal collection."""
     data = request.get_json()
     word_data = data.get('word_data')
     topic_ids = data.get('topic_ids', [])
 
     if not word_data or not isinstance(word_data, dict):
-        return jsonify({"error": "Dữ liệu từ không hợp lệ hoặc bị thiếu."}), 400
+        return jsonify({"error": "Word data is missing or invalid."}), 400
 
     result = save_word(word_data, topic_ids)
     return jsonify(result)
@@ -84,18 +85,18 @@ def save_word_route():
 
 @app.route('/get_exam_word', methods=['POST'])
 def get_exam_word_route():
-    """API để lấy một từ để kiểm tra, có thể lọc theo chủ đề."""
+    """Grab a random word for the quiz, filtered by topic if you want."""
     data = request.get_json()
     topic_ids = data.get('topic_ids', None)
     word = get_word_for_exam(topic_ids)
     if word:
         return jsonify(word)
-    return jsonify({"error": "Không có từ nào phù hợp với chủ đề đã chọn."}), 404
+    return jsonify({"error": "No words found for the selected topics."}), 404
 
 
 @app.route('/submit_answer', methods=['POST'])
 def submit_answer_route():
-    """API để cập nhật điểm sau khi người dùng trả lời."""
+    """Update the score for a word after you answer a quiz question."""
     data = request.get_json()
     word_id = data.get('id')
     is_correct = data.get('is_correct')
@@ -105,7 +106,7 @@ def submit_answer_route():
 
 @app.route('/get_answer/<int:word_id>', methods=['GET'])
 def get_answer_route(word_id):
-    """API để lấy đáp án đúng cho một từ."""
+    """Get the correct answer for a word by its ID (for quiz feedback)."""
     correct_answer = get_correct_answer_by_id(word_id)
     if correct_answer is not None:
         return jsonify({"correct_answer": correct_answer})
@@ -114,21 +115,21 @@ def get_answer_route(word_id):
 
 @app.route('/delete_word/<int:word_id>', methods=['DELETE'])
 def delete_word_route(word_id):
-    """API để xóa một từ."""
+    """Delete a word from your saved list."""
     result = delete_word_by_id(word_id)
     return jsonify(result)
 
 
 @app.route('/get_topics', methods=['GET'])
 def get_topics_route():
-    """API để lấy danh sách tất cả các chủ đề."""
+    """Get a list of all your topics (for organizing words)."""
     topics = get_all_topics()
     return jsonify(topics)
 
 
 @app.route('/add_topic', methods=['POST'])
 def add_topic_route():
-    """API để thêm một chủ đề mới."""
+    """Add a brand new topic to help organize your words."""
     data = request.get_json()
     topic_name = data.get('topic_name')
     if not topic_name:
@@ -142,7 +143,7 @@ def add_topic_route():
 
 @app.route('/delete_topic/<int:topic_id>', methods=['DELETE'])
 def delete_topic_route(topic_id):
-    """API để xóa một chủ đề."""
+    """Remove a topic by its ID. (Don't worry, your words are safe!)"""
     result = delete_topic_by_id(topic_id)
     return jsonify(result)
 

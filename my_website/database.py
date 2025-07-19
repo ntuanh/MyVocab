@@ -1,39 +1,38 @@
-# File: my_website/database.py
-# PHIÊN BẢN CUỐI CÙNG - Hoàn thiện 100% cho Vercel Postgres.
+
 
 import os
 import psycopg2
-from psycopg2.extras import RealDictCursor  # Giúp trả về kết quả dạng dictionary
+from psycopg2.extras import RealDictCursor  # This makes query results act like Python dicts, which is way easier to work with
 import random
 
-# Vercel & Neon sẽ tự động cung cấp biến môi trường này sau khi bạn liên kết DB
+# Vercel & Neon will automatically provide this environment variable after you link your DB
 DATABASE_URL = os.environ.get('POSTGRES_URL')
 
 
 def get_db_connection():
-    """Tạo và trả về một kết nối đến Vercel Postgres."""
+    """Open and return a connection to my Vercel Postgres database."""
     try:
         if not DATABASE_URL:
-            raise ValueError("Biến môi trường POSTGRES_URL chưa được thiết lập.")
-        # Dùng RealDictCursor để kết quả trả về giống dictionary (dễ xử lý)
+            raise ValueError("POSTGRES_URL environment variable isn't set. Did you link your DB?")
+        # RealDictCursor means I get dict-like results instead of tuples. So much nicer!
         conn = psycopg2.connect(DATABASE_URL, cursor_factory=RealDictCursor)
         return conn
     except Exception as e:
-        print(f"Lỗi kết nối database: {e}")
+        print(f"Database connection error: {e}")
         return None
 
 
-# --- CÁC HÀM XỬ LÝ DATABASE (ĐÃ CẬP NHẬT CHO POSTGRES) ---
-# LƯU Ý QUAN TRỌNG: Postgres dùng %s làm placeholder, không phải ? như SQLite
+# --- DATABASE FUNCTIONS (UPDATED FOR POSTGRES) ---
+# IMPORTANT: Postgres uses %s as a placeholder, not ? like SQLite
 
 def init_db():
-    """Khởi tạo các bảng trong database Postgres nếu chúng chưa tồn tại."""
+    """Create all the tables in Postgres if they don't exist yet. (First-time setup stuff.)"""
     conn = get_db_connection()
     if not conn: return "Database connection failed"
 
     try:
         with conn.cursor() as cur:
-            # SERIAL PRIMARY KEY trong Postgres tự động tăng
+            # SERIAL PRIMARY KEY in Postgres auto-increments for me
             cur.execute('''
                 CREATE TABLE IF NOT EXISTS words (
                     id SERIAL PRIMARY KEY,
@@ -60,16 +59,16 @@ def init_db():
             ''')
 
             cur.execute("SELECT COUNT(*) FROM topics;")
-            # psycopg2 trả về dict, truy cập bằng key 'count'
+            # psycopg2 gives me a dict, so I use the 'count' key
             if cur.fetchone()['count'] == 0:
                 default_topics = [('Daily life',), ('Work',), ('Cooking',), ('Travel',), ('Technology',)]
-                # executemany dùng cho việc chèn nhiều dòng
+                # executemany is perfect for inserting a bunch of rows at once
                 cur.executemany("INSERT INTO topics (name) VALUES (%s);", default_topics)
 
-        conn.commit()  # Lưu tất cả thay đổi
+        conn.commit()  # Save all the changes
         return "Database initialized successfully."
     except Exception as e:
-        conn.rollback()  # Hoàn tác nếu có lỗi
+        conn.rollback()  # Roll back if anything goes wrong
         return f"Error initializing database: {e}"
     finally:
         if conn:
@@ -77,7 +76,7 @@ def init_db():
 
 
 def save_word(word_data, topic_ids=None):
-    """Lưu từ mới hoặc cập nhật chủ đề cho từ đã có."""
+    """Save a new word, or update its topics if it already exists."""
     conn = get_db_connection()
     if not conn: return {"status": "error", "message": "DB connection failed"}
 
@@ -86,7 +85,7 @@ def save_word(word_data, topic_ids=None):
 
     try:
         with conn.cursor() as cur:
-            # Dùng ON CONFLICT để xử lý trường hợp từ đã tồn tại (tương đương INSERT OR IGNORE)
+            # ON CONFLICT is like INSERT OR IGNORE in SQLite. Super handy for avoiding duplicates!
             cur.execute('''
                 INSERT INTO words (word, vietnamese_meaning, english_definition, example, image_url)
                 VALUES (%s, %s, %s, %s, %s)
@@ -99,11 +98,11 @@ def save_word(word_data, topic_ids=None):
                 word_data.get('image_url')
             ))
 
-            # Lấy ID của từ (dù là mới thêm hay đã có)
+            # Grab the word's ID (works for both new and existing words)
             cur.execute("SELECT id FROM words WHERE word = %s;", (word_to_save,))
             word_id = cur.fetchone()['id']
 
-            # Cập nhật chủ đề
+            # Now update the topics for this word
             if topic_ids is not None:
                 cur.execute("DELETE FROM word_topics WHERE word_id = %s;", (word_id,))
                 if topic_ids:
@@ -172,6 +171,7 @@ def get_word_for_exam(topic_ids=None):
             all_words = cur.fetchall()
             if not all_words: return None
 
+            # This is a little trick: words with higher priority_score show up more often in quizzes
             weighted_list = [word for word in all_words for _ in range(word['priority_score'])]
             if not weighted_list: return None
 
@@ -194,6 +194,7 @@ def update_word_score(word_id, is_correct):
             if not result: return {"status": "error", "message": "Word not found."}
 
             current_score = result['priority_score']
+            # If you get it right, the word shows up less. If you get it wrong, it shows up more!
             new_score = max(1, current_score - 1) if is_correct else current_score + 1
             cur.execute("UPDATE words SET priority_score = %s WHERE id = %s;", (new_score, word_id))
             conn.commit()
