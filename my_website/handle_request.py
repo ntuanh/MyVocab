@@ -62,10 +62,14 @@ def get_translation(text_to_translate):
 
 
 def get_content_from_gemini(word):
-    if not gemini_model: return {}
+    print("\n--- [DEBUG] ENTERING get_content_from_gemini ---")
+    print(f"[DEBUG] Word to process: {word}")
+
+    if not gemini_model:
+        print("[DEBUG] EXIT: gemini_model is not initialized.")
+        return {}
+
     try:
-        # SỬA 2: Làm cho prompt linh hoạt hơn
-        # Yêu cầu nó cung cấp "nếu có thể" (if available)
         prompt = f"""
         Analyze the English word "{word}". 
         Please provide a JSON object with the following keys. If a piece of information is not available, provide an empty string or an empty list.
@@ -76,25 +80,48 @@ def get_content_from_gemini(word):
             "family_words": ["related_noun", "related_verb", "related_adjective"]
         }}
         """
+        print(f"[DEBUG] Generated prompt: {prompt}")
+        print("[DEBUG] Sending request to Gemini API...")
+
         response = gemini_model.generate_content(prompt, request_options={'timeout': 20})
 
-        # SỬA 3: Xử lý response trống một cách an toàn
-        if not response.parts:
-            print(f"WARN: Gemini returned no parts for '{word}'. Potentially blocked.")
+        print("[DEBUG] Received response from Gemini.")
+
+        # --- PHẦN DEBUG QUAN TRỌNG NHẤT ---
+        # In toàn bộ đối tượng response để kiểm tra
+        print(f"[DEBUG] Full Gemini response object: {response}")
+
+        # Kiểm tra xem có bị chặn vì lý do an toàn không
+        if response.prompt_feedback.block_reason:
+            print(f"[DEBUG] EXIT: Request was blocked. Reason: {response.prompt_feedback.block_reason}")
             return {}
 
-        # Thử parse JSON, nếu thất bại thì in ra và trả về rỗng
+        # Kiểm tra xem có text trả về không
+        if not response.parts:
+            print("[DEBUG] EXIT: Response has no parts (response.parts is empty).")
+            return {}
+
+        response_text = response.text
+        print(f"[DEBUG] Extracted response.text: {response_text}")
+
+        # Thử parse JSON
         try:
-            return json.loads(response.text)
-        except json.JSONDecodeError:
-            print(f"ERROR: Gemini did not return valid JSON for '{word}'. Response: {response.text}")
+            parsed_json = json.loads(response_text)
+            print(f"[DEBUG] Successfully parsed JSON: {parsed_json}")
+            print("--- [DEBUG] EXITING get_content_from_gemini (SUCCESS) ---")
+            return parsed_json
+        except json.JSONDecodeError as json_error:
+            print(f"[DEBUG] EXIT: JSONDecodeError. Could not parse the response text.")
+            print(f"[DEBUG] JSON Error details: {json_error}")
             return {}
 
     except Exception as e:
-        print(f"ERROR calling Gemini for '{word}': {e}")
+        print(f"[DEBUG] EXIT: An unexpected exception occurred in the main try block.")
+        print(f"[DEBUG] Exception details: {e}")
+        # In traceback chi tiết nếu có thể (hữu ích trên Vercel)
+        import traceback
+        traceback.print_exc()
         return {}
-
-
 def get_image_from_pexels(query):
     # Hàm này đã ổn, giữ nguyên
     if not PEXELS_API_KEY: return None
