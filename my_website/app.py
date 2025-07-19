@@ -147,25 +147,3 @@ def delete_topic_route(topic_id):
     return jsonify(result)
 
 
-# --- ROUTE QUẢN TRỊ (ADMIN) ---
-
-@app.route('/api/init-db')
-def init_db_route():
-    """
-    Endpoint an toàn để khởi tạo database.
-    Chỉ chạy một lần duy nhất sau khi deploy lên Vercel Postgres.
-    """
-    secret_key_from_url = request.args.get('secret')
-    expected_secret_key = os.environ.get('ADMIN_SECRET_KEY')
-
-    if not expected_secret_key or secret_key_from_url != expected_secret_key:
-        return "Unauthorized: Invalid or missing secret key.", 401
-
-    try:
-        # Gọi trực tiếp hàm init_db() đã được import
-        result_message = init_db()
-        print(f"Database initialization result: {result_message}")
-        return f"<h1>Database Initialization</h1><p>{result_message}</p>", 200
-    except Exception as e:
-        print(f"Error during manual DB initialization: {e}")
-        return f"<h1>Error</h1><p>An error occurred: {e}</p>", 500
