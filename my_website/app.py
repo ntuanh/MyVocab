@@ -1,11 +1,11 @@
-# my_website/app.py
+# File: my_website/app.py
+# Phiên bản hoàn chỉnh, đã sửa lỗi và tối ưu cho Vercel.
 
-from flask import Flask, render_template, request, jsonify
 import os
+from flask import Flask, render_template, request, jsonify
 
-from . import database
-
-# Import tất cả các hàm cần thiết từ các file khác
+# --- CÁC DÒNG IMPORT ---
+# Import các hàm cần thiết từ các file khác trong cùng package.
 from .handle_request import get_dictionary_data
 from .database import (
     init_db,
@@ -20,18 +20,11 @@ from .database import (
     delete_topic_by_id
 )
 
-# Khởi tạo ứng dụng Flask
-
+# --- KHỞI TẠO FLASK APP ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 app = Flask(__name__,
             static_folder=os.path.join(BASE_DIR, 'static'),
             template_folder=os.path.join(BASE_DIR, 'templates'))
-
-# Khởi tạo database một lần duy nhất khi ứng dụng bắt đầu
-# Thao tác này sẽ tạo file myvocab.db và các bảng nếu chúng chưa tồn tại.
-with app.app_context():
-    init_db()
 
 
 # --- CÁC ROUTE ĐỂ RENDER TRANG (HTML) ---
@@ -42,23 +35,9 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/add_topic', methods=['POST'])
-def add_topic_route():
-    data = request.get_json()
-    topic_name = data.get('topic_name')
-    if not topic_name:
-        return jsonify({"error": "Topic name cannot be empty."}), 400
-
-    new_topic = add_new_topic(topic_name.strip())
-    if new_topic:
-        return jsonify(new_topic), 201  # 201 Created
-    else:
-        return jsonify({"error": "Failed to create topic."}), 500
-
 @app.route('/exam')
 def exam_page():
     """Render trang kiểm tra từ vựng."""
-    # Lấy danh sách chủ đề để truyền sang cho trang exam
     topics = get_all_topics()
     return render_template('exam.html', topics=topics)
 
@@ -70,6 +49,13 @@ def data_page():
     return render_template('data.html', words=saved_words)
 
 
+@app.route('/manage_topics')
+def manage_topics_page():
+    """Render trang quản lý các chủ đề."""
+    topics = get_all_topics()
+    return render_template('manage_topics.html', topics=topics)
+
+
 # --- CÁC ENDPOINT API (TRẢ VỀ DỮ LIỆU JSON) ---
 
 @app.route('/lookup', methods=['POST'])
@@ -77,63 +63,33 @@ def lookup_route():
     """API để tra cứu một từ."""
     data = request.get_json()
     user_message = data.get('message')
-    # get_dictionary_data đã trả về một phản hồi JSON hoàn chỉnh
+    if not user_message:
+        return jsonify({'error': 'No message provided'}), 400
     return get_dictionary_data(user_message)
 
 
 @app.route('/save_word', methods=['POST'])
 def save_word_route():
     """API để lưu một từ và các chủ đề liên quan."""
-    print("\n--- Received request on /save_word ---")  # Báo hiệu đã nhận được request
-
     data = request.get_json()
-    print(f"Request JSON data: {data}")  # In ra toàn bộ dữ liệu frontend gửi lên
-
     word_data = data.get('word_data')
     topic_ids = data.get('topic_ids', [])
 
-    # In ra các biến đã được bóc tách
-    print(f"Extracted word_data: {word_data}")
-    print(f"Extracted topic_ids: {topic_ids}")
-
     if not word_data or not isinstance(word_data, dict):
-        print("ERROR: word_data is invalid or missing. Aborting.")
         return jsonify({"error": "Dữ liệu từ không hợp lệ hoặc bị thiếu."}), 400
 
-    # Gọi hàm lưu và xem kết quả
-    print("Calling database.save_word...")
     result = save_word(word_data, topic_ids)
-    print(f"Result from database.save_word: {result}")
-
     return jsonify(result)
 
-@app.route('/manage_topics')
-def manage_topics_page():
-    """Render trang quản lý các chủ đề."""
-    topics = get_all_topics()
-    return render_template('manage_topics.html', topics=topics)
-
-@app.route('/delete_topic/<int:topic_id>', methods=['DELETE'])
-def delete_topic_route(topic_id):
-    """API để xóa một chủ đề."""
-    # Thêm một lớp bảo vệ để không cho xóa chủ đề mặc định
-    if topic_id == 1: # Giả sử 'Daily life' có ID là 1
-        return jsonify({"error": "Cannot delete the default topic."}), 403
-    result = delete_topic_by_id(topic_id)
-    return jsonify(result)
 
 @app.route('/get_exam_word', methods=['POST'])
 def get_exam_word_route():
     """API để lấy một từ để kiểm tra, có thể lọc theo chủ đề."""
     data = request.get_json()
     topic_ids = data.get('topic_ids', None)
-
     word = get_word_for_exam(topic_ids)
-
     if word:
         return jsonify(word)
-
-    # Sửa lỗi: Đảm bảo chuỗi được đóng đúng cách
     return jsonify({"error": "Không có từ nào phù hợp với chủ đề đã chọn."}), 404
 
 
@@ -151,7 +107,6 @@ def submit_answer_route():
 def get_answer_route(word_id):
     """API để lấy đáp án đúng cho một từ."""
     correct_answer = get_correct_answer_by_id(word_id)
-
     if correct_answer is not None:
         return jsonify({"correct_answer": correct_answer})
     return jsonify({"error": "Word not found in database."}), 404
@@ -171,28 +126,46 @@ def get_topics_route():
     return jsonify(topics)
 
 
+@app.route('/add_topic', methods=['POST'])
+def add_topic_route():
+    """API để thêm một chủ đề mới."""
+    data = request.get_json()
+    topic_name = data.get('topic_name')
+    if not topic_name:
+        return jsonify({"error": "Topic name cannot be empty."}), 400
+
+    new_topic = add_new_topic(topic_name.strip())
+    if new_topic:
+        return jsonify(new_topic), 201
+    return jsonify({"error": "Failed to create topic."}), 500
+
+
+@app.route('/delete_topic/<int:topic_id>', methods=['DELETE'])
+def delete_topic_route(topic_id):
+    """API để xóa một chủ đề."""
+    result = delete_topic_by_id(topic_id)
+    return jsonify(result)
+
+
+# --- ROUTE QUẢN TRỊ (ADMIN) ---
+
 @app.route('/api/init-db')
 def init_db_route():
-    # Lấy "mật khẩu" từ tham số 'secret' trên URL
-    # Ví dụ: ...vercel.app/api/init-db?secret=mat_khau_cua_ban
+    """
+    Endpoint an toàn để khởi tạo database.
+    Chỉ chạy một lần duy nhất sau khi deploy lên Vercel Postgres.
+    """
     secret_key_from_url = request.args.get('secret')
-
-    # Lấy "mật khẩu" đúng được lưu trên Vercel
     expected_secret_key = os.environ.get('ADMIN_SECRET_KEY')
 
-    # Kiểm tra xem "mật khẩu" có được cung cấp và có khớp không
     if not expected_secret_key or secret_key_from_url != expected_secret_key:
-        # Nếu không khớp, trả về lỗi 401 Unauthorized
         return "Unauthorized: Invalid or missing secret key.", 401
 
-    # Nếu mật khẩu khớp, chạy hàm init_db() từ file database.py
     try:
-        result_message = database.init_db()
+        # Gọi trực tiếp hàm init_db() đã được import
+        result_message = init_db()
         print(f"Database initialization result: {result_message}")
         return f"<h1>Database Initialization</h1><p>{result_message}</p>", 200
     except Exception as e:
         print(f"Error during manual DB initialization: {e}")
         return f"<h1>Error</h1><p>An error occurred: {e}</p>", 500
-# Đoạn này để có thể chạy server trực tiếp bằng lệnh `python my_website/app.py`
-# if __name__ == '__main__':
-#     app.run(debug=True)
