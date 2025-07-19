@@ -169,6 +169,28 @@ def get_topics_route():
     return jsonify(topics)
 
 
+@app.route('/api/init-db')
+def init_db_route():
+    # Lấy "mật khẩu" từ tham số 'secret' trên URL
+    # Ví dụ: ...vercel.app/api/init-db?secret=mat_khau_cua_ban
+    secret_key_from_url = request.args.get('secret')
+
+    # Lấy "mật khẩu" đúng được lưu trên Vercel
+    expected_secret_key = os.environ.get('ADMIN_SECRET_KEY')
+
+    # Kiểm tra xem "mật khẩu" có được cung cấp và có khớp không
+    if not expected_secret_key or secret_key_from_url != expected_secret_key:
+        # Nếu không khớp, trả về lỗi 401 Unauthorized
+        return "Unauthorized: Invalid or missing secret key.", 401
+
+    # Nếu mật khẩu khớp, chạy hàm init_db() từ file database.py
+    try:
+        result_message = database.init_db()
+        print(f"Database initialization result: {result_message}")
+        return f"<h1>Database Initialization</h1><p>{result_message}</p>", 200
+    except Exception as e:
+        print(f"Error during manual DB initialization: {e}")
+        return f"<h1>Error</h1><p>An error occurred: {e}</p>", 500
 # Đoạn này để có thể chạy server trực tiếp bằng lệnh `python my_website/app.py`
 # if __name__ == '__main__':
 #     app.run(debug=True)
