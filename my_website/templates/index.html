@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyVocab - Từ điển thông minh</title>
-    <!-- Link đến file CSS -->
+    <title>MyVocab - Smart Dictionary</title>
+    <!-- Link to CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Link đến thư viện icon Font Awesome -->
+    <!-- Link to Font Awesome icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div id="app-container">
-        <!-- CỘT BÊN TRÁI -->
+        <!-- LEFT COLUMN -->
         <aside id="left-panel">
             <div id="search-container">
                 <form id="search-form">
@@ -22,18 +22,18 @@
             <div id="image-panel" class="panel">
                 <p>Image will appear here</p>
             </div>
-            <!-- CÁC NÚT HÀNH ĐỘNG MỚI -->
+            <!-- NEW ACTION BUTTONS -->
         </aside>
 
-        <!-- CỘT Ở GIỮA -->
+        <!-- CENTER COLUMN -->
         <main id="main-content">
             <div id="vietnamese-panel" class="panel pink hidden">
-                <h3>Nghĩa Tiếng Việt</h3>
+                <h3>Vietnamese Meaning</h3>
                 <p id="vietnamese-meaning">...</p>
             </div>
             <div id="definition-panel" class="panel blue">
                 <h3>English Definition</h3>
-                <p id="english-definition">Nhập một từ vào ô tìm kiếm để bắt đầu.</p>
+                <p id="english-definition">Enter a word in the search box to begin.</p>
             </div>
             <div id="example-panel" class="panel pink">
                 <h3>Example</h3>
@@ -52,7 +52,7 @@
             </div>
         </main>
 
-        <!-- CỘT BÊN PHẢI -->
+        <!-- RIGHT COLUMN -->
         <aside id="right-panel">
             <div id="ipa-panel" class="panel pink">
                 <h3>IPA</h3>
@@ -69,18 +69,20 @@
         </aside>
     </div>
 
-    <!-- Link đến file JavaScript -->
+    <!-- Link to JavaScript file -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+
     <div id="toast-notification" class="toast hidden">
         <span id="toast-message"></span>
     </div>
+
     <div id="save-modal" class="modal-overlay hidden">
         <div class="modal-content">
             <h3>Save '<span id="modal-word-to-save"></span>'</h3>
             <p>Select topics for this word. If none are selected, it will be saved to "Daily life".</p>
 
             <div id="modal-topic-list" class="topic-list-container">
-                <!-- JavaScript sẽ điền các checkbox chủ đề vào đây -->
+                <!-- JavaScript will populate topic checkboxes here -->
             </div>
 
             <div id="add-topic-container">
