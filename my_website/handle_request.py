@@ -1,6 +1,3 @@
-# my_website/handle_request.py
-# PHIÊN BẢN HOÀN THIỆN CUỐI CÙNG - Đã thêm Từ đồng nghĩa (Similar Meaning)
-
 import os
 import requests
 import json
@@ -12,12 +9,10 @@ from google.generativeai.types import HarmCategory, HarmBlockThreshold
 from googletrans import Translator
 from .database import find_word_in_db
 
-# --- CẤU HÌNH ---
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 PEXELS_API_KEY = os.environ.get("PEXELS_API_KEY")
 DICT_API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
 
-# Khởi tạo các client/model một lần duy nhất
 gemini_model = None
 translator_client = None
 
@@ -47,7 +42,7 @@ except Exception as e:
     print(f"CRITICAL ERROR during initialization: {e}")
 
 
-# --- CÁC HÀM TIỆN ÍCH VÀ GỌI API ---
+# --- API ---
 
 def get_translation(text_to_translate):
     if not translator_client or not text_to_translate: return "N/A"
@@ -92,21 +87,17 @@ def get_image_from_pexels(query):
         return None
 
 
-# <<< SỬA ĐỔI: Hàm này giờ sẽ lấy cả IPA và Synonyms >>>
 def get_data_from_dictionary_api(word):
-    """Lấy dữ liệu IPA và từ đồng nghĩa từ Free Dictionary API."""
     default_result = {"pronunciation": "N/A", "synonyms": []}
     try:
         response = requests.get(f"{DICT_API_URL}{word}", timeout=10)
         if response.status_code == 200:
             data = response.json()[0]
 
-            # Lấy IPA
             pronunciation = next((p['text'] for p in data.get('phonetics', []) if p.get('text')), "N/A")
 
-            # Lấy Synonyms từ phần nghĩa đầu tiên
             first_meaning = data.get('meanings', [{}])[0]
-            synonyms = first_meaning.get('synonyms', [])[:5]  # Lấy tối đa 5 từ đồng nghĩa
+            synonyms = first_meaning.get('synonyms', [])[:5] 
 
             return {"pronunciation": pronunciation, "synonyms": synonyms}
     except Exception as e:
@@ -114,8 +105,6 @@ def get_data_from_dictionary_api(word):
 
     return default_result
 
-
-# --- HÀM XỬ LÝ CHÍNH ---
 
 def get_dictionary_data(user_word):
     word_to_lookup = user_word.strip().lower()
@@ -158,7 +147,6 @@ def get_dictionary_data(user_word):
             "pronunciation_ipa": dict_data.get("pronunciation", "N/A"),
             "family_words": family_words,
             "image_url": image_url,
-            # <<< SỬA ĐỔI: Sử dụng kết quả synonyms từ dict_data >>>
             "synonyms": dict_data.get("synonyms", []),
             "is_saved": False
         }
