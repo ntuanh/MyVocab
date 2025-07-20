@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 :root {
-    --bg-color: #6A8E7F; /* Nền xanh lá cây trong ảnh */
+    --bg-color: #6A8E7F; 
     --panel-blue: #A0D2EB;
     --panel-pink: #E4AEC5;
     --panel-dark-blue: #4A5899;
@@ -90,7 +90,7 @@ body {
 
 #image-panel {
     flex-grow: 1;
-    display: flex; /* Quan trọng */
+    display: flex; 
     justify-content: center;
     align-items: center;
     background-color: var(--panel-blue);
@@ -102,13 +102,11 @@ body {
 #word-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Giúp ảnh lấp đầy panel mà không bị méo */
+    object-fit: cover; 
     border-radius: var(--border-radius);
     background-color: #eee;
-    /* KHÔNG có 'display: none' ở đây. JavaScript sẽ điều khiển việc này. */
 }
 
-/* Màu sắc cho các panel */
 #definition-panel { background-color: var(--panel-blue); }
 #vietnamese-panel, #example-panel, #ipa-panel, #synonym-panel { background-color: var(--panel-pink); }
 #family-panel {
@@ -120,7 +118,6 @@ body {
     background-color: var(--panel-dark-blue);
 }
 
-/* Styling cho phần nghĩa bị ẩn */
 #vietnamese-panel.hidden {
     position: relative;
     cursor: pointer;
@@ -142,7 +139,6 @@ body {
 }
 #vietnamese-panel.revealed::after { display: none; }
 
-/* Styling cho danh sách tag */
 .tag-list {
     display: flex;
     flex-wrap: wrap;
@@ -161,13 +157,11 @@ body {
     background-color: rgba(255,255,255,0.2);
 }
 
-/* Thêm vào cuối file style.css */
-
 #action-buttons {
     display: flex;
-    justify-content: flex-start; /* Hoặc center, flex-end tùy ý */
+    justify-content: flex-start;
     gap: 1rem;
-    margin-top: -0.5rem; /* Điều chỉnh khoảng cách với panel trên */
+    margin-top: -0.5rem; 
 }
 
 .action-btn {
@@ -195,12 +189,11 @@ body {
 }
 
 #save-button.saved {
-    background-color: #90ee90; /* Màu xanh lá cây khi đã lưu   */
+    background-color: #90ee90; 
     color: white;
     transform: scale(1.05);
 }
 
-/* Thêm vào cuối file style.css */
 .suggestion-link {
     font-weight: 600;
     color: var(--panel-dark-blue);
@@ -222,11 +215,10 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-/* --- Styling cho các nút hành động --- */
 #actions-panel {
     display: flex;
     gap: 1rem;
-    justify-content: center; /* Căn giữa các nút */
+    justify-content: center; 
 }
 
 .action-btn, .exam-link {
@@ -251,11 +243,10 @@ body {
     margin-right: 0.5rem;
 }
 
-/* --- Styling cho trang Exam --- */
 .exam-body {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Canh trên cùng */
+    align-items: flex-start; 
 }
 #exam-container {
     width: 100%;
@@ -306,11 +297,11 @@ body {
     font-size: 1rem;
 }
 #feedback-card.correct {
-    background-color: #d4edda; /* Green */
+    background-color: #d4edda; 
     color: #155724;
 }
 #feedback-card.incorrect {
-    background-color: #f8d7da; /* Red */
+    background-color: #f8d7da; 
     color: #721c24;
 }
 .back-link {
@@ -319,7 +310,6 @@ body {
     margin-top: 1rem;
 }
 
-/* --- Styling cho nút Data --- */
 .data-link {
     background-color: var(--panel-blue) !important;
     color: var(--text-color) !important;
@@ -328,7 +318,6 @@ body {
     background-color: #8abedc !important;
 }
 
-/* --- Styling cho trang Data --- */
 .data-body {
     align-items: flex-start;
 }
@@ -362,9 +351,9 @@ th {
 tbody tr:hover {
     background-color: #f9f9f9;
 }
-/* Styling cho nút Delete trong bảng */
+
 .delete-btn {
-    background-color: #f44336; /* Màu đỏ */
+    background-color: #f44336; 
     color: white;
     border: none;
     padding: 0.4rem 0.8rem;
@@ -377,17 +366,17 @@ tbody tr:hover {
     background-color: #d32f2f;
 }
 .action-btn:disabled {
-    background-color: #28a745; /* Màu xanh lá cây thành công */
+    background-color: #28a745;
     color: white;
-    cursor: not-allowed; /* Đổi con trỏ chuột để cho biết không thể nhấn */
-    opacity: 1; /* Ghi đè opacity mặc định của trạng thái disabled */
+    cursor: not-allowed;
+    opacity: 1; 
 }
-/* --- Styling cho Toast Notification --- */
+/* --- Styling for Toast Notification --- */
 #toast-notification {
-    position: fixed; /* Cố định vị trí trên màn hình */
+    position: fixed;
     bottom: 2rem;
     left: 50%;
-    transform: translateX(-50%); /* Căn giữa theo chiều ngang */
+    transform: translateX(-50%); 
     padding: 1rem 2rem;
     border-radius: 10px;
     color: white;
@@ -406,14 +395,14 @@ tbody tr:hover {
 }
 
 #toast-notification.success {
-    background-color: #28a745; /* Màu xanh lá cây */
+    background-color: #28a745; /* green */
 }
 
 #toast-notification.error {
-    background-color: #dc3545; /* Màu đỏ */
+    background-color: #dc3545; /* red */
 }
 
-/* --- Styling cho Modal xác nhận --- */
+/* --- Styling for Modal cf --- */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -431,7 +420,7 @@ tbody tr:hover {
 
 .modal-overlay.hidden {
     opacity: 0;
-    pointer-events: none; /* Không cho phép click khi đang ẩn */
+    pointer-events: none; /* Reject click hidden */
 }
 
 .modal-content {
@@ -494,7 +483,7 @@ tbody tr:hover {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 1rem; /* Tạo khoảng cách với text ở trên */
+    margin-top: 1rem; 
     transition: all 0.2s ease-in-out;
 }
 
@@ -505,9 +494,8 @@ tbody tr:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Tùy chỉnh màu chữ cho từng loại feedback */
 #feedback-card.correct #next-word-btn {
-    color: #155724; /* Màu xanh lá đậm */
+    color: #155724;
     border-color: #155724;
 }
 
@@ -517,7 +505,7 @@ tbody tr:hover {
 }
 
 #feedback-card.incorrect #next-word-btn {
-    color: #721c24; /* Màu đỏ đậm */
+    color: #721c24; 
     border-color: #721c24;
 }
 
@@ -526,7 +514,6 @@ tbody tr:hover {
     color: white;
 }
 
-/* Hiệu ứng rung cho ô input khi nhập rỗng */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
@@ -536,11 +523,10 @@ tbody tr:hover {
 .shake {
   animation: shake 0.5s;
 }
-/* ... (các style cũ) ... */
 
-/* --- Styling cho Feedback Card (Cập nhật) --- */
+/* Styling for Feedback Card  */
 #feedback-card {
-    background-color: #f0f0f0; /* Màu nền trung tính mặc định */
+    background-color: #f0f0f0; 
     color: #555;
     text-align: center;
 }
@@ -554,9 +540,6 @@ tbody tr:hover {
     display: none;
 }
 
-/* ... (các style cũ) ... */
-
-/* --- Styling cho Màn hình chọn chủ đề --- */
 #topic-selection-container {
     width: 100%;
     max-width: 700px;
@@ -612,7 +595,6 @@ tbody tr:hover {
 }
 
 /* style.css */
-/* ... */
 #add-topic-container {
     display: flex;
     gap: 0.5rem;
@@ -635,7 +617,7 @@ tbody tr:hover {
     cursor: pointer;
 }
 
-/* Styling cho badge đếm số lượng từ */
+/* Styling for badge counting words */
 .word-count-badge {
     color: #888;
     font-size: 0.85rem;
