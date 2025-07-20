@@ -2,49 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyVocab - Manage Topics</title>
-    <!-- Link đến file CSS chung -->
+    <!-- Link to shared CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Link đến thư viện icon Font Awesome -->
+    <!-- Link to Font Awesome icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="data-body">
 
     <div id="data-container">
         <h1 class="data-title">Manage Topics</h1>
-        <p class="data-subtitle">Đây là danh sách các chủ đề bạn đã tạo. Bạn có thể xóa các chủ đề không cần thiết.</p>
+        <p class="data-subtitle">This is a list of the topics you've created. You can remove any topic that is no longer needed.</p>
         
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
                         <th>Topic Name</th>
-                        <th>Word Count</th> <!-- Cột mới: Số lượng từ -->
+                        <th>Word Count</th> <!-- New column: number of words in each topic -->
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Dùng vòng lặp Jinja2 để duyệt qua danh sách 'topics' mà app.py gửi sang -->
+                    <!-- Loop through the 'topics' list passed from app.py using Jinja2 -->
                     {% for topic in topics %}
-                    <!-- Thêm thuộc tính data-id vào thẻ <tr> để JavaScript có thể xác định hàng này -->
+                    <!-- Add a data-id attribute so JavaScript can identify the row -->
                     <tr data-id="{{ topic.id }}">
                         <td>{{ topic.name }}</td>
-                        <!-- Hiển thị số lượng từ cho mỗi chủ đề -->
+                        <!-- Display word count for each topic -->
                         <td style="text-align: center;">{{ topic.word_count }}</td>
                         <td>
-                            <!-- Chỉ hiển thị nút xóa cho các chủ đề không phải là chủ đề mặc định -->
+                            <!-- Only show the delete button for non-default topics -->
                             {% if topic.name != 'Daily life' %}
                             <button class="delete-btn topic-delete-btn" data-id="{{ topic.id }}">Delete</button>
                             {% endif %}
                         </td>
                     </tr>
                     {% else %}
-                    <!-- Hiển thị dòng này nếu không có chủ đề nào (trường hợp hi hữu) -->
+                    <!-- Fallback row shown when no topics are found -->
                     <tr>
                         <td colspan="3" style="text-align: center;">No topics found.</td>
                     </tr>
@@ -58,7 +54,7 @@
         </a>
     </div>
 
-    <!-- JavaScript để xử lý sự kiện xóa -->
+    <!-- JavaScript to handle delete button events -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.topic-delete-btn').forEach(button => {
@@ -67,7 +63,7 @@
                     const row = document.querySelector(`tr[data-id="${topicId}"]`);
                     const topicName = row ? row.querySelector('td:first-child').textContent : 'this topic';
 
-                    // Sử dụng modal xác nhận tùy chỉnh (nếu bạn đã tạo) hoặc confirm() mặc định
+                    // Use a custom modal if available, otherwise fall back to the default confirm dialog
                     if (confirm(`Are you sure you want to delete the topic "${topicName}"? All word associations will be lost.`)) {
                         try {
                             const response = await fetch(`/delete_topic/${topicId}`, { 
@@ -91,10 +87,5 @@
             });
         });
     </script>
-</body>
-</html></title>
-</head>
-<body>
-
 </body>
 </html>
