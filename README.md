@@ -45,7 +45,7 @@
 
 ## Demo
 
-![screenshot or gif here if available]
+![search](./images/search.png)
 
 ---
 
@@ -124,4 +124,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Enjoy learning with MyVocab!**
+
 
