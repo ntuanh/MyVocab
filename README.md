@@ -125,6 +125,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Enjoy learning with MyVocab!**
 
----
-
-Would you like me to write this new README to your `README.md` file? If you want to customize any section, let me know!
