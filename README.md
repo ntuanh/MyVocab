@@ -2,20 +2,10 @@
 
 [MyVocab](https://my-vocab-xi.vercel.app/)
 
-<table>
-<tr>
-<td width="70%" style="vertical-align: top;">
+
+![MyVocab QR](./images/MyVocabQR.png)
 
 **MyVocab** is a modern, AI-powered web app to help you learn English vocabulary efficiently. It provides definitions, Vietnamese translations, example sentences, pronunciation, synonyms, related words, and images for any English word. You can save words, organize them by topics, and test yourself with quizzes. Powered by Google Gemini AI and built with Flask.
-
-</td>
-<td width="30%" style="vertical-align: top; text-align: center;">
-
-<img src="./images/MyVocabQR.png" alt="MyVocab QR" width="250" height="250" style="display: block; margin: 0 auto;">
-
-</td>
-</tr>
-</table>
 
 ---
 
@@ -153,7 +143,7 @@ MyVocab/
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+[MIT](LICENSE) (or your chosen license)
 
 ---
 
