@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyVocab - Exam</title>
-    <!-- Dùng chung file CSS với trang chính -->
+    <!-- Reusing the same CSS file from the main page -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Link đến thư viện icon Font Awesome -->
+    <!-- Link to Font Awesome icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <!-- my_website/templates/exam.html -->
 <body class="exam-body">
 
-    <!-- MÀN HÌNH CHỌN CHỦ ĐỀ (HIỂN THỊ BAN ĐẦU) -->
+    <!-- TOPIC SELECTION SCREEN (VISIBLE ON PAGE LOAD) -->
     <div id="topic-selection-container" class="panel">
         <h1 class="exam-title">Choose Your Topics</h1>
         <p class="data-subtitle">Select topics to review, or leave blank to review all words.</p>
@@ -21,7 +21,7 @@
                 {% for topic in topics %}
                 <div class="topic-checkbox">
                     <input type="checkbox" id="topic-{{ topic.id }}" name="topics" value="{{ topic.id }}">
-                    <!-- Sửa lại label để hiển thị số lượng từ -->
+                    <!-- Display label with word count -->
                     <label for="topic-{{ topic.id }}">
                         {{ topic.name }} <span class="word-count-badge">({{ topic.word_count }})</span>
                     </label>
@@ -33,7 +33,7 @@
         <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dictionary</a>
     </div>
 
-    <!-- GIAO DIỆN KIỂM TRA CHÍNH (SẼ BỊ ẨN BAN ĐẦU) -->
+    <!-- MAIN EXAM INTERFACE (INITIALLY HIDDEN) -->
     <div id="exam-container" class="hidden">
         <h1 class="exam-title">Vocabulary Exam</h1>
 
@@ -48,7 +48,7 @@
         </div>
 
         <form id="answer-form">
-            <input type="text" id="answer-input" placeholder="Nhập nghĩa tiếng Việt..." autocomplete="off" required>
+            <input type="text" id="answer-input" placeholder="Enter the Vietnamese meaning..." autocomplete="off" required>
             <button type="submit">Submit</button>
         </form>
 
