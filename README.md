@@ -106,15 +106,6 @@ MyVocab/
 
 ---
 
-## Troubleshooting
-
-- **Python not found**: Ensure Python 3.12+ is installed and in your PATH.
-- **Module not found**: Run `pip install -r requirements.txt` again.
-- **API key error**: Check your `.env` file for typos or missing keys.
-- **App not loading**: Check terminal for errors and ensure you are in the correct folder.
-
----
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
