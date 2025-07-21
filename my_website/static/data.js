@@ -1,12 +1,11 @@
-// my_website/static/data.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Grab all the modal elements I'll need
+    // Grab all the modal elements 
     const confirmModal = document.getElementById('confirm-modal');
     const modalText = document.getElementById('modal-text');
     const cancelBtn = document.getElementById('modal-btn-cancel');
     const confirmBtn = document.getElementById('modal-btn-confirm');
 
-    // I'll use this to store whatever function should run when the user hits "Confirm"
+    // Use this to store whatever function should run when the user hits "Confirm"
     let onConfirmAction = null;
 
     // Show the confirmation modal with a custom message and action
@@ -72,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (rowElement) {
                     rowElement.remove();
                 }
-                // You could show a toast here if you want
                 // alert(result.message); // For now, just an alert
             } else {
                 alert(result.message || 'Failed to delete word.');
