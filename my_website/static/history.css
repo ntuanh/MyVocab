@@ -83,8 +83,6 @@ body {
     color: #888;
 }
 
-/* Added this at the end of history.css for some extra polish */
-
 .word-card-footer {
     display: flex;
     justify-content: space-between;
