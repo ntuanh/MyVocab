@@ -1,6 +1,5 @@
-// my_website/static/exam.js
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. GRAB ALL THE ELEMENTS I NEED ---
+    // --- 1. GRAB ALL THE ELEMENTS ---
     // Topic selection screen
     const topicSelectionContainer = document.getElementById('topic-selection-container');
     const topicForm = document.getElementById('topic-form');
@@ -159,8 +158,4 @@ document.addEventListener('DOMContentLoaded', () => {
             img.style.display = isHidden ? 'block' : 'none';
         }
     });
-
-    // --- 5. LET'S GET STARTED! ---
-    // The default UI is the topic selection screen, so I don't need to do anything here.
-    // The user will kick things off by hitting "Start Exam".
 });
