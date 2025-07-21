@@ -74,8 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         createTagList(synonymListEl, data.synonyms);
         createTagList(familyListEl, data.family_words);
 
-        // Logic hiển thị ảnh đã được sửa lại
-        imagePanel.innerHTML = ''; // Xóa sạch trước
+        imagePanel.innerHTML = ''; // clean
         if (data.image_url) {
             const img = document.createElement('img');
             img.id = 'word-image';
