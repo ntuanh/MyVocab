@@ -1,8 +1,7 @@
-# File: my_website/app.py
 # This is my main Flask app for MyVocab. I've tweaked and optimized it for Vercel deployment.
 
 import os
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify , session, redirect, url_for
 
 # --- IMPORTS ---
 # Grabbing all the helper functions I need from my other modules in this package.
@@ -27,6 +26,52 @@ app = Flask(__name__,
             static_folder=os.path.join(BASE_DIR, 'static'),
             template_folder=os.path.join(BASE_DIR, 'templates'))
 
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "a_default_secret_key_for_local_dev")
+
+
+@app.route('/api/verify_password', methods=['POST'])
+def verify_password():
+    # Lấy mật khẩu đúng từ biến môi trường
+    correct_password = os.environ.get('VIEW_DATA_PASSWORD')
+    if not correct_password:
+        # Trường hợp bạn quên cài đặt biến môi trường
+        return jsonify({'error': 'Server configuration error'}), 500
+
+    # Lấy mật khẩu do người dùng gửi lên từ request
+    data = request.get_json()
+    submitted_password = data.get('password')
+
+    # So sánh mật khẩu
+    if submitted_password == correct_password:
+        # Nếu đúng, đánh dấu trong session của người dùng rằng họ đã được xác thực
+        session['data_access_granted'] = True
+        return jsonify({'status': 'success'}), 200
+    else:
+        # Nếu sai, trả về lỗi 401 Unauthorized
+        return jsonify({'error': 'Incorrect password'}), 401
+
+
+# --- BẢO VỆ ROUTE HIỂN THỊ TRANG DATA ---
+# Tìm route hiển thị trang data.html (hoặc tương tự) của bạn và sửa lại
+@app.route('/data')  # Giả sử URL của bạn là /data
+def data_page():
+    # "Người gác cổng": Kiểm tra xem người dùng đã vượt qua bước xác thực mật khẩu chưa
+    if not session.get('data_access_granted'):
+        # Nếu chưa, chuyển hướng họ về trang chủ
+        return redirect(url_for('index'))
+
+        # Nếu đã được cấp quyền, hiển thị trang data
+    return render_template('data.html')  # Thay 'data.html' bằng tên file template của bạn
+
+
+# Đừng quên thêm endpoint để lấy dữ liệu cho trang data
+@app.route('/api/all_data')
+def get_all_data():
+    if not session.get('data_access_granted'):
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    words = get_all_saved_words()  # Hàm này từ database.py
+    return jsonify(words)
 
 # --- PAGE ROUTES (RENDER HTML) ---
 

@@ -229,3 +229,45 @@ document.addEventListener('DOMContentLoaded', () => {
         saveModal.classList.add('hidden');
     });
 });
+
+const viewDataBtn = document.getElementById('view-data-btn'); // Đảm bảo nút của bạn có id="view-data-btn"
+
+if (viewDataBtn) {
+    viewDataBtn.addEventListener('click', async function(event) {
+        // 1. Ngăn trình duyệt chuyển đến trang /data ngay lập tức
+        event.preventDefault();
+
+        // 2. Hiện hộp thoại yêu cầu mật khẩu
+        const password = prompt("Please enter the password to view data:");
+
+        // 3. Nếu người dùng nhấn Cancel hoặc không nhập gì, dừng lại
+        if (!password) {
+            return;
+        }
+
+        try {
+            // 4. Gửi mật khẩu đến backend để xác thực
+            const response = await fetch('/api/verify_password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ password: password }),
+            });
+
+            // 5. Xử lý kết quả từ backend
+            if (response.ok) {
+                // Nếu mật khẩu đúng (backend trả về status 200)
+                alert("Password correct! Loading data...");
+                // Chuyển hướng đến trang data
+                window.location.href = viewDataBtn.href; // Lấy href từ chính nút đó
+            } else {
+                // Nếu mật khẩu sai (backend trả về status 401 hoặc lỗi khác)
+                alert("Incorrect password. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error verifying password:", error);
+            alert("An error occurred. Please check the console.");
+        }
+    });
+}
