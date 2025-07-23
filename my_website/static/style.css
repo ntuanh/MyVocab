@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 :root {
-    --bg-color: #6A8E7F; 
+    --bg-color: #6A8E7F;
     --panel-blue: #A0D2EB;
     --panel-pink: #E4AEC5;
     --panel-dark-blue: #4A5899;
@@ -90,7 +90,7 @@ body {
 
 #image-panel {
     flex-grow: 1;
-    display: flex; 
+    display: flex; /* Quan trọng */
     justify-content: center;
     align-items: center;
     background-color: var(--panel-blue);
@@ -102,11 +102,13 @@ body {
 #word-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover; /* Giúp ảnh lấp đầy panel mà không bị méo */
     border-radius: var(--border-radius);
     background-color: #eee;
+    /* KHÔNG có 'display: none' ở đây. JavaScript sẽ điều khiển việc này. */
 }
 
+/* Màu sắc cho các panel */
 #definition-panel { background-color: var(--panel-blue); }
 #vietnamese-panel, #example-panel, #ipa-panel, #synonym-panel { background-color: var(--panel-pink); }
 #family-panel {
@@ -118,6 +120,7 @@ body {
     background-color: var(--panel-dark-blue);
 }
 
+/* Styling cho phần nghĩa bị ẩn */
 #vietnamese-panel.hidden {
     position: relative;
     cursor: pointer;
@@ -139,6 +142,7 @@ body {
 }
 #vietnamese-panel.revealed::after { display: none; }
 
+/* Styling cho danh sách tag */
 .tag-list {
     display: flex;
     flex-wrap: wrap;
@@ -157,11 +161,13 @@ body {
     background-color: rgba(255,255,255,0.2);
 }
 
+/* Thêm vào cuối file style.css */
+
 #action-buttons {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-start; /* Hoặc center, flex-end tùy ý */
     gap: 1rem;
-    margin-top: -0.5rem; 
+    margin-top: -0.5rem; /* Điều chỉnh khoảng cách với panel trên */
 }
 
 .action-btn {
@@ -189,11 +195,12 @@ body {
 }
 
 #save-button.saved {
-    background-color: #90ee90; 
+    background-color: #90ee90; /* Màu xanh lá cây khi đã lưu   */
     color: white;
     transform: scale(1.05);
 }
 
+/* Thêm vào cuối file style.css */
 .suggestion-link {
     font-weight: 600;
     color: var(--panel-dark-blue);
@@ -215,10 +222,11 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
+/* --- Styling cho các nút hành động --- */
 #actions-panel {
     display: flex;
     gap: 1rem;
-    justify-content: center; 
+    justify-content: center; /* Căn giữa các nút */
 }
 
 .action-btn, .exam-link {
@@ -243,10 +251,11 @@ body {
     margin-right: 0.5rem;
 }
 
+/* --- Styling cho trang Exam --- */
 .exam-body {
     display: flex;
     justify-content: center;
-    align-items: flex-start; 
+    align-items: flex-start; /* Canh trên cùng */
 }
 #exam-container {
     width: 100%;
@@ -297,11 +306,11 @@ body {
     font-size: 1rem;
 }
 #feedback-card.correct {
-    background-color: #d4edda; 
+    background-color: #d4edda; /* Green */
     color: #155724;
 }
 #feedback-card.incorrect {
-    background-color: #f8d7da; 
+    background-color: #f8d7da; /* Red */
     color: #721c24;
 }
 .back-link {
@@ -310,6 +319,7 @@ body {
     margin-top: 1rem;
 }
 
+/* --- Styling cho nút Data --- */
 .data-link {
     background-color: var(--panel-blue) !important;
     color: var(--text-color) !important;
@@ -318,6 +328,7 @@ body {
     background-color: #8abedc !important;
 }
 
+/* --- Styling cho trang Data --- */
 .data-body {
     align-items: flex-start;
 }
@@ -351,9 +362,9 @@ th {
 tbody tr:hover {
     background-color: #f9f9f9;
 }
-
+/* Styling cho nút Delete trong bảng */
 .delete-btn {
-    background-color: #f44336; 
+    background-color: #f44336; /* Màu đỏ */
     color: white;
     border: none;
     padding: 0.4rem 0.8rem;
@@ -366,17 +377,17 @@ tbody tr:hover {
     background-color: #d32f2f;
 }
 .action-btn:disabled {
-    background-color: #28a745;
+    background-color: #28a745; /* Màu xanh lá cây thành công */
     color: white;
-    cursor: not-allowed;
-    opacity: 1; 
+    cursor: not-allowed; /* Đổi con trỏ chuột để cho biết không thể nhấn */
+    opacity: 1; /* Ghi đè opacity mặc định của trạng thái disabled */
 }
-/* --- Styling for Toast Notification --- */
+/* --- Styling cho Toast Notification --- */
 #toast-notification {
-    position: fixed;
+    position: fixed; /* Cố định vị trí trên màn hình */
     bottom: 2rem;
     left: 50%;
-    transform: translateX(-50%); 
+    transform: translateX(-50%); /* Căn giữa theo chiều ngang */
     padding: 1rem 2rem;
     border-radius: 10px;
     color: white;
@@ -395,14 +406,14 @@ tbody tr:hover {
 }
 
 #toast-notification.success {
-    background-color: #28a745; /* green */
+    background-color: #28a745; /* Màu xanh lá cây */
 }
 
 #toast-notification.error {
-    background-color: #dc3545; /* red */
+    background-color: #dc3545; /* Màu đỏ */
 }
 
-/* --- Styling for Modal cf --- */
+/* --- Styling cho Modal xác nhận --- */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -420,7 +431,7 @@ tbody tr:hover {
 
 .modal-overlay.hidden {
     opacity: 0;
-    pointer-events: none; /* Reject click hidden */
+    pointer-events: none; /* Không cho phép click khi đang ẩn */
 }
 
 .modal-content {
@@ -483,7 +494,7 @@ tbody tr:hover {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 1rem; 
+    margin-top: 1rem; /* Tạo khoảng cách với text ở trên */
     transition: all 0.2s ease-in-out;
 }
 
@@ -494,8 +505,9 @@ tbody tr:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* Tùy chỉnh màu chữ cho từng loại feedback */
 #feedback-card.correct #next-word-btn {
-    color: #155724;
+    color: #155724; /* Màu xanh lá đậm */
     border-color: #155724;
 }
 
@@ -505,7 +517,7 @@ tbody tr:hover {
 }
 
 #feedback-card.incorrect #next-word-btn {
-    color: #721c24; 
+    color: #721c24; /* Màu đỏ đậm */
     border-color: #721c24;
 }
 
@@ -514,6 +526,7 @@ tbody tr:hover {
     color: white;
 }
 
+/* Hiệu ứng rung cho ô input khi nhập rỗng */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
@@ -523,10 +536,11 @@ tbody tr:hover {
 .shake {
   animation: shake 0.5s;
 }
+/* ... (các style cũ) ... */
 
-/* Styling for Feedback Card  */
+/* --- Styling cho Feedback Card (Cập nhật) --- */
 #feedback-card {
-    background-color: #f0f0f0; 
+    background-color: #f0f0f0; /* Màu nền trung tính mặc định */
     color: #555;
     text-align: center;
 }
@@ -540,6 +554,9 @@ tbody tr:hover {
     display: none;
 }
 
+/* ... (các style cũ) ... */
+
+/* --- Styling cho Màn hình chọn chủ đề --- */
 #topic-selection-container {
     width: 100%;
     max-width: 700px;
@@ -595,6 +612,7 @@ tbody tr:hover {
 }
 
 /* style.css */
+/* ... */
 #add-topic-container {
     display: flex;
     gap: 0.5rem;
@@ -617,9 +635,92 @@ tbody tr:hover {
     cursor: pointer;
 }
 
-/* Styling for badge counting words */
+/* Styling cho badge đếm số lượng từ */
 .word-count-badge {
     color: #888;
     font-size: 0.85rem;
     margin-left: 0.25rem;
 }
+
+.modal-overlay {
+    position: fixed; /* Nằm cố định trên màn hình */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Lớp nền mờ */
+    display: none; /* Mặc định ẩn đi */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Luôn nằm trên cùng */
+    transition: opacity 0.3s ease; /* Hiệu ứng mờ dần */
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 400px; /* Chiều rộng tối đa */
+    text-align: center;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.modal-content p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+#password-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end; /* Đẩy nút sang phải */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    margin-top: 20px;
+}
+
+.modal-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #e9ecef;
+    color: #495057;
+}
+.btn-secondary:hover {
+    background-color: #d6d8db;
+}
+
+.error-message {
+    color: #dc3545; /* Màu đỏ cho thông báo lỗi */
+    font-size: 0.9rem;
+    height: 1.2em; /* Giữ chiều cao ổn định */
+    margin-top: 5px;
+}
+

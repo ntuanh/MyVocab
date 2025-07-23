@@ -34,6 +34,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentWordData = null;
 
+    const viewDataBtn = document.getElementById('view-data-btn');
+    const modalOverlay = document.getElementById('password-modal-overlay');
+    const passwordInput = document.getElementById('password-input');
+    const submitPasswordBtn = document.getElementById('submit-password-btn');
+    const cancelPasswordBtn = document.getElementById('cancel-password-btn');
+    const passwordError = document.getElementById('password-error');
+
+    function showPasswordModal() {
+        passwordInput.value = ''; // Xóa mật khẩu cũ
+        passwordError.textContent = ''; // Xóa thông báo lỗi cũ
+        modalOverlay.style.display = 'flex'; // Hiện modal
+    }
+
+    function hidePasswordModal() {
+        modalOverlay.style.display = 'none'; // Ẩn modal
+    }
+
+    async function handlePasswordSubmit() {
+        const password = passwordInput.value;
+        if (!password) {
+            passwordError.textContent = 'Password cannot be empty.';
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/verify_password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password: password }),
+            });
+
+            if (response.ok) {
+                // Mật khẩu đúng, chuyển hướng
+                window.location.href = viewDataBtn.href;
+            } else {
+                // Mật khẩu sai
+                passwordError.textContent = 'Incorrect password. Please try again.';
+                passwordInput.focus(); // Tập trung lại vào ô nhập
+            }
+        } catch (error) {
+            console.error("Error verifying password:", error);
+            passwordError.textContent = 'An error occurred. Please try again later.';
+        }
+    }
+
+    // Gắn sự kiện
+    if (viewDataBtn) {
+        viewDataBtn.addEventListener('click', function(event) {
+            event.preventDefault(); // Ngăn chuyển trang ngay lập tức
+            showPasswordModal();    // Thay vào đó, hiện modal
+        });
+    }
+
+    // Sự kiện cho các nút trong modal
+    cancelPasswordBtn.addEventListener('click', hidePasswordModal);
+    modalOverlay.addEventListener('click', function(event) {
+        // Chỉ đóng khi nhấn vào lớp nền mờ, không phải hộp thoại
+        if (event.target === modalOverlay) {
+            hidePasswordModal();
+        }
+    });
+    submitPasswordBtn.addEventListener('click', handlePasswordSubmit);
+
+    // Cho phép nhấn Enter để submit
+    passwordInput.addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            handlePasswordSubmit();
+        }
+    });
+
     // --- 2. Define handle functions ---
 
     function showToast(message, type = 'success') {
