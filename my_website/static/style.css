@@ -440,13 +440,13 @@ body {
     flex-direction: column;
     gap: 1.5rem;
 
-    width: 50%;
-    max-width: 700px;
+    width: 100%;
+    max-width: 650px;
     margin: 0 auto;
 }
 
 #exam-container .panel {
-    width: 50%;
+    width: 100%;
     box-sizing: border-box; /* Ensures padding is included in the width */
 }
 
