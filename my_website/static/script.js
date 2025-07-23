@@ -1,24 +1,28 @@
+// This event listener ensures that all the HTML is loaded before this script runs.
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. get all of ELEMENTS from DOM ---
+
+    // --- 1. ELEMENT SELECTION ---
+    // Get all necessary elements from the HTML document once and store them in variables.
+    
+    // Main search components
     const searchForm = document.getElementById('search-form');
     const wordInput = document.getElementById('word-input');
 
-    // Panel left
+    // Display panels
     const imagePanel = document.getElementById('image-panel');
-    const saveBtn = document.getElementById('save-btn');
-
-    // Panel center
     const vietnamesePanel = document.getElementById('vietnamese-panel');
     const vietnameseMeaningEl = document.getElementById('vietnamese-meaning');
     const definitionEl = document.getElementById('english-definition');
     const exampleEl = document.getElementById('example-sentence');
-
-    // Panel right
     const ipaEl = document.getElementById('pronunciation-ipa');
     const synonymListEl = document.getElementById('synonym-list');
     const familyListEl = document.getElementById('family-list');
 
-    // Modal save words
+    // Action buttons
+    const saveBtn = document.getElementById('save-btn');
+    const viewDataBtn = document.getElementById('view-data-btn');
+
+    // Save Word Modal elements
     const saveModal = document.getElementById('save-modal');
     const modalWordEl = document.getElementById('modal-word-to-save');
     const modalTopicList = document.getElementById('modal-topic-list');
@@ -27,108 +31,60 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancelSaveBtn = document.getElementById('modal-btn-cancel-save');
     const confirmSaveBtn = document.getElementById('modal-btn-confirm-save');
 
-    // Toast Notification
-    const toast = document.getElementById('toast-notification');
-    const toastMessage = document.getElementById('toast-message');
-    let toastTimeout;
-
-    let currentWordData = null;
-
-    const viewDataBtn = document.getElementById('view-data-btn');
-    const modalOverlay = document.getElementById('password-modal-overlay');
+    // Password Modal elements
+    const passwordModalOverlay = document.getElementById('password-modal-overlay');
     const passwordInput = document.getElementById('password-input');
     const submitPasswordBtn = document.getElementById('submit-password-btn');
     const cancelPasswordBtn = document.getElementById('cancel-password-btn');
-    const passwordError = document.getElementById('password-error');
+    const passwordErrorEl = document.getElementById('password-error');
 
-    function showPasswordModal() {
-        passwordInput.value = ''; // Xóa mật khẩu cũ
-        passwordError.textContent = ''; // Xóa thông báo lỗi cũ
-        modalOverlay.style.display = 'flex'; // Hiện modal
-    }
+    // Toast Notification elements
+    const toast = document.getElementById('toast-notification');
+    const toastMessage = document.getElementById('toast-message');
+    let toastTimeout; // Variable to hold the timer for the toast
 
-    function hidePasswordModal() {
-        modalOverlay.style.display = 'none'; // Ẩn modal
-    }
+    // A global variable to store the data of the currently looked-up word.
+    let currentWordData = null;
 
-    async function handlePasswordSubmit() {
-        const password = passwordInput.value;
-        if (!password) {
-            passwordError.textContent = 'Password cannot be empty.';
-            return;
-        }
 
-        try {
-            const response = await fetch('/api/verify_password', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ password: password }),
-            });
+    // --- 2. HELPER FUNCTIONS ---
+    // Reusable functions for common tasks like showing notifications, updating the UI, etc.
 
-            if (response.ok) {
-                // Mật khẩu đúng, chuyển hướng
-                window.location.href = viewDataBtn.href;
-            } else {
-                // Mật khẩu sai
-                passwordError.textContent = 'Incorrect password. Please try again.';
-                passwordInput.focus(); // Tập trung lại vào ô nhập
-            }
-        } catch (error) {
-            console.error("Error verifying password:", error);
-            passwordError.textContent = 'An error occurred. Please try again later.';
-        }
-    }
-
-    // Gắn sự kiện
-    if (viewDataBtn) {
-        viewDataBtn.addEventListener('click', function(event) {
-            event.preventDefault(); // Ngăn chuyển trang ngay lập tức
-            showPasswordModal();    // Thay vào đó, hiện modal
-        });
-    }
-
-    // Sự kiện cho các nút trong modal
-    cancelPasswordBtn.addEventListener('click', hidePasswordModal);
-    modalOverlay.addEventListener('click', function(event) {
-        // Chỉ đóng khi nhấn vào lớp nền mờ, không phải hộp thoại
-        if (event.target === modalOverlay) {
-            hidePasswordModal();
-        }
-    });
-    submitPasswordBtn.addEventListener('click', handlePasswordSubmit);
-
-    // Cho phép nhấn Enter để submit
-    passwordInput.addEventListener('keyup', function(event) {
-        if (event.key === 'Enter') {
-            handlePasswordSubmit();
-        }
-    });
-
-    // --- 2. Define handle functions ---
-
+    /**
+     * Shows a toast notification with a message.
+     * @param {string} message The message to display.
+     * @param {string} type The type of toast ('success' or 'error').
+     */
     function showToast(message, type = 'success') {
-        clearTimeout(toastTimeout);
+        clearTimeout(toastTimeout); // Clear any existing toast timer
         toastMessage.textContent = message;
-        toast.className = 'toast';
+        toast.className = 'toast'; // Reset classes
         toast.classList.add(type, 'show');
         toastTimeout = setTimeout(() => {
             toast.classList.remove('show');
-        }, 3000);
+        }, 3000); // Hide after 3 seconds
     }
 
+    /**
+     * Populates the UI with data received from the API.
+     * @param {object} data The word data object.
+     */
     function updateUI(data) {
-        currentWordData = data;
+        currentWordData = data; // Store the current word's data globally
 
+        // Update text content
         definitionEl.textContent = data.english_definition || 'N/A';
         exampleEl.textContent = data.example || 'N/A';
         vietnameseMeaningEl.textContent = data.vietnamese_meaning || 'N/A';
         ipaEl.textContent = data.pronunciation_ipa || 'N/A';
 
+        // Hide the Vietnamese meaning initially
         vietnamesePanel.classList.add('hidden');
         vietnamesePanel.classList.remove('revealed');
 
+        // Helper function to create lists of tags (for synonyms and family words)
         const createTagList = (element, list) => {
-            element.innerHTML = '';
+            element.innerHTML = ''; // Clear previous content
             if (list && list.length > 0) {
                 list.forEach(item => {
                     const tag = document.createElement('span');
@@ -137,14 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     element.appendChild(tag);
                 });
             } else {
-                element.innerHTML = 'N/A';
+                element.innerHTML = 'N/A'; // Show N/A if the list is empty
             }
         };
 
         createTagList(synonymListEl, data.synonyms);
         createTagList(familyListEl, data.family_words);
 
-        imagePanel.innerHTML = ''; // clean
+        // Update the image panel
+        imagePanel.innerHTML = ''; // Clear previous content
         if (data.image_url) {
             const img = document.createElement('img');
             img.id = 'word-image';
@@ -156,9 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const placeholder = document.createElement('p');
             placeholder.textContent = 'No Image Found';
             imagePanel.appendChild(placeholder);
-            imagePanel.style.backgroundColor = 'var(--panel-blue)';
         }
-
+        
+        // Update the "Save Word" button's state
         if (data.is_saved) {
             saveBtn.disabled = true;
             saveBtn.innerHTML = '<i class="fas fa-check"></i> Already Saved';
@@ -168,9 +125,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    /**
+     * Resets the UI to its initial state, showing a specific message.
+     * @param {string} message The message to show in the definition panel.
+     */
     function resetUI(message) {
-        currentWordData = null;
+        currentWordData = null; // Clear current word data
         definitionEl.textContent = message;
+        // Reset other panels
         ['example-sentence', 'vietnamese-meaning', 'pronunciation-ipa'].forEach(id => {
             document.getElementById(id).textContent = '...';
         });
@@ -178,20 +140,60 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById(id).innerHTML = '';
         });
         imagePanel.innerHTML = '<p>Image Placeholder</p>';
-        imagePanel.style.backgroundColor = 'var(--panel-blue)';
         saveBtn.disabled = false;
         saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Word';
     }
 
-    async function showSaveModal() {
-        if (!currentWordData) return;
-        modalWordEl.textContent = currentWordData.word;
 
+    // --- 3. EVENT LISTENERS ---
+    // This section connects user actions (like clicks and form submissions) to functions.
+
+    // Handle the main word search
+    searchForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Prevent the form from reloading the page
+        const word = wordInput.value.trim();
+        if (!word) return;
+
+        resetUI('Searching...'); // Show a loading message
         try {
+            const response = await fetch('/lookup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: word })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                updateUI(data); // If successful, update the UI with new data
+            } else {
+                resetUI(data.error || 'An unknown error occurred.'); // Show error message
+            }
+        } catch (error) {
+            resetUI('Failed to connect to the server.'); // Handle network errors
+        }
+    });
+
+    // Reveal Vietnamese meaning on click
+    vietnamesePanel.addEventListener('click', () => {
+        vietnamesePanel.classList.toggle('hidden');
+        vietnamesePanel.classList.toggle('revealed');
+    });
+
+    // --- Save Word Modal Logic ---
+
+    // Show the "Save Word" modal
+    saveBtn.addEventListener('click', async () => {
+        if (!currentWordData || !currentWordData.word) {
+            showToast('Please search for a word first!', 'error');
+            return;
+        }
+        
+        modalWordEl.textContent = currentWordData.word;
+        try {
+            // Fetch the list of topics from the backend
             const response = await fetch('/get_topics');
             const topics = await response.json();
 
-            modalTopicList.innerHTML = '';
+            modalTopicList.innerHTML = ''; // Clear old topic list
             topics.forEach(topic => {
                 const topicDiv = document.createElement('div');
                 topicDiv.className = 'topic-checkbox';
@@ -201,51 +203,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 modalTopicList.appendChild(topicDiv);
             });
-            saveModal.classList.remove('hidden');
+            saveModal.classList.remove('hidden'); // Show the modal
         } catch (error) {
             showToast("Could not load topics.", "error");
         }
-    }
-
-    // --- 3. assign events ---
-
-    searchForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const word = wordInput.value.trim();
-        if (!word) return;
-        resetUI('Searching...');
-        try {
-            const response = await fetch('/lookup', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: word })
-            });
-            const data = await response.json();
-            if (response.ok) {
-                updateUI(data);
-            } else {
-                resetUI(data.error || 'An unknown error occurred.');
-            }
-        } catch (error) {
-            resetUI('Failed to connect to the server.');
-        }
     });
 
-    vietnamesePanel.addEventListener('click', () => {
-        if (vietnamesePanel.classList.contains('hidden')) {
-            vietnamesePanel.classList.remove('hidden');
-            vietnamesePanel.classList.add('revealed');
-        }
-    });
-
-    saveBtn.addEventListener('click', () => {
-        if (!currentWordData || !currentWordData.word) {
-            showToast('Please search for a word first!', 'error');
-            return;
-        }
-        showSaveModal();
-    });
-
+    // Add a new topic from the modal
     addTopicBtn.addEventListener('click', async () => {
         const newTopicName = newTopicInput.value.trim();
         if (!newTopicName) return;
@@ -257,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const newTopic = await response.json();
             if (newTopic && newTopic.id) {
+                // Add the new topic to the list and check it by default
                 const topicDiv = document.createElement('div');
                 topicDiv.className = 'topic-checkbox';
                 topicDiv.innerHTML = `
@@ -264,13 +229,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <label for="modal-topic-${newTopic.id}">${newTopic.name}</label>
                 `;
                 modalTopicList.appendChild(topicDiv);
-                newTopicInput.value = '';
+                newTopicInput.value = ''; // Clear the input field
             }
         } catch (error) {
             showToast("Failed to add topic.", "error");
         }
     });
-
+    
+    // Confirm saving the word with selected topics
     confirmSaveBtn.addEventListener('click', async () => {
         const selectedCheckboxes = document.querySelectorAll('input[name="modal-topics"]:checked');
         const selectedTopicIds = Array.from(selectedCheckboxes).map(cb => cb.value);
@@ -285,59 +251,87 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const result = await response.json();
             showToast(result.message, result.status === 'error' ? 'error' : 'success');
-            saveModal.classList.add('hidden');
+            saveModal.classList.add('hidden'); // Hide the modal
             if (result.status !== 'error') {
                 saveBtn.disabled = true;
                 saveBtn.innerHTML = '<i class="fas fa-check"></i> Already Saved';
             }
         } catch (error) {
-            showToast("Failed to save.", "error");
+            showToast("Failed to save word.", "error");
         }
     });
-
+    
+    // Cancel saving and hide the modal
     cancelSaveBtn.addEventListener('click', () => {
         saveModal.classList.add('hidden');
     });
-});
 
-const viewDataBtn = document.getElementById('view-data-btn'); // Đảm bảo nút của bạn có id="view-data-btn"
+    // --- Password Modal Logic ---
+    
+    function showPasswordModal() {
+        passwordInput.value = ''; // Clear previous password
+        passwordErrorEl.textContent = ''; // Clear previous error
+        passwordModalOverlay.style.display = 'flex'; // Show the modal
+        passwordInput.focus(); // Focus on the input field
+    }
 
-if (viewDataBtn) {
-    viewDataBtn.addEventListener('click', async function(event) {
-        // 1. Ngăn trình duyệt chuyển đến trang /data ngay lập tức
-        event.preventDefault();
+    function hidePasswordModal() {
+        passwordModalOverlay.style.display = 'none'; // Hide the modal
+    }
 
-        // 2. Hiện hộp thoại yêu cầu mật khẩu
-        const password = prompt("Please enter the password to view data:");
-
-        // 3. Nếu người dùng nhấn Cancel hoặc không nhập gì, dừng lại
+    async function handlePasswordSubmit() {
+        const password = passwordInput.value;
         if (!password) {
+            passwordErrorEl.textContent = 'Password cannot be empty.';
             return;
         }
 
         try {
-            // 4. Gửi mật khẩu đến backend để xác thực
             const response = await fetch('/api/verify_password', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password: password }),
             });
 
-            // 5. Xử lý kết quả từ backend
             if (response.ok) {
-                // Nếu mật khẩu đúng (backend trả về status 200)
-                alert("Password correct! Loading data...");
-                // Chuyển hướng đến trang data
-                window.location.href = viewDataBtn.href; // Lấy href từ chính nút đó
+                // If password is correct, redirect to the data page
+                window.location.href = viewDataBtn.href;
             } else {
-                // Nếu mật khẩu sai (backend trả về status 401 hoặc lỗi khác)
-                alert("Incorrect password. Please try again.");
+                // If password is incorrect
+                passwordErrorEl.textContent = 'Incorrect password. Please try again.';
             }
         } catch (error) {
             console.error("Error verifying password:", error);
-            alert("An error occurred. Please check the console.");
+            passwordErrorEl.textContent = 'An error occurred. Please try again.';
         }
-    });
-}
+    }
+
+    // Show the password modal when "View Data" is clicked
+    if (viewDataBtn) {
+        viewDataBtn.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default link behavior
+            showPasswordModal();
+        });
+    }
+
+    // Add event listeners for the password modal buttons and overlay
+    if (cancelPasswordBtn) cancelPasswordBtn.addEventListener('click', hidePasswordModal);
+    if (submitPasswordBtn) submitPasswordBtn.addEventListener('click', handlePasswordSubmit);
+    if (passwordModalOverlay) {
+        passwordModalOverlay.addEventListener('click', (event) => {
+            // Close modal only if the click is on the dark background
+            if (event.target === passwordModalOverlay) {
+                hidePasswordModal();
+            }
+        });
+    }
+    // Allow submitting with the "Enter" key
+    if (passwordInput) {
+        passwordInput.addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                handlePasswordSubmit();
+            }
+        });
+    }
+
+}); // End of DOMContentLoaded
