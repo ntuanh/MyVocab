@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="vi">
+<!-- The language is set to 'en' for English -->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- Main container for the entire application layout -->
     <div id="app-container">
-        <!-- LEFT COLUMN -->
+        <!-- LEFT COLUMN: Search and Image -->
         <aside id="left-panel">
             <div id="search-container">
                 <form id="search-form">
@@ -22,10 +24,9 @@
             <div id="image-panel" class="panel">
                 <p>Image will appear here</p>
             </div>
-            <!-- NEW ACTION BUTTONS -->
         </aside>
 
-        <!-- CENTER COLUMN -->
+        <!-- CENTER COLUMN: Main word details -->
         <main id="main-content">
             <div id="vietnamese-panel" class="panel pink hidden">
                 <h3>Vietnamese Meaning</h3>
@@ -39,20 +40,9 @@
                 <h3>Example</h3>
                 <p id="example-sentence">...</p>
             </div>
-            <div id="actions-panel">
-                <button id="save-btn" class="action-btn">
-                    <i class="fas fa-save"></i> Save Word
-                </button>
-                <a href="/exam" class="action-btn exam-link">
-                    <i class="fas fa-graduation-cap"></i> Go to Exam
-                </a>
-                <a href="/data" id="view-data-btn" class="action-btn data-link">
-                    <i class="fas fa-database"></i> View Data
-                </a>
-            </div>
         </main>
 
-        <!-- RIGHT COLUMN -->
+        <!-- RIGHT COLUMN: Supplementary word details -->
         <aside id="right-panel">
             <div id="ipa-panel" class="panel pink">
                 <h3>IPA</h3>
@@ -67,35 +57,49 @@
                 <div id="family-list" class="tag-list"></div>
             </div>
         </aside>
+
+        <!-- ACTION BUTTONS ROW [REFACTOR] -->
+        <!-- This panel is now a direct child of the grid container, preventing layout conflicts. -->
+        <div id="actions-panel">
+            <button id="save-btn" class="action-btn">
+                <i class="fas fa-save"></i> Save Word
+            </button>
+            <a href="/exam" class="action-btn exam-link">
+                <i class="fas fa-graduation-cap"></i> Go to Exam
+            </a>
+            <a href="/data" id="view-data-btn" class="action-btn data-link">
+                <i class="fas fa-database"></i> View Data
+            </a>
+        </div>
     </div>
 
-    <!-- Link to JavaScript file -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <!-- MODALS AND NOTIFICATIONS (kept outside the main app container for stacking context) -->
 
+    <!-- Toast Notification for feedback -->
     <div id="toast-notification" class="toast hidden">
         <span id="toast-message"></span>
     </div>
 
+    <!-- Modal for saving a word to topics -->
     <div id="save-modal" class="modal-overlay hidden">
         <div class="modal-content">
             <h3>Save '<span id="modal-word-to-save"></span>'</h3>
             <p>Select topics for this word. If none are selected, it will be saved to "Daily life".</p>
-
             <div id="modal-topic-list" class="topic-list-container">
                 <!-- JavaScript will populate topic checkboxes here -->
             </div>
-
             <div id="add-topic-container">
                 <input type="text" id="new-topic-input" placeholder="Or create a new topic...">
                 <button id="add-topic-btn">Add</button>
             </div>
-
             <div class="modal-actions">
                 <button id="modal-btn-cancel-save" class="modal-btn">Cancel</button>
                 <button id="modal-btn-confirm-save" class="modal-btn confirm">Confirm Save</button>
             </div>
         </div>
     </div>
+
+    <!-- Modal for password-protected data view -->
     <div id="password-modal-overlay" class="modal-overlay">
         <div id="password-modal" class="modal-content">
             <h3>View Protected Data</h3>
@@ -108,5 +112,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Link to JavaScript file at the end of the body for faster page load -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

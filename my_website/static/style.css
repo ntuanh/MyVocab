@@ -20,33 +20,94 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    box-sizing: border-box;
 }
 
 #app-container {
     display: grid;
+    /* [FIX 1/3] Define a new row for the action buttons. */
+    /* It now has two rows: the main content row (auto) and a small row for buttons (auto). */
+    grid-template-rows: 1fr auto;
     grid-template-columns: 1.2fr 2fr 1fr;
+
+    /* [FIX 2/3] Define the layout areas for clarity. */
+    grid-template-areas:
+        "left main right"
+        "actions actions actions"; /* The new actions row spans all 3 columns. */
+
     gap: 1.5rem;
     width: 100%;
     max-width: 1400px;
     height: 90vh;
-    grid-template-rows: 1fr;
 }
+
+/* Assign elements to their grid areas */
+#left-panel { grid-area: left; }
+#main-content { grid-area: main; }
+#right-panel { grid-area: right; }
+#actions-panel { grid-area: actions; } /* [FIX 3/3] Assign the actions panel to its new dedicated area. */
+
 
 #left-panel, #main-content, #right-panel {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    overflow: auto;
+    overflow-y: auto; /* Allow individual columns to scroll if content overflows */
     min-height: 0;
 }
 
+/* --- Styling for the action buttons panel --- */
+#actions-panel {
+    display: flex;
+    gap: 1rem;
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center;     /* Align items vertically in the center */
+    padding: 0.5rem 0;       /* Add some vertical padding */
+    position: relative;      /* Establish a stacking context */
+    z-index: 10;             /* Ensure buttons are on top of other elements */
+}
+
+.action-btn, .exam-link, .data-link {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--panel-dark);
+    color: var(--light-text-color);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.action-btn:hover, .exam-link:hover, .data-link:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+}
+.action-btn:disabled {
+    background-color: #28a745;
+    color: white;
+    cursor: not-allowed;
+    opacity: 1;
+}
+.data-link {
+    background-color: var(--panel-blue) !important;
+    color: var(--text-color) !important;
+}
+.data-link:hover {
+    background-color: #8abedc !important;
+}
+
+/* --- General Panel Styling --- */
 .panel {
     background-color: white;
     padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     color: var(--text-color);
-    /*overflow-y: auto;*/
 }
 
 .panel h3 {
@@ -54,15 +115,12 @@ body {
     border-bottom: 2px solid rgba(0,0,0,0.1);
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
-    position: sticky;
-    top: -1.5rem;
-    background-color: inherit;
-    padding-top: 1.5rem;
 }
 .panel p {
     margin-bottom: 0;
 }
 
+/* --- Left Column --- */
 #search-container {
     background-color: var(--panel-dark);
     padding: 1rem;
@@ -90,7 +148,7 @@ body {
 
 #image-panel {
     flex-grow: 1;
-    display: flex; /* Quan trọng */
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--panel-blue);
@@ -102,13 +160,11 @@ body {
 #word-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Giúp ảnh lấp đầy panel mà không bị méo */
+    object-fit: cover;
     border-radius: var(--border-radius);
-    background-color: #eee;
-    /* KHÔNG có 'display: none' ở đây. JavaScript sẽ điều khiển việc này. */
 }
 
-/* Màu sắc cho các panel */
+/* --- Panel Colors --- */
 #definition-panel { background-color: var(--panel-blue); }
 #vietnamese-panel, #example-panel, #ipa-panel, #synonym-panel { background-color: var(--panel-pink); }
 #family-panel {
@@ -117,10 +173,9 @@ body {
 }
 #family-panel h3 {
     border-bottom-color: rgba(255,255,255,0.2);
-    background-color: var(--panel-dark-blue);
 }
 
-/* Styling cho phần nghĩa bị ẩn */
+/* --- Hidden Vietnamese Panel Style --- */
 #vietnamese-panel.hidden {
     position: relative;
     cursor: pointer;
@@ -130,7 +185,7 @@ body {
     user-select: none;
 }
 #vietnamese-panel.hidden::after {
-    content: 'Nhấn để xem nghĩa';
+    content: 'Click to reveal';
     position: absolute;
     top: 50%;
     left: 50%;
@@ -140,9 +195,8 @@ body {
     border-radius: 10px;
     font-weight: 500;
 }
-#vietnamese-panel.revealed::after { display: none; }
 
-/* Styling cho danh sách tag */
+/* --- Tag List Styling --- */
 .tag-list {
     display: flex;
     flex-wrap: wrap;
@@ -152,7 +206,6 @@ body {
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
     font-size: 0.9rem;
-    cursor: pointer;
 }
 #synonym-panel .tag {
     background-color: rgba(0,0,0,0.1);
@@ -161,259 +214,31 @@ body {
     background-color: rgba(255,255,255,0.2);
 }
 
-/* Thêm vào cuối file style.css */
-
-#action-buttons {
-    display: flex;
-    justify-content: flex-start; /* Hoặc center, flex-end tùy ý */
-    gap: 1rem;
-    margin-top: -0.5rem; /* Điều chỉnh khoảng cách với panel trên */
-}
-
-.action-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    font-family: 'Poppins', sans-serif;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-}
-
-#save-button {
-    background-color: var(--panel-pink);
-    color: var(--text-color);
-}
-
-#save-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-#save-button.saved {
-    background-color: #90ee90; /* Màu xanh lá cây khi đã lưu   */
-    color: white;
-    transform: scale(1.05);
-}
-
-/* Thêm vào cuối file style.css */
-.suggestion-link {
-    font-weight: 600;
-    color: var(--panel-dark-blue);
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.suggestion-link:hover {
-    color: #000;
-}
-
-#data-button {
-    background-color: var(--panel-blue);
-    color: var(--text-color);
-    text-decoration: none;
-}
-#data-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-/* --- Styling cho các nút hành động --- */
-#actions-panel {
-    display: flex;
-    gap: 1rem;
-    justify-content: center; /* Căn giữa các nút */
-}
-
-.action-btn, .exam-link {
-    flex: 0;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 12px;
-    background-color: var(--panel-dark);
-    color: var(--light-text-color);
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.2s, transform 0.2s;
-}
-.action-btn:hover, .exam-link:hover {
-    background-color: #555;
-    transform: translateY(-2px);
-}
-.action-btn i, .exam-link i {
-    margin-right: 0.5rem;
-}
-
-/* --- Styling cho trang Exam --- */
-.exam-body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Canh trên cùng */
-}
-#exam-container {
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    text-align: center;
-}
-.exam-title {
-    color: white;
-}
-#question-card h2 {
-    font-size: 2.5rem;
-    margin: 0;
-    color: var(--panel-dark-blue);
-}
-#hint-card {
-    cursor: pointer;
-    background-color: var(--panel-blue);
-}
-#hint-card.hidden img {
-    display: none;
-}
-#hint-image {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-top: 1rem;
-}
-#answer-form {
-    display: flex;
-    gap: 1rem;
-}
-#answer-input {
-    flex-grow: 1;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    padding: 0.8rem;
-    font-size: 1.1rem;
-}
-#answer-form button {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    background-color: var(--panel-dark-blue);
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-#feedback-card.correct {
-    background-color: #d4edda; /* Green */
-    color: #155724;
-}
-#feedback-card.incorrect {
-    background-color: #f8d7da; /* Red */
-    color: #721c24;
-}
-.back-link {
-    color: white;
-    text-decoration: none;
-    margin-top: 1rem;
-}
-
-/* --- Styling cho nút Data --- */
-.data-link {
-    background-color: var(--panel-blue) !important;
-    color: var(--text-color) !important;
-}
-.data-link:hover {
-    background-color: #8abedc !important;
-}
-
-/* --- Styling cho trang Data --- */
-.data-body {
-    align-items: flex-start;
-}
-#data-container {
-    width: 100%;
-    max-width: 900px;
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 20px;
-}
-.data-title {
-    margin-top: 0;
-}
-.table-container {
-    width: 100%;
-    overflow-x: auto;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-th, td {
-    padding: 0.8rem 1rem;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-}
-th {
-    background-color: #f2f2f2;
-}
-tbody tr:hover {
-    background-color: #f9f9f9;
-}
-/* Styling cho nút Delete trong bảng */
-.delete-btn {
-    background-color: #f44336; /* Màu đỏ */
-    color: white;
-    border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.delete-btn:hover {
-    background-color: #d32f2f;
-}
-.action-btn:disabled {
-    background-color: #28a745; /* Màu xanh lá cây thành công */
-    color: white;
-    cursor: not-allowed; /* Đổi con trỏ chuột để cho biết không thể nhấn */
-    opacity: 1; /* Ghi đè opacity mặc định của trạng thái disabled */
-}
-/* --- Styling cho Toast Notification --- */
+/* --- Toast Notification Styling --- */
 #toast-notification {
-    position: fixed; /* Cố định vị trí trên màn hình */
-    bottom: 2rem;
+    position: fixed;
+    bottom: -100px; /* Start off-screen */
     left: 50%;
-    transform: translateX(-50%); /* Căn giữa theo chiều ngang */
+    transform: translateX(-50%);
     padding: 1rem 2rem;
     border-radius: 10px;
     color: white;
     font-weight: 500;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, bottom 0.3s, visibility 0.3s;
+    z-index: 3000;
+    transition: bottom 0.5s ease-in-out;
 }
-
 #toast-notification.show {
-    bottom: 3rem;
-    opacity: 1;
-    visibility: visible;
+    bottom: 2rem;
 }
-
 #toast-notification.success {
-    background-color: #28a745; /* Màu xanh lá cây */
+    background-color: #28a745;
 }
-
 #toast-notification.error {
-    background-color: #dc3545; /* Màu đỏ */
+    background-color: #dc3545;
 }
 
-/* --- Styling cho Modal xác nhận --- */
+/* --- General Modal Styling --- */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -421,17 +246,17 @@ tbody tr:hover {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
+    display: none; /* Hidden by default */
     justify-content: center;
     align-items: center;
     z-index: 2000;
-    opacity: 1;
-    transition: opacity 0.3s;
-}
-
-.modal-overlay.hidden {
     opacity: 0;
-    pointer-events: none; /* Không cho phép click khi đang ẩn */
+    transition: opacity 0.3s ease;
+}
+/* This style will be added by JS to show the modal */
+.modal-overlay:not([style*="display: none"]) {
+    display: flex;
+    opacity: 1;
 }
 
 .modal-content {
@@ -439,259 +264,25 @@ tbody tr:hover {
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.25);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    transform: scale(1);
-    transition: transform 0.3s;
+    width: 90%;
+    max-width: 450px; /* Slightly wider for better spacing */
+    text-align: left;
 }
-
-.modal-overlay.hidden .modal-content {
-    transform: scale(0.9);
-}
-
 .modal-content h3 {
     margin-top: 0;
-    color: var(--text-color);
+    text-align: center;
 }
-
 .modal-content p {
-    margin: 1rem 0 2rem 0;
+    margin: 1rem 0;
     color: #555;
+    text-align: center;
 }
-
 .modal-actions {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
-}
-
-.modal-btn {
-    padding: 0.7rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.modal-btn.confirm {
-    background-color: #dc3545; /* red */
-    color: white;
-}
-
-.modal-btn.confirm:hover {
-    background-color: #c82333;
-}
-
-#feedback-card #next-word-btn {
-    background-color: #fff;
-    color: var(--text-color);
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    padding: 0.7rem 2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 1rem; /* Tạo khoảng cách với text ở trên */
-    transition: all 0.2s ease-in-out;
-}
-
-#feedback-card #next-word-btn:hover {
-    background-color: #f0f0f0;
-    border-color: #ccc;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Tùy chỉnh màu chữ cho từng loại feedback */
-#feedback-card.correct #next-word-btn {
-    color: #155724; /* Màu xanh lá đậm */
-    border-color: #155724;
-}
-
-#feedback-card.correct #next-word-btn:hover {
-     background-color: #155724;
-     color: white;
-}
-
-#feedback-card.incorrect #next-word-btn {
-    color: #721c24; /* Màu đỏ đậm */
-    border-color: #721c24;
-}
-
-#feedback-card.incorrect #next-word-btn:hover {
-    background-color: #721c24;
-    color: white;
-}
-
-/* Hiệu ứng rung cho ô input khi nhập rỗng */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-  20%, 40%, 60%, 80% { transform: translateX(5px); }
-}
-
-.shake {
-  animation: shake 0.5s;
-}
-/* ... (các style cũ) ... */
-
-/* --- Styling cho Feedback Card (Cập nhật) --- */
-#feedback-card {
-    background-color: #f0f0f0; /* Màu nền trung tính mặc định */
-    color: #555;
-    text-align: center;
-}
-
-#motivational-quote p {
-    font-style: italic;
-    font-size: 1.1rem;
-}
-
-#answer-feedback.hidden {
-    display: none;
-}
-
-/* ... (các style cũ) ... */
-
-/* --- Styling cho Màn hình chọn chủ đề --- */
-#topic-selection-container {
-    width: 100%;
-    max-width: 700px;
-    text-align: center;
-}
-#topic-selection-container.hidden, #exam-container.hidden {
-    display: none;
-}
-
-#topic-list-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 2rem 0;
-    text-align: left;
-}
-
-.topic-checkbox {
-    background-color: #f8f9fa;
-    padding: 0.8rem 1rem;
-    border-radius: 10px;
-    border: 1px solid #dee2e6;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.topic-checkbox input[type="checkbox"] {
-    margin-right: 0.75rem;
-    width: 18px;
-    height: 18px;
-}
-
-.topic-checkbox label {
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-#start-exam-btn {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 12px;
-    background-color: var(--panel-dark-blue);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-#start-exam-btn:hover {
-    background-color: #3b467a;
-}
-
-/* style.css */
-/* ... */
-#add-topic-container {
-    display: flex;
-    gap: 0.5rem;
     margin-top: 1.5rem;
-    border-top: 1px solid #eee;
-    padding-top: 1.5rem;
 }
-#new-topic-input {
-    flex-grow: 1;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 0.5rem;
-}
-#add-topic-btn {
-    border: none;
-    background-color: var(--panel-dark-blue);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-/* Styling cho badge đếm số lượng từ */
-.word-count-badge {
-    color: #888;
-    font-size: 0.85rem;
-    margin-left: 0.25rem;
-}
-
-.modal-overlay {
-    position: fixed; /* Nằm cố định trên màn hình */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Lớp nền mờ */
-    display: none; /* Mặc định ẩn đi */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Luôn nằm trên cùng */
-    transition: opacity 0.3s ease; /* Hiệu ứng mờ dần */
-}
-
-.modal-content {
-    background-color: #fff;
-    padding: 25px 30px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    width: 90%;
-    max-width: 400px; /* Chiều rộng tối đa */
-    text-align: center;
-}
-
-.modal-content h3 {
-    margin-top: 0;
-    color: #333;
-}
-
-.modal-content p {
-    color: #666;
-    margin-bottom: 20px;
-}
-
-#password-input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: flex-end; /* Đẩy nút sang phải */
-    gap: 10px; /* Khoảng cách giữa các nút */
-    margin-top: 20px;
-}
-
 .modal-actions button {
     padding: 10px 20px;
     border: none;
@@ -701,26 +292,45 @@ tbody tr:hover {
     transition: background-color 0.2s ease;
 }
 
-.btn-primary {
-    background-color: #007bff;
-    color: white;
+/* --- Save Word Modal Specifics --- */
+.topic-list-container {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    padding: 0.5rem;
+    border-radius: 8px;
 }
-.btn-primary:hover {
-    background-color: #0056b3;
+.topic-checkbox {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
 }
+.topic-checkbox input { margin-right: 0.5rem; }
+#add-topic-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+#new-topic-input { flex-grow: 1; border: 1px solid #ccc; border-radius: 8px; padding: 0.5rem; }
+#add-topic-btn { border: none; background-color: var(--panel-dark-blue); color: white; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; }
 
-.btn-secondary {
-    background-color: #e9ecef;
-    color: #495057;
+/* --- Password Modal Specifics --- */
+#password-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
 }
-.btn-secondary:hover {
-    background-color: #d6d8db;
-}
+.btn-primary { background-color: #007bff; color: white; }
+.btn-primary:hover { background-color: #0056b3; }
+.btn-secondary { background-color: #e9ecef; color: #495057; }
+.btn-secondary:hover { background-color: #d6d8db; }
+.error-message { color: #dc3545; font-size: 0.9rem; height: 1.2em; text-align: left; margin-top: -5px; }
 
-.error-message {
-    color: #dc3545; /* Màu đỏ cho thông báo lỗi */
-    font-size: 0.9rem;
-    height: 1.2em; /* Giữ chiều cao ổn định */
-    margin-top: 5px;
-}
-
+/* Remove redundant rules from the end */
+/* The general .modal-overlay and .modal-content rules at the top are enough */
