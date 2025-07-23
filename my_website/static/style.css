@@ -376,6 +376,9 @@ body {
     padding: 2rem;
     border-radius: var(--border-radius);
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 50%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 #topic-selection-container h2 {
@@ -436,10 +439,14 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+
+    width: 50%;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 #exam-container .panel {
-    width: 100%;
+    width: 50%;
     box-sizing: border-box; /* Ensures padding is included in the width */
 }
 
