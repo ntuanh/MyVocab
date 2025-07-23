@@ -332,5 +332,26 @@ body {
 .btn-secondary:hover { background-color: #d6d8db; }
 .error-message { color: #dc3545; font-size: 0.9rem; height: 1.2em; text-align: left; margin-top: -5px; }
 
-/* Remove redundant rules from the end */
-/* The general .modal-overlay and .modal-content rules at the top are enough */
+/* Đoạn code ĐÚNG để sửa lỗi */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex; /* Dùng flex để căn giữa modal con */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-overlay.hidden {
+    /* Khi có class .hidden, nó sẽ vô hình VÀ biến mất */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Quan trọng: không cho phép tương tác khi ẩn */
+}
