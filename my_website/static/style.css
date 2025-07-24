@@ -11,6 +11,7 @@
     --border-radius: 20px;
 }
 
+/* --- BASE & LAYOUT --- */
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg-color);
@@ -25,510 +26,184 @@ body {
 
 #app-container {
     display: grid;
-    /* [FIX 1/3] Define a new row for the action buttons. */
-    /* It now has two rows: the main content row (auto) and a small row for buttons (auto). */
     grid-template-rows: 1fr auto;
     grid-template-columns: 1.2fr 2fr 1fr;
-
-    /* [FIX 2/3] Define the layout areas for clarity. */
     grid-template-areas:
         "left main right"
-        "actions actions actions"; /* The new actions row spans all 3 columns. */
-
+        "actions actions actions";
     gap: 1.5rem;
     width: 100%;
     max-width: 1400px;
     height: 90vh;
 }
 
-/* Assign elements to their grid areas */
 #left-panel { grid-area: left; }
 #main-content { grid-area: main; }
 #right-panel { grid-area: right; }
-#actions-panel { grid-area: actions; } /* [FIX 3/3] Assign the actions panel to its new dedicated area. */
-
+#actions-panel { grid-area: actions; }
 
 #left-panel, #main-content, #right-panel {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    overflow-y: auto; /* Allow individual columns to scroll if content overflows */
+    overflow-y: auto;
     min-height: 0;
 }
 
-/* --- Styling for the action buttons panel --- */
-#actions-panel {
-    display: flex;
-    gap: 1rem;
-    justify-content: center; /* Center the buttons horizontally */
-    align-items: center;     /* Align items vertically in the center */
-    padding: 0.5rem 0;       /* Add some vertical padding */
-    position: relative;      /* Establish a stacking context */
-    z-index: 10;             /* Ensure buttons are on top of other elements */
-}
-
-.action-btn, .exam-link, .data-link {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 12px;
-    background-color: var(--panel-dark);
-    color: var(--light-text-color);
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.2s, transform 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.action-btn:hover, .exam-link:hover, .data-link:hover {
-    background-color: #555;
-    transform: translateY(-2px);
-}
-.action-btn:disabled {
-    background-color: #28a745;
-    color: white;
-    cursor: not-allowed;
-    opacity: 1;
-}
-.data-link {
-    background-color: var(--panel-blue) !important;
-    color: var(--text-color) !important;
-}
-.data-link:hover {
-    background-color: #8abedc !important;
-}
-
-/* --- General Panel Styling --- */
 .panel {
     background-color: white;
     padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    color: var(--text-color);
 }
+.panel h3 { margin-top: 0; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+.panel p { margin-bottom: 0; }
 
-.panel h3 {
-    margin-top: 0;
-    border-bottom: 2px solid rgba(0,0,0,0.1);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-}
-.panel p {
-    margin-bottom: 0;
-}
+/* --- COMPONENT STYLES --- */
 
-/* --- Left Column --- */
-#search-container {
-    background-color: var(--panel-dark);
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    flex-shrink: 0;
-}
-
-#search-form {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 25px;
-    padding: 0.5rem 1rem;
-}
-
+/* Search Bar */
+#search-container { background-color: var(--panel-dark); padding: 1rem; border-radius: var(--border-radius); }
+#search-form { display: flex; align-items: center; background-color: #fff; border-radius: 25px; padding: 0.5rem 1rem; }
+#word-input { border: none; outline: none; width: 100%; font-size: 1.1rem; padding-left: 0.75rem; }
 #search-form i { color: #999; }
 
-#word-input {
-    border: none;
-    outline: none;
-    width: 100%;
-    font-size: 1.1rem;
-    padding-left: 0.75rem;
-}
+/* Image Panel */
+#image-panel { flex-grow: 1; display: flex; justify-content: center; align-items: center; background-color: var(--panel-blue); overflow: hidden; min-height: 200px; }
+#word-image { width: 100%; height: 100%; object-fit: cover; }
 
-#image-panel {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--panel-blue);
-    padding: 0;
-    overflow: hidden;
-    min-height: 200px;
-}
-
-#word-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: var(--border-radius);
-}
-
-/* --- Panel Colors --- */
+/* Colored Panels */
 #definition-panel { background-color: var(--panel-blue); }
 #vietnamese-panel, #example-panel, #ipa-panel, #synonym-panel { background-color: var(--panel-pink); }
-#family-panel {
-    background-color: var(--panel-dark-blue);
-    color: var(--light-text-color);
-}
-#family-panel h3 {
-    border-bottom-color: rgba(255,255,255,0.2);
-}
+#family-panel { background-color: var(--panel-dark-blue); color: var(--light-text-color); }
+#family-panel h3 { border-bottom-color: rgba(255,255,255,0.2); }
 
-/* --- Hidden Vietnamese Panel Style --- */
-#vietnamese-panel.hidden {
-    position: relative;
-    cursor: pointer;
-}
-#vietnamese-panel.hidden p {
-    filter: blur(5px);
-    user-select: none;
-}
+/* Vietnamese Meaning Reveal */
+#vietnamese-panel.hidden { cursor: pointer; position: relative; }
+#vietnamese-panel.hidden p { filter: blur(5px); user-select: none; }
 #vietnamese-panel.hidden::after {
     content: 'Click to reveal';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255,255,255,0.7);
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    font-weight: 500;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.8); padding: 0.5rem 1rem;
+    border-radius: 10px; font-weight: 500;
 }
 
-/* --- Tag List Styling --- */
-.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-.tag {
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.9rem;
-}
-#synonym-panel .tag {
-    background-color: rgba(0,0,0,0.1);
-}
-#family-panel .tag {
-    background-color: rgba(255,255,255,0.2);
-}
+/* Tag Lists */
+.tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag { padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem; }
+#synonym-panel .tag { background-color: rgba(0,0,0,0.1); }
+#family-panel .tag { background-color: rgba(255,255,255,0.2); }
 
-/* --- Toast Notification Styling --- */
-#toast-notification {
-    position: fixed;
-    bottom: -100px; /* Start off-screen */
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    color: white;
-    font-weight: 500;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    z-index: 3000;
-    transition: bottom 0.5s ease-in-out;
+/* Action Buttons */
+#actions-panel { display: flex; gap: 1rem; justify-content: center; align-items: center; padding-top: 0.5rem; position: relative; z-index: 10; }
+.action-btn, .exam-link, .data-link {
+    padding: 0.8rem 1.5rem; border: none; border-radius: 12px;
+    background-color: var(--panel-dark); color: var(--light-text-color);
+    font-size: 1rem; font-weight: 500; cursor: pointer; text-decoration: none;
+    transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem;
 }
-#toast-notification.show {
-    bottom: 2rem;
-}
-#toast-notification.success {
-    background-color: #28a745;
-}
-#toast-notification.error {
-    background-color: #dc3545;
-}
+.action-btn:hover, .exam-link:hover, .data-link:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+.action-btn:disabled { background-color: #28a745; color: white; cursor: not-allowed; opacity: 1; }
+.data-link { background-color: var(--panel-blue) !important; color: var(--text-color) !important; }
 
-/* --- General Modal Styling --- */
+/* --- UNIVERSAL MODAL STYLES (SINGLE SOURCE OF TRUTH) --- */
+
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; justify-content: center; align-items: center;
     z-index: 2000;
 
+    /* DEFAULT STATE: HIDDEN */
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-
-    transition: opacity 0.3s, visibility 0.3s;
+    transition: opacity 0.3s, visibility 0s 0.3s;
 }
-/* This style will be added by JS to show the modal */
+
 .modal-overlay.visible {
+    /* VISIBLE STATE: Added by JavaScript */
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+    transition: opacity 0.3s, visibility 0s;
 }
 
 .modal-content {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
+    background: white; padding: 2rem; border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.25);
-    width: 90%;
-    max-width: 450px;
-    transform: scale(0.95);
-    transition: transform 0.3s;
+    width: 90%; max-width: 450px;
+    transform: scale(0.95); transition: transform 0.3s;
 }
 
-.modal-overlay.visible .modal-content {
-    transform: scale(1);
-}
+.modal-overlay.visible .modal-content { transform: scale(1); }
+.modal-content h3 { margin-top: 0; text-align: center; }
+.modal-content p { margin: 1rem 0; color: #555; text-align: center; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem; }
+.modal-actions button { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: background-color 0.2s; }
 
-.modal-content h3 {
-    margin-top: 0;
-    text-align: center;
-}
-.modal-content p {
-    margin: 1rem 0;
-    color: #555;
-    text-align: center;
-}
-.modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-.modal-actions button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
-}
-
-/* --- Save Word Modal Specifics --- */
-.topic-list-container {
-    max-height: 150px;
-    overflow-y: auto;
-    border: 1px solid #eee;
-    padding: 0.5rem;
-    border-radius: 8px;
-}
-.topic-checkbox {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
-}
+/* Save Word Modal Specifics */
+.topic-list-container { max-height: 150px; overflow-y: auto; border: 1px solid #eee; padding: 0.5rem; border-radius: 8px; }
+.topic-checkbox { display: flex; align-items: center; padding: 0.5rem; }
 .topic-checkbox input { margin-right: 0.5rem; }
-#add-topic-container {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid #eee;
-}
+#add-topic-container { display: flex; gap: 0.5rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee; }
 #new-topic-input { flex-grow: 1; border: 1px solid #ccc; border-radius: 8px; padding: 0.5rem; }
 #add-topic-btn { border: none; background-color: var(--panel-dark-blue); color: white; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; }
 
-/* --- Password Modal Specifics --- */
-#password-input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-}
+/* Password Modal Specifics */
+#password-input { width: 100%; box-sizing: border-box; padding: 12px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; }
 .btn-primary { background-color: #007bff; color: white; }
-.btn-primary:hover { background-color: #0056b3; }
 .btn-secondary { background-color: #e9ecef; color: #495057; }
-.btn-secondary:hover { background-color: #d6d8db; }
 .error-message { color: #dc3545; font-size: 0.9rem; height: 1.2em; text-align: left; margin-top: -5px; }
 
-/* Đoạn code ĐÚNG để sửa lỗi */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex; /* Dùng flex để căn giữa modal con */
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.3s, visibility 0.3s;
+/* --- TOAST NOTIFICATION --- */
+#toast-notification {
+    position: fixed; bottom: -100px; left: 50%;
+    transform: translateX(-50%); padding: 1rem 2rem;
+    border-radius: 10px; color: white; font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 3000;
+    opacity: 0; visibility: hidden; transition: all 0.5s;
 }
+#toast-notification.show { bottom: 2rem; opacity: 1; visibility: visible; }
+#toast-notification.success { background-color: #28a745; }
+#toast-notification.error { background-color: #dc3545; }
 
-.modal-overlay.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-/* Body styling for the exam page to align content to the top */
-.exam-body {
-    align-items: flex-start;
-}
-
-/* Main container for the topic selection and exam question sections */
-#exam-layout-container {
-    display: flex;
-    gap: 2rem;
-    width: 100%;
-    max-width: 1200px;
-    align-items: flex-start;
-}
-
-/* Left panel for choosing topics */
+/* --- EXAM PAGE STYLING --- */
+.exam-body { align-items: flex-start; }
+#exam-layout-container { display: flex; gap: 2rem; width: 100%; max-width: 1200px; align-items: flex-start; }
 #topic-selection-container {
-    flex: 1; /* Takes up 1 part of the space */
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    width: 50%;
-    max-width: 600px;
-    margin: 0 auto;
+    flex: 1; background-color: #fff; padding: 2rem;
+    border-radius: var(--border-radius); box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 500px; margin: 0 auto;
 }
-
-#topic-selection-container h2 {
-    margin-top: 0;
-}
-
-#topic-list-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin: 1.5rem 0;
-}
-
-.topic-checkbox {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 8px;
-    transition: background-color 0.2s;
-}
-.topic-checkbox:hover {
-    background-color: #f0f0f0;
-}
-.topic-checkbox input {
-    margin-right: 0.75rem;
-    width: 18px;
-    height: 18px;
-}
-
+#topic-list-container { display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; }
+.topic-checkbox { display: flex; align-items: center; cursor: pointer; padding: 0.5rem; border-radius: 8px; transition: background-color 0.2s; }
+.topic-checkbox:hover { background-color: #f0f0f0; }
+.topic-checkbox input { margin-right: 0.75rem; width: 18px; height: 18px; }
 #start-exam-btn {
-    width: 100%;
-    padding: 0.8rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    background-color: var(--panel-dark-blue);
-    color: white;
-    cursor: pointer;
-    margin-top: 1rem;
+    width: 100%; padding: 0.8rem; font-size: 1rem; font-weight: 600;
+    border: none; border-radius: 10px; background-color: var(--panel-dark-blue);
+    color: white; cursor: pointer; margin-top: 1rem;
 }
-
-.back-link {
-    display: inline-block;
-    margin-top: 1rem;
-    color: #555;
-    text-decoration: none;
-}
-.back-link i {
-    margin-right: 0.5rem;
-}
-
-
-/* Right panel for the actual exam */
+.back-link { display: inline-block; margin-top: 1rem; color: #555; text-decoration: none; }
 #exam-container {
-    flex: 2; /* Takes up 2 parts of the space, making it wider */
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-
-    width: 100%;
-    max-width: 650px;
-    margin: 0 auto;
+    flex: 2; display: flex; flex-direction: column; gap: 1.5rem;
+    width: 100%; max-width: 700px; margin: 0 auto;
 }
-
-#exam-container .panel {
-    width: 100%;
-    box-sizing: border-box; /* Ensures padding is included in the width */
-}
-
-#question-card h2 {
-    font-size: 2.5rem;
-    margin: 0;
-    color: var(--panel-dark-blue);
-    text-align: center;
-}
-
-#hint-card {
-    cursor: pointer;
-    background-color: var(--panel-blue);
-    text-align: center;
-}
-#hint-card.hidden img {
-    display: none;
-}
-#hint-image {
-    max-width: 100%;
-    max-height: 200px;
-    object-fit: contain;
-    border-radius: 10px;
-    margin-top: 1rem;
-}
-
-#answer-form {
-    display: flex;
-    gap: 1rem;
-}
-#answer-input {
-    flex-grow: 1;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    padding: 0.8rem;
-    font-size: 1.1rem;
-}
+#question-card h2 { font-size: 2.5rem; margin: 0; color: var(--panel-dark-blue); text-align: center; }
+#hint-card { cursor: pointer; background-color: var(--panel-blue); text-align: center; }
+#hint-image { max-width: 100%; max-height: 200px; object-fit: contain; border-radius: 10px; margin-top: 1rem; }
+#answer-form { display: flex; gap: 1rem; }
+#answer-input { flex-grow: 1; border: 2px solid #ccc; border-radius: 10px; padding: 0.8rem; font-size: 1.1rem; }
 #answer-form button {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    background-color: var(--panel-dark-blue);
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1rem;
+    padding: 0.8rem 1.5rem; border: none; background-color: var(--panel-dark-blue);
+    color: white; border-radius: 10px; cursor: pointer; font-size: 1rem;
 }
-
-#feedback-card {
-    text-align: center;
-}
-#feedback-card.correct {
-    background-color: #d4edda;
-    color: #155724;
-}
-#feedback-card.incorrect {
-    background-color: #f8d7da;
-    color: #721c24;
-}
+#feedback-card { text-align: center; }
+#feedback-card.correct { background-color: #d4edda; color: #155724; }
+#feedback-card.incorrect { background-color: #f8d7da; color: #721c24; }
 #next-word-btn, #change-topics-btn {
-    padding: 0.7rem 1.5rem;
-    border: 2px solid #ccc;
-    background-color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    margin-top: 1rem;
-    margin-right: 0.5rem;
+    padding: 0.7rem 1.5rem; border: 2px solid #ccc; background-color: white;
+    border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 500;
+    margin-top: 1rem; margin-right: 0.5rem;
 }
-
-/* General class to hide elements with JavaScript */
-.hidden {
-    display: none !important;
-}
+.hidden { display: none !important; }

@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<!-- The language is set to 'en' for English -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyVocab - Smart Dictionary</title>
-    <!-- Link to CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Link to Font Awesome icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Main container for the entire application layout -->
     <div id="app-container">
         <!-- LEFT COLUMN: Search and Image -->
         <aside id="left-panel">
@@ -58,8 +54,7 @@
             </div>
         </aside>
 
-        <!-- ACTION BUTTONS ROW [REFACTOR] -->
-        <!-- This panel is now a direct child of the grid container, preventing layout conflicts. -->
+        <!-- ACTION BUTTONS ROW -->
         <div id="actions-panel">
             <button id="save-btn" class="action-btn">
                 <i class="fas fa-save"></i> Save Word
@@ -73,20 +68,21 @@
         </div>
     </div>
 
-    <!-- MODALS AND NOTIFICATIONS (kept outside the main app container for stacking context) -->
+    <!-- MODALS AND NOTIFICATIONS -->
 
     <!-- Toast Notification for feedback -->
-    <div id="toast-notification" class="toast hidden">
+    <div id="toast-notification" class="toast"> <!-- Removed 'hidden' for JS control -->
         <span id="toast-message"></span>
     </div>
 
     <!-- Modal for saving a word to topics -->
-    <div id="save-modal" class="modal-overlay hidden">
+    <!-- [FIX] Removed 'hidden' class. CSS will handle initial state. -->
+    <div id="save-modal" class="modal-overlay">
         <div class="modal-content">
             <h3>Save '<span id="modal-word-to-save"></span>'</h3>
             <p>Select topics for this word. If none are selected, it will be saved to "Daily life".</p>
             <div id="modal-topic-list" class="topic-list-container">
-                <!-- JavaScript will populate topic checkboxes here -->
+                <!-- JavaScript populates this -->
             </div>
             <div id="add-topic-container">
                 <input type="text" id="new-topic-input" placeholder="Or create a new topic...">
@@ -100,6 +96,7 @@
     </div>
 
     <!-- Modal for password-protected data view -->
+    <!-- [FIX] This structure is now consistent with the save-modal -->
     <div id="password-modal-overlay" class="modal-overlay">
         <div id="password-modal" class="modal-content">
             <h3>View Protected Data</h3>
@@ -113,7 +110,7 @@
         </div>
     </div>
 
-    <!-- Link to JavaScript file at the end of the body for faster page load -->
+    <!-- Link to JavaScript file -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
