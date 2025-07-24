@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const result = await response.json();
             showToast(result.message, result.status === 'error' ? 'error' : 'success');
-            saveModal.classList.add('hidden'); // Hide the modal
+            saveModal.classList.remove('visible'); // Hide the modal
             if (result.status !== 'error') {
                 saveBtn.disabled = true;
                 saveBtn.innerHTML = '<i class="fas fa-check"></i> Already Saved';
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Cancel saving and hide the modal
     cancelSaveBtn.addEventListener('click', () => {
-        saveModal.classList.add('hidden');
+        saveModal.classList.remove('visible');
     });
 
     // --- Password Modal Logic ---
