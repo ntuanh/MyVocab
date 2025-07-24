@@ -197,10 +197,10 @@ document.addEventListener('DOMContentLoaded', () => {
             topics.forEach(topic => {
                 const topicDiv = document.createElement('div');
                 topicDiv.className = 'topic-checkbox';
-                topicDiv.innerHTML =
+                topicDiv.innerHTML = `
                     <input type="checkbox" id="modal-topic-${topic.id}" name="modal-topics" value="${topic.id}">
                     <label for="modal-topic-${topic.id}">${topic.name}</label>
-                ;
+                `;
                 modalTopicList.appendChild(topicDiv);
             });
             saveModal.classList.remove('hidden'); // Show the modal
