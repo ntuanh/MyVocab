@@ -197,10 +197,10 @@ document.addEventListener('DOMContentLoaded', () => {
             topics.forEach(topic => {
                 const topicDiv = document.createElement('div');
                 topicDiv.className = 'topic-checkbox';
-                topicDiv.innerHTML = `
+                topicDiv.innerHTML =
                     <input type="checkbox" id="modal-topic-${topic.id}" name="modal-topics" value="${topic.id}">
                     <label for="modal-topic-${topic.id}">${topic.name}</label>
-                `;
+                ;
                 modalTopicList.appendChild(topicDiv);
             });
             saveModal.classList.remove('hidden'); // Show the modal
@@ -271,12 +271,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function showPasswordModal() {
         passwordInput.value = ''; // Clear previous password
         passwordErrorEl.textContent = ''; // Clear previous error
-        passwordModalOverlay.style.display = 'flex'; // Show the modal
+        passwordModalOverlay.classList.add('visible'); // Show the modal
         passwordInput.focus(); // Focus on the input field
     }
 
     function hidePasswordModal() {
-        passwordModalOverlay.style.display = 'none'; // Hide the modal
+        passwordModalOverlay.classList.remove('visible'); // Hide the modal
     }
 
     async function handlePasswordSubmit() {
