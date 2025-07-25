@@ -79,12 +79,21 @@ body {
 
 /* Vietnamese Meaning Reveal */
 #vietnamese-panel.hidden { cursor: pointer; position: relative; }
-#vietnamese-panel.hidden p { filter: blur(5px); user-select: none; }
+#vietnamese-panel.hidden p {
+    filter: blur(5px);
+    user-select: none;
+}
 #vietnamese-panel.hidden::after {
     content: 'Click to reveal';
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    background: rgba(255,255,255,0.8); padding: 0.5rem 1rem;
-    border-radius: 10px; font-weight: 500;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-weight: 500;
+    color: #333;
 }
 
 /* Tag Lists */
@@ -207,3 +216,17 @@ body {
     margin-top: 1rem; margin-right: 0.5rem;
 }
 .hidden { display: none !important; }
+
+#vietnamese-panel {
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#vietnamese-panel.revealed p {
+    filter: none;
+}
+
+#vietnamese-panel.revealed::after {
+    display: none;
+}
