@@ -24,6 +24,9 @@ app = Flask(__name__,
 
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "a_super_secret_key_for_local_development_only")
 
+print("INFO: Application starting up. Initializing database schema...")
+init_db_message = init_db()
+print(f"INFO: Database initialization result: {init_db_message}")
 
 # --- PAGE ROUTES (RENDER HTML) ---
 

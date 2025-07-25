@@ -96,10 +96,6 @@ def init_db():
 
 
 def save_word(word_data, topic_ids=None):
-    """
-    Saves a new word to the PostgreSQL database or updates topics for an existing one.
-    This version uses the correct '%s' placeholder and 'ON CONFLICT' syntax for PostgreSQL.
-    """
     # 1. Validate input data
     if not word_data or not word_data.get('word'):
         print("ERROR in save_word: Invalid or missing word data.")
