@@ -1,75 +1,62 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyVocab - Exam</title>
-    <!-- Reusing the same CSS file from the main page -->
+    <title>MyVocab - Vocabulary Exam</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Link to Font Awesome icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<!-- my_website/templates/exam.html -->
 <body class="exam-body">
 
-    <!-- TOPIC SELECTION SCREEN (VISIBLE ON PAGE LOAD) -->
-    <div id="topic-selection-container" class="panel">
+    <!-- Màn hình 1: Chọn chủ đề -->
+    <div id="topic-selection-container">
         <h1 class="exam-title">Choose Your Topics</h1>
-        <p class="data-subtitle">Select topics to review, or leave blank to review all words.</p>
-        <form id="topic-form">
-            <div id="topic-list-container">
-                {% for topic in topics %}
-                <div class="topic-checkbox">
-                    <input type="checkbox" id="topic-{{ topic.id }}" name="topics" value="{{ topic.id }}">
-                    <!-- Display label with word count -->
-                    <label for="topic-{{ topic.id }}">
-                        {{ topic.name }} <span class="word-count-badge">({{ topic.word_count }})</span>
-                    </label>
-                </div>
-                {% endfor %}
-            </div>
-            <button type="submit" id="start-exam-btn">Start Exam</button>
-        </form>
+        <p>Select topics to review, or leave blank to review all words.</p>
+
+        <div id="topic-list-container">
+            <!-- JavaScript will load topics here -->
+            <p>Loading topics...</p>
+        </div>
+
+        <button id="start-exam-btn">Start Exam</button>
         <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dictionary</a>
     </div>
 
-    <!-- MAIN EXAM INTERFACE (INITIALLY HIDDEN) -->
+    <!-- Màn hình 2: Làm bài kiểm tra (Mặc định ẩn) -->
     <div id="exam-container" class="hidden">
         <h1 class="exam-title">Vocabulary Exam</h1>
 
         <div id="question-card" class="panel">
-            <h2 id="question-word">Loading...</h2>
+            <h2 id="exam-word">Loading...</h2>
             <p>What is the Vietnamese meaning of this word?</p>
         </div>
 
-        <div id="hint-card" class="panel hidden">
+        <div id="hint-card" class="panel">
             <p>Hint (click to show image)</p>
-            <img id="hint-image" src="" alt="Image hint">
+            <img id="hint-image" src="" alt="Image hint" class="hidden">
         </div>
 
         <form id="answer-form">
-            <input type="text" id="answer-input" placeholder="Enter the Vietnamese meaning..." autocomplete="off" required>
+            <input type="text" id="answer-input" placeholder="Enter the Vietnamese meaning..." autocomplete="off">
             <button type="submit">Submit</button>
         </form>
 
-        <div id="feedback-card" class="panel">
-            <div id="motivational-quote">
-                <p>"The beautiful thing about learning is that no one can take it away from you."</p>
-            </div>
-            <div id="answer-feedback" class="hidden">
+        <div id="feedback-card" class="panel hidden">
+            <div id="answer-feedback">
                 <h3 id="feedback-title"></h3>
                 <p id="feedback-text"></p>
+            </div>
+            <div id="motivational-quote" class="hidden">
+                 <p>"The beautiful thing about learning is that no one can take it away from you."</p>
             </div>
             <button id="next-word-btn">Next Word</button>
         </div>
 
-        <button id="change-topics-btn" class="back-link"
-                style="background-color: grey; padding: 10px 20px;
-                border: none; border-radius: 10px;
-                font-size: 16px ; font-weight: bold;">
-            Change Topics</button>
+        <button id="change-topics-btn">Change Topics</button>
     </div>
 
+    <!-- Link to the new exam script -->
     <script src="{{ url_for('static', filename='exam.js') }}"></script>
 </body>
 </html>

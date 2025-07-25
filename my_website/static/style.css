@@ -177,44 +177,103 @@ body {
 #toast-notification.error { background-color: #dc3545; }
 
 /* --- EXAM PAGE STYLING --- */
-.exam-body { align-items: flex-start; }
-#exam-layout-container { display: flex; gap: 2rem; width: 100%; max-width: 1200px; align-items: flex-start; }
+
+.exam-body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 4rem; /* Add some space at the top */
+}
+
+/* Container for the topic selection screen */
 #topic-selection-container {
-    flex: 1; background-color: #fff; padding: 2rem;
-    border-radius: var(--border-radius); box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    max-width: 500px; margin: 0 auto;
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: var(--border-radius);
+    text-align: center;
 }
-#topic-list-container { display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; }
-.topic-checkbox { display: flex; align-items: center; cursor: pointer; padding: 0.5rem; border-radius: 8px; transition: background-color 0.2s; }
-.topic-checkbox:hover { background-color: #f0f0f0; }
+
+#topic-selection-container h1 { margin-top: 0; }
+#topic-selection-container p { color: #666; }
+
+#topic-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.topic-checkbox {
+    background-color: #f8f9fa;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.topic-checkbox:hover { background-color: #e9ecef; }
 .topic-checkbox input { margin-right: 0.75rem; width: 18px; height: 18px; }
+.topic-checkbox label { font-size: 1rem; cursor: pointer; }
+
 #start-exam-btn {
-    width: 100%; padding: 0.8rem; font-size: 1rem; font-weight: 600;
-    border: none; border-radius: 10px; background-color: var(--panel-dark-blue);
-    color: white; cursor: pointer; margin-top: 1rem;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--panel-dark-blue);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
-.back-link { display: inline-block; margin-top: 1rem; color: #555; text-decoration: none; }
+#start-exam-btn:hover { background-color: #3b467a; }
+
+.back-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: #555;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.back-link i { margin-right: 0.5rem; }
+
+
+/* Container for the main exam screen */
 #exam-container {
-    flex: 2; display: flex; flex-direction: column; gap: 1.5rem;
-    width: 100%; max-width: 700px; margin: 0 auto;
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
-#question-card h2 { font-size: 2.5rem; margin: 0; color: var(--panel-dark-blue); text-align: center; }
+
+.exam-title { color: white; text-align: center; }
+
+#exam-container .panel { width: 100%; box-sizing: border-box; }
+
+#question-card { text-align: center; }
+#question-card h2 { font-size: 3rem; margin: 1rem 0; color: var(--panel-dark-blue); }
+
 #hint-card { cursor: pointer; background-color: var(--panel-blue); text-align: center; }
-#hint-image { max-width: 100%; max-height: 200px; object-fit: contain; border-radius: 10px; margin-top: 1rem; }
+#hint-image { max-width: 100%; max-height: 200px; border-radius: 10px; margin-top: 1rem; }
+
 #answer-form { display: flex; gap: 1rem; }
 #answer-input { flex-grow: 1; border: 2px solid #ccc; border-radius: 10px; padding: 0.8rem; font-size: 1.1rem; }
-#answer-form button {
-    padding: 0.8rem 1.5rem; border: none; background-color: var(--panel-dark-blue);
-    color: white; border-radius: 10px; cursor: pointer; font-size: 1rem;
-}
+#answer-form button { padding: 0.8rem 1.5rem; border: none; background-color: var(--panel-dark-blue); color: white; border-radius: 10px; cursor: pointer; font-size: 1rem; }
+
 #feedback-card { text-align: center; }
 #feedback-card.correct { background-color: #d4edda; color: #155724; }
 #feedback-card.incorrect { background-color: #f8d7da; color: #721c24; }
-#next-word-btn, #change-topics-btn {
-    padding: 0.7rem 1.5rem; border: 2px solid #ccc; background-color: white;
-    border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 500;
-    margin-top: 1rem; margin-right: 0.5rem;
-}
+#next-word-btn, #change-topics-btn { padding: 0.7rem 1.5rem; border: 2px solid #ccc; background-color: white; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 500; margin-top: 1rem; margin-right: 0.5rem; }
+
+/* General utility class to hide elements */
+.hidden { display: none !important; }
 
 
 #vietnamese-panel {

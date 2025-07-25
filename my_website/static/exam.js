@@ -1,161 +1,158 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. GRAB ALL THE ELEMENTS ---
-    // Topic selection screen
-    const topicSelectionContainer = document.getElementById('topic-selection-container');
-    const topicForm = document.getElementById('topic-form');
+// my_website/static/exam.js
 
-    // Exam screen
+document.addEventListener('DOMContentLoaded', () => {
+    // --- 1. ELEMENT SELECTION ---
+    const topicSelectionContainer = document.getElementById('topic-selection-container');
     const examContainer = document.getElementById('exam-container');
-    const questionWordEl = document.getElementById('question-word');
+    const topicListContainer = document.getElementById('topic-list-container');
+    const startExamBtn = document.getElementById('start-exam-btn');
+
+    const examWordEl = document.getElementById('exam-word');
     const hintCard = document.getElementById('hint-card');
-    const hintImageEl = document.getElementById('hint-image');
+    const hintImage = document.getElementById('hint-image');
     const answerForm = document.getElementById('answer-form');
     const answerInput = document.getElementById('answer-input');
     const feedbackCard = document.getElementById('feedback-card');
+    const feedbackTitle = document.getElementById('feedback-title');
+    const feedbackText = document.getElementById('feedback-text');
     const motivationalQuote = document.getElementById('motivational-quote');
-    const answerFeedback = document.getElementById('answer-feedback');
-    const feedbackTitleEl = document.getElementById('feedback-title');
-    const feedbackTextEl = document.getElementById('feedback-text');
     const nextWordBtn = document.getElementById('next-word-btn');
     const changeTopicsBtn = document.getElementById('change-topics-btn');
 
-    // --- 2. STATE VARIABLES ---
     let currentWord = null;
-    let selectedTopicIds = [];
 
-    // --- 3. ALL THE HANDLER FUNCTIONS ---
+    // --- 2. LOGIC FUNCTIONS ---
 
-    /**
-     * Reset the UI for a new question. (Keeps things tidy!)
-     */
-    function resetExamUI() {
-        answerFeedback.classList.add('hidden');
-        motivationalQuote.classList.remove('hidden');
-        feedbackCard.className = 'panel';
-        hintCard.style.display = 'none';
-        const img = hintCard.querySelector('img');
-        if (img) img.style.display = 'none';
-        answerInput.value = '';
-        answerInput.disabled = false;
-        questionWordEl.textContent = 'Loading...';
-        answerInput.focus();
+    // Function to load topics into the selection screen
+    async function loadTopics() {
+        try {
+            const response = await fetch('/get_topics');
+            const topics = await response.json();
+            topicListContainer.innerHTML = ''; // Clear loading message
+            topics.forEach(topic => {
+                const topicDiv = document.createElement('div');
+                topicDiv.className = 'topic-checkbox';
+                topicDiv.innerHTML = `
+                    <input type="checkbox" id="topic-${topic.id}" name="topics" value="${topic.id}">
+                    <label for="topic-${topic.id}">${topic.name} (${topic.word_count})</label>
+                `;
+                topicListContainer.appendChild(topicDiv);
+            });
+        } catch (error) {
+            topicListContainer.innerHTML = '<p>Error loading topics.</p>';
+        }
     }
 
-    /**
-     * Fetch a new word from the server, based on the topics the user picked.
-     */
-    async function getNewWord() {
+    // Function to fetch the next exam word from the backend
+    async function getNextWord() {
+        const selectedCheckboxes = document.querySelectorAll('input[name="topics"]:checked');
+        const selectedTopicIds = Array.from(selectedCheckboxes).map(cb => cb.value);
+
         resetExamUI();
+        examWordEl.textContent = 'Loading...';
+        
         try {
             const response = await fetch('/get_exam_word', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ topic_ids: selectedTopicIds })
             });
-            const data = await response.json();
-            if (!response.ok) {
-                questionWordEl.textContent = data.error || 'Error loading word!';
-                answerInput.disabled = true;
-                return;
-            }
-            currentWord = data;
-            questionWordEl.textContent = currentWord.word;
-            if (currentWord.image_url) {
-                hintImageEl.src = currentWord.image_url;
-                hintCard.style.display = 'block';
+
+            if (response.ok) {
+                currentWord = await response.json();
+                examWordEl.textContent = currentWord.word;
+                hintImage.src = currentWord.image_url || '';
+            } else {
+                examWordEl.textContent = 'No words found for these topics!';
+                answerForm.classList.add('hidden');
             }
         } catch (error) {
-            console.error('Error fetching word:', error);
-            questionWordEl.textContent = 'Could not load a word for the quiz.';
+            examWordEl.textContent = 'Error fetching word.';
         }
     }
 
-    /**
-     * Tell the server to update the score for this word (right or wrong answer)
-     */
-    async function updateScoreOnServer(wordId, isCorrect) {
+    // Function to check the user's answer
+    async function checkAnswer() {
+        const userAnswer = answerInput.value.trim();
+        if (!userAnswer || !currentWord) return;
+
         try {
+            // First, get the correct answer
+            const answerRes = await fetch(`/get_answer/${currentWord.id}`);
+            const answerData = await answerRes.json();
+            const correctAnswer = answerData.correct_answer;
+
+            // Normalize answers for comparison
+            const isCorrect = userAnswer.toLowerCase() === correctAnswer.toLowerCase();
+            
+            // Show feedback
+            feedbackCard.classList.remove('hidden', 'correct', 'incorrect');
+            motivationalQuote.classList.add('hidden');
+            answerForm.classList.add('hidden');
+
+            if (isCorrect) {
+                feedbackCard.classList.add('correct');
+                feedbackTitle.textContent = "Correct!";
+                feedbackText.textContent = `The meaning of "${currentWord.word}" is "${correctAnswer}".`;
+            } else {
+                feedbackCard.classList.add('incorrect');
+                feedbackTitle.textContent = "Incorrect";
+                feedbackText.textContent = `The correct answer is "${correctAnswer}".`;
+            }
+            
+            // Update the word's score in the database
             await fetch('/submit_answer', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: wordId, is_correct: isCorrect })
+                body: JSON.stringify({ id: currentWord.id, is_correct: isCorrect })
             });
-            console.log(`Score updated for word ID ${wordId}. Correct: ${isCorrect}`);
+
         } catch (error) {
-            console.error("Failed to update score:", error);
+            feedbackTitle.textContent = 'Error checking answer.';
         }
     }
-
-    /**
-     * Handle what happens when the user submits an answer.
-     */
-    async function handleAnswerSubmit(e) {
-        e.preventDefault();
-        if (!currentWord || answerInput.disabled) return;
-        const userAnswer = answerInput.value.trim();
-        if (userAnswer === '') {
-            answerInput.classList.add('shake');
-            setTimeout(() => answerInput.classList.remove('shake'), 500);
-            return;
-        }
-        answerInput.disabled = true;
-        try {
-            const response = await fetch(`/get_answer/${currentWord.id}`);
-            const result = await response.json();
-            if (!response.ok) throw new Error(result.error);
-
-            const correctAnswer = result.correct_answer.toLowerCase();
-            const userAnswerLower = userAnswer.toLowerCase();
-            const correctParts = correctAnswer.split(/,|;/).map(part => part.trim().toLowerCase());
-            const isCorrect = correctParts.includes(userAnswerLower);
-
-            motivationalQuote.classList.add('hidden');
-            answerFeedback.classList.remove('hidden');
-
-            if (isCorrect) {
-                feedbackTitleEl.textContent = "Correct!";
-                feedbackCard.className = 'panel feedback-card correct';
-                feedbackTextEl.textContent = "Good job!";
-            } else {
-                feedbackTitleEl.textContent = "Incorrect!";
-                feedbackCard.className = 'panel feedback-card incorrect';
-                feedbackTextEl.textContent = `The correct answer is: ${result.correct_answer}`;
-            }
-            updateScoreOnServer(currentWord.id, isCorrect);
-        } catch (error) {
-            console.error('Error submitting answer:', error);
-            alert(error.message || "Something went wrong while checking the answer.");
-            answerInput.disabled = false;
-        }
+    
+    // Function to reset the exam UI for the next question
+    function resetExamUI() {
+        answerInput.value = '';
+        feedbackCard.classList.add('hidden');
+        motivationalQuote.classList.remove('hidden');
+        hintImage.classList.add('hidden');
+        answerForm.classList.remove('hidden');
+        answerInput.focus();
     }
 
-    // --- 4. WIRE UP ALL THE EVENTS ---
+    // --- 3. EVENT LISTENERS ---
 
-    // When the user submits the topic selection form
-    topicForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const checkedBoxes = document.querySelectorAll('input[name="topics"]:checked');
-        selectedTopicIds = Array.from(checkedBoxes).map(cb => cb.value);
+    // When the "Start Exam" button is clicked
+    startExamBtn.addEventListener('click', () => {
         topicSelectionContainer.classList.add('hidden');
         examContainer.classList.remove('hidden');
-        getNewWord();
+        getNextWord();
     });
-
-    // When the user submits their answer
-    answerForm.addEventListener('submit', handleAnswerSubmit);
-
-    // Button events
-    nextWordBtn.addEventListener('click', getNewWord);
+    
+    // When the "Change Topics" button is clicked
     changeTopicsBtn.addEventListener('click', () => {
         examContainer.classList.add('hidden');
         topicSelectionContainer.classList.remove('hidden');
-        selectedTopicIds = [];
     });
+
+    // When the answer form is submitted
+    answerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        checkAnswer();
+    });
+    
+    // When the "Next Word" button is clicked
+    nextWordBtn.addEventListener('click', getNextWord);
+    
+    // When the hint card is clicked
     hintCard.addEventListener('click', () => {
-        const img = hintCard.querySelector('img');
-        if (img) {
-            const isHidden = img.style.display === 'none' || img.style.display === '';
-            img.style.display = isHidden ? 'block' : 'none';
+        if(currentWord && currentWord.image_url) {
+            hintImage.classList.toggle('hidden');
         }
     });
+
+    // Initial load
+    loadTopics();
 });
