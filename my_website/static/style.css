@@ -273,7 +273,7 @@ body {
 #next-word-btn, #change-topics-btn { padding: 0.7rem 1.5rem; border: 2px solid #ccc; background-color: white; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 500; margin-top: 1rem; margin-right: 0.5rem; }
 
 /* General utility class to hide elements */
-/*.hidden { display: none !important; }*/
+.hidden { display: none !important; }
 
 
 #vietnamese-panel {
