@@ -2,6 +2,7 @@ import os
 import psycopg2
 from psycopg2.extras import RealDictCursor  # This makes query results act like Python dicts, which is way easier to work with
 import random
+import json
 
 # Vercel & Neon will automatically provide this environment variable after you link your DB
 DATABASE_URL = os.environ.get('POSTGRES_URL')
@@ -24,13 +25,24 @@ def get_db_connection():
 # IMPORTANT: Postgres uses %s as a placeholder, not ? like SQLite
 
 def init_db():
-    """Create all the tables in Postgres if they don't exist yet. (First-time setup stuff.)"""
+    """
+    Creates all necessary tables in the PostgreSQL database if they don't exist yet.
+    This version includes columns for caching IPA, synonyms, and family words.
+    """
     conn = get_db_connection()
-    if not conn: return "Database connection failed"
+    if not conn:
+        print("CRITICAL: Database connection failed during initialization.")
+        return "Database connection failed"
 
     try:
+        # 'with conn.cursor()' handles closing the cursor automatically
         with conn.cursor() as cur:
-            # SERIAL PRIMARY KEY in Postgres auto-increments for me
+
+            # --- UPDATED 'words' TABLE SCHEMA ---
+            # 'SERIAL PRIMARY KEY' is the PostgreSQL equivalent of AUTOINCREMENT.
+            # 'TEXT' is a suitable type for storing strings of any length.
+            # 'JSONB' is the recommended type for storing JSON data in PostgreSQL.
+            # It's more efficient for storage and can be indexed.
             cur.execute('''
                 CREATE TABLE IF NOT EXISTS words (
                     id SERIAL PRIMARY KEY,
@@ -39,15 +51,25 @@ def init_db():
                     english_definition TEXT,
                     example TEXT,
                     image_url TEXT,
-                    priority_score INTEGER DEFAULT 1
+                    priority_score INTEGER DEFAULT 1,
+
+                    -- NEW COLUMNS ADDED --
+                    pronunciation_ipa TEXT,
+                    synonyms_json JSONB,      -- Use JSONB for lists of synonyms
+                    family_words_json JSONB   -- Use JSONB for lists of family words
                 );
             ''')
+
+            # --- 'topics' TABLE ---
             cur.execute('''
                 CREATE TABLE IF NOT EXISTS topics (
                     id SERIAL PRIMARY KEY,
                     name TEXT NOT NULL UNIQUE
                 );
             ''')
+
+            # --- 'word_topics' JUNCTION TABLE ---
+            # This table links words and topics (many-to-many relationship).
             cur.execute('''
                 CREATE TABLE IF NOT EXISTS word_topics (
                     word_id INTEGER REFERENCES words(id) ON DELETE CASCADE,
@@ -56,22 +78,26 @@ def init_db():
                 );
             ''')
 
+            # --- SEED DEFAULT TOPICS ---
+            # Check if the topics table is empty before inserting default values.
             cur.execute("SELECT COUNT(*) FROM topics;")
-            # psycopg2 gives me a dict, so I use the 'count' key
-            if cur.fetchone()['count'] == 0:
+            # The cursor for psycopg2 (Postgres driver) returns a tuple
+            if cur.fetchone()[0] == 0:
                 default_topics = [('Daily life',), ('Work',), ('Cooking',), ('Travel',), ('Technology',)]
-                # executemany is perfect for inserting a bunch of rows at once
+                # 'executemany' is the efficient way to insert multiple rows.
+                # '%s' is the placeholder for PostgreSQL queries with psycopg2.
                 cur.executemany("INSERT INTO topics (name) VALUES (%s);", default_topics)
 
-        conn.commit()  # Save all the changes
+        conn.commit()  # Persist all the changes to the database
+        print("INFO: Database initialized successfully with the new schema.")
         return "Database initialized successfully."
     except Exception as e:
-        conn.rollback()  # Roll back if anything goes wrong
+        conn.rollback()  # If any error occurs, undo all changes in this transaction
+        print(f"ERROR: Could not initialize database. Details: {e}")
         return f"Error initializing database: {e}"
     finally:
         if conn:
-            conn.close()
-
+            conn.close()  # Always close the connection
 
 def save_word(word_data, topic_ids=None):
     """Save a new word, or update its topics if it already exists."""
@@ -93,7 +119,10 @@ def save_word(word_data, topic_ids=None):
                 word_data.get('vietnamese_meaning'),
                 word_data.get('english_definition'),
                 word_data.get('example'),
-                word_data.get('image_url')
+                word_data.get('image_url'),
+                word_data.get('pronunciation_ipa'),
+                json.dumps(word_data.get('synonyms', [])),
+                json.dumps(word_data.get('family_words', []))
             ))
 
             # Grab the word's ID (works for both new and existing words)
@@ -120,17 +149,36 @@ def save_word(word_data, topic_ids=None):
 
 def find_word_in_db(word_to_find):
     conn = get_db_connection()
-    if not conn: return None
+    if not conn:
+        print(f"ERROR: Database connection failed while trying to find '{word_to_find}'.")
+        return None
+
+    # This will hold the final dictionary result
+    word_dict = None
+
     try:
         with conn.cursor() as cur:
+            # Query to select all columns for the specific word
             cur.execute("SELECT * FROM words WHERE word = %s;", (word_to_find,))
-            return cur.fetchone()
+
+            # Fetch one result
+            word_data_row = cur.fetchone()
+
+            if word_data_row:
+                # Get column names from the cursor description
+                column_names = [desc[0] for desc in cur.description]
+                word_dict = dict(zip(column_names, word_data_row))
+                word_dict['synonyms'] = word_dict.pop('synonyms_json', []) or []
+                word_dict['family_words'] = word_dict.pop('family_words_json', []) or []
+                print(f"INFO: Found '{word_to_find}' in PostgreSQL cache.")
     except Exception as e:
-        print(f"ERROR in find_word_in_db: {e}")
+        print(f"ERROR: An exception occurred in find_word_in_db for '{word_to_find}': {e}")
         return None
     finally:
         if conn:
             conn.close()
+
+    return word_dict
 
 
 def get_all_topics():
