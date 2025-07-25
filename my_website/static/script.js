@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ipaEl.textContent = data.pronunciation_ipa || 'N/A';
 
         // Hide the Vietnamese meaning initially
-        vietnamesePanel.classList.add('hidden');
-        vietnamesePanel.classList.remove('revealed');
+//        vietnamesePanel.classList.add('hidden');
+//        vietnamesePanel.classList.remove('revealed');
 
         // Helper function to create lists of tags (for synonyms and family words)
         const createTagList = (element, list) => {
