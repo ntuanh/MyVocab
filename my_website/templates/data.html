@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyVocab - Saved Words</title>
-    <!-- Link to shared CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Link to Font Awesome icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="data-body">
 
     <div id="data-container">
-        <h1 class="data-title">Saved Words</h1>
-        <p class="data-subtitle">These are all the words you've saved. Words with a higher priority score will appear more frequently in tests.</p>
+        <div class="data-header">
+            <h1 class="data-title">Your Saved Words</h1>
+            <!-- Nút "Manage Topics" đã được chuyển lên đây -->
+            <a href="/manage_topics" class="btn-manage-topics">Manage Topics</a>
+        </div>
 
         <div class="table-container">
             <table>
@@ -21,51 +22,24 @@
                     <tr>
                         <th>Word</th>
                         <th>Definition</th>
-                        <th>Priority Score</th>
-                        <th>Actions</th> <!-- New column for actions -->
+                        <th>Score</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Loop through the 'words' list passed from app.py using Jinja2 -->
-                    {% for word in words %}
-                    <!-- Add data-id attribute so JavaScript can identify the row -->
-                    <tr data-id="{{ word.id }}">
-                        <td>{{ word.word }}</td>
-                        <td>{{ word.english_definition }}</td>
-                        <td style="text-align: center;">{{ word.priority_score }}</td>
-                        <td>
-                            <!-- Delete button with class and data-id for JavaScript event handling -->
-                            <button class="delete-btn" data-id="{{ word.id }}">Delete</button>
-                        </td>
-                    </tr>
-                    {% else %}
-                    <!-- Display this row if no words are saved -->
+                <tbody id="data-table-body">
+                    <!-- JavaScript sẽ điền dữ liệu vào đây -->
+                    <!-- Dòng này chỉ để làm mẫu, sẽ bị xóa bởi JS -->
                     <tr>
-                        <td colspan="4" style="text-align: center;">You haven't saved any words yet. Go back and save some!</td>
+                        <td colspan="4">Loading data...</td>
                     </tr>
-                    {% endfor %}
                 </tbody>
             </table>
         </div>
 
-        <a href="/" class="back-link">
-            <i class="fas fa-arrow-left"></i> Back to Dictionary
-        </a>
-
-        <a href="/manage_topics" class="action-btn data-link" style="margin-left: 1rem;">Manage Topics</a>
+        <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dictionary</a>
     </div>
 
-    <!-- Link to external JavaScript file that handles the page logic -->
+    <!-- Link to the new data page script -->
     <script src="{{ url_for('static', filename='data.js') }}"></script>
-    <div id="confirm-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <h3 id="modal-title">Confirm Deletion</h3>
-            <p id="modal-text">Are you sure you want to delete this word?</p>
-            <div class="modal-actions">
-                <button id="modal-btn-cancel" class="modal-btn">Cancel</button>
-                <button id="modal-btn-confirm" class="modal-btn confirm">Delete</button>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

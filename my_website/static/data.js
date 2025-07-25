@@ -1,83 +1,78 @@
+// my_website/static/data.js
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Grab all the modal elements 
-    const confirmModal = document.getElementById('confirm-modal');
-    const modalText = document.getElementById('modal-text');
-    const cancelBtn = document.getElementById('modal-btn-cancel');
-    const confirmBtn = document.getElementById('modal-btn-confirm');
+    const tableBody = document.getElementById('data-table-body');
 
-    // Use this to store whatever function should run when the user hits "Confirm"
-    let onConfirmAction = null;
-
-    // Show the confirmation modal with a custom message and action
-    function showConfirmModal(word, onConfirm) {
-        modalText.textContent = `Are you sure you want to delete the word "${word}"? This action cannot be undone.`;
-        onConfirmAction = onConfirm; // Save the action for later
-        confirmModal.classList.remove('hidden');
-    }
-
-    // Hide the modal and reset the action
-    function hideConfirmModal() {
-        confirmModal.classList.add('hidden');
-        onConfirmAction = null; // Just in case
-    }
-
-    // Wire up the modal buttons
-    cancelBtn.addEventListener('click', hideConfirmModal);
-    confirmBtn.addEventListener('click', () => {
-        if (onConfirmAction) {
-            onConfirmAction(); // Do whatever the user wanted
-        }
-        hideConfirmModal(); // Always hide the modal after
-    });
-    // Also let users close the modal by clicking the overlay
-    confirmModal.addEventListener('click', (event) => {
-        if(event.target === confirmModal) {
-            hideConfirmModal();
-        }
-    });
-
-    // Find all the delete buttons in the table
-    const deleteButtons = document.querySelectorAll('.delete-btn');
-
-    // Attach a click event to each delete button
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const wordId = event.target.dataset.id;
-            const row = document.querySelector(`tr[data-id="${wordId}"]`);
-            const word = row ? row.querySelector('td:first-child').textContent : 'this word';
-
-            // Instead of using confirm(), show my custom modal
-            showConfirmModal(word, () => {
-                // This runs if the user confirms the delete
-                deleteWord(wordId, row);
-            });
-        });
-    });
-
-    /**
-     * Actually delete the word from the server and UI
-     * @param {string} wordId - The ID of the word to delete
-     * @param {HTMLElement} rowElement - The <tr> for that word in the table
-     */
-    async function deleteWord(wordId, rowElement) {
+    // Function to fetch and display saved words
+    async function loadSavedWords() {
         try {
-            const response = await fetch(`/delete_word/${wordId}`, {
-                method: 'DELETE',
-            });
-            const result = await response.json();
-
-            if (response.ok && result.status === 'success') {
-                // If it worked, remove the row from the table
-                if (rowElement) {
-                    rowElement.remove();
+            const response = await fetch('/api/all_data');
+            if (!response.ok) {
+                // If unauthorized (password not entered), redirect to home
+                if (response.status === 401) {
+                    window.location.href = '/';
                 }
-                // alert(result.message); // For now, just an alert
-            } else {
-                alert(result.message || 'Failed to delete word.');
+                throw new Error('Failed to fetch data');
             }
+            const words = await response.json();
+            
+            tableBody.innerHTML = ''; // Clear the "Loading..." message
+
+            if (words.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center;">You have not saved any words yet.</td></tr>';
+                return;
+            }
+
+            words.forEach(word => {
+                const row = document.createElement('tr');
+                row.setAttribute('data-word-id', word.id);
+                row.innerHTML = `
+                    <td>${word.word}</td>
+                    <td>${word.english_definition || 'N/A'}</td>
+                    <td>${word.priority_score}</td>
+                    <td><button class="delete-btn" data-id="${word.id}">Delete</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
         } catch (error) {
-            console.error('Delete error:', error);
-            alert('An error occurred while trying to delete the word.');
+            console.error('Error loading words:', error);
+            tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Could not load data. Please try again.</td></tr>';
         }
     }
+
+    // Event listener for delete buttons (using event delegation)
+    tableBody.addEventListener('click', async (event) => {
+        if (event.target.classList.contains('delete-btn')) {
+            const button = event.target;
+            const wordId = button.dataset.id;
+            
+            const confirmed = confirm('Are you sure you want to delete this word?');
+            
+            if (confirmed) {
+                try {
+                    const response = await fetch(`/delete_word/${wordId}`, {
+                        method: 'DELETE'
+                    });
+                    const result = await response.json();
+                    
+                    if (result.status === 'success') {
+                        // Remove the row from the table smoothly
+                        const rowToDelete = document.querySelector(`tr[data-word-id='${wordId}']`);
+                        if (rowToDelete) {
+                            rowToDelete.style.opacity = '0';
+                            setTimeout(() => rowToDelete.remove(), 300);
+                        }
+                    } else {
+                        alert('Failed to delete the word.');
+                    }
+                } catch (error) {
+                    console.error('Error deleting word:', error);
+                    alert('An error occurred while deleting the word.');
+                }
+            }
+        }
+    });
+
+    // Initial load of data when the page opens
+    loadSavedWords();
 });

@@ -290,3 +290,98 @@ body {
 #vietnamese-panel.revealed::after {
     display: none;
 }
+
+/* my_website/static/style.css */
+/* --- DATA PAGE STYLING --- */
+
+.data-body {
+    align-items: flex-start;
+    padding-top: 4rem;
+}
+
+#data-container {
+    width: 100%;
+    max-width: 1000px; /* Tăng chiều rộng tối đa */
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.data-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.data-title {
+    margin: 0;
+    color: var(--text-color);
+}
+
+.btn-manage-topics {
+    background-color: var(--panel-dark-blue);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.2s;
+}
+.btn-manage-topics:hover {
+    background-color: #3b467a;
+    transform: translateY(-2px);
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Cho phép cuộn ngang trên màn hình nhỏ */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Gộp các đường viền lại */
+}
+
+th, td {
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef; /* Đường kẻ nhạt hơn */
+    text-align: left;
+    vertical-align: middle;
+}
+
+thead th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    position: sticky; /* Giúp header cố định khi cuộn */
+    top: 0;
+}
+
+tbody tr:hover {
+    background-color: #f1f3f5; /* Hiệu ứng hover cho hàng */
+}
+
+td:first-child {
+    font-weight: 600; /* In đậm cột "Word" */
+    color: var(--panel-dark-blue);
+}
+
+.delete-btn {
+    background-color: #ffe3e3;
+    color: #dc3545;
+    border: 1px solid #f5c6cb;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
