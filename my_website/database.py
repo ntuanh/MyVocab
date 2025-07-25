@@ -1,10 +1,9 @@
 import os
 import psycopg2
-from psycopg2.extras import RealDictCursor  # This makes query results act like Python dicts, which is way easier to work with
+from psycopg2.extras import RealDictCursor
 import random
 import json
 
-# Vercel & Neon will automatically provide this environment variable after you link your DB
 DATABASE_URL = os.environ.get('POSTGRES_URL')
 
 
@@ -19,10 +18,6 @@ def get_db_connection():
     except Exception as e:
         print(f"Database connection error: {e}")
         return None
-
-
-# --- DATABASE FUNCTIONS (UPDATED FOR POSTGRES) ---
-# IMPORTANT: Postgres uses %s as a placeholder, not ? like SQLite
 
 def init_db():
     """
@@ -99,73 +94,113 @@ def init_db():
         if conn:
             conn.close()  # Always close the connection
 
-def save_word(word_data, topic_ids=None):
-    """Save a new word, or update its topics if it already exists."""
-    conn = get_db_connection()
-    if not conn: return {"status": "error", "message": "DB connection failed"}
 
-    word_to_save = word_data.get('word')
-    if not word_to_save: return {"status": "error", "message": "Word data invalid"}
+def save_word(word_data, topic_ids=None):
+    """
+    Saves a new word to the PostgreSQL database or updates topics for an existing one.
+    This version uses the correct '%s' placeholder and 'ON CONFLICT' syntax for PostgreSQL.
+    """
+    # 1. Validate input data
+    if not word_data or not word_data.get('word'):
+        print("ERROR in save_word: Invalid or missing word data.")
+        return {"status": "error", "message": "Word data is invalid."}
+
+    # 2. Get database connection
+    conn = get_db_connection()
+    if not conn:
+        print("ERROR in save_word: Database connection failed.")
+        return {"status": "error", "message": "Database connection failed."}
 
     try:
+        # 3. Use 'with conn.cursor()' for automatic resource management
         with conn.cursor() as cur:
-            # ON CONFLICT is like INSERT OR IGNORE in SQLite. Super handy for avoiding duplicates!
-            cur.execute('''
-                INSERT INTO words (word, vietnamese_meaning, english_definition, example, image_url)
-                VALUES (%s, %s, %s, %s, %s)
+            word_to_save = word_data.get('word')
+
+            # 4. Prepare the SQL INSERT statement with PostgreSQL syntax
+            # 'ON CONFLICT (word) DO NOTHING' is the PostgreSQL equivalent of 'INSERT OR IGNORE'.
+            # It attempts to insert a new row, but if a row with the same 'word' already exists, it does nothing.
+            insert_sql = """
+                INSERT INTO words (
+                    word, vietnamese_meaning, english_definition, example, image_url, 
+                    pronunciation_ipa, synonyms_json, family_words_json
+                )
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 ON CONFLICT (word) DO NOTHING;
-            ''', (
+            """
+
+            # 5. Prepare the data tuple to be passed to the query
+            # psycopg2 automatically handles Python lists/dicts when the column type is JSONB.
+            # No need to manually call json.dumps().
+            data_tuple = (
                 word_to_save,
                 word_data.get('vietnamese_meaning'),
                 word_data.get('english_definition'),
                 word_data.get('example'),
                 word_data.get('image_url'),
                 word_data.get('pronunciation_ipa'),
-                json.dumps(word_data.get('synonyms', [])),
-                json.dumps(word_data.get('family_words', []))
-            ))
+                word_data.get('synonyms', []),  # Pass the list directly
+                word_data.get('family_words', [])  # Pass the list directly
+            )
 
-            # Grab the word's ID (works for both new and existing words)
+            # 6. Execute the insert command
+            cur.execute(insert_sql, data_tuple)
+
+            # Check if a new row was actually inserted
+            was_newly_inserted = cur.rowcount > 0
+
+            # 7. Get the ID of the word (whether it was new or already existed)
             cur.execute("SELECT id FROM words WHERE word = %s;", (word_to_save,))
-            word_id = cur.fetchone()['id']
+            result = cur.fetchone()
+            if not result:
+                raise Exception("Could not retrieve word ID after insertion.")
+            word_id = result[0]
 
-            # Now update the topics for this word
+            # 8. Update topic associations if topic_ids are provided
             if topic_ids is not None:
+                # First, remove all existing associations for this word
                 cur.execute("DELETE FROM word_topics WHERE word_id = %s;", (word_id,))
-                if topic_ids:
-                    valid_topic_ids = [(word_id, int(tid)) for tid in topic_ids]
-                    cur.executemany("INSERT INTO word_topics (word_id, topic_id) VALUES (%s, %s);", valid_topic_ids)
 
+                # Then, insert the new associations if any were selected
+                if topic_ids:
+                    # executemany is efficient for inserting multiple rows
+                    topic_data_to_insert = [(word_id, int(tid)) for tid in topic_ids]
+                    cur.executemany("INSERT INTO word_topics (word_id, topic_id) VALUES (%s, %s);",
+                                    topic_data_to_insert)
+
+        # 9. Commit the transaction to save all changes
         conn.commit()
-        return {"status": "success", "message": "Word saved/updated successfully."}
+
+        print(f"INFO: Successfully saved/updated word '{word_to_save}'.")
+        return {"status": "success", "message": "Word saved!"} if was_newly_inserted else {"status": "updated",
+                                                                                           "message": "Word topics updated."}
+
     except Exception as e:
-        conn.rollback()
-        print(f"ERROR in save_word: {e}")
-        return {"status": "error", "message": str(e)}
+        # 10. If any error occurs, roll back all changes from this transaction
+        if conn:
+            conn.rollback()
+        print(f"DATABASE EXCEPTION in save_word: {e}")
+        import traceback
+        traceback.print_exc()  # Print full error for better debugging
+        return {"status": "error", "message": "Failed to save word due to a database error."}
     finally:
+        # 11. Always close the connection
         if conn:
             conn.close()
-
 
 def find_word_in_db(word_to_find):
     conn = get_db_connection()
     if not conn:
         print(f"ERROR: Database connection failed while trying to find '{word_to_find}'.")
         return None
-
-    # This will hold the final dictionary result
     word_dict = None
 
     try:
         with conn.cursor() as cur:
-            # Query to select all columns for the specific word
             cur.execute("SELECT * FROM words WHERE word = %s;", (word_to_find,))
 
-            # Fetch one result
             word_data_row = cur.fetchone()
 
             if word_data_row:
-                # Get column names from the cursor description
                 column_names = [desc[0] for desc in cur.description]
                 word_dict = dict(zip(column_names, word_data_row))
                 word_dict['synonyms'] = word_dict.pop('synonyms_json', []) or []
