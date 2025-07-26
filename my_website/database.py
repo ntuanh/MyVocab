@@ -1,18 +1,16 @@
 # my_website/database.py
-# PHIÊN BẢN HOÀN CHỈNH - Dùng cho PostgreSQL trên Vercel
+# Final Complete Version - Refactored for Vercel PostgreSQL with a robust transaction decorator.
 
 import os
 import psycopg2
-import psycopg2.extras  # Cần thiết để sử dụng DictCursor
+import psycopg2.extras  # Required for DictCursor
 import json
+import random
 
 
-# --- HÀM KẾT NỐI DATABASE ---
+# --- DATABASE CONNECTION ---
 def get_db_connection():
-    """
-    Tạo và trả về một kết nối đến database PostgreSQL.
-    Đọc chuỗi kết nối từ biến môi trường DATABASE_URL.
-    """
+    """Establishes and returns a connection to the PostgreSQL database."""
     try:
         conn = psycopg2.connect(os.environ.get("DATABASE_URL"))
         return conn
@@ -21,32 +19,21 @@ def get_db_connection():
         return None
 
 
-# --- HÀM KHỞI TẠO CẤU TRÚC (SCHEMA) ---
+# --- SCHEMA INITIALIZATION HELPER ---
 def initialize_schema(cursor):
-    """
-    Chạy các lệnh CREATE TABLE IF NOT EXISTS để đảm bảo các bảng tồn tại.
-    Hàm này sẽ được gọi bên trong các hàm khác khi cần.
-    """
-    print("INFO: Running schema check (CREATE TABLE IF NOT EXISTS)...")
+    """Runs CREATE TABLE IF NOT EXISTS commands to ensure the schema is present."""
     try:
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS words (
-                id SERIAL PRIMARY KEY,
-                word TEXT NOT NULL UNIQUE,
-                vietnamese_meaning TEXT,
-                english_definition TEXT,
-                example TEXT,
-                image_url TEXT,
-                priority_score INTEGER DEFAULT 1,
-                pronunciation_ipa TEXT,
-                synonyms_json JSONB,
-                family_words_json JSONB
+                id SERIAL PRIMARY KEY, word TEXT NOT NULL UNIQUE, vietnamese_meaning TEXT,
+                english_definition TEXT, example TEXT, image_url TEXT,
+                priority_score INTEGER DEFAULT 1, pronunciation_ipa TEXT,
+                synonyms_json JSONB, family_words_json JSONB
             );
         ''')
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS topics (
-                id SERIAL PRIMARY KEY,
-                name TEXT NOT NULL UNIQUE
+                id SERIAL PRIMARY KEY, name TEXT NOT NULL UNIQUE
             );
         ''')
         cursor.execute('''
@@ -57,45 +44,35 @@ def initialize_schema(cursor):
             );
         ''')
 
-        # Thêm các chủ đề mặc định nếu bảng topics trống
         cursor.execute("SELECT COUNT(*) FROM topics;")
         if cursor.fetchone()[0] == 0:
             default_topics = [('Daily life',), ('Work',), ('Cooking',), ('Travel',), ('Technology',)]
             cursor.executemany("INSERT INTO topics (name) VALUES (%s);", default_topics)
-            print("INFO: Default topics seeded.")
-
-        print("INFO: Schema check complete.")
     except Exception as e:
         print(f"ERROR during schema initialization: {e}")
-        # Ném lỗi ra ngoài để giao dịch bên ngoài có thể rollback
         raise e
 
 
-# --- CÁC HÀM TƯƠNG TÁC VỚI DATABASE ---
-
-# Gói logic khởi tạo và thực thi vào một hàm decorator để tránh lặp code (Nâng cao & Hiệu quả)
+# --- TRANSACTION DECORATOR (ADVANCED) ---
+# This decorator handles connection, cursor, schema initialization, commit/rollback, and closing.
 def db_transaction(func):
     def wrapper(*args, **kwargs):
         conn = get_db_connection()
         if not conn:
-            # Trả về một giá trị mặc định phù hợp với kiểu trả về của hàm gốc
-            # Ví dụ: None, [], hoặc một dict lỗi
-            return {"status": "error", "message": "Database connection failed."} if 'save' in func.__name__ else None
+            # Return a default value appropriate for the wrapped function's return type
+            return None if 'get' in func.__name__ else {"status": "error", "message": "Database connection failed."}
 
         try:
             with conn:
                 with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                    # Luôn chạy kiểm tra schema ở đầu mỗi giao dịch
-                    initialize_schema(cur)
-                    # Chạy hàm gốc (ví dụ: save_word_logic)
-                    result = func(cur, *args, **kwargs)
+                    initialize_schema(cur)  # Always ensure schema exists at the start of a transaction
+                    result = func(cur, *args, **kwargs)  # Execute the original function logic
                     return result
         except Exception as e:
             print(f"DATABASE EXCEPTION in {func.__name__}: {e}")
             import traceback
             traceback.print_exc()
-            # Trả về giá trị mặc định/lỗi
-            return {"status": "error", "message": "A database error occurred."} if 'save' in func.__name__ else None
+            return None if 'get' in func.__name__ else {"status": "error", "message": "A database error occurred."}
         finally:
             if conn:
                 conn.close()
@@ -103,10 +80,13 @@ def db_transaction(func):
     return wrapper
 
 
+# --- DATABASE INTERACTION FUNCTIONS (wrapped with the decorator) ---
+
 @db_transaction
 def save_word(cur, word_data, topic_ids=None):
-    # Logic của hàm save_word giờ nằm ở đây và nhận 'cur' làm tham số
-    # ... (Code giống hệt phiên bản trước, chỉ thay 'cursor' bằng 'cur') ...
+    if not word_data or not word_data.get('word'):
+        return {"status": "error", "message": "Word data is invalid."}
+
     word_to_save = word_data.get('word')
     insert_sql = """
         INSERT INTO words (word, vietnamese_meaning, english_definition, example, image_url, 
@@ -121,13 +101,16 @@ def save_word(cur, word_data, topic_ids=None):
     )
     cur.execute(insert_sql, data_tuple)
     was_newly_inserted = cur.rowcount > 0
+
     cur.execute("SELECT id FROM words WHERE word = %s;", (word_to_save,))
     word_id = cur.fetchone()['id']
+
     if topic_ids is not None:
         cur.execute("DELETE FROM word_topics WHERE word_id = %s;", (word_id,))
         if topic_ids:
             topic_data = [(word_id, int(tid)) for tid in topic_ids]
             cur.executemany("INSERT INTO word_topics (word_id, topic_id) VALUES (%s, %s);", topic_data)
+
     return {"status": "success", "message": "Word saved!"} if was_newly_inserted else {"status": "updated",
                                                                                        "message": "Word topics updated."}
 
@@ -144,12 +127,85 @@ def find_word_in_db(cur, word_to_find):
     return None
 
 
-# ... Bạn có thể áp dụng decorator @db_transaction cho các hàm khác để chúng cũng tự động khởi tạo schema ...
-# Ví dụ:
 @db_transaction
 def get_all_topics(cur):
     query = "SELECT t.id, t.name, COUNT(wt.word_id) as word_count FROM topics t LEFT JOIN word_topics wt ON t.id = wt.topic_id GROUP BY t.id ORDER BY t.name ASC"
     cur.execute(query)
     return [dict(row) for row in cur.fetchall()]
 
-# ... Và các hàm còn lại: get_word_for_exam, update_word_score, v.v...
+
+@db_transaction
+def add_new_topic(cur, topic_name):
+    cur.execute("INSERT INTO topics (name) VALUES (%s) ON CONFLICT (name) DO NOTHING RETURNING id, name;",
+                (topic_name,))
+    new_topic = cur.fetchone()
+    # If topic already existed, fetch it
+    if not new_topic:
+        cur.execute("SELECT id, name FROM topics WHERE name = %s;", (topic_name,))
+        new_topic = cur.fetchone()
+    return dict(new_topic) if new_topic else None
+
+
+@db_transaction
+def get_word_for_exam(cur, topic_ids=None):
+    query = "SELECT w.id, w.word, w.image_url, w.priority_score FROM words w"
+    params = []
+    if topic_ids:
+        # Use tuple for params to avoid SQL injection issues with f-strings
+        query += " JOIN word_topics wt ON w.id = wt.word_id WHERE wt.topic_id IN %s"
+        params.append(tuple(topic_ids))
+
+    cur.execute(query, params if params else None)
+    all_words = cur.fetchall()
+    if not all_words: return None
+
+    weighted_list = [word for word in all_words for _ in range(word['priority_score'])]
+    if not weighted_list: return None
+
+    chosen_word = random.choice(weighted_list)
+    return dict(chosen_word)
+
+
+@db_transaction
+def update_word_score(cur, word_id, is_correct):
+    cur.execute("SELECT priority_score FROM words WHERE id = %s;", (word_id,))
+    result = cur.fetchone()
+    if not result: return {"status": "error", "message": "Word not found."}
+
+    current_score = result['priority_score']
+    new_score = max(1, current_score - 1) if is_correct else current_score + 1
+    cur.execute("UPDATE words SET priority_score = %s WHERE id = %s;", (new_score, word_id))
+    return {"status": "success", "new_score": new_score}
+
+
+@db_transaction
+def get_correct_answer_by_id(cur, word_id):
+    cur.execute("SELECT vietnamese_meaning FROM words WHERE id = %s;", (word_id,))
+    result = cur.fetchone()
+    return result['vietnamese_meaning'] if result else None
+
+
+@db_transaction
+def get_all_saved_words(cur):
+    cur.execute("SELECT * FROM words ORDER BY priority_score DESC, word ASC;")
+    words = cur.fetchall()
+    # Need to process JSON fields for each row
+    results = []
+    for row in words:
+        word_dict = dict(row)
+        word_dict['synonyms'] = word_dict.pop('synonyms_json', []) or []
+        word_dict['family_words'] = word_dict.pop('family_words_json', []) or []
+        results.append(word_dict)
+    return results
+
+
+@db_transaction
+def delete_word_by_id(cur, word_id):
+    cur.execute("DELETE FROM words WHERE id = %s;", (word_id,))
+    return {"status": "success"} if cur.rowcount > 0 else {"status": "error", "message": "Word not found"}
+
+
+@db_transaction
+def delete_topic_by_id(cur, topic_id):
+    cur.execute("DELETE FROM topics WHERE id = %s;", (topic_id,))
+    return {"status": "success"} if cur.rowcount > 0 else {"status": "error", "message": "Topic not found"}
