@@ -4,7 +4,8 @@
 <tr>
 <td width="70%" style="vertical-align: top;">
 
-[MyVocab](https://my-vocab-xi.vercel.app/) is a modern, AI-powered web app to help you learn English vocabulary efficiently. It provides definitions, Vietnamese translations, example sentences, pronunciation, synonyms, related words, and images for any English word. You can save words, organize them by topics, and test yourself with quizzes. Powered by Google Gemini AI and built with Flask.
+[MyVocab](https://my-vocab-xi.vercel.app/) is a modern, AI-powered web app to help you learn English vocabulary efficiently. It provides definitions, Vietnamese translations, example sentences, pronunciation, synonyms, related words, and images for any English word. You can save words, organize them by topics, and test yourself with quizzes .
+[&rarr; Access it here](https://my-vocab-xi.vercel.app/)
 
 </td>
 <td width="30%" style="vertical-align: top; text-align: center;">
@@ -15,6 +16,16 @@
 </tr>
 </table>
 
+---
+
+## What Makes MyVocab Special?
+
+| Feature | Description |
+| :--- | :--- |
+| 📸 **Visual Learning** | Don't just read definitions—see them! Every word is paired with a vivid image, helping you build stronger memory connections. |
+| 🧠 **AI-Powered Context** | Get more than just a translation. Our AI provides rich details like clear definitions, practical examples, synonyms, and related "family words". |
+| 🎯 **Smart Exam Mode** | Stop wasting time on words you already know. The exam mode intelligently tests you more on the vocabulary you find difficult, making your practice sessions incredibly efficient. |
+| 📚 **Personalized Collection**| Save any word with a single click. Organize your personal dictionary into custom topics to focus your learning on what's important to you. |
 ---
 
 ## Tech Stack
@@ -29,21 +40,8 @@
 
 ---
 
-## Features
-
-- **Smart Dictionary**: Get English definitions, Vietnamese meanings, example sentences, IPA pronunciation, synonyms, related words, and an image for any English word.
-- **Topic Management**: Organize your vocabulary by custom topics.
-- **Save Words**: Save words to your personal database and manage them easily.
-- **Quiz Mode**: Test your knowledge with topic-based quizzes.
-- **Modern UI**: Responsive, clean, and intuitive interface.
-- **AI Integration**: Uses Google Gemini for rich, contextual word data.
-- **Image Support**: Fetches relevant images for words (if Pexels API key is provided).
-- **Password-Protected Data**: Secure access to your saved data.
-
----
-
 ## Demo
-[Demo Images ](./images)
+[Click hiaaaa:))](./images)
 
 ![search](./images/search.png)
 
@@ -91,18 +89,6 @@ MyVocab/
 ```
 
 ---
-
-### Main Endpoints
-
-- **Dictionary Lookup**: `/api/lookup` (POST)
-- **Save Word**: `/api/save_word` (POST)
-- **Get Topics**: `/api/get_topics` (GET)
-- **Add Topic**: `/api/add_topic` (POST)
-- **Delete Topic**: `/api/delete_topic/<id>` (DELETE)
-- **Quiz**: `/api/get_exam_word` (POST), `/api/submit_answer` (POST), `/api/get_answer/<id>` (GET)
-- **Data**: `/data` (HTML, password-protected), `/api/all_data` (GET, session-protected)
-- **Delete Word**: `/api/delete_word/<id>` (DELETE)
-- **Password Verification**: `/api/verify_password` (POST)
 
 ### Database Schema
 
