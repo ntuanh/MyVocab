@@ -9,54 +9,56 @@
 </head>
 <body class="exam-body">
 
-    <!-- Màn hình 1: Chọn chủ đề -->
-    <div id="topic-selection-container">
-        <h1 class="exam-title">Choose Your Topics</h1>
-        <p>Select topics to review, or leave blank to review all words.</p>
+    <!-- Container chính cho toàn bộ layout của trang exam -->
+    <div id="exam-layout-container">
 
-        <div id="topic-list-container">
-            <!-- JavaScript will load topics here -->
-            <p>Loading topics...</p>
+        <!-- Màn hình 1: Chọn chủ đề -->
+        <div id="topic-selection-container">
+            <h2>Choose Your Topics</h2>
+            <p>Select topics to review, or leave blank to review all words.</p>
+            <div id="topic-list-container">
+                <p>Loading topics...</p>
+            </div>
+            <button id="start-exam-btn">Start Exam</button>
+            <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dictionary</a>
         </div>
 
-        <button id="start-exam-btn">Start Exam</button>
-        <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dictionary</a>
+        <!-- Màn hình 2: Làm bài kiểm tra (Mặc định ẩn) -->
+        <div id="exam-container" class="hidden">
+            <h1 class="exam-title">Vocabulary Exam</h1>
+
+            <div id="question-card" class="panel">
+                <h2 id="exam-word">Loading...</h2>
+                <p>What is the Vietnamese meaning of this word?</p>
+            </div>
+
+            <div id="hint-card" class="panel">
+                <p>Hint (click to show image)</p>
+                <img id="hint-image" src="" alt="Image hint" class="hidden">
+            </div>
+
+            <form id="answer-form">
+                <input type="text" id="answer-input" placeholder="Enter the Vietnamese meaning..." autocomplete="off">
+                <button type="submit">Submit</button>
+            </form>
+
+            <div id="feedback-card" class="panel hidden">
+                <div id="answer-feedback">
+                    <h3 id="feedback-title"></h3>
+                    <p id="feedback-text"></p>
+                </div>
+                <div id="motivational-quote" class="hidden">
+                     <p>"The beautiful thing about learning is that no one can take it away from you."</p>
+                </div>
+                <button id="next-word-btn">Next Word</button>
+            </div>
+
+            <button id="change-topics-btn">Change Topics</button>
+        </div>
+
     </div>
 
-    <!-- Màn hình 2: Làm bài kiểm tra (Mặc định ẩn) -->
-    <div id="exam-container" class="hidden">
-        <h1 class="exam-title">Vocabulary Exam</h1>
-
-        <div id="question-card" class="panel">
-            <h2 id="exam-word">Loading...</h2>
-            <p>What is the Vietnamese meaning of this word?</p>
-        </div>
-
-        <div id="hint-card" class="panel">
-            <p>Hint (click to show image)</p>
-            <img id="hint-image" src="" alt="Image hint" class="hidden">
-        </div>
-
-        <form id="answer-form">
-            <input type="text" id="answer-input" placeholder="Enter the Vietnamese meaning..." autocomplete="off">
-            <button type="submit">Submit</button>
-        </form>
-
-        <div id="feedback-card" class="panel hidden">
-            <div id="answer-feedback">
-                <h3 id="feedback-title"></h3>
-                <p id="feedback-text"></p>
-            </div>
-            <div id="motivational-quote" class="hidden">
-                 <p>"The beautiful thing about learning is that no one can take it away from you."</p>
-            </div>
-            <button id="next-word-btn">Next Word</button>
-        </div>
-
-        <button id="change-topics-btn">Change Topics</button>
-    </div>
-
-    <!-- Link to the new exam script -->
+    <!-- Link to the exam script -->
     <script src="{{ url_for('static', filename='exam.js') }}"></script>
 </body>
 </html>
