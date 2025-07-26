@@ -1,6 +1,3 @@
-# my_website/app.py
-# Final production-ready version with corrected API routes for Vercel.
-
 import os
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 
@@ -8,7 +5,6 @@ from flask import Flask, render_template, request, jsonify, session, redirect, u
 # Import all necessary functions from your other modules.
 from .handle_request import get_dictionary_data
 from .database import (
-    # We no longer need init_db() here, it's handled inside the db functions.
     save_word,
     get_word_for_exam,
     update_word_score,
@@ -29,10 +25,6 @@ app = Flask(__name__,
 # A secret key is required for Flask sessions to work.
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "a_super_secret_key_for_local_development_only")
 
-
-# --- PAGE ROUTES (RENDERING HTML) ---
-# These routes serve the main HTML pages and do not have the /api prefix.
-
 @app.route('/')
 def index():
     """Renders the main dictionary page."""
@@ -45,10 +37,6 @@ def exam_page():
 
 @app.route('/data')
 def data_page():
-    """
-    Renders the data view page.
-    This route is protected by the password check in the session.
-    """
     if not session.get('data_access_granted'):
         return redirect(url_for('index'))
     return render_template('data.html')
@@ -57,10 +45,6 @@ def data_page():
 def manage_topics_page():
     """Renders the topic management page."""
     return render_template('manage_topics.html')
-
-
-# --- API ENDPOINTS (RETURNING JSON) ---
-# All API routes now have the '/api/' prefix to work correctly with the vercel.json routing.
 
 @app.route('/api/verify_password', methods=['POST'])
 def verify_password():

@@ -1,5 +1,3 @@
-// my_website/static/data.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const tableBody = document.getElementById('data-table-body');
 

@@ -1,5 +1,3 @@
-// my_website/static/exam.js
-
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. ELEMENT SELECTION ---
     const topicSelectionContainer = document.getElementById('topic-selection-container');

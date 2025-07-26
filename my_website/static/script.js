@@ -1,4 +1,3 @@
-// This event listener ensures that all the HTML is loaded before this script runs.
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. ELEMENT SELECTION ---

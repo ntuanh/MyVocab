@@ -305,16 +305,16 @@ td:first-child { font-weight: 600; color: var(--panel-dark-blue); }
 
 /* --- GitHub Star Button Styling --- */
 .github-star-button {
-    position: fixed; /* Cố định vị trí trên màn hình */
+    position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 1001; /* Nằm trên hầu hết các phần tử khác */
+    z-index: 1001;
 
     display: inline-flex;
     align-items: center;
-    gap: 8px; /* Khoảng cách giữa icon và chữ */
+    gap: 8px;
 
-    background-color: #24292e; /* Màu nền giống GitHub */
+    background-color: #24292e;
     color: #ffffff;
 
     padding: 8px 16px;
@@ -333,5 +333,5 @@ td:first-child { font-weight: 600; color: var(--panel-dark-blue); }
 }
 
 .github-star-button .fa-github {
-    font-size: 1.2rem; /* Làm cho icon to hơn một chút */
+    font-size: 1.2rem;
 }

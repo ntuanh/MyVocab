@@ -1,6 +1,3 @@
-// File: my_website/static/manage_topics.js
-// This script handles all logic for the Manage Topics page.
-
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. ELEMENT SELECTION ---
     const tableBody = document.getElementById('topics-table-body');
@@ -11,9 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 2. LOGIC FUNCTIONS ---
 
-    /**
-     * Fetches the list of topics from the backend and renders them in the table.
-     */
     async function loadTopics() {
         try {
             const response = await fetch('/api/get_topics');
@@ -32,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // If there are topics, create a table row for each one
             topics.forEach(topic => {
                 const row = document.createElement('tr');
                 row.setAttribute('data-topic-id', topic.id); // Add an attribute for easy selection
@@ -87,8 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. EVENT LISTENERS ---
 
-    // Use event delegation to handle clicks on all delete buttons
-    // This is more efficient than adding a listener to each button individually
     tableBody.addEventListener('click', (event) => {
         // Check if the clicked element is a delete button
         if (event.target.classList.contains('delete-btn')) {

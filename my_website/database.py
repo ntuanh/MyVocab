@@ -1,6 +1,3 @@
-# my_website/database.py
-# Final Complete Version - Refactored for Vercel PostgreSQL with a robust transaction decorator.
-
 import os
 import psycopg2
 import psycopg2.extras  # Required for DictCursor
