@@ -38,7 +38,8 @@ def index():
 @app.route('/exam')
 def exam_page():
     """Exam page."""
-    topics = get_all_topics()
+    # topics = get_all_topics()
+    topic = []
     return render_template('exam.html', topics=topics)
 
 @app.route('/data')
@@ -50,7 +51,8 @@ def data_page():
     if not session.get('data_access_granted'):
         return redirect(url_for('index'))
 
-    saved_words = get_all_saved_words()
+    # saved_words = get_all_saved_words()
+    save_words = []
     return render_template('data.html', words=saved_words)
 
 
