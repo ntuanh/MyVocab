@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('/api/lookup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: word })
+                body: JSON.stringify({ word: word })
             });
             const data = await response.json();
             if (response.ok) {
