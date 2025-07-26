@@ -83,6 +83,12 @@ body {
     filter: blur(5px);
     user-select: none;
 }
+
+#vietnamese-panel.hidden #vietnamese-meaning {
+    filter: blur(5px);
+    user-select: none;
+}
+
 #vietnamese-panel.hidden::after {
     content: 'Click to reveal';
     position: absolute;
@@ -272,15 +278,16 @@ body {
 #feedback-card.incorrect { background-color: #f8d7da; color: #721c24; }
 #next-word-btn, #change-topics-btn { padding: 0.7rem 1.5rem; border: 2px solid #ccc; background-color: white; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 500; margin-top: 1rem; margin-right: 0.5rem; }
 
-/* General utility class to hide elements */
-.hidden { display: none !important; }
-
 
 #vietnamese-panel {
     position: relative;
     cursor: pointer;
     transition: background-color 0.3s;
-    display: block;
+    /*display: block;*/
+}
+
+#vietnamese-panel.revealed #vietnamese-meaning {
+    filter: none;
 }
 
 #vietnamese-panel.revealed p {
