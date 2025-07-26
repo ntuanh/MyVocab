@@ -123,32 +123,9 @@ Set these in your deployment environment:
 - `FLASK_SECRET_KEY` (Flask session secret)
 - `VIEW_DATA_PASSWORD` (Password for viewing saved data)
 
----
-
-## Dependencies
-
-- Flask
-- gunicorn
-- python-dotenv
-- google-generativeai
-- googletrans==4.0.0-rc1
-- requests
-- psycopg2-binary
-
-Install with:
-
-```sh
-pip install -r requirements.txt
-```
 
 ---
 
-## Deployment
-
-- **Local**: Run `python -m my_website.app` after setting environment variables.
-- **Vercel**: Uses [api/index.py](api/index.py) as the entrypoint. See [vercel.json](vercel.json) for routing.
-
----
 
 ## License
 
