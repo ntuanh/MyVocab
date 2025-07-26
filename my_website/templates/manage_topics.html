@@ -12,39 +12,28 @@
 <body class="data-body">
 
     <div id="data-container">
-        <h1 class="data-title">Manage Topics</h1>
+        <div class="data-header">
+            <h1 class="data-title">Manage Topics</h1>
+        </div>
+
         <p class="data-subtitle">This is a list of the topics you've created. You can remove any topic that is no longer needed.</p>
-        
+
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
                         <th>Topic Name</th>
-                        <th>Word Count</th> <!-- New column: number of words in each topic -->
+                        <th>Word Count</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Loop through the 'topics' list passed from app.py using Jinja2 -->
-                    {% for topic in topics %}
-                    <!-- Add a data-id attribute so JavaScript can identify the row -->
-                    <tr data-id="{{ topic.id }}">
-                        <td>{{ topic.name }}</td>
-                        <!-- Display word count for each topic -->
-                        <td style="text-align: center;">{{ topic.word_count }}</td>
-                        <td>
-                            <!-- Only show the delete button for non-default topics -->
-                            {% if topic.name != 'Daily life' %}
-                            <button class="delete-btn topic-delete-btn" data-id="{{ topic.id }}">Delete</button>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% else %}
-                    <!-- Fallback row shown when no topics are found -->
+                <!-- [REFACTOR] The table body is now empty by default -->
+                <!-- JavaScript will be responsible for fetching and populating this section -->
+                <tbody id="topics-table-body">
+                    <!-- A loading message will be shown initially -->
                     <tr>
-                        <td colspan="3" style="text-align: center;">No topics found.</td>
+                        <td colspan="3" class="empty-table-cell">Loading topics...</td>
                     </tr>
-                    {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -54,38 +43,7 @@
         </a>
     </div>
 
-    <!-- JavaScript to handle delete button events -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.topic-delete-btn').forEach(button => {
-                button.addEventListener('click', async (event) => {
-                    const topicId = event.target.dataset.id;
-                    const row = document.querySelector(`tr[data-id="${topicId}"]`);
-                    const topicName = row ? row.querySelector('td:first-child').textContent : 'this topic';
-
-                    // Use a custom modal if available, otherwise fall back to the default confirm dialog
-                    if (confirm(`Are you sure you want to delete the topic "${topicName}"? All word associations will be lost.`)) {
-                        try {
-                            const response = await fetch(`/delete_topic/${topicId}`, { 
-                                method: 'DELETE' 
-                            });
-                            const result = await response.json();
-
-                            if (response.ok && result.status === 'success') {
-                                if (row) {
-                                    row.remove();
-                                }
-                            } else {
-                                alert(result.error || 'Failed to delete topic.');
-                            }
-                        } catch (error) {
-                            console.error('Delete topic error:', error);
-                            alert('An error occurred.');
-                        }
-                    }
-                });
-            });
-        });
-    </script>
+    <!-- [REFACTOR] All JavaScript logic is moved to an external file for better organization -->
+    <script src="{{ url_for('static', filename='manage_topics.js') }}"></script>
 </body>
 </html>

@@ -392,3 +392,10 @@ td:first-child {
     background-color: #dc3545;
     color: white;
 }
+
+.empty-table-cell {
+    text-align: center;
+    padding: 2rem 1rem !important;
+    color: #888;
+    font-style: italic;
+}
