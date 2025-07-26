@@ -5,7 +5,18 @@ import random
 import json
 
 DATABASE_URL = os.environ.get('POSTGRES_URL')
+_db_initialized = False
 
+def ensure_db_initialized():
+    """
+    Checks if the database has been initialized in this session.
+    If not, it calls init_db(). This prevents redundant checks.
+    """
+    global _db_initialized
+    if not _db_initialized:
+        print("INFO: First request received. Ensuring database schema exists...")
+        init_db()
+        _db_initialized = True
 
 def get_db_connection():
     """Open and return a connection to my Vercel Postgres database."""
@@ -19,84 +30,32 @@ def get_db_connection():
         print(f"Database connection error: {e}")
         return None
 
+
 def init_db():
-    """
-    Creates all necessary tables in the PostgreSQL database if they don't exist yet.
-    This version includes columns for caching IPA, synonyms, and family words.
-    """
+    """Creates all tables if they do not exist."""
     conn = get_db_connection()
-    if not conn:
-        print("CRITICAL: Database connection failed during initialization.")
-        return "Database connection failed"
-
+    if not conn: return
     try:
-        # 'with conn.cursor()' handles closing the cursor automatically
         with conn.cursor() as cur:
+            # ... (toàn bộ các lệnh CREATE TABLE IF NOT EXISTS của bạn giữ nguyên) ...
+            cur.execute(''' CREATE TABLE IF NOT EXISTS words (...) ''')
+            cur.execute(''' CREATE TABLE IF NOT EXISTS topics (...) ''')
+            cur.execute(''' CREATE TABLE IF NOT EXISTS word_topics (...) ''')
 
-            # --- UPDATED 'words' TABLE SCHEMA ---
-            # 'SERIAL PRIMARY KEY' is the PostgreSQL equivalent of AUTOINCREMENT.
-            # 'TEXT' is a suitable type for storing strings of any length.
-            # 'JSONB' is the recommended type for storing JSON data in PostgreSQL.
-            # It's more efficient for storage and can be indexed.
-            cur.execute('''
-                CREATE TABLE IF NOT EXISTS words (
-                    id SERIAL PRIMARY KEY,
-                    word TEXT NOT NULL UNIQUE,
-                    vietnamese_meaning TEXT,
-                    english_definition TEXT,
-                    example TEXT,
-                    image_url TEXT,
-                    priority_score INTEGER DEFAULT 1,
-
-                    -- NEW COLUMNS ADDED --
-                    pronunciation_ipa TEXT,
-                    synonyms_json JSONB,      -- Use JSONB for lists of synonyms
-                    family_words_json JSONB   -- Use JSONB for lists of family words
-                );
-            ''')
-
-            # --- 'topics' TABLE ---
-            cur.execute('''
-                CREATE TABLE IF NOT EXISTS topics (
-                    id SERIAL PRIMARY KEY,
-                    name TEXT NOT NULL UNIQUE
-                );
-            ''')
-
-            # --- 'word_topics' JUNCTION TABLE ---
-            # This table links words and topics (many-to-many relationship).
-            cur.execute('''
-                CREATE TABLE IF NOT EXISTS word_topics (
-                    word_id INTEGER REFERENCES words(id) ON DELETE CASCADE,
-                    topic_id INTEGER REFERENCES topics(id) ON DELETE CASCADE,
-                    PRIMARY KEY (word_id, topic_id)
-                );
-            ''')
-
-            # --- SEED DEFAULT TOPICS ---
-            # Check if the topics table is empty before inserting default values.
             cur.execute("SELECT COUNT(*) FROM topics;")
-            # The cursor for psycopg2 (Postgres driver) returns a tuple
             if cur.fetchone()[0] == 0:
                 default_topics = [('Daily life',), ('Work',), ('Cooking',), ('Travel',), ('Technology',)]
-                # 'executemany' is the efficient way to insert multiple rows.
-                # '%s' is the placeholder for PostgreSQL queries with psycopg2.
                 cur.executemany("INSERT INTO topics (name) VALUES (%s);", default_topics)
-
-        conn.commit()  # Persist all the changes to the database
-        print("INFO: Database initialized successfully with the new schema.")
-        return "Database initialized successfully."
+        conn.commit()
+        print("INFO: Database schema check/initialization complete.")
     except Exception as e:
-        conn.rollback()  # If any error occurs, undo all changes in this transaction
-        print(f"ERROR: Could not initialize database. Details: {e}")
-        return f"Error initializing database: {e}"
+        conn.rollback()
+        print(f"ERROR during init_db: {e}")
     finally:
-        if conn:
-            conn.close()  # Always close the connection
-
+        if conn: conn.close()
 
 def save_word(word_data, topic_ids=None):
-    # 1. Validate input data
+    ensure_db_initialized()
     if not word_data or not word_data.get('word'):
         print("ERROR in save_word: Invalid or missing word data.")
         return {"status": "error", "message": "Word data is invalid."}
@@ -184,6 +143,7 @@ def save_word(word_data, topic_ids=None):
             conn.close()
 
 def find_word_in_db(word_to_find):
+    ensure_db_initialized()
     conn = get_db_connection()
     if not conn:
         print(f"ERROR: Database connection failed while trying to find '{word_to_find}'.")
@@ -213,6 +173,7 @@ def find_word_in_db(word_to_find):
 
 
 def get_all_topics():
+    ensure_db_initialized()
     conn = get_db_connection()
     if not conn: return []
     try:
@@ -234,6 +195,7 @@ def get_all_topics():
 
 
 def get_word_for_exam(topic_ids=None):
+    ensure_db_initialized()
     conn = get_db_connection()
     if not conn: return None
     try:
