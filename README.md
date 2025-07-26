@@ -43,6 +43,7 @@
 ---
 
 ## Demo
+[Demo Images ](./images)
 
 ![search](./images/search.png)
 
@@ -91,8 +92,6 @@ MyVocab/
 
 ---
 
-## API & Database
-
 ### Main Endpoints
 
 - **Dictionary Lookup**: `/api/lookup` (POST)
@@ -110,19 +109,6 @@ MyVocab/
 - `words`: id, word, vietnamese_meaning, english_definition, example, image_url, priority_score, pronunciation_ipa, synonyms_json, family_words_json
 - `topics`: id, name
 - `word_topics`: word_id, topic_id
-
----
-
-## Environment Variables
-
-Set these in your deployment environment:
-
-- `DATABASE_URL` (PostgreSQL connection string)
-- `GEMINI_API_KEY` (Google Gemini API key)
-- `PEXELS_API_KEY` (Pexels API key, optional for images)
-- `FLASK_SECRET_KEY` (Flask session secret)
-- `VIEW_DATA_PASSWORD` (Password for viewing saved data)
-
 
 ---
 
