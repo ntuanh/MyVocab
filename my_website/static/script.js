@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentWordData) return;
         modalWordEl.textContent = currentWordData.word;
         try {
-            const response = await fetch('/get_topics');
+            const response = await fetch('/api/get_topics');
             const topics = await response.json();
             modalTopicList.innerHTML = '';
             topics.forEach(topic => {
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!word) return;
         resetUI('Searching...');
         try {
-            const response = await fetch('/lookup', {
+            const response = await fetch('/api/lookup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: word })
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const newTopicName = newTopicInput.value.trim();
         if (!newTopicName) return;
         try {
-            const response = await fetch('/add_topic', {
+            const response = await fetch('/api/add_topic', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ topic_name: newTopicName })
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedCheckboxes = document.querySelectorAll('input[name="modal-topics"]:checked');
         const selectedTopicIds = Array.from(selectedCheckboxes).map(cb => cb.value);
         try {
-            const response = await fetch('/save_word', {
+            const response = await fetch('/api/save_word', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ word_data: currentWordData, topic_ids: selectedTopicIds })

@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (confirmed) {
                 try {
-                    const response = await fetch(`/delete_word/${wordId}`, {
+                    const response = await fetch(`/api/delete_word/${wordId}`, {
                         method: 'DELETE'
                     });
                     const result = await response.json();

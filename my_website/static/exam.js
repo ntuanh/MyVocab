@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to load topics into the selection screen
     async function loadTopics() {
         try {
-            const response = await fetch('/get_topics');
+            const response = await fetch('/api/get_topics');
             const topics = await response.json();
             topicListContainer.innerHTML = ''; // Clear loading message
             topics.forEach(topic => {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         examWordEl.textContent = 'Loading...';
         
         try {
-            const response = await fetch('/get_exam_word', {
+            const response = await fetch('/api/get_exam_word', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ topic_ids: selectedTopicIds })
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // First, get the correct answer
-            const answerRes = await fetch(`/get_answer/${currentWord.id}`);
+            const answerRes = await fetch(`/api/get_answer/${currentWord.id}`);
             const answerData = await answerRes.json();
             const correctAnswer = answerData.correct_answer;
 
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             // Update the word's score in the database
-            await fetch('/submit_answer', {
+            await fetch('/api/submit_answer', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: currentWord.id, is_correct: isCorrect })
