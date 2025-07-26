@@ -21,7 +21,7 @@
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
-![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/postgresql-%23336791.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
@@ -38,6 +38,7 @@
 - **Modern UI**: Responsive, clean, and intuitive interface.
 - **AI Integration**: Uses Google Gemini for rich, contextual word data.
 - **Image Support**: Fetches relevant images for words (if Pexels API key is provided).
+- **Password-Protected Data**: Secure access to your saved data.
 
 ---
 
@@ -54,7 +55,7 @@
 - **Save**: Click "Save Word" and assign it to topics.
 - **Manage Topics**: Add or remove topics as you like.
 - **Quiz**: Go to "Exam" to test yourself on saved words by topic.
-- **Data**: View and manage all your saved words.
+- **Data**: View and manage all your saved words (password-protected).
 
 ---
 
@@ -69,29 +70,58 @@ MyVocab/
 ├── my_website/           # Main Flask app
 │   ├── app.py            # Flask app and routes
 │   ├── handle_request.py # AI, translation, and API logic
-│   ├── database.py       # SQLite DB logic
+│   ├── database.py       # PostgreSQL DB logic
 │   ├── static/           # JS, CSS, client assets
+│   │   ├── style.css
+│   │   ├── script.js
+│   │   ├── data.js
+│   │   ├── exam.js
+│   │   └── manage_topics.js
 │   └── templates/        # HTML templates (Jinja2)
+│       ├── index.html
+│       ├── exam.html
+│       ├── data.html
+│       └── manage_topics.html
 │
 ├── requirements.txt      # Python dependencies
-├── myvocab.db            # SQLite database (auto-created)
+├── myvocab.db            # (Legacy) SQLite database (not used if PostgreSQL is configured)
+├── LICENSE
 └── README.md
 ```
 
+---
+
 ## API & Database
 
-- **Dictionary Lookup**: `/lookup` (POST)
-- **Save Word**: `/save_word` (POST)
-- **Get Topics**: `/get_topics` (GET)
-- **Add Topic**: `/add_topic` (POST)
-- **Delete Topic**: `/delete_topic/<id>` (DELETE)
-- **Quiz**: `/get_exam_word` (POST), `/submit_answer` (POST)
-- **Data**: `/data` (HTML), `/get_all_saved_words` (internal)
+### Main Endpoints
 
-**Database schema**:
-- `words`: id, word, vietnamese_meaning, english_definition, example, image_url, priority_score
+- **Dictionary Lookup**: `/api/lookup` (POST)
+- **Save Word**: `/api/save_word` (POST)
+- **Get Topics**: `/api/get_topics` (GET)
+- **Add Topic**: `/api/add_topic` (POST)
+- **Delete Topic**: `/api/delete_topic/<id>` (DELETE)
+- **Quiz**: `/api/get_exam_word` (POST), `/api/submit_answer` (POST), `/api/get_answer/<id>` (GET)
+- **Data**: `/data` (HTML, password-protected), `/api/all_data` (GET, session-protected)
+- **Delete Word**: `/api/delete_word/<id>` (DELETE)
+- **Password Verification**: `/api/verify_password` (POST)
+
+### Database Schema
+
+- `words`: id, word, vietnamese_meaning, english_definition, example, image_url, priority_score, pronunciation_ipa, synonyms_json, family_words_json
 - `topics`: id, name
 - `word_topics`: word_id, topic_id
+
+---
+
+## Environment Variables
+
+Set these in your deployment environment:
+
+- `DATABASE_URL` (PostgreSQL connection string)
+- `GEMINI_API_KEY` (Google Gemini API key)
+- `PEXELS_API_KEY` (Pexels API key, optional for images)
+- `FLASK_SECRET_KEY` (Flask session secret)
+- `VIEW_DATA_PASSWORD` (Password for viewing saved data)
 
 ---
 
@@ -103,6 +133,20 @@ MyVocab/
 - google-generativeai
 - googletrans==4.0.0-rc1
 - requests
+- psycopg2-binary
+
+Install with:
+
+```sh
+pip install -r requirements.txt
+```
+
+---
+
+## Deployment
+
+- **Local**: Run `python -m my_website.app` after setting environment variables.
+- **Vercel**: Uses [api/index.py](api/index.py) as the entrypoint. See [vercel.json](vercel.json) for routing.
 
 ---
 
