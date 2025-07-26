@@ -1,11 +1,24 @@
 # my_website/app.py
-# PHIÊN BẢN DEBUG - Tối giản để tìm lỗi
+# Final production-ready version with corrected API routes for Vercel.
 
 import os
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 
-# Import các hàm cần thiết. Chúng ta sẽ chỉ dùng get_db_connection trực tiếp.
-from .database import get_db_connection
+# --- IMPORTS ---
+# Import all necessary functions from your other modules.
+from .handle_request import get_dictionary_data
+from .database import (
+    # We no longer need init_db() here, it's handled inside the db functions.
+    save_word,
+    get_word_for_exam,
+    update_word_score,
+    get_all_saved_words,
+    delete_word_by_id,
+    get_correct_answer_by_id,
+    get_all_topics,
+    add_new_topic,
+    delete_topic_by_id
+)
 
 # --- FLASK APP SETUP ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -13,86 +26,139 @@ app = Flask(__name__,
             static_folder=os.path.join(BASE_DIR, 'static'),
             template_folder=os.path.join(BASE_DIR, 'templates'))
 
-app.secret_key = os.environ.get("FLASK_SECRET_KEY", "a_super_secret_key_for_local_dev")
+# A secret key is required for Flask sessions to work.
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "a_super_secret_key_for_local_development_only")
 
 
-# --- ROUTE CHÍNH - Tối giản ---
+# --- PAGE ROUTES (RENDERING HTML) ---
+# These routes serve the main HTML pages and do not have the /api prefix.
+
 @app.route('/')
 def index():
+    """Renders the main dictionary page."""
     return render_template('index.html')
 
+@app.route('/exam')
+def exam_page():
+    """Renders the exam page."""
+    return render_template('exam.html')
 
-# --- [DEBUG] ENDPOINT ĐỂ KHỞI TẠO DATABASE ---
-# Endpoint này sẽ là công cụ duy nhất của chúng ta để tạo bảng.
-@app.route('/api/setup_database')
-def setup_database_route():
-    print("--- [DEBUG] Received request for /api/setup_database ---")
+@app.route('/data')
+def data_page():
+    """
+    Renders the data view page.
+    This route is protected by the password check in the session.
+    """
+    if not session.get('data_access_granted'):
+        return redirect(url_for('index'))
+    return render_template('data.html')
 
-    conn = get_db_connection()
-    if not conn:
-        print("[DEBUG] FAILED: Database connection returned None.")
-        return "Database connection failed. Check DATABASE_URL environment variable and logs.", 500
+@app.route('/manage_topics')
+def manage_topics_page():
+    """Renders the topic management page."""
+    return render_template('manage_topics.html')
 
-    try:
-        # Dùng 'with' để đảm bảo cursor và connection được đóng đúng cách
-        with conn:
-            with conn.cursor() as cur:
-                print("[DEBUG] Connection successful. Creating tables...")
 
-                # Chạy các lệnh CREATE TABLE IF NOT EXISTS
-                cur.execute('''
-                    CREATE TABLE IF NOT EXISTS words (
-                        id SERIAL PRIMARY KEY, word TEXT NOT NULL UNIQUE, vietnamese_meaning TEXT,
-                        english_definition TEXT, example TEXT, image_url TEXT,
-                        priority_score INTEGER DEFAULT 1, pronunciation_ipa TEXT,
-                        synonyms_json JSONB, family_words_json JSONB
-                    );
-                ''')
-                cur.execute('''
-                    CREATE TABLE IF NOT EXISTS topics (
-                        id SERIAL PRIMARY KEY, name TEXT NOT NULL UNIQUE
-                    );
-                ''')
-                cur.execute('''
-                    CREATE TABLE IF NOT EXISTS word_topics (
-                        word_id INTEGER REFERENCES words(id) ON DELETE CASCADE,
-                        topic_id INTEGER REFERENCES topics(id) ON DELETE CASCADE,
-                        PRIMARY KEY (word_id, topic_id)
-                    );
-                ''')
-                print("[DEBUG] CREATE TABLE commands executed.")
+# --- API ENDPOINTS (RETURNING JSON) ---
+# All API routes now have the '/api/' prefix to work correctly with the vercel.json routing.
 
-                # Thêm chủ đề mặc định
-                cur.execute("SELECT COUNT(*) FROM topics;")
-                if cur.fetchone()[0] == 0:
-                    print("[DEBUG] Topics table is empty. Seeding default topics...")
-                    default_topics = [('Daily life',), ('Work',), ('Cooking',), ('Travel',), ('Technology',)]
-                    cur.executemany("INSERT INTO topics (name) VALUES (%s);", default_topics)
-                    print("[DEBUG] Default topics seeded.")
+@app.route('/api/verify_password', methods=['POST'])
+def verify_password():
+    """Verifies the password for accessing the data page."""
+    correct_password = os.environ.get('VIEW_DATA_PASSWORD')
+    if not correct_password:
+        return jsonify({'error': 'Server configuration error'}), 500
 
-                # conn.commit() được tự động gọi khi thoát khỏi khối 'with conn:'
+    data = request.get_json()
+    submitted_password = data.get('password')
 
-        print("[DEBUG] SUCCESS: Database setup complete.")
-        return "Database setup successful! Tables have been created.", 200
+    if submitted_password == correct_password:
+        session['data_access_granted'] = True
+        return jsonify({'status': 'success'}), 200
+    else:
+        return jsonify({'error': 'Incorrect password'}), 401
 
-    except Exception as e:
-        print(f"[DEBUG] FAILED: An exception occurred during database setup: {e}")
-        import traceback
-        traceback.print_exc()
-        return f"An error occurred: {e}", 500
+@app.route('/api/all_data')
+def get_all_data():
+    """API endpoint to fetch all saved data (protected by session)."""
+    if not session.get('data_access_granted'):
+        return jsonify({'error': 'Unauthorized'}), 401
+    words = get_all_saved_words()
+    return jsonify(words)
 
-# --- CÁC ROUTE CÒN LẠI (TẠM THỜI VÔ HIỆU HÓA HOẶC GIỮ NGUYÊN) ---
-# Chúng ta sẽ không đụng đến chúng cho đến khi database được thiết lập thành công.
-# ... (Bạn có thể giữ nguyên các route còn lại của mình ở đây) ...
-# ...
-# @app.route('/api/verify_password', methods=['POST'])
-# def verify_password():
-#     #...
-#
-# @app.route('/data')
-# def data_page():
-#     #...
-#
-# @app.route('/lookup', methods=['POST'])
-# def lookup_route():
-#     #...
+@app.route('/api/lookup', methods=['POST'])
+def lookup_route():
+    """API endpoint to look up a word."""
+    data = request.get_json()
+    user_word = data.get('word') # Assuming the key is 'word' now
+    if not user_word:
+        return jsonify({'error': 'No word provided'}), 400
+    return get_dictionary_data(user_word)
+
+@app.route('/api/save_word', methods=['POST'])
+def save_word_route():
+    """API endpoint to save a word."""
+    data = request.get_json()
+    word_data = data.get('word_data')
+    topic_ids = data.get('topic_ids', [])
+    if not word_data:
+        return jsonify({"error": "Word data is missing."}), 400
+    result = save_word(word_data, topic_ids)
+    return jsonify(result)
+
+@app.route('/api/get_exam_word', methods=['POST'])
+def get_exam_word_route():
+    """API endpoint to get a word for the exam."""
+    data = request.get_json()
+    topic_ids = data.get('topic_ids', None)
+    word = get_word_for_exam(topic_ids)
+    if word:
+        return jsonify(word)
+    return jsonify({"error": "No words found for the selected topics."}), 404
+
+@app.route('/api/submit_answer', methods=['POST'])
+def submit_answer_route():
+    """API endpoint to submit an exam answer."""
+    data = request.get_json()
+    word_id = data.get('id')
+    is_correct = data.get('is_correct')
+    result = update_word_score(word_id, is_correct)
+    return jsonify(result)
+
+@app.route('/api/get_answer/<int:word_id>', methods=['GET'])
+def get_answer_route(word_id):
+    """API endpoint to get the correct answer for an exam question."""
+    correct_answer = get_correct_answer_by_id(word_id)
+    if correct_answer is not None:
+        return jsonify({"correct_answer": correct_answer})
+    return jsonify({"error": "Word not found."}), 404
+
+@app.route('/api/delete_word/<int:word_id>', methods=['DELETE'])
+def delete_word_route(word_id):
+    """API endpoint to delete a saved word."""
+    result = delete_word_by_id(word_id)
+    return jsonify(result)
+
+@app.route('/api/get_topics', methods=['GET'])
+def get_topics_route():
+    """API endpoint to get the list of all topics."""
+    topics = get_all_topics()
+    return jsonify(topics)
+
+@app.route('/api/add_topic', methods=['POST'])
+def add_topic_route():
+    """API endpoint to add a new topic."""
+    data = request.get_json()
+    topic_name = data.get('topic_name')
+    if not topic_name:
+        return jsonify({"error": "Topic name cannot be empty."}), 400
+    new_topic = add_new_topic(topic_name.strip())
+    if new_topic:
+        return jsonify(new_topic), 201
+    return jsonify({"error": "Failed to create topic."}), 500
+
+@app.route('/api/delete_topic/<int:topic_id>', methods=['DELETE'])
+def delete_topic_route(topic_id):
+    """API endpoint to delete a topic."""
+    result = delete_topic_by_id(topic_id)
+    return jsonify(result)
