@@ -249,7 +249,8 @@ td:first-child { font-weight: 600; color: var(--panel-dark-blue); }
 
 /* Right column for the main exam interface */
 #exam-container {
-    flex: 2; /* Takes up more space */
+    width: 100%;
+    max-width: 650px;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
