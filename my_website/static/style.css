@@ -208,6 +208,7 @@ td:first-child { font-weight: 600; color: var(--panel-dark-blue); }
     width: 100%;
     max-width: 1200px;
     align-items: flex-start;
+    justify-content: center;
 }
 
 /* Left column for topic selection */
@@ -300,4 +301,37 @@ td:first-child { font-weight: 600; color: var(--panel-dark-blue); }
 
 #vietnamese-panel.is-revealed::after {
     display: none;
+}
+
+/* --- GitHub Star Button Styling --- */
+.github-star-button {
+    position: fixed; /* Cố định vị trí trên màn hình */
+    top: 20px;
+    right: 20px;
+    z-index: 1001; /* Nằm trên hầu hết các phần tử khác */
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa icon và chữ */
+
+    background-color: #24292e; /* Màu nền giống GitHub */
+    color: #ffffff;
+
+    padding: 8px 16px;
+    border-radius: 8px;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.github-star-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.github-star-button .fa-github {
+    font-size: 1.2rem; /* Làm cho icon to hơn một chút */
 }
