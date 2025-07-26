@@ -273,7 +273,3 @@ td:first-child { font-weight: 600; color: var(--panel-dark-blue); }
     margin-top: 1rem; margin-right: 0.5rem;
 }
 
-/* Utility class to hide elements */
-.hidden {
-    display: none !important;
-}
