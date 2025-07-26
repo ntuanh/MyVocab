@@ -57,8 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ipaEl.textContent = data.pronunciation_ipa || 'N/A';
 
         // Restore the "Click to reveal" functionality
-        vietnamesePanel.classList.add('hidden');
-        vietnamesePanel.classList.remove('revealed');
+        vietnamesePanel.classList.add('is-hidden');
+        vietnamesePanel.classList.remove('is-revealed');
 
         const createTagList = (element, list) => {
             element.innerHTML = '';
@@ -162,8 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     vietnamesePanel.addEventListener('click', () => {
-        vietnamesePanel.classList.toggle('hidden');
-        vietnamesePanel.classList.toggle('revealed');
+        vietnamesePanel.classList.toggle('is-hidden');
+        vietnamesePanel.classList.toggle('is-revealed');
     });
 
     // --- [FIX] Correctly attach event listener for Save Button ---
