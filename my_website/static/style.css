@@ -303,23 +303,35 @@ td:first-child { font-weight: 600; color: var(--panel-dark-blue); }
     display: none;
 }
 
-/* --- GitHub Star Button Styling (Vibrant Color) --- */
+/* --- GitHub Star Button Styling --- */
 .github-star-button {
-    /* Sử dụng một màu sắc nổi bật, ví dụ màu tím của GitHub */
-    background-color: #8A3FFC;
-    color: #ffffff !important;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
 
-    /* Ghi đè hiệu ứng hover chung */
-    transition: all 0.2s ease-in-out !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background-color: #24292e;
+    color: #ffffff;
+
+    padding: 8px 16px;
+    border-radius: 8px;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .github-star-button:hover {
-    background-color: #7e2ff5;
-    transform: translateY(-3px); /* Hiệu ứng nảy lên mạnh hơn */
-    box-shadow: 0 6px 15px rgba(138, 63, 252, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .github-star-button .fa-github {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
