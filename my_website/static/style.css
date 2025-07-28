@@ -305,33 +305,20 @@ td:first-child { font-weight: 600; color: var(--panel-dark-blue); }
 
 /* --- GitHub Star Button Styling --- */
 .github-star-button {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1001;
+    background: linear-gradient(45deg, #333, #555);
+    color: #ffffff !important;
+    border: 2px solid #666;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    background-color: #24292e;
-    color: #ffffff;
-
-    padding: 8px 16px;
-    border-radius: 8px;
-
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.3s ease-in-out !important;
 }
 
 .github-star-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    background: linear-gradient(45deg, #444, #666);
 }
 
 .github-star-button .fa-github {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
