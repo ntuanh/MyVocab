@@ -303,35 +303,16 @@ td:first-child { font-weight: 600; color: var(--panel-dark-blue); }
     display: none;
 }
 
-/* --- GitHub Star Button Styling --- */
+/* --- GitHub Star Button Styling  --- */
 .github-star-button {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1001;
-
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    background-color: #24292e;
-    color: #ffffff;
-
-    padding: 8px 16px;
-    border-radius: 8px;
-
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #24292e; /* Màu nền tối giống GitHub */
+    color: #ffffff !important; /* Ghi đè màu chữ của .data-link nếu có */
 }
 
 .github-star-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #40464f; /* Màu sáng hơn một chút khi hover */
 }
 
 .github-star-button .fa-github {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
