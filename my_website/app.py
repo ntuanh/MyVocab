@@ -36,7 +36,7 @@ def exam_page():
     return render_template('exam.html')
 
 @app.route('/data')
-def data_page():
+def data_page():    
     if not session.get('data_access_granted'):
         return redirect(url_for('index'))
     return render_template('data.html')
