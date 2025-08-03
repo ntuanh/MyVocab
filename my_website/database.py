@@ -24,7 +24,7 @@ def initialize_schema(cursor):
             CREATE TABLE IF NOT EXISTS words (
                 id SERIAL PRIMARY KEY, word TEXT NOT NULL UNIQUE, vietnamese_meaning TEXT,
                 english_definition TEXT, example TEXT, image_url TEXT,
-                priority_score INTEGER DEFAULT 1, pronunciation_ipa TEXT,
+                priority_score INTEGER DEFAULT 5, pronunciation_ipa TEXT,
                 synonyms_json JSONB, family_words_json JSONB
             );
         ''')
