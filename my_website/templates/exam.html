@@ -12,6 +12,7 @@
 
     <div id="exam-layout-container">
 
+        <!-- Màn hình 1: Chọn chủ đề -->
         <div id="topic-selection-container">
             <h2>Choose Your Topics</h2>
             <p>Select topics to review, or leave blank to review all words.</p>
@@ -22,12 +23,20 @@
             <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dictionary</a>
         </div>
 
+        <!-- Màn hình 2: Làm bài kiểm tra (Mặc định ẩn) -->
         <div id="exam-container" class="hidden">
             <h1 class="exam-title">Vocabulary Exam</h1>
 
+            <!-- KHUNG CÂU HỎI CHÍNH -->
             <div id="question-card" class="panel">
                 <h2 id="exam-word">Loading...</h2>
-                <p>What is the Vietnamese meaning of this word?</p>
+                <p id="question-prompt">What is the Vietnamese meaning of this word?</p>
+
+                <!-- <<< THÊM PHẦN TỰ ĐÁNH GIÁ VÀO ĐÂY >>> -->
+                <div id="self-assessment-answer" class="hidden">
+                    <p id="hidden-meaning">Đây là nghĩa tiếng việt</p>
+                    <button id="reveal-meaning-btn" class="btn-secondary">Reveal Answer</button>
+                </div>
             </div>
 
             <div id="hint-card" class="panel">
@@ -35,11 +44,19 @@
                 <img id="hint-image" src="" alt="Image hint" class="hidden">
             </div>
 
+            <!-- KHUNG NHẬP LIỆU (cho câu hỏi cũ) -->
             <form id="answer-form">
                 <input type="text" id="answer-input" placeholder="Enter the Vietnamese meaning..." autocomplete="off">
                 <button type="submit">Submit</button>
             </form>
 
+            <!-- <<< THÊM CÁC NÚT TỰ ĐÁNH GIÁ VÀO ĐÂY >>> -->
+            <div id="self-assessment-buttons" class="hidden">
+                <button id="btn-dont-know" class="btn-assessment incorrect">I don't know it</button>
+                <button id="btn-know-it" class="btn-assessment correct">I know it!</button>
+            </div>
+
+            <!-- KHUNG PHẢN HỒI -->
             <div id="feedback-card" class="panel hidden">
                 <div id="answer-feedback">
                     <h3 id="feedback-title"></h3>
