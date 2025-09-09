@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 currentWord = await response.json();
 
-                // [NEW LOGIC] Determine question type based on Vietnamese meaning length
                 if (currentWord && currentWord.vietnamese_meaning) {
                     const meaningWordCount = currentWord.vietnamese_meaning.split(' ').length;
 
@@ -88,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         setupFillInBlankQuestion();
                     }
                 } else {
-                    setupFillInBlankQuestion(); // Default to fill-in-blank if meaning is missing
+                    setupFillInBlankQuestion();
                 }
 
                 examWordEl.textContent = currentWord.word;
@@ -103,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // [NEW] Setup UI for fill-in-the-blank questions
     function setupFillInBlankQuestion() {
         questionPrompt.textContent = "What is the Vietnamese meaning of this word?";
         answerForm.classList.remove('hidden');
@@ -111,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
         selfAssessmentButtons.classList.add('hidden');
     }
 
-    // [NEW] Setup UI for self-assessment questions
     function setupSelfAssessmentQuestion() {
         questionPrompt.textContent = "Do you know the Vietnamese meaning of this word?";
         answerForm.classList.add('hidden');
@@ -122,9 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hiddenMeaning.textContent = currentWord.vietnamese_meaning;
     }
 
-    // [REFACTORED] Central function to submit the result and show feedback
-    async function submitResult(isCorrect) {
-        // Hide all input controls
+    async function submitResult(isCorrect, correctAnswerText) {
         answerForm.classList.add('hidden');
         selfAssessmentButtons.classList.add('hidden');
         selfAssessmentAnswer.classList.add('hidden');
@@ -139,40 +134,48 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Failed to update score:", error);
         }
 
-        // Show feedback card
         feedbackCard.classList.remove('hidden');
         motivationalQuote.classList.add('hidden');
-        feedbackCard.className = 'panel'; // Reset classes
+        feedbackCard.className = 'panel';
         feedbackCard.classList.add(isCorrect ? 'correct' : 'incorrect');
 
         feedbackTitle.textContent = isCorrect ? "Correct!" : "Keep Practicing!";
-        feedbackText.textContent = `The meaning of "${currentWord.word}" is "${currentWord.vietnamese_meaning}".`;
+        // [FIX] Use the correctAnswerText passed into this function
+        feedbackText.textContent = `The meaning of "${currentWord.word}" is "${correctAnswerText}".`;
     }
 
-    // Handles answer for fill-in-the-blank questions
     async function checkAnswer() {
         const userAnswer = answerInput.value.trim();
         if (!userAnswer || !currentWord) return;
 
         try {
             const answerRes = await fetch(`/api/get_answer/${currentWord.id}`);
+            if (!answerRes.ok) {
+                throw new Error("Could not fetch answer from server.");
+            }
             const answerData = await answerRes.json();
 
-            let isCorrect = false;
+            // [FIX] Read the correct key 'full_meaning' from the backend response
+            const correctAnswer = answerData.full_meaning;
             const keywords = answerData.keywords;
 
-            // Check against keywords if they exist, otherwise check full meaning
+            let isCorrect = false;
+
             if (keywords) {
                 const keywordList = keywords.split(',').map(kw => kw.trim().toLowerCase());
                 isCorrect = keywordList.some(kw => userAnswer.toLowerCase().includes(kw));
-            } else {
-                isCorrect = userAnswer.toLowerCase() === answerData.correct_answer.toLowerCase();
+            } else if (correctAnswer) {
+                isCorrect = userAnswer.toLowerCase() === correctAnswer.toLowerCase();
             }
 
-            submitResult(isCorrect);
+            // Pass the correct answer text to the submitResult function
+            submitResult(isCorrect, correctAnswer);
+
         } catch (error) {
             console.error("Error checking answer:", error);
+            feedbackCard.classList.remove('hidden');
             feedbackTitle.textContent = 'Error checking answer.';
+            feedbackText.textContent = 'Please try again.';
         }
     }
 
@@ -181,7 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackCard.classList.add('hidden');
         motivationalQuote.classList.remove('hidden');
         hintImage.classList.add('hidden');
-        // Let the setup functions handle showing/hiding the correct inputs
         answerForm.classList.add('hidden');
         selfAssessmentButtons.classList.add('hidden');
         selfAssessmentAnswer.classList.add('hidden');
@@ -214,18 +216,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // [NEW] Event listeners for the new self-assessment buttons
     revealMeaningBtn.addEventListener('click', () => {
         selfAssessmentAnswer.classList.add('revealed');
         revealMeaningBtn.classList.add('hidden');
     });
 
     btnKnowIt.addEventListener('click', () => {
-        submitResult(true); // User says they knew it -> is_correct = true
+        // [FIX] Pass the correct answer text to submitResult
+        submitResult(true, currentWord.vietnamese_meaning);
     });
 
     btnDontKnow.addEventListener('click', () => {
-        submitResult(false); // User says they didn't know it -> is_correct = false
+        // [FIX] Pass the correct answer text to submitResult
+        submitResult(false, currentWord.vietnamese_meaning);
     });
 
     // --- 4. INITIALIZATION ---
