@@ -155,6 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const answerData = await answerRes.json();
 
+            // --- THÊM CÁC DÒNG DEBUG Ở ĐÂY ---
+            console.log("--- DEBUG: Inside checkAnswer ---");
+            console.log("Response from /api/get_answer:", answerData);
+
+            const correctAnswer = answerData.full_meaning;
+            console.log("Value of correctAnswer:", correctAnswer); // << Xem giá trị này có phải là undefined không
+
             // [FIX] Read the correct key 'full_meaning' from the backend response
             const correctAnswer = answerData.full_meaning;
             const keywords = answerData.keywords;
@@ -222,12 +229,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnKnowIt.addEventListener('click', () => {
-        // [FIX] Pass the correct answer text to submitResult
+        // --- THÊM DÒNG DEBUG Ở ĐÂY ---
+        console.log("--- DEBUG: btnKnowIt clicked ---");
+        console.log("Value of currentWord:", currentWord);
+        console.log("Value of currentWord.vietnamese_meaning:", currentWord.vietnamese_meaning);
         submitResult(true, currentWord.vietnamese_meaning);
     });
 
     btnDontKnow.addEventListener('click', () => {
-        // [FIX] Pass the correct answer text to submitResult
+            // --- THÊM DÒNG DEBUG Ở ĐÂY ---
+        console.log("--- DEBUG: btnDontKnow clicked ---");
+        console.log("Value of currentWord:", currentWord);
+        console.log("Value of currentWord.vietnamese_meaning:", currentWord.vietnamese_meaning);
         submitResult(false, currentWord.vietnamese_meaning);
     });
 
