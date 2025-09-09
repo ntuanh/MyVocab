@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 from googletrans import Translator
-from .database import find_word_in_db
+from database import find_word_in_db
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 PEXELS_API_KEY = os.environ.get("PEXELS_API_KEY")

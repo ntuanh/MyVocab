@@ -1,8 +1,8 @@
 import os
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 
-from .handle_request import get_dictionary_data
-from .database import (
+from handle_request import get_dictionary_data
+from database import (
     save_word,
     get_word_for_exam,
     update_word_score,
