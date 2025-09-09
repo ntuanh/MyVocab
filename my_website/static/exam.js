@@ -150,19 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const answerRes = await fetch(`/api/get_answer/${currentWord.id}`);
-            if (!answerRes.ok) {
-                throw new Error("Could not fetch answer from server.");
-            }
             const answerData = await answerRes.json();
 
-            // --- THÊM CÁC DÒNG DEBUG Ở ĐÂY ---
-            console.log("--- DEBUG: Inside checkAnswer ---");
-            console.log("Response from /api/get_answer:", answerData);
-
-            const correctAnswer = answerData.full_meaning;
-            console.log("Value of correctAnswer:", correctAnswer); // << Xem giá trị này có phải là undefined không
-
-            // [FIX] Read the correct key 'full_meaning' from the backend response
+            // CHỈ GIỮ LẠI DÒNG NÀY
             const correctAnswer = answerData.full_meaning;
             const keywords = answerData.keywords;
 
@@ -175,14 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 isCorrect = userAnswer.toLowerCase() === correctAnswer.toLowerCase();
             }
 
-            // Pass the correct answer text to the submitResult function
             submitResult(isCorrect, correctAnswer);
 
         } catch (error) {
             console.error("Error checking answer:", error);
-            feedbackCard.classList.remove('hidden');
-            feedbackTitle.textContent = 'Error checking answer.';
-            feedbackText.textContent = 'Please try again.';
         }
     }
 
