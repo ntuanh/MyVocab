@@ -154,8 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("--- DEBUG: Inside checkAnswer ---");
             console.log("Response from /api/get_answer:", answerData);
 
-            // CHỈ GIỮ LẠI DÒNG NÀY
-            const correctAnswer = answerData.full_meaning;
+            const correctAnswer = answerData.correct_answer;
             console.log("Value of correctAnswer:", correctAnswer);
             const keywords = answerData.keywords;
 
