@@ -1,8 +1,6 @@
 import os
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 
-# --- IMPORTS ---
-# Import all necessary functions from your other modules.
 from .handle_request import get_dictionary_data
 from .database import (
     save_word,
@@ -109,12 +107,14 @@ def submit_answer_route():
     result = update_word_score(word_id, is_correct)
     return jsonify(result)
 
+
 @app.route('/api/get_answer/<int:word_id>', methods=['GET'])
 def get_answer_route(word_id):
-    """API endpoint to get the correct answer for an exam question."""
-    correct_answer = get_correct_answer_by_id(word_id)
-    if correct_answer is not None:
-        return jsonify({"correct_answer": correct_answer})
+    """API endpoint to get the correct answer and keywords for an exam question."""
+    answer_data = get_correct_answer_by_id(word_id)
+
+    if answer_data:
+        return jsonify(answer_data)
     return jsonify({"error": "Word not found."}), 404
 
 @app.route('/api/delete_word/<int:word_id>', methods=['DELETE'])

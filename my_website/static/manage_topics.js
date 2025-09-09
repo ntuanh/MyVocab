@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (result.status === 'success') {
-                    // Find the row in the table and remove it with a smooth animation
                     const rowToDelete = document.querySelector(`tr[data-topic-id='${topicId}']`);
                     if (rowToDelete) {
                         rowToDelete.style.transition = 'opacity 0.3s ease';

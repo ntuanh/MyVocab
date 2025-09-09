@@ -177,10 +177,18 @@ def update_word_score(cur, word_id, is_correct):
 
 @db_transaction
 def get_correct_answer_by_id(cur, word_id):
-    cur.execute("SELECT vietnamese_meaning FROM words WHERE id = %s;", (word_id,))
+    """
+    Fetches both the full Vietnamese meaning and the keywords for a given word ID.
+    Returns a dictionary, or None if the word is not found.
+    """
+    cur.execute("SELECT vietnamese_meaning, vietnamese_keywords FROM words WHERE id = %s;", (word_id,))
     result = cur.fetchone()
-    return result['vietnamese_meaning'] if result else None
-
+    if result:
+        return {
+            "correct_answer": result['vietnamese_meaning'],
+            "keywords": result['vietnamese_keywords']
+        }
+    return None
 
 @db_transaction
 def get_all_saved_words(cur):
