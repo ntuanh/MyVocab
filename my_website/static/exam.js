@@ -138,33 +138,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function checkAnswerByTyping() {
         const userAnswer = answerInput.value.trim();
-        if (!userAnswer || !currentWord) return;
-        
+        if (!userAnswer || !currentWord) {
+            // Stop if there's no answer or no current word to check against
+            return;
+        }
+
         try {
-            const response = await fetch(`/api/get_answer/${currentWord.id}`);
-            if (!response.ok) throw new Error('API error');
-            
+            // [FIX] Changed the URL format to use a query parameter (?id=...)
+            // This is more robust for Vercel's serverless environment.
+            const response = await fetch(`/api/get_answer?id=${currentWord.id}`);
+
+            // Check if the server responded with an error (like 404 or 500)
+            if (!response.ok) {
+                // This will be caught by the catch block below
+                throw new Error(`API responded with status: ${response.status}`);
+            }
+
             const answerData = await response.json();
             const correctAnswer = answerData.correct_answer;
             const keywords = answerData.keywords;
-            
+
             let isCorrect = false;
-            if (keywords) {
+
+            // Determine correctness based on keywords first, then fall back to full meaning
+            if (keywords && keywords.length > 0) {
                 const keywordList = keywords.split(',').map(kw => kw.trim().toLowerCase());
+                // The answer is correct if it includes at least one of the keywords
                 isCorrect = keywordList.some(kw => userAnswer.toLowerCase().includes(kw));
             } else if (correctAnswer) {
+                // Fallback for words without keywords
                 isCorrect = userAnswer.toLowerCase() === correctAnswer.toLowerCase();
             }
-            
+
+            // Pass the result and the full correct answer to the UI update function
             submitResult(isCorrect, correctAnswer);
 
         } catch (error) {
-            console.error("Error checking answer:", error);
+            // This block will catch network errors or API errors (like 404)
+            console.error("Error in checkAnswerByTyping:", error);
             feedbackCard.classList.remove('hidden');
-            feedbackTitle.textContent = 'Error checking answer.';
+            feedbackTitle.textContent = 'Error Checking Answer';
+            feedbackText.textContent = 'Could not connect to the server. Please try again.';
         }
     }
-    
     function resetExamUI() {
         answerInput.value = '';
         feedbackCard.classList.add('hidden');

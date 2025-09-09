@@ -108,13 +108,19 @@ def submit_answer_route():
     return jsonify(result)
 
 
-@app.route('/api/get_answer/<int:word_id>', methods=['GET'])
-def get_answer_route(word_id):
-    """API endpoint to get the correct answer and keywords for an exam question."""
+@app.route('/api/get_answer', methods=['GET'])  # Bỏ <int:word_id> khỏi URL
+def get_answer_route():
+    # Lấy 'id' từ query parameter của URL
+    word_id = request.args.get('id', type=int)
+
+    if not word_id:
+        return jsonify({"error": "Word ID is required."}), 400
+
     answer_data = get_correct_answer_by_id(word_id)
 
     if answer_data:
         return jsonify(answer_data)
+
     return jsonify({"error": "Word not found."}), 404
 
 @app.route('/api/delete_word/<int:word_id>', methods=['DELETE'])
