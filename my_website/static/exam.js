@@ -151,9 +151,12 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const answerRes = await fetch(`/api/get_answer/${currentWord.id}`);
             const answerData = await answerRes.json();
+            console.log("--- DEBUG: Inside checkAnswer ---");
+            console.log("Response from /api/get_answer:", answerData);
 
             // CHỈ GIỮ LẠI DÒNG NÀY
             const correctAnswer = answerData.full_meaning;
+            console.log("Value of correctAnswer:", correctAnswer);
             const keywords = answerData.keywords;
 
             let isCorrect = false;
