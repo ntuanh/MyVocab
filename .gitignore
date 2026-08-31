@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Secrets - never commit these
+.env
+.env.*
+Debug/
+
+# Local database / editor / build output
+myvocab.db
+.idea/
+.vercel/

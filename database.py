@@ -1,4 +1,8 @@
+import copy
+import functools
 import os
+import re
+
 import psycopg2
 import psycopg2.extras  # Required for DictCursor
 import json
@@ -25,9 +29,12 @@ def initialize_schema(cursor):
                 id SERIAL PRIMARY KEY, word TEXT NOT NULL UNIQUE, vietnamese_meaning TEXT,
                 english_definition TEXT, example TEXT, image_url TEXT,
                 priority_score INTEGER DEFAULT 5, pronunciation_ipa TEXT,
-                synonyms_json JSONB, family_words_json JSONB
+                synonyms_json JSONB, family_words_json JSONB,
+                vietnamese_keywords TEXT
             );
         ''')
+        # Migration for databases created before vietnamese_keywords existed.
+        cursor.execute("ALTER TABLE words ADD COLUMN IF NOT EXISTS vietnamese_keywords TEXT;")
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS topics (
                 id SERIAL PRIMARY KEY, name TEXT NOT NULL UNIQUE
@@ -50,36 +57,52 @@ def initialize_schema(cursor):
         raise e
 
 
-# --- TRANSACTION DECORATOR (ADVANCED) ---
-# This decorator handles connection, cursor, schema initialization, commit/rollback, and closing.
-def db_transaction(func):
-    def wrapper(*args, **kwargs):
-        conn = get_db_connection()
-        if not conn:
-            # Return a default value appropriate for the wrapped function's return type
-            return None if 'get' in func.__name__ else {"status": "error", "message": "Database connection failed."}
+# --- KEYWORD HELPER ---
+def derive_keywords(vietnamese_meaning):
+    """Builds a comma-separated keyword list from a Vietnamese meaning.
 
-        try:
-            with conn:
-                with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                    initialize_schema(cur)  # Always ensure schema exists at the start of a transaction
-                    result = func(cur, *args, **kwargs)  # Execute the original function logic
-                    return result
-        except Exception as e:
-            print(f"DATABASE EXCEPTION in {func.__name__}: {e}")
-            import traceback
-            traceback.print_exc()
-            return None if 'get' in func.__name__ else {"status": "error", "message": "A database error occurred."}
-        finally:
-            if conn:
+    The exam marks a typed answer correct when it contains one of these keywords,
+    so a long meaning like "kien cuong, deo dai truoc kho khan" stays answerable.
+    """
+    if not vietnamese_meaning:
+        return None
+    parts = [p.strip() for p in re.split(r'[,;/()]', vietnamese_meaning) if p.strip()]
+    return ", ".join(parts) if parts else None
+
+
+# --- TRANSACTION DECORATOR ---
+# Handles connection, cursor, schema initialization, commit/rollback, and closing.
+# `on_error` is what callers get when the database is unreachable or the query blows
+# up; it must match the shape the caller expects (a list stays a list, never None).
+def db_transaction(on_error):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            conn = get_db_connection()
+            if not conn:
+                return copy.deepcopy(on_error)
+
+            try:
+                with conn:
+                    with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                        initialize_schema(cur)  # Always ensure schema exists at the start of a transaction
+                        return func(cur, *args, **kwargs)
+            except Exception as e:
+                print(f"DATABASE EXCEPTION in {func.__name__}: {e}")
+                import traceback
+                traceback.print_exc()
+                return copy.deepcopy(on_error)
+            finally:
                 conn.close()
 
-    return wrapper
+        return wrapper
+
+    return decorator
 
 
 # --- DATABASE INTERACTION FUNCTIONS (wrapped with the decorator) ---
 
-@db_transaction
+@db_transaction(on_error={"status": "error", "message": "A database error occurred."})
 def save_word(cur, word_data, topic_ids=None):
     if not word_data or not word_data.get('word'):
         return {"status": "error", "message": "Word data is invalid."}
@@ -87,14 +110,15 @@ def save_word(cur, word_data, topic_ids=None):
     word_to_save = word_data.get('word')
     insert_sql = """
         INSERT INTO words (word, vietnamese_meaning, english_definition, example, image_url, 
-                           pronunciation_ipa, synonyms_json, family_words_json)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                           pronunciation_ipa, synonyms_json, family_words_json, vietnamese_keywords)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
         ON CONFLICT (word) DO NOTHING;
     """
     data_tuple = (
         word_to_save, word_data.get('vietnamese_meaning'), word_data.get('english_definition'),
         word_data.get('example'), word_data.get('image_url'), word_data.get('pronunciation_ipa'),
-        json.dumps(word_data.get('synonyms', [])), json.dumps(word_data.get('family_words', []))
+        json.dumps(word_data.get('synonyms', [])), json.dumps(word_data.get('family_words', [])),
+        word_data.get('vietnamese_keywords') or derive_keywords(word_data.get('vietnamese_meaning'))
     )
     cur.execute(insert_sql, data_tuple)
     was_newly_inserted = cur.rowcount > 0
@@ -112,7 +136,7 @@ def save_word(cur, word_data, topic_ids=None):
                                                                                        "message": "Word topics updated."}
 
 
-@db_transaction
+@db_transaction(on_error=None)
 def find_word_in_db(cur, word_to_find):
     cur.execute("SELECT * FROM words WHERE word = %s;", (word_to_find,))
     word_data_row = cur.fetchone()
@@ -124,14 +148,14 @@ def find_word_in_db(cur, word_to_find):
     return None
 
 
-@db_transaction
+@db_transaction(on_error=[])
 def get_all_topics(cur):
     query = "SELECT t.id, t.name, COUNT(wt.word_id) as word_count FROM topics t LEFT JOIN word_topics wt ON t.id = wt.topic_id GROUP BY t.id ORDER BY t.name ASC"
     cur.execute(query)
     return [dict(row) for row in cur.fetchall()]
 
 
-@db_transaction
+@db_transaction(on_error=None)
 def add_new_topic(cur, topic_name):
     cur.execute("INSERT INTO topics (name) VALUES (%s) ON CONFLICT (name) DO NOTHING RETURNING id, name;",
                 (topic_name,))
@@ -143,9 +167,9 @@ def add_new_topic(cur, topic_name):
     return dict(new_topic) if new_topic else None
 
 
-@db_transaction
+@db_transaction(on_error=None)
 def get_word_for_exam(cur, topic_ids=None):
-    query = "SELECT w.id, w.word, w.image_url, w.priority_score FROM words w"
+    query = "SELECT w.id, w.word, w.image_url, w.priority_score, w.vietnamese_meaning FROM words w"
     params = []
     if topic_ids:
         # Use tuple for params to avoid SQL injection issues with f-strings
@@ -163,7 +187,7 @@ def get_word_for_exam(cur, topic_ids=None):
     return dict(chosen_word)
 
 
-@db_transaction
+@db_transaction(on_error={"status": "error", "message": "A database error occurred."})
 def update_word_score(cur, word_id, is_correct):
     cur.execute("SELECT priority_score FROM words WHERE id = %s;", (word_id,))
     result = cur.fetchone()
@@ -175,7 +199,7 @@ def update_word_score(cur, word_id, is_correct):
     return {"status": "success", "new_score": new_score}
 
 
-@db_transaction
+@db_transaction(on_error=None)
 def get_correct_answer_by_id(cur, word_id):
     """
     Fetches both the full Vietnamese meaning and the keywords for a given word ID.
@@ -186,11 +210,11 @@ def get_correct_answer_by_id(cur, word_id):
     if result:
         return {
             "correct_answer": result['vietnamese_meaning'],
-            "keywords": result['vietnamese_keywords']
+            "keywords": result['vietnamese_keywords'] or derive_keywords(result['vietnamese_meaning'])
         }
     return None
 
-@db_transaction
+@db_transaction(on_error=[])
 def get_all_saved_words(cur):
     cur.execute("SELECT * FROM words ORDER BY priority_score DESC, word ASC;")
     words = cur.fetchall()
@@ -204,13 +228,13 @@ def get_all_saved_words(cur):
     return results
 
 
-@db_transaction
+@db_transaction(on_error={"status": "error", "message": "A database error occurred."})
 def delete_word_by_id(cur, word_id):
     cur.execute("DELETE FROM words WHERE id = %s;", (word_id,))
     return {"status": "success"} if cur.rowcount > 0 else {"status": "error", "message": "Word not found"}
 
 
-@db_transaction
+@db_transaction(on_error={"status": "error", "message": "A database error occurred."})
 def delete_topic_by_id(cur, topic_id):
     cur.execute("DELETE FROM topics WHERE id = %s;", (topic_id,))
     return {"status": "success"} if cur.rowcount > 0 else {"status": "error", "message": "Topic not found"}

@@ -20,8 +20,15 @@ app = Flask(__name__,
             static_folder=os.path.join(BASE_DIR, 'static'),
             template_folder=os.path.join(BASE_DIR, 'templates'))
 
-# A secret key is required for Flask sessions to work.
-app.secret_key = os.environ.get("FLASK_SECRET_KEY", "a_super_secret_key_for_local_development_only")
+# A secret key is required for Flask sessions to work. On Vercel every instance
+# must sign cookies with the same key, so it has to come from the environment --
+# the fallback below is only good enough for a local run.
+app.secret_key = os.environ.get("FLASK_SECRET_KEY")
+if not app.secret_key:
+    print("WARN: FLASK_SECRET_KEY is not set. Using an insecure development key -- "
+          "anyone could forge the /data session cookie. Set it in your Vercel "
+          "project's Environment Variables.")
+    app.secret_key = "a_super_secret_key_for_local_development_only"
 
 @app.route('/')
 def index():
@@ -51,7 +58,7 @@ def verify_password():
     if not correct_password:
         return jsonify({'error': 'Server configuration error'}), 500
 
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     submitted_password = data.get('password')
 
     if submitted_password == correct_password:
@@ -71,7 +78,7 @@ def get_all_data():
 @app.route('/api/lookup', methods=['POST'])
 def lookup_route():
     """API endpoint to look up a word."""
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     user_word = data.get('word') # Assuming the key is 'word' now
     if not user_word:
         return jsonify({'error': 'No word provided'}), 400
@@ -80,7 +87,7 @@ def lookup_route():
 @app.route('/api/save_word', methods=['POST'])
 def save_word_route():
     """API endpoint to save a word."""
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     word_data = data.get('word_data')
     topic_ids = data.get('topic_ids', [])
     if not word_data:
@@ -91,7 +98,7 @@ def save_word_route():
 @app.route('/api/get_exam_word', methods=['POST'])
 def get_exam_word_route():
     """API endpoint to get a word for the exam."""
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     topic_ids = data.get('topic_ids', None)
     word = get_word_for_exam(topic_ids)
     if word:
@@ -101,7 +108,7 @@ def get_exam_word_route():
 @app.route('/api/submit_answer', methods=['POST'])
 def submit_answer_route():
     """API endpoint to submit an exam answer."""
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     word_id = data.get('id')
     is_correct = data.get('is_correct')
     result = update_word_score(word_id, is_correct)
@@ -138,7 +145,7 @@ def get_topics_route():
 @app.route('/api/add_topic', methods=['POST'])
 def add_topic_route():
     """API endpoint to add a new topic."""
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     topic_name = data.get('topic_name')
     if not topic_name:
         return jsonify({"error": "Topic name cannot be empty."}), 400

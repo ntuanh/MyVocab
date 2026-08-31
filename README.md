@@ -43,7 +43,7 @@
 ## Demo
 [Click hiaaaa:))](./images)
 
-![search](./images/search.png)
+![search](./images/Search.png)
 
 ---
 
@@ -63,27 +63,28 @@
 ```
 MyVocab/
 │
-├── api/                  # Vercel/production entrypoint
-│   └── index.py
+├── api/
+│   └── index.py          # Vercel entrypoint (exposes `app`)
 │
-├── my_website/           # Main Flask app
-│   ├── app.py            # Flask app and routes
-│   ├── handle_request.py # AI, translation, and API logic
-│   ├── database.py       # PostgreSQL DB logic
-│   ├── static/           # JS, CSS, client assets
-│   │   ├── style.css
-│   │   ├── script.js
-│   │   ├── data.js
-│   │   ├── exam.js
-│   │   └── manage_topics.js
-│   └── templates/        # HTML templates (Jinja2)
-│       ├── index.html
-│       ├── exam.html
-│       ├── data.html
-│       └── manage_topics.html
+├── app.py                # Flask app and routes
+├── handle_request.py     # Gemini / Pexels / dictionary lookups
+├── database.py           # PostgreSQL logic + schema migration
+│
+├── static/               # JS, CSS, client assets
+│   ├── style.css
+│   ├── script.js
+│   ├── data.js
+│   ├── exam.js
+│   └── manage_topics.js
+│
+├── templates/            # HTML templates (Jinja2)
+│   ├── index.html
+│   ├── exam.html
+│   ├── data.html
+│   └── manage_topics.html
 │
 ├── requirements.txt      # Python dependencies
-├── myvocab.db            # (Legacy) SQLite database (not used if PostgreSQL is configured)
+├── vercel.json           # Vercel build + routing config
 ├── LICENSE
 └── README.md
 ```
@@ -92,12 +93,42 @@ MyVocab/
 
 ### Database Schema
 
-- `words`: id, word, vietnamese_meaning, english_definition, example, image_url, priority_score, pronunciation_ipa, synonyms_json, family_words_json
+- `words`: id, word, vietnamese_meaning, vietnamese_keywords, english_definition, example, image_url, priority_score, pronunciation_ipa, synonyms_json, family_words_json
 - `topics`: id, name
 - `word_topics`: word_id, topic_id
 
 ---
 
+
+## Deployment (Vercel)
+
+The tables are created automatically on the first request, so a brand new
+PostgreSQL database needs no manual setup.
+
+### Environment Variables
+
+Set these in **Project Settings -> Environment Variables**:
+
+| Variable | Required | Purpose |
+| :--- | :--- | :--- |
+| `DATABASE_URL` | Yes | PostgreSQL connection string (Neon, Supabase, Vercel Postgres...). |
+| `FLASK_SECRET_KEY` | Yes | Signs the session cookie. Without it every deployment shares a public default and the `/data` password can be bypassed. Use a long random value. |
+| `VIEW_DATA_PASSWORD` | Yes | Password for the `/data` page. `/api/verify_password` returns 500 if unset. |
+| `GEMINI_API_KEY` | Yes | Google AI Studio key. Without it lookups return no definition. |
+| `PEXELS_API_KEY` | No | Image lookups; word images are skipped if unset. |
+| `GEMINI_MODEL` | No | Defaults to `gemini-2.5-flash`. Override to change model. |
+
+### Local development
+
+```bash
+python -m venv .venv
+.venv/Scripts/activate        # Windows;  source .venv/bin/activate on macOS/Linux
+pip install -r requirements.txt
+# export the variables above, then:
+flask --app app run --debug
+```
+
+---
 
 ## License
 

@@ -1,7 +1,5 @@
 Flask
-gunicorn
 python-dotenv
-google-generativeai
 googletrans==4.0.0-rc1
 requests
 psycopg2-binary

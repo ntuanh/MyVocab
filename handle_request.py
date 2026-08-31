@@ -4,40 +4,28 @@ import json
 from flask import jsonify
 from concurrent.futures import ThreadPoolExecutor
 
-import google.generativeai as genai
-from google.generativeai.types import HarmCategory, HarmBlockThreshold
 from googletrans import Translator
-from database import find_word_in_db
+from database import find_word_in_db, derive_keywords
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 PEXELS_API_KEY = os.environ.get("PEXELS_API_KEY")
 DICT_API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
 
-gemini_model = None
+# Called over plain REST rather than the google-generativeai SDK: that SDK is end
+# of life and pulls ~120MB of transitive deps into the Vercel bundle for one call.
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models"
+
 translator_client = None
 
-try:
-    if GEMINI_API_KEY:
-        genai.configure(api_key=GEMINI_API_KEY)
-        safety_settings = {
-            HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_ONLY_HIGH,
-            HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_ONLY_HIGH,
-            HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_ONLY_HIGH,
-            HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_ONLY_HIGH,
-        }
-        generation_config = genai.types.GenerationConfig(response_mime_type="application/json")
-        gemini_model = genai.GenerativeModel(
-            'gemini-1.5-flash-latest',
-            generation_config=generation_config,
-            safety_settings=safety_settings
-        )
-        print("INFO: Gemini model initialized successfully.")
-    else:
-        print("WARN: GEMINI_API_KEY not found.")
+if GEMINI_API_KEY:
+    print(f"INFO: Gemini configured with model '{GEMINI_MODEL}'.")
+else:
+    print("WARN: GEMINI_API_KEY not found.")
 
+try:
     translator_client = Translator()
     print("INFO: Googletrans Translator initialized successfully.")
-
 except Exception as e:
     print(f"CRITICAL ERROR during initialization: {e}")
 
@@ -53,8 +41,15 @@ def get_translation(text_to_translate):
         return "N/A"
 
 
+SAFETY_SETTINGS = [
+    {"category": c, "threshold": "BLOCK_ONLY_HIGH"}
+    for c in ("HARM_CATEGORY_HARASSMENT", "HARM_CATEGORY_HATE_SPEECH",
+              "HARM_CATEGORY_SEXUALLY_EXPLICIT", "HARM_CATEGORY_DANGEROUS_CONTENT")
+]
+
+
 def get_content_from_gemini(word):
-    if not gemini_model: return {}
+    if not GEMINI_API_KEY: return {}
     try:
         prompt = f"""
         Analyze the English word "{word}". 
@@ -66,9 +61,23 @@ def get_content_from_gemini(word):
             "family_words": ["related_noun", "related_verb", "related_adjective"]
         }}
         """
-        response = gemini_model.generate_content(prompt, request_options={'timeout': 20})
-        if not response.parts: return {}
-        return json.loads(response.text)
+        response = requests.post(
+            f"{GEMINI_API_URL}/{GEMINI_MODEL}:generateContent",
+            headers={"x-goog-api-key": GEMINI_API_KEY},
+            json={
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {"response_mime_type": "application/json"},
+                "safetySettings": SAFETY_SETTINGS,
+            },
+            timeout=20,
+        )
+        if response.status_code != 200:
+            print(f"ERROR: Gemini returned {response.status_code} for '{word}': {response.text[:300]}")
+            return {}
+
+        parts = response.json()["candidates"][0]["content"]["parts"]
+        text = "".join(p.get("text", "") for p in parts)
+        return json.loads(text) if text else {}
     except Exception as e:
         print(f"ERROR calling Gemini for '{word}': {e}")
         return {}
@@ -112,7 +121,7 @@ def get_dictionary_data(user_word):
         return jsonify({'error': "Please enter a single English word."}), 400
 
     cached_word = find_word_in_db(word_to_lookup)
-    if cached_word:
+    if cached_word and cached_word.get('word'):
         print(f"INFO: Serving '{word_to_lookup}' from cache.")
         cached_word['is_saved'] = True
         return jsonify(cached_word)
@@ -148,6 +157,7 @@ def get_dictionary_data(user_word):
             "family_words": family_words,
             "image_url": image_url,
             "synonyms": dict_data.get("synonyms", []),
+            "vietnamese_keywords": derive_keywords(vietnamese_meaning),
             "is_saved": False
         }
         return jsonify(result_data)

@@ -322,3 +322,49 @@ td:first-child { font-weight: 600; color: var(--panel-dark-blue); }
 .github-star-button .fa-github {
     font-size: 1.1rem;
 }
+
+/* --- Self-assessment question (long meanings) --- */
+#self-assessment-answer {
+    margin-top: 1rem;
+}
+
+/* The meaning stays blurred until "Reveal Answer" is pressed. */
+#self-assessment-answer #hidden-meaning {
+    filter: blur(6px);
+    user-select: none;
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+    transition: filter 0.25s ease;
+}
+
+#self-assessment-answer.revealed #hidden-meaning {
+    filter: none;
+    user-select: auto;
+}
+
+#self-assessment-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.btn-assessment {
+    flex: 1;
+    max-width: 220px;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.btn-assessment:hover {
+    transform: translateY(-2px);
+    filter: brightness(0.95);
+}
+
+.btn-assessment.correct { background-color: #d4edda; color: #155724; }
+.btn-assessment.incorrect { background-color: #f8d7da; color: #721c24; }

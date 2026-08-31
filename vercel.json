@@ -4,21 +4,13 @@
     {
       "src": "api/index.py",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "45mb" }
+      "config": {
+        "maxLambdaSize": "250mb",
+        "includeFiles": "{templates,static}/**"
+      }
     }
   ],
   "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/favicon.png",
-      "dest": "/static/favicon.png"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.py"
-    }
+    { "src": "/(.*)", "dest": "/api/index.py" }
   ]
 }
