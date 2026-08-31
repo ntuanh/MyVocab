@@ -97,18 +97,47 @@ def get_image_from_pexels(query):
 
 
 def get_data_from_dictionary_api(word):
-    default_result = {"pronunciation": "N/A", "synonyms": []}
+    """Pronunciation, synonyms and a fallback definition from the free dictionary API.
+
+    The API returns several entries per word, each with several senses, roughly in
+    Wiktionary order -- for "pink" the first is a species of minnow. So scan every
+    entry and prefer a sense that ships a usage example, which tracks the common
+    meaning far better than simply taking the first one.
+    """
+    default_result = {"pronunciation": "N/A", "synonyms": [], "definition": None, "example": None}
     try:
         response = requests.get(f"{DICT_API_URL}{word}", timeout=10)
-        if response.status_code == 200:
-            data = response.json()[0]
+        if response.status_code != 200:
+            return default_result
 
-            pronunciation = next((p['text'] for p in data.get('phonetics', []) if p.get('text')), "N/A")
+        entries = response.json()
+        pronunciation = "N/A"
+        synonyms = []
+        with_example = None
+        without_example = None
 
-            first_meaning = data.get('meanings', [{}])[0]
-            synonyms = first_meaning.get('synonyms', [])[:5] 
+        for entry in entries:
+            if pronunciation == "N/A":
+                pronunciation = next((p['text'] for p in entry.get('phonetics', []) if p.get('text')),
+                                     "N/A")
+            for meaning in entry.get('meanings', []):
+                if not synonyms:
+                    synonyms = meaning.get('synonyms', [])[:5]
+                for definition in meaning.get('definitions', []):
+                    if not definition.get('definition'):
+                        continue
+                    if definition.get('example') and with_example is None:
+                        with_example = definition
+                    elif without_example is None:
+                        without_example = definition
 
-            return {"pronunciation": pronunciation, "synonyms": synonyms}
+        chosen = with_example or without_example or {}
+        return {
+            "pronunciation": pronunciation,
+            "synonyms": synonyms,
+            "definition": chosen.get('definition'),
+            "example": chosen.get('example'),
+        }
     except Exception as e:
         print(f"ERROR calling Dictionary API for '{word}': {e}")
 
@@ -141,6 +170,16 @@ def get_dictionary_data(user_word):
         vietnamese_meaning = gemini_data.get("vietnamese_meaning")
         example = gemini_data.get("example_sentence")
         family_words = gemini_data.get("family_words", [])
+
+        # Gemini is the best source but not the only one. If it is unavailable
+        # (no key, quota, retired model) fall back to the free dictionary API
+        # rather than discarding a lookup the other sources answered.
+        if not english_definition:
+            english_definition = dict_data.get("definition")
+            if english_definition:
+                print(f"INFO: Gemini unavailable for '{word_to_lookup}'; used dictionary API definition.")
+        if not example:
+            example = dict_data.get("example")
 
         if english_definition and (not vietnamese_meaning or vietnamese_meaning.strip() == ""):
             vietnamese_meaning = get_translation(english_definition)
