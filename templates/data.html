@@ -13,8 +13,80 @@
     <div id="data-container">
         <div class="data-header">
             <h1 class="data-title">Your Saved Words</h1>
-            <a href="/manage_topics" class="btn-manage-topics">Manage Topics</a>
+            <div class="data-header-actions">
+                <button type="button" id="stats-btn" class="btn-stats"
+                        aria-expanded="false" aria-controls="stats-panel">
+                    <i class="fas fa-chart-bar"></i> <span id="stats-btn-label">Show Progress</span>
+                </button>
+                <a href="/manage_topics" class="btn-manage-topics">Manage Topics</a>
+            </div>
         </div>
+
+        <!-- Filled in by data.js from the words already fetched for the table,
+             so opening the panel costs no extra request. -->
+        <section id="stats-panel" class="stats-panel" hidden aria-labelledby="stats-heading">
+            <h2 id="stats-heading" class="stats-heading">Your progress</h2>
+
+            <!-- Hero figure: the one number this panel leads with. -->
+            <div class="stats-total">
+                <span class="stats-total-value" id="stat-total">0</span>
+                <span class="stats-total-label">words saved in total</span>
+            </div>
+
+            <!-- The headline ratio: learned against everything saved. A meter, not a
+                 two-slice pie -- one value against a limit reads better on a track. -->
+            <div class="viz-block">
+                <div class="meter-head">
+                    <h3 class="viz-title">Learned so far</h3>
+                    <span class="meter-readout" id="meter-readout">0 of 0</span>
+                </div>
+                <div class="meter" id="meter" tabindex="0" role="img" aria-label="No saved words yet.">
+                    <div class="meter-fill" id="meter-fill"></div>
+                </div>
+                <div class="meter-foot">
+                    <span id="meter-learned-label">0 learned</span>
+                    <span id="meter-remaining-label">0 not learned yet</span>
+                </div>
+            </div>
+
+            <!-- Part-to-whole: the same words split three ways. The buckets are an
+                 ordered scale (most known -> least), so the fills are one hue
+                 stepped light to dark rather than three unrelated colours. -->
+            <div class="viz-block">
+                <h3 class="viz-title">Where every word stands</h3>
+                <div class="stats-bar" id="stats-bar"></div>
+
+                <!-- Doubles as the legend: swatch + name + value, so identity never
+                     rests on colour alone. -->
+                <div class="stats-tiles">
+                    <div class="stat-tile">
+                        <span class="stat-swatch swatch-learned"></span>
+                        <span class="stat-value" id="stat-learned">0</span>
+                        <span class="stat-label">Learned
+                            <small>score 1&ndash;4 &middot; you got these right</small></span>
+                    </div>
+                    <div class="stat-tile">
+                        <span class="stat-swatch swatch-untested"></span>
+                        <span class="stat-value" id="stat-untested">0</span>
+                        <span class="stat-label">Not tested yet
+                            <small>score 5 &middot; the starting score</small></span>
+                    </div>
+                    <div class="stat-tile">
+                        <span class="stat-swatch swatch-practice"></span>
+                        <span class="stat-value" id="stat-practice">0</span>
+                        <span class="stat-label">Needs practice
+                            <small>score 6+ &middot; more misses than hits</small></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="stats-note">
+                Every word starts at <strong>5</strong>. A right answer in the exam lowers its
+                score, a wrong answer raises it &mdash; so a word counts as
+                <strong>learned</strong> once its score drops below 5, and anything at 5 or
+                above is still on your to-do list.
+            </p>
+        </section>
 
         <div class="table-container">
             <table>
@@ -23,12 +95,13 @@
                         <th>Word</th>
                         <th>Definition</th>
                         <th>Score</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="data-table-body">
                     <tr>
-                        <td colspan="4">Loading data...</td>
+                        <td colspan="5">Loading data...</td>
                     </tr>
                 </tbody>
             </table>
@@ -36,6 +109,9 @@
 
         <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dictionary</a>
     </div>
+
+    <!-- Shared hover/focus readout for the meter and the bar segments. -->
+    <div id="viz-tooltip" class="viz-tooltip" role="status" hidden></div>
 
     <!-- Link to the new data page script -->
     <script src="{{ url_for('static', filename='data.js') }}"></script>

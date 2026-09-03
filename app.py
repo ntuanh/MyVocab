@@ -1,4 +1,14 @@
 import os
+
+# Local runs keep credentials in a .env file; on Vercel the same names arrive as
+# project Environment Variables and there is nothing to load. This has to run
+# before the imports below, which read os.environ at module scope.
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 
 from handle_request import get_dictionary_data

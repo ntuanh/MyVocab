@@ -1,4 +1,5 @@
 import os
+import time
 import requests
 import json
 from flask import jsonify
@@ -16,12 +17,40 @@ DICT_API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models"
 
+# The three upstream fetches run in parallel, so a lookup costs roughly the
+# slowest of them plus the translation step. Keep the total comfortably inside
+# the Vercel function time limit.
+GEMINI_TIMEOUT = float(os.environ.get("GEMINI_TIMEOUT", 8))
+PEXELS_TIMEOUT = float(os.environ.get("PEXELS_TIMEOUT", 5))
+
+# api.dictionaryapi.dev has a bimodal response time: usually well under a second,
+# but a slice of requests stall for 20s or more. A request that has already
+# stalled rarely recovers, so a short per-attempt timeout with a fresh retry
+# beats one long wait. DICT_DEADLINE caps what the retries cost in total.
+# A healthy response lands in well under a second, so 3s is already generous and
+# leaves room for three real tries inside the deadline.
+DICT_ATTEMPT_TIMEOUT = float(os.environ.get("DICT_ATTEMPT_TIMEOUT", 3))
+DICT_MAX_ATTEMPTS = int(os.environ.get("DICT_MAX_ATTEMPTS", 3))
+DICT_DEADLINE = float(os.environ.get("DICT_DEADLINE", 8))
+# Below this much budget left, a further attempt would time out before a healthy
+# response could arrive, so spend the remainder on failing fast instead.
+DICT_MIN_ATTEMPT_TIMEOUT = 1.0
+
+# Outcome of an upstream call. UNAVAILABLE and NOT_FOUND have to stay distinct:
+# only NOT_FOUND is evidence that a word does not exist.
+OK = "ok"
+NOT_FOUND = "not_found"
+UNAVAILABLE = "unavailable"
+SKIPPED = "skipped"
+
 translator_client = None
 
 if GEMINI_API_KEY:
     print(f"INFO: Gemini configured with model '{GEMINI_MODEL}'.")
 else:
-    print("WARN: GEMINI_API_KEY not found.")
+    print("WARN: GEMINI_API_KEY not found. Every lookup will fall back to the "
+          "dictionary API, so there will be no family words and no Gemini "
+          "definitions. Set it in your Vercel project's Environment Variables.")
 
 try:
     translator_client = Translator()
@@ -49,7 +78,11 @@ SAFETY_SETTINGS = [
 
 
 def get_content_from_gemini(word):
-    if not GEMINI_API_KEY: return {}
+    """Returns (content, status). An empty content dict is never silent -- the
+    status and the log line say whether the key was missing, the call failed, or
+    the model declined to answer."""
+    if not GEMINI_API_KEY:
+        return {}, SKIPPED
     try:
         prompt = f"""
         Analyze the English word "{word}". 
@@ -69,31 +102,70 @@ def get_content_from_gemini(word):
                 "generationConfig": {"response_mime_type": "application/json"},
                 "safetySettings": SAFETY_SETTINGS,
             },
-            timeout=20,
+            timeout=GEMINI_TIMEOUT,
         )
         if response.status_code != 200:
             print(f"ERROR: Gemini returned {response.status_code} for '{word}': {response.text[:300]}")
-            return {}
+            return {}, UNAVAILABLE
 
-        parts = response.json()["candidates"][0]["content"]["parts"]
+        payload = response.json()
+        candidates = payload.get("candidates") or []
+        if not candidates:
+            # A safety block or a truncated generation comes back with no
+            # candidate at all rather than with an error status.
+            print(f"WARN: Gemini returned no candidates for '{word}': {json.dumps(payload)[:300]}")
+            return {}, UNAVAILABLE
+
+        parts = candidates[0].get("content", {}).get("parts", [])
         text = "".join(p.get("text", "") for p in parts)
-        return json.loads(text) if text else {}
+        if not text:
+            print(f"WARN: Gemini returned an empty body for '{word}'.")
+            return {}, UNAVAILABLE
+        return json.loads(text), OK
     except Exception as e:
         print(f"ERROR calling Gemini for '{word}': {e}")
-        return {}
+        return {}, UNAVAILABLE
 
 
 def get_image_from_pexels(query):
     if not PEXELS_API_KEY: return None
     try:
         response = requests.get("https://api.pexels.com/v1/search", headers={"Authorization": PEXELS_API_KEY},
-                                params={"query": query, "per_page": 1}, timeout=10)
+                                params={"query": query, "per_page": 1}, timeout=PEXELS_TIMEOUT)
         if response.status_code == 200:
             data = response.json()
             return data["photos"][0]["src"]["large"] if data.get("photos") else None
     except Exception as e:
         print(f"ERROR calling Pexels for '{query}': {e}")
         return None
+
+
+def _fetch_dictionary_entries(word):
+    """Returns (entries, status). Retries a stalled or failed request until
+    DICT_DEADLINE, and reports NOT_FOUND only when the API itself answered 404."""
+    deadline = time.monotonic() + DICT_DEADLINE
+    last_error = None
+
+    for attempt in range(1, DICT_MAX_ATTEMPTS + 1):
+        remaining = deadline - time.monotonic()
+        if remaining < DICT_MIN_ATTEMPT_TIMEOUT:
+            break
+        try:
+            response = requests.get(f"{DICT_API_URL}{word}",
+                                    timeout=min(DICT_ATTEMPT_TIMEOUT, remaining))
+            if response.status_code == 404:
+                return None, NOT_FOUND
+            if response.status_code != 200:
+                last_error = f"HTTP {response.status_code}"
+            else:
+                return response.json(), OK
+        except Exception as e:
+            last_error = e
+        print(f"WARN: Dictionary API attempt {attempt}/{DICT_MAX_ATTEMPTS} for "
+              f"'{word}' failed: {last_error}")
+
+    print(f"ERROR: Dictionary API unavailable for '{word}': {last_error}")
+    return None, UNAVAILABLE
 
 
 def get_data_from_dictionary_api(word):
@@ -104,44 +176,40 @@ def get_data_from_dictionary_api(word):
     entry and prefer a sense that ships a usage example, which tracks the common
     meaning far better than simply taking the first one.
     """
-    default_result = {"pronunciation": "N/A", "synonyms": [], "definition": None, "example": None}
-    try:
-        response = requests.get(f"{DICT_API_URL}{word}", timeout=10)
-        if response.status_code != 200:
-            return default_result
+    entries, status = _fetch_dictionary_entries(word)
+    if entries is None:
+        return {"pronunciation": "N/A", "synonyms": [], "definition": None,
+                "example": None, "status": status}
 
-        entries = response.json()
-        pronunciation = "N/A"
-        synonyms = []
-        with_example = None
-        without_example = None
+    pronunciation = "N/A"
+    synonyms = []
+    with_example = None
+    without_example = None
 
-        for entry in entries:
-            if pronunciation == "N/A":
-                pronunciation = next((p['text'] for p in entry.get('phonetics', []) if p.get('text')),
-                                     "N/A")
-            for meaning in entry.get('meanings', []):
-                if not synonyms:
-                    synonyms = meaning.get('synonyms', [])[:5]
-                for definition in meaning.get('definitions', []):
-                    if not definition.get('definition'):
-                        continue
-                    if definition.get('example') and with_example is None:
-                        with_example = definition
-                    elif without_example is None:
-                        without_example = definition
+    for entry in entries:
+        if pronunciation == "N/A":
+            pronunciation = next((p['text'] for p in entry.get('phonetics', []) if p.get('text')),
+                                 "N/A")
+        for meaning in entry.get('meanings', []):
+            if not synonyms:
+                synonyms = meaning.get('synonyms', [])[:5]
+            for definition in meaning.get('definitions', []):
+                if not definition.get('definition'):
+                    continue
+                if definition.get('example') and with_example is None:
+                    with_example = definition
+                elif without_example is None:
+                    without_example = definition
 
-        chosen = with_example or without_example or {}
-        return {
-            "pronunciation": pronunciation,
-            "synonyms": synonyms,
-            "definition": chosen.get('definition'),
-            "example": chosen.get('example'),
-        }
-    except Exception as e:
-        print(f"ERROR calling Dictionary API for '{word}': {e}")
-
-    return default_result
+    chosen = with_example or without_example or {}
+    return {
+        "pronunciation": pronunciation,
+        "synonyms": synonyms,
+        "definition": chosen.get('definition'),
+        "example": chosen.get('example'),
+        # The API answered, so an entry carrying no usable sense is a real miss.
+        "status": OK if chosen else NOT_FOUND,
+    }
 
 
 def get_dictionary_data(user_word):
@@ -162,7 +230,7 @@ def get_dictionary_data(user_word):
             image_future = executor.submit(get_image_from_pexels, word_to_lookup)
             dict_api_future = executor.submit(get_data_from_dictionary_api, word_to_lookup)
 
-            gemini_data = gemini_future.result()
+            gemini_data, gemini_status = gemini_future.result()
             image_url = image_future.result()
             dict_data = dict_api_future.result()
 
@@ -185,7 +253,20 @@ def get_dictionary_data(user_word):
             vietnamese_meaning = get_translation(english_definition)
 
         if not english_definition and not vietnamese_meaning:
-            return jsonify({'error': f"Could not find information for '{word_to_lookup}'."}), 404
+            # Only call a word missing when every source actually answered. A
+            # dictionary API timeout says nothing about whether the word exists,
+            # and telling the user it does not is both wrong and unactionable.
+            if gemini_status == UNAVAILABLE or dict_data.get("status") == UNAVAILABLE:
+                print(f"WARN: No source reachable for '{word_to_lookup}' "
+                      f"(gemini={gemini_status}, dictionary={dict_data.get('status')}).")
+                return jsonify({
+                    'error': f"Could not reach the dictionary service for '{word_to_lookup}'. Please try again.",
+                    'retryable': True,
+                }), 503
+            return jsonify({
+                'error': f"Could not find information for '{word_to_lookup}'.",
+                'retryable': False,
+            }), 404
 
         result_data = {
             "word": word_to_lookup,

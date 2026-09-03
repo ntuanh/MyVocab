@@ -184,6 +184,143 @@ body {
     transition: background-color 0.2s, transform 0.2s;
 }
 .btn-manage-topics:hover { background-color: #3b467a; transform: translateY(-2px); }
+
+/* --- 5a. PROGRESS PANEL (saved-word statistics) --- */
+/* The three buckets are an ORDERED scale -- best known, then untested, then
+   worst known -- so the fills are one blue hue stepped light-to-dark, with dark
+   meaning "most mastered". A green/amber/red set was rejected: green vs red
+   measures only dE 5.7 under deuteranopia (validated, hard fail), while a single
+   hue separates by lightness and so survives every colour-vision deficiency.
+   Steps validated as an ordinal ramp against this panel's #f8f9fa surface;
+   every in-segment label clears 4.5:1 against its own fill. */
+/* Scoped to the page, not the panel: the table's Status column paints the same
+   swatches, and it lives outside .stats-panel. */
+.data-body {
+    --learned:   #0d366b;   /* darkest  -- score 1-4 */
+    --untested:  #256abf;   /* mid      -- score 5   */
+    --practice:  #86b6ef;   /* lightest -- score 6+  */
+    --meter-track: #cde2fb; /* same ramp, below the data range */
+    --viz-surface: #f8f9fa;
+    --ink-primary: #212529;
+    --ink-secondary: #495057;
+    --ink-muted: #868e96;
+}
+.stats-panel {
+    background-color: var(--viz-surface);
+    border: 1px solid #e9ecef;
+    border-radius: 14px;
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+}
+.stats-heading {
+    margin: 0 0 1.25rem; font-size: 1.1rem; font-weight: 600;
+    color: var(--ink-secondary); letter-spacing: 0.01em;
+}
+
+.data-header-actions { display: flex; align-items: center; gap: 0.75rem; }
+.btn-stats {
+    font-family: inherit; font-size: 1rem; font-weight: 500;
+    background-color: #fff; color: var(--panel-dark-blue);
+    border: 2px solid var(--panel-dark-blue);
+    padding: 0.6rem 1.3rem; border-radius: 10px; cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+.btn-stats:hover { background-color: var(--panel-dark-blue); color: #fff; transform: translateY(-2px); }
+.btn-stats[aria-expanded="true"] { background-color: var(--panel-dark-blue); color: #fff; }
+
+/* Hero figure -- proportional figures, not tabular: at 3.4rem equal-width
+   digits make a number like 121 look loose. */
+.stats-total { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 1.75rem; }
+.stats-total-value {
+    font-size: 3.4rem; font-weight: 600; line-height: 1;
+    color: var(--ink-primary);
+}
+.stats-total-label { font-size: 1rem; color: #6c757d; }
+
+.viz-block { margin-bottom: 1.75rem; }
+.viz-title {
+    margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--ink-secondary);
+}
+.meter-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.meter-readout { font-size: 0.95rem; font-weight: 600; color: var(--ink-primary); }
+
+/* One value against a limit: a filled track, not a two-slice pie. The unfilled
+   remainder is a lighter step of the same ramp so the whole bar reads as one scale. */
+.meter {
+    height: 34px; margin-top: 0.7rem; border-radius: 6px;
+    background-color: var(--meter-track); overflow: hidden; cursor: default;
+}
+.meter-fill {
+    height: 100%; width: 0; background-color: var(--learned);
+    border-radius: 6px 4px 4px 6px;
+    transition: width 0.45s ease-out;
+}
+.meter-foot {
+    display: flex; justify-content: space-between; gap: 1rem;
+    margin-top: 0.5rem; font-size: 0.85rem; color: var(--ink-muted);
+}
+
+/* Part-to-whole: one bar, segments sized by share, a 2px surface gap so fills
+   never touch (the gap separates them -- never a border). */
+.stats-bar { display: flex; gap: 2px; height: 34px; margin-top: 0.9rem; }
+/* display:flex outranks the UA's [hidden] rule, so hide it explicitly. */
+.stats-bar[hidden] { display: none; }
+.stats-bar-segment {
+    flex-basis: 0; min-width: 4px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 600; cursor: default;
+    transition: filter 0.15s;
+}
+.stats-bar-segment:hover, .stats-bar-segment:focus-visible { filter: brightness(1.12); }
+.meter:focus-visible, .stats-bar-segment:focus-visible {
+    outline: 2px solid var(--panel-dark-blue); outline-offset: 2px;
+}
+
+/* Fills carry identity; the ink on top is picked by the fill's luminance. */
+.swatch-learned  { background-color: var(--learned);  color: #fff; }
+.swatch-untested { background-color: var(--untested); color: #fff; }
+.swatch-practice { background-color: var(--practice); color: #0b0b0b; }
+
+.stats-tiles { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.1rem; }
+.stat-tile {
+    flex: 1 1 190px; display: grid; gap: 0 0.6rem; align-items: center;
+    grid-template-columns: auto auto 1fr;
+    background-color: #fff; border: 1px solid #e9ecef;
+    border-radius: 12px; padding: 0.9rem 1.1rem;
+}
+.stat-swatch { width: 12px; height: 12px; border-radius: 3px; }
+.stat-value { font-size: 1.7rem; font-weight: 600; color: var(--ink-primary); }
+.stat-label { font-size: 0.9rem; font-weight: 500; color: var(--ink-secondary); }
+.stat-label small { display: block; font-weight: 400; color: var(--ink-muted); font-size: 0.78rem; }
+
+.stats-note { margin: 0; font-size: 0.85rem; color: #6c757d; line-height: 1.55; }
+.stats-note strong { color: var(--ink-secondary); }
+
+/* Hover/focus readout. Values lead, the bucket name follows. */
+.viz-tooltip {
+    position: fixed; z-index: 3000; pointer-events: none;
+    background-color: #212529; color: #fff;
+    padding: 0.5rem 0.75rem; border-radius: 8px;
+    font-size: 0.85rem; line-height: 1.35;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+    max-width: 240px;
+}
+.viz-tooltip[hidden] { display: none; }
+.viz-tooltip .tip-value { font-weight: 600; }
+.viz-tooltip .tip-name { color: #ced4da; }
+
+/* Table-view twin of the chart: the same buckets as words, no colour needed. */
+.status-cell { white-space: nowrap; font-size: 0.85rem; color: var(--ink-secondary); }
+.status-cell .stat-swatch { display: inline-block; margin-right: 0.45rem; vertical-align: middle; }
+
+@media (max-width: 600px) {
+    .data-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .stats-tiles { flex-direction: column; }
+    /* Once stacked, flex-basis governs HEIGHT -- leaving the 190px row basis in
+       place stretches every tile into a tall empty card. Size to content instead. */
+    .stat-tile { flex: 0 0 auto; }
+    .stats-total-value { font-size: 2.8rem; }
+}
 .table-container { width: 100%; overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: 1rem; border-bottom: 1px solid #e9ecef; text-align: left; vertical-align: middle; }

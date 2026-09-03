@@ -154,6 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateUI(data);
             } else {
                 resetUI(data.error || 'An unknown error occurred.');
+                // A retryable failure means the upstream dictionary stalled, not
+                // that the word is missing -- searching again usually works.
+                if (data.retryable) {
+                    showToast('Dictionary service is busy. Please search again.', 'error');
+                }
             }
         } catch (error) {
             resetUI('Failed to connect to the server.');
