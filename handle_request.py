@@ -14,7 +14,11 @@ DICT_API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
 
 # Called over plain REST rather than the google-generativeai SDK: that SDK is end
 # of life and pulls ~120MB of transitive deps into the Vercel bundle for one call.
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+# Google retires a model name without removing it from ListModels: gemini-2.5-flash
+# still appears there but answers generateContent with 404 "no longer available to
+# new users", which took every uncached lookup down. Pin a current model here and
+# expect to move it again -- GEMINI_MODEL overrides it without a code change.
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models"
 
 # The three upstream fetches run in parallel, so a lookup costs roughly the

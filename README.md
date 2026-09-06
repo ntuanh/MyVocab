@@ -116,7 +116,7 @@ Set these in **Project Settings -> Environment Variables**:
 | `VIEW_DATA_PASSWORD` | Yes | Password for the `/data` page. `/api/verify_password` returns 500 if unset. |
 | `GEMINI_API_KEY` | Yes | Google AI Studio key. Without it lookups return no definition. |
 | `PEXELS_API_KEY` | No | Image lookups; word images are skipped if unset. |
-| `GEMINI_MODEL` | No | Defaults to `gemini-2.5-flash`. Override to change model. |
+| `GEMINI_MODEL` | No | Defaults to `gemini-3.6-flash`. Set this if that model is ever retired. |
 
 ### Local development
 
