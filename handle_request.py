@@ -24,7 +24,13 @@ GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models"
 # The three upstream fetches run in parallel, so a lookup costs roughly the
 # slowest of them plus the translation step. Keep the total comfortably inside
 # the Vercel function time limit.
-GEMINI_TIMEOUT = float(os.environ.get("GEMINI_TIMEOUT", 8))
+#
+# 8s used to be generous here and is now the reason lookups fail: gemini-3.6-flash
+# thinks before it answers -- a one word prompt already spends ~160 thought tokens
+# -- which puts a real lookup between 5s and 19s. thinkingBudget:0 is rejected by
+# this model, so the latency cannot be turned off and the budget has to absorb it.
+# Most answers land near 6s; the ceiling is for the slow tail.
+GEMINI_TIMEOUT = float(os.environ.get("GEMINI_TIMEOUT", 20))
 PEXELS_TIMEOUT = float(os.environ.get("PEXELS_TIMEOUT", 5))
 
 # api.dictionaryapi.dev has a bimodal response time: usually well under a second,
