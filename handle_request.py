@@ -18,19 +18,21 @@ DICT_API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
 # still appears there but answers generateContent with 404 "no longer available to
 # new users", which took every uncached lookup down. Pin a current model here and
 # expect to move it again -- GEMINI_MODEL overrides it without a code change.
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
+#
+# A -lite model, not the full flash: the free tier grants only 20 requests a DAY
+# per model (GenerateRequestsPerDayPerProjectPerModel-FreeTier), which gemini-3.6
+# -flash burns through in one sitting, and that model also reasons before it
+# answers -- 5s to 19s a word. This one reports zero thought tokens and returns in
+# about a second, which is what a search box needs.
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite")
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models"
 
 # The three upstream fetches run in parallel, so a lookup costs roughly the
 # slowest of them plus the translation step. Keep the total comfortably inside
 # the Vercel function time limit.
-#
-# 8s used to be generous here and is now the reason lookups fail: gemini-3.6-flash
-# thinks before it answers -- a one word prompt already spends ~160 thought tokens
-# -- which puts a real lookup between 5s and 19s. thinkingBudget:0 is rejected by
-# this model, so the latency cannot be turned off and the budget has to absorb it.
-# Most answers land near 6s; the ceiling is for the slow tail.
-GEMINI_TIMEOUT = float(os.environ.get("GEMINI_TIMEOUT", 20))
+# The lite model answers in about a second, so this is headroom for a slow tail
+# rather than a figure to tune; a thinking model would need far more than this.
+GEMINI_TIMEOUT = float(os.environ.get("GEMINI_TIMEOUT", 10))
 PEXELS_TIMEOUT = float(os.environ.get("PEXELS_TIMEOUT", 5))
 
 # api.dictionaryapi.dev has a bimodal response time: usually well under a second,
