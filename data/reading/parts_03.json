@@ -1,0 +1,567 @@
+{
+ "parts": [
+  {
+   "id": 11,
+   "title": "Building with Bamboo",
+   "topic": "Technology",
+   "paragraphs": [
+    "Bamboo looks like a tree, but it is actually a giant grass, and it is one of the fastest-growing plants on Earth. Some species can grow by close to a metre in a single day, and while a hardwood tree may need fifty years or more before it can be harvested for timber, bamboo is usually ready to use within three to five years. When the stems, known as culms, are cut, the plant is not killed: new shoots grow up from the same underground root system, so a bamboo forest can be harvested again and again.",
+    "For thousands of years, people across Asia, Africa and Latin America have used bamboo to build houses, bridges, furniture and tools. In Hong Kong, it is still the material of choice for scaffolding, and workers can be seen tying bamboo poles together around the tallest skyscrapers. The material is light enough to be carried by hand, yet surprisingly strong, and it bends without breaking in strong winds, which is one reason it has performed well in some earthquakes.",
+    "Engineers who have tested bamboo describe it as remarkably strong for its weight. When it is pulled, its long fibres resist breaking so well that its strength compares favourably with some types of steel. This strength comes from the structure of the culm: a hollow tube divided at intervals by solid walls called nodes, with the strongest fibres concentrated near the outer surface. A hollow shape like this is one of the most efficient ways to combine lightness and stiffness.",
+    "Bamboo also has a reputation as an environmentally friendly material. Because it grows so fast, it takes in large amounts of carbon dioxide, and some of that carbon remains locked inside bamboo products for as long as they last. Its roots help to hold soil together on slopes, reducing erosion, and plantations can often be established on land that is too poor for other crops.",
+    "There are, however, good reasons why bamboo has not replaced timber and concrete. Untreated bamboo rots when it is in contact with damp ground and is attacked by insects and fungi, so buildings made from it have often lasted only a few years. It also burns easily. Another problem is that every culm is different: diameters, wall thicknesses and the spacing of nodes vary, which makes it hard for engineers to calculate exactly how a structure will behave, and building codes in many countries do not cover it at all.",
+    "Modern techniques are addressing these weaknesses. Soaking culms in solutions of boron salts protects them against insects and decay, and good design keeps bamboo away from rain and damp ground. Factories now also produce engineered bamboo by cutting culms into strips and gluing them together into flat boards and beams of standard sizes. These products behave far more predictably than whole culms, and architects have used them to create striking public buildings.",
+    "Bamboo also has a curious life cycle. Many species flower only once every few decades, and when they do, all the plants of that species in a region tend to flower at the same time and then die. Such mass flowering can suddenly remove an entire supply of building material, a reminder that even the fastest-growing resource has its limits."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Cutting down a bamboo culm kills the whole plant.",
+       "a": "FALSE",
+       "p": "A"
+      },
+      {
+       "q": "Bamboo scaffolding is still used in Hong Kong.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Bamboo houses are cheaper to build than houses made of concrete.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "The strongest fibres in a bamboo culm are found near its centre.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Untreated bamboo buildings have often lasted only a short time.",
+       "a": "TRUE",
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The stems of bamboo are known as ____.",
+       "a": [
+        "culms"
+       ],
+       "p": "A"
+      },
+      {
+       "q": "The solid walls dividing the hollow stem are called ____.",
+       "a": [
+        "nodes"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Bamboo roots help to reduce ____ on slopes.",
+       "a": [
+        "erosion"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Culms can be protected by soaking them in solutions of ____.",
+       "a": [
+        "boron salts"
+       ],
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "Why is it hard for engineers to design with whole bamboo culms?",
+       "options": [
+        "They cannot be joined together.",
+        "They are too heavy to lift.",
+        "They are not strong enough.",
+        "Each culm has different measurements."
+       ],
+       "a": "D",
+       "p": "E"
+      },
+      {
+       "q": "Engineered bamboo is made by",
+       "options": [
+        "growing bamboo in factories.",
+        "gluing strips into boards and beams.",
+        "mixing bamboo with concrete.",
+        "heating culms until they harden."
+       ],
+       "a": "B",
+       "p": "F"
+      },
+      {
+       "q": "What does the writer say about the flowering of bamboo?",
+       "options": [
+        "It can suddenly destroy a supply of bamboo.",
+        "It occurs only in Asia.",
+        "It happens every year.",
+        "It makes bamboo stronger."
+       ],
+       "a": "A",
+       "p": "G"
+      },
+      {
+       "q": "Which of the following is NOT mentioned as a weakness of bamboo?",
+       "options": [
+        "It rots in damp ground.",
+        "It burns easily.",
+        "It is too expensive to transport.",
+        "It is attacked by insects."
+       ],
+       "a": "C",
+       "p": "E"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 12,
+   "title": "How Birds Find Their Way",
+   "topic": "Nature",
+   "paragraphs": [
+    "Every year, billions of birds make journeys that would challenge the best human navigators. The Arctic tern travels between the far north and Antarctica and back, covering tens of thousands of kilometres. Tiny songbirds weighing less than a coin fly across deserts and seas, often at night, and many return to exactly the same garden or nesting site year after year. How they find their way has puzzled scientists for centuries, and the full answer is still not known.",
+    "One important clue came from experiments with caged birds. During the migration season, birds kept in cages become restless and spend much of their time hopping and fluttering in one direction, the direction in which they would be flying if they were free. By changing the conditions around the cage, researchers could test which signals the birds were using to choose that direction.",
+    "Birds that migrate by day can use the sun as a compass. Because the sun's position changes during the day, this requires an accurate internal clock. When scientists shifted birds' body clocks by keeping them under artificial lights at the wrong times, the birds chose the wrong direction, by exactly the amount that the sun would have moved in the time difference. Night-flying birds, meanwhile, can use the stars. In the 1960s, the American scientist Stephen Emlen placed young buntings in a planetarium and showed that they learned to orient themselves by the pattern of stars rotating around the North Star.",
+    "Birds can also sense the Earth's magnetic field. Experiments with European robins showed that they kept their direction even when they could see neither sun nor stars, and that they became confused when the magnetic field around them was altered. How birds detect magnetism is still debated. One leading theory suggests that special molecules in the eye may allow birds to see the magnetic field as a pattern laid over their normal vision.",
+    "Other senses play a part too. Seabirds such as shearwaters seem to rely on smell to find their way over the featureless ocean, and birds whose sense of smell has been blocked in experiments have had difficulty returning home. Close to the end of a journey, many birds also recognise familiar landmarks such as coastlines, rivers and mountain ranges.",
+    "Perhaps most remarkable is that some birds know where to go without being shown. Young cuckoos are raised by birds of other species and never meet their own parents, yet in their first autumn they fly alone from Europe to the forests of central Africa. This suggests that the direction and distance of the journey are, to a large extent, inherited.",
+    "Human activity is making these journeys harder. Bright city lights at night can attract and confuse birds flying in the dark, causing many to crash into buildings. Some cities now ask owners of tall buildings to switch off unnecessary lights during the main migration seasons, a simple step that has been shown to save large numbers of birds."
+   ],
+   "groups": [
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "an example of birds that make long journeys without any adult guide",
+       "a": "F"
+      },
+      {
+       "q": "a description of a method used to discover which direction caged birds wanted to fly",
+       "a": "B"
+      },
+      {
+       "q": "a way in which towns and cities are trying to protect migrating birds",
+       "a": "G"
+      },
+      {
+       "q": "a possible explanation of how birds detect magnetism",
+       "a": "D"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Many small songbirds migrate during the night.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "Birds with altered body clocks still flew in the correct direction.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Emlen's buntings were born in the planetarium.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Scientists agree on exactly how birds sense magnetism.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "Shearwaters use their sense of smell to navigate at sea.",
+       "a": "TRUE",
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Using the sun as a compass requires an accurate ____.",
+       "a": [
+        "internal clock"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Emlen's birds oriented themselves using the stars rotating around the ____.",
+       "a": [
+        "North Star"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Near the end of their journey, birds may recognise landmarks such as ____, rivers and mountains.",
+       "a": [
+        "coastlines"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Young cuckoos fly alone to the forests of ____.",
+       "a": [
+        "central Africa"
+       ],
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 13,
+   "title": "A Short History of Paper",
+   "topic": "History",
+   "paragraphs": [
+    "Paper is so common today that it is easy to forget how revolutionary it once was. Before it existed, people wrote on a wide range of materials. The ancient Egyptians used papyrus, made by pressing together thin strips cut from the stems of a water plant. In Europe, important documents were written on parchment, prepared from the skins of animals, which was durable but expensive. In China, people wrote on strips of bamboo, which were heavy, and on silk, which was costly.",
+    "True paper is made in a different way. Plant fibres are broken down in water until they separate, and the resulting mixture is lifted out on a fine screen. As the water drains away, the fibres mat together into a thin sheet, which is then pressed and dried. Chinese tradition credits a court official named Cai Lun with presenting this invention to the emperor in the year 105, using materials such as tree bark, hemp, old rags and fishing nets. Archaeologists have since found fragments of paper that are older than this, so Cai Lun probably improved and promoted the process rather than inventing it.",
+    "For several centuries, papermaking remained a Chinese skill. It spread first to Korea and Japan, and then westward. According to a well-known story, Chinese papermakers were captured after a battle near the city of Samarkand in Central Asia in 751 and taught their craft to their captors. Whether or not this is true, papermaking was soon flourishing in Samarkand, and by the end of the eighth century there was a paper mill in Baghdad.",
+    "Paper transformed the Islamic world. Cheaper than parchment and easier to produce, it allowed scholars to copy and circulate large numbers of books on science, medicine, mathematics and philosophy. Great libraries were established, and the book trade became an important part of city life. From the Middle East, papermaking passed through North Africa to Spain, where the first European paper mills were established in the twelfth century.",
+    "Italian papermakers introduced several important improvements. They used water-powered machines to beat rags into pulp, which made production much faster, and they began to mark their paper with watermarks, faint designs that can be seen when a sheet is held up to the light and that identified the mill that made it. When the printing press arrived in the fifteenth century, the supply of affordable paper allowed printed books to spread rapidly.",
+    "For centuries, the main raw material in Europe was old linen and cotton rags. As literacy grew and newspapers multiplied, demand outstripped the supply of rags, and in the nineteenth century manufacturers turned to wood pulp, which was abundant and cheap. Wood-pulp paper made books and newspapers affordable for ordinary people, but much of it contained acids that cause it to turn yellow and crumble over time, a problem that libraries are still dealing with today."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "Faster machines and a mark of origin",
+      "A key to the spread of learning",
+      "Writing before paper",
+      "Why paper is disappearing",
+      "From rags to trees",
+      "How true paper is made",
+      "A craft travels west",
+      "Paper money in ancient China"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 2
+      },
+      {
+       "q": "B",
+       "a": 5
+      },
+      {
+       "q": "C",
+       "a": 6
+      },
+      {
+       "q": "D",
+       "a": 1
+      },
+      {
+       "q": "E",
+       "a": 0
+      },
+      {
+       "q": "F",
+       "a": 4
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Parchment was cheaper than papyrus.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "The oldest pieces of paper ever found were made by Cai Lun.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Historians are certain that captured papermakers brought their skill to Samarkand.",
+       "a": "FALSE",
+       "p": "C"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "In true papermaking, the fibre mixture is lifted out of the water on a fine ____.",
+       "a": [
+        "screen"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Italian mills used ____ machines to beat rags into pulp.",
+       "a": [
+        "water powered",
+        "water-powered"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "In the nineteenth century, manufacturers began to use ____ instead of rags.",
+       "a": [
+        "wood pulp"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "Acids in some paper cause it to turn yellow and ____.",
+       "a": [
+        "crumble"
+       ],
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 14,
+   "title": "Farms That Grow Upwards",
+   "topic": "Food",
+   "paragraphs": [
+    "In a converted warehouse on the edge of a city, rows of lettuces grow in trays stacked from floor to ceiling, lit not by the sun but by thousands of purple-pink lamps. There is no soil, no weather and almost no insects. This is a vertical farm, one of a growing number of businesses that aim to produce food indoors, close to the people who will eat it.",
+    "Most vertical farms grow plants without soil. In hydroponic systems, the roots hang in water containing all the nutrients the plants need, while in aeroponic systems they are sprayed with a fine nutrient mist. Light comes from LED lamps, which have become much more efficient in recent years and can be tuned to the colours that plants use most for growth, chiefly red and blue. Temperature, humidity and even the level of carbon dioxide in the air are controlled by computers.",
+    "Supporters of vertical farming point to several advantages. Because water is recycled within the system, these farms use far less of it than traditional agriculture. Crops are protected from pests, so pesticides are rarely needed, and harvests do not depend on the season or the weather, so the same crop can be produced all year round. Since farms can be built inside or near cities, food can reach shops within hours of being picked, reducing transport and waste.",
+    "The approach has attracted particular interest in places with little farmland. Singapore, a small and densely populated island that imports most of its food, has encouraged high-tech farming as part of its plan to grow more of its own food. Desert countries with scarce water have also invested in indoor farms.",
+    "Yet vertical farming has a serious weakness: energy. In a field, sunlight is free; indoors, every photon must be produced by electricity, and the lamps and climate-control systems are expensive to run. When energy prices rose sharply in the early 2020s, several well-funded vertical farming companies ran into financial trouble, and some closed altogether. Critics also point out that if the electricity comes from fossil fuels, the environmental benefits may disappear.",
+    "The economics also limit what can be grown. Leafy greens and herbs are well suited to indoor farms because they grow quickly, stay small and are sold at high prices. Staple crops such as wheat, rice and potatoes, by contrast, need a great deal of light and space for each unit of food produced, and growing them indoors is far too expensive to be practical.",
+    "Few experts therefore expect vertical farms to replace traditional agriculture. A more likely future is one in which they supply fresh, high-value produce to cities, especially where land and water are scarce, while staple foods continue to be grown in the open. As renewable electricity becomes cheaper, the balance may gradually shift in their favour."
+   ],
+   "groups": [
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "In aeroponic systems, plant roots are",
+       "options": [
+        "covered with LED lamps.",
+        "left hanging in pure water.",
+        "planted in special soil.",
+        "sprayed with a nutrient mist."
+       ],
+       "a": "D",
+       "p": "B"
+      },
+      {
+       "q": "Why do vertical farms rarely need pesticides?",
+       "options": [
+        "They grow pest-resistant varieties.",
+        "Computers remove insects automatically.",
+        "The crops are harvested too quickly.",
+        "Pests cannot reach the crops."
+       ],
+       "a": "D",
+       "p": "C"
+      },
+      {
+       "q": "What happened to some vertical farming companies in the early 2020s?",
+       "options": [
+        "They moved to Singapore.",
+        "They switched to growing wheat.",
+        "They struggled when energy became expensive.",
+        "They received government support."
+       ],
+       "a": "C",
+       "p": "E"
+      },
+      {
+       "q": "Leafy greens suit indoor farms partly because they",
+       "options": [
+        "need no light.",
+        "are sold at high prices.",
+        "can be stored for months.",
+        "are difficult to grow outdoors."
+       ],
+       "a": "B",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "LED lamps can be adjusted to give the colours plants use most.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Vertical farms use more water than traditional farms.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Singapore grows most of its own food.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "Vertical farms produce more nutritious vegetables than open fields.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Most experts believe vertical farms will eventually replace field agriculture.",
+       "a": "FALSE",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Plants in hydroponic systems take their nutrients from ____.",
+       "a": [
+        "water"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Food from city farms can reach shops within ____ of being picked.",
+       "a": [
+        "hours"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Crops such as wheat, rice and potatoes are described as ____.",
+       "a": [
+        "staple crops"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "Cheaper ____ electricity could make vertical farms more competitive.",
+       "a": [
+        "renewable"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 15,
+   "title": "Rivers in the Ocean",
+   "topic": "Science",
+   "paragraphs": [
+    "The oceans may look calm from the shore, but their waters are always moving. Vast currents flow through every ocean, some near the surface and some thousands of metres below it, carrying water, heat, nutrients and living things around the planet. Together they act like a giant heating and cooling system, and they have a powerful influence on the weather and climate of the land.",
+    "Surface currents are driven mainly by the wind. As winds blow across the sea, they drag the top layer of water along with them. The rotation of the Earth, however, prevents the water from simply following the wind. Because of an effect named after the French scientist Gaspard-Gustave de Coriolis, moving water is turned to the right in the northern hemisphere and to the left in the southern hemisphere. As a result, the major surface currents form enormous circular systems called gyres, which turn clockwise north of the equator and anticlockwise south of it.",
+    "One of the best-known surface currents is the Gulf Stream, which carries warm water from the Gulf of Mexico along the east coast of North America and then across the Atlantic. In the 1770s, Benjamin Franklin, who was then in charge of the post office in the American colonies, wanted to know why mail ships sailing from England took longer than merchant ships. With the help of his cousin, a whaling captain, he produced one of the first maps of the current, so that ships could avoid sailing against it. The warmth carried by the Gulf Stream and its extension helps to give north-western Europe winters that are much milder than those of places at similar latitudes in Canada.",
+    "Deep below the surface lies a slower but equally important system, driven not by wind but by differences in the density of seawater. Cold water is denser than warm water, and salty water is denser than fresh water. In the far North Atlantic, surface water becomes very cold and salty, sinks to the ocean floor and flows slowly southwards. Elsewhere, deep water gradually rises to the surface again. This global pattern of movement is often called the ocean conveyor belt, and water may take around a thousand years to complete the journey.",
+    "Scientists are concerned that climate change could disturb this system. As ice sheets melt and rainfall increases at high latitudes, large amounts of fresh water are added to the North Atlantic. Fresher water is lighter and sinks less easily, which could weaken the circulation. Some studies suggest that it has already slowed, although measuring such a vast system is extremely difficult, and how much it might change in the future is uncertain.",
+    "Researchers sometimes learn about currents from unexpected sources. In 1992, a container ship lost thousands of plastic bath toys in a storm in the North Pacific. Over the following years, the toys were found on beaches across the world, and by recording where and when they washed up, oceanographers were able to test their models of how surface currents carry floating objects, including the plastic waste that now pollutes the seas."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Some ocean currents flow far below the surface.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "In the southern hemisphere, moving water is turned to the right.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Franklin's cousin was a sea captain.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "Franklin's map was used by the British navy.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Scientists are sure that the deep circulation has slowed down.",
+       "a": "FALSE",
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Surface currents form large circular systems known as ____.",
+       "a": [
+        "gyres"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Franklin wanted to know why ____ took longer to cross the Atlantic than merchant ships.",
+       "a": [
+        "mail ships"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "The deep circulation is driven by differences in the ____ of seawater.",
+       "a": [
+        "density"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "The deep global pattern of movement is sometimes called the ocean ____.",
+       "a": [
+        "conveyor belt"
+       ],
+       "p": "D"
+      }
+     ]
+    },
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "an accidental event that helped scientists study currents",
+       "a": "F"
+      },
+      {
+       "q": "the reason why some parts of Europe have mild winters",
+       "a": "C"
+      },
+      {
+       "q": "the effect of melting ice on the circulation of the oceans",
+       "a": "E"
+      },
+      {
+       "q": "a comparison of the oceans to a heating and cooling system",
+       "a": "A"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

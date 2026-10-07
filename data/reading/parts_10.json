@@ -1,0 +1,578 @@
+{
+ "parts": [
+  {
+   "id": 46,
+   "title": "Lights on the Edge of the Sea",
+   "topic": "History",
+   "paragraphs": [
+    "For as long as people have sailed, the most dangerous part of a voyage has often been its beginning and its end. Rocks, sandbanks and unfamiliar coastlines have wrecked countless ships within sight of land, especially at night or in bad weather. The lighthouse, a tower carrying a light to warn ships of danger and guide them into port, is one of the oldest answers to this problem, and its history combines engineering, science and remarkable human endurance.",
+    "The most famous lighthouse of the ancient world stood on the island of Pharos at the entrance to the harbour of Alexandria in Egypt. Built in the third century BC, it was one of the Seven Wonders of the Ancient World and may have been more than a hundred metres tall, making it one of the tallest structures on Earth at the time. A fire burned at the top, and some accounts say that a mirror was used to reflect its light far out to sea. The tower survived for well over a thousand years before a series of earthquakes reduced it to ruins. The Romans also built lighthouses throughout their empire, and one of them, the Tower of Hercules in northern Spain, is still in use today, making it the oldest working lighthouse in the world.",
+    "Building a lighthouse on land was hard enough; building one on a rock in the open sea was far more difficult. The Eddystone Rocks, a group of reefs off the coast of south-west England, had sunk many ships, and in 1698 an eccentric merchant named Henry Winstanley completed a decorative wooden lighthouse there. In 1703, during one of the most violent storms ever recorded in Britain, the tower was swept away with Winstanley inside it. A second wooden tower burned down decades later. The engineer John Smeaton then designed a stone tower, completed in 1759, built from blocks that locked together like pieces of a puzzle and joined with a special mortar that could set underwater. His design was so successful that it influenced the construction of lighthouses for the next century.",
+    "Early lighthouses were lit by wood or coal fires and later by candles and oil lamps, but much of their light was wasted, spreading in all directions or absorbed by the glass. The problem was solved by a French physicist, Augustin-Jean Fresnel, who in 1822 introduced a new kind of lens made of rings of glass prisms arranged around a central lamp. The prisms bent the light into a single powerful beam that could be seen many kilometres away, using far less fuel. Fresnel lenses were soon installed in lighthouses around the world.",
+    "Seeing a light was not enough; sailors also needed to know which lighthouse they were looking at. Each lighthouse was therefore given its own pattern, known as its light characteristic: one might show a single white flash every ten seconds, another two red flashes, another a steady light. Lights were rotated by clockwork mechanisms, and some lighthouses had different colours on different sides to show ships whether they were in a safe channel. In daylight, lighthouses could be recognised by their shape and by the stripes or bands painted on their towers.",
+    "For centuries, lighthouses depended on keepers, who lived at the station, often with their families, and tended the light through the night. They trimmed wicks, cleaned lenses, wound the clockwork and kept detailed records of the weather. On isolated rocks, keepers might spend weeks at a time cut off from the shore by storms, and the job required patience, discipline and the ability to live in close quarters with others. Many keepers also took part in rescues of shipwrecked sailors.",
+    "During the twentieth century, electricity and automatic equipment gradually made keepers unnecessary. In Britain, the last keepers left their lighthouse in 1998, and similar changes took place around the world. Satellite navigation has since reduced the importance of lights for many ships, although they remain a valuable backup. Many old lighthouses have been turned into museums, hotels or holiday homes, and they remain among the most loved buildings on any coast, symbols of safety, guidance and hope."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "An ancient wonder and a survivor still at work",
+      "Machines replace people",
+      "Bending light into a beam",
+      "The life of the keepers",
+      "Why lighthouses were painted white",
+      "Telling one light from another",
+      "Building on a rock at sea",
+      "Danger at the start and end of a voyage"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 7
+      },
+      {
+       "q": "B",
+       "a": 0
+      },
+      {
+       "q": "C",
+       "a": 6
+      },
+      {
+       "q": "D",
+       "a": 2
+      },
+      {
+       "q": "E",
+       "a": 5
+      },
+      {
+       "q": "F",
+       "a": 3
+      },
+      {
+       "q": "G",
+       "a": 1
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "The lighthouse at Alexandria was destroyed by fire.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Winstanley died when his lighthouse was destroyed.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "Fresnel's lens needed more fuel than earlier lamps.",
+       "a": "FALSE",
+       "p": "D"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 3,
+     "questions": [
+      {
+       "q": "The oldest working lighthouse is the ____ in Spain.",
+       "a": [
+        "Tower of Hercules"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Smeaton's tower was built from blocks that ____ together.",
+       "a": [
+        "locked"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Each lighthouse's pattern of light is known as its light ____.",
+       "a": [
+        "characteristic"
+       ],
+       "p": "E"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 47,
+   "title": "Two Languages, One Mind",
+   "topic": "Psychology",
+   "paragraphs": [
+    "For much of the world, speaking more than one language is perfectly normal. Many researchers estimate that more than half of the world's population uses two or more languages in daily life, whether because they live in multilingual countries, because their family speaks a different language from the wider community, or because they have learned a second language at school or work. Yet for a long time, many educators and psychologists in Western countries regarded bilingualism with suspicion.",
+    "In the early twentieth century, a number of studies appeared to show that children who grew up with two languages performed worse on intelligence tests than those who spoke only one. Some writers warned that learning two languages would confuse children and hold back their development. Looking back, researchers have identified serious problems with these studies. Many tested children in a language they did not know well, and they often compared children from poor immigrant families with wealthier children who spoke the majority language, without taking these differences into account.",
+    "A turning point came in 1962, when two researchers in Montreal, Elizabeth Peal and Wallace Lambert, compared bilingual and monolingual children of similar backgrounds. To their surprise, the bilingual children performed better on a range of tests, especially those requiring flexible thinking. Over the following decades, many researchers reported that bilingual people seemed to be better at tasks that involved ignoring distractions, switching between activities and focusing attention, abilities that psychologists call executive function.",
+    "One explanation for this possible advantage lies in the way the bilingual brain handles language. Studies show that when bilingual people speak or listen in one language, their other language does not simply switch off; both remain active to some degree. To avoid mixing them up, the brain must constantly select the right language and suppress the other. Some researchers argued that this daily practice in controlling attention strengthens the brain's general ability to manage competing information.",
+    "In recent years, however, the idea of a bilingual advantage has become controversial. Several large studies involving thousands of participants have found little or no difference between bilinguals and monolinguals on tests of executive function. Critics have also pointed out that studies finding an advantage were more likely to be published than those finding none, which may have created a misleading picture. The debate continues, and many researchers now believe that any advantage is smaller than once thought and may depend on how and when people use their languages.",
+    "Another much-discussed claim concerns old age. Some studies of patients with dementia found that bilingual patients had developed symptoms several years later, on average, than monolingual patients with similar levels of brain disease. Researchers have suggested that a lifetime of managing two languages might build up a kind of reserve that helps the brain cope with damage. Other studies, however, have not found the same effect, and the question remains open.",
+    "What is clear is that the early fears were mistaken. Children are fully capable of learning two languages from birth. Young bilingual children may know fewer words in each language than monolingual children of the same age, but when the words they know in both languages are counted together, their vocabularies are similar in size. Mixing words from two languages in one sentence, known as code-switching, is not a sign of confusion; it is a normal skill that adult bilinguals use too.",
+    "For families who want to raise bilingual children, the main challenge is often keeping the less common language alive. Children of immigrants frequently lose much of their parents' language as they grow up, especially once they start school in the majority language. Experts suggest that children need regular and meaningful contact with each language, through conversation, books, songs and friends, if they are to become confident speakers of both. Some families follow a strategy known as one parent, one language, in which each parent consistently speaks a different language to the child."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Early studies of bilingual children were often unfair to them.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Peal and Lambert expected bilingual children to perform better.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Bilingual people can completely switch off the language they are not using.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "All recent large studies have confirmed the bilingual advantage.",
+       "a": "FALSE",
+       "p": "E"
+      },
+      {
+       "q": "Bilingual patients with dementia respond better to medicine.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "Abilities such as ignoring distractions and switching between tasks are called",
+       "options": [
+        "code-switching.",
+        "flexible vocabulary.",
+        "executive function.",
+        "language reserve."
+       ],
+       "a": "C",
+       "p": "C"
+      },
+      {
+       "q": "Critics suggest the bilingual advantage may have been exaggerated because",
+       "options": [
+        "positive results were more likely to be published.",
+        "bilinguals were tested in the wrong language.",
+        "monolinguals refused to take part.",
+        "the tests were too difficult."
+       ],
+       "a": "A",
+       "p": "E"
+      },
+      {
+       "q": "When the words they know in both languages are counted, young bilingual children",
+       "options": [
+        "cannot speak either language well.",
+        "have vocabularies of a similar size to monolinguals.",
+        "know far fewer words than monolinguals.",
+        "know more words than adults."
+       ],
+       "a": "B",
+       "p": "G"
+      },
+      {
+       "q": "The writer says that code-switching is",
+       "options": [
+        "a sign that a child is confused.",
+        "found only in children.",
+        "something experts advise parents to prevent.",
+        "a normal skill used by bilinguals."
+       ],
+       "a": "D",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 3,
+     "questions": [
+      {
+       "q": "Peal and Lambert carried out their study in ____.",
+       "a": [
+        "Montreal"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "A lifetime of using two languages might build up a ____ in the brain.",
+       "a": [
+        "reserve",
+        "kind of reserve"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "Children of immigrants often lose their parents' language after they start ____.",
+       "a": [
+        "school"
+       ],
+       "p": "H"
+      },
+      {
+       "q": "Experts say children need regular and meaningful ____ with each language.",
+       "a": [
+        "contact"
+       ],
+       "p": "H"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 48,
+   "title": "Science by the Crowd",
+   "topic": "Society",
+   "paragraphs": [
+    "Science is usually imagined as the work of professionals in laboratories, but some of the most valuable scientific data in the world has been collected by ordinary people in their spare time. Birdwatchers counting species in their gardens, gardeners recording when plants flower, and computer users examining images on their screens have all contributed to research that would have been impossible for scientists to carry out alone. This kind of public participation in research is known as citizen science.",
+    "One of the oldest examples began in North America on Christmas Day in 1900. At the time, a popular holiday tradition involved teams of hunters competing to shoot as many birds as possible. The ornithologist Frank Chapman proposed an alternative: instead of shooting birds, people would count them. Twenty-seven people took part in the first Christmas Bird Count. The tradition has continued every year since, and tens of thousands of volunteers now take part. Because the count has been repeated for more than a century, its records allow scientists to see how bird populations and their ranges have changed over long periods, including shifts linked to climate change.",
+    "The internet has transformed citizen science by allowing people anywhere in the world to take part. In 2007, astronomers at the University of Oxford faced a problem: they had images of around a million galaxies and needed to classify them by shape, a task that computers at the time could not do reliably and that would take a single researcher many years. They created a website called Galaxy Zoo, where members of the public could look at images and classify galaxies with a few clicks. The response far exceeded expectations. Within the first year, more than a hundred thousand volunteers had made tens of millions of classifications.",
+    "Volunteers did more than simply provide labour. While examining images, a Dutch schoolteacher named Hanny van Arkel noticed a strange glowing green object that did not match any category on the website. Professional astronomers investigated and concluded that it was a cloud of gas lit up by radiation from a nearby galaxy, a type of object that had never been seen before. It was named Hanny's Voorwerp, meaning Hanny's object in Dutch.",
+    "Some projects turn research into games. In Foldit, an online game developed by scientists at the University of Washington, players compete to fold the structures of proteins, the complex molecules that carry out many of the functions of living cells. The shape of a protein determines how it works, but predicting that shape is extremely difficult. In 2011, Foldit players solved the structure of an enzyme from a virus related to HIV, a problem that had puzzled scientists for years, in only about ten days.",
+    "Smartphones have created further opportunities. Apps allow people to photograph plants and animals and upload their observations, together with the time and location, to databases used by researchers. Others record air quality, noise or the timing of natural events such as the arrival of migrating birds. Such projects can gather information over enormous areas and long periods at very little cost.",
+    "Citizen science is not without problems. Scientists must find ways of checking the quality of data collected by people with different levels of skill, for example by asking several volunteers to classify the same image, or by comparing their results with those of experts. Observations may also be concentrated in places where many volunteers live, such as cities and popular parks, leaving remote areas under-recorded. Researchers have developed statistical methods to correct for these biases.",
+    "Supporters argue that the benefits go beyond data. Taking part in research can increase people's understanding of science and their trust in it, and it can make them more aware of environmental issues in their own neighbourhoods. Many volunteers say they take part out of curiosity and a desire to contribute to something meaningful. For scientists, the public has become not just an audience for their discoveries but a partner in making them."
+   ],
+   "groups": [
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "an example of a discovery made by a single volunteer",
+       "a": "D"
+      },
+      {
+       "q": "methods used to make sure volunteers' data is reliable",
+       "a": "G"
+      },
+      {
+       "q": "a project that replaced a competition to kill animals",
+       "a": "B"
+      },
+      {
+       "q": "the personal reasons people give for taking part",
+       "a": "H"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Fewer than thirty people took part in the first Christmas Bird Count.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "In 2007, computers could classify galaxies more reliably than people.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "The Galaxy Zoo team expected even more volunteers than actually took part.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Hanny van Arkel later became a professional astronomer.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Remote areas tend to be recorded less often than cities.",
+       "a": "TRUE",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The Christmas Bird Count was proposed by an ____ named Frank Chapman.",
+       "a": [
+        "ornithologist"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Galaxy Zoo volunteers classified galaxies according to their ____.",
+       "a": [
+        "shape"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Foldit players work out the structures of ____.",
+       "a": [
+        "proteins"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Smartphone apps record observations together with the time and ____.",
+       "a": [
+        "location"
+       ],
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 49,
+   "title": "From Wolf to Best Friend",
+   "topic": "Nature",
+   "paragraphs": [
+    "Dogs were the first animals to be domesticated, long before sheep, goats, cattle or horses, and long before people began to farm. Today there are hundreds of millions of dogs in the world, in every shape and size from tiny lapdogs to giant guard dogs. All of them, scientists agree, are descended from wolves. Exactly when, where and how that transformation took place, however, remains one of the most hotly debated questions in the study of human history.",
+    "Genetic studies show that dogs are most closely related to grey wolves, but not to any wolf population living today. Instead, they appear to have descended from an ancient population of wolves that has since disappeared. Estimates of when dogs and wolves separated vary widely, from around fifteen thousand to more than thirty thousand years ago, partly because the rate at which genes change over time is difficult to calculate precisely. Archaeological evidence provides firmer dates. One of the clearest early examples is a dog buried alongside two humans at Bonn-Oberkassel in Germany around fourteen thousand years ago. The dog had been seriously ill as a puppy and could only have survived with human care, suggesting that people felt an emotional attachment to it.",
+    "How did a dangerous predator become a companion? One traditional explanation is that hunter-gatherers captured wolf pups and raised them, gradually selecting the tamest animals. An alternative theory proposes that wolves largely domesticated themselves. According to this view, some wolves began to scavenge food waste near human camps. Animals that were less fearful and less aggressive towards people could exploit this food source more successfully, and over many generations a population of tamer wolves developed, which humans eventually took into their communities.",
+    "A famous experiment in the Soviet Union suggests how selecting for tameness alone can change an animal. Beginning in 1959, the scientist Dmitry Belyaev and his colleagues bred silver foxes, choosing in each generation only the individuals that were least afraid of humans. After several generations, many of the foxes behaved like friendly dogs, wagging their tails and seeking human attention. Surprisingly, they also began to look more like dogs, with floppy ears, curly tails and patches of white fur, even though the researchers had not selected for any of these features.",
+    "Living alongside humans for so long has given dogs unusual social skills. Studies have shown that dogs are remarkably good at understanding human gestures. When a person points to one of two hidden containers of food, dogs usually follow the gesture correctly, while chimpanzees, our close relatives, often fail. Even young puppies with little experience of people show this ability, suggesting that it is partly inherited rather than simply learned.",
+    "The bond between dogs and humans also has a chemical basis. Japanese researchers found that when dogs and their owners gaze into each other's eyes, levels of oxytocin, a hormone associated with trust and attachment, rise in both. Another study found that dogs have a small muscle above the eye that allows them to raise their inner eyebrows, creating the appealing expression often called puppy-dog eyes. Wolves lack this muscle, and researchers suggest that people may have unconsciously favoured dogs that could make the expression.",
+    "Most of the breeds we know today are surprisingly recent. While working dogs were bred for tasks such as herding and hunting for thousands of years, the majority of modern breeds were developed in the last two centuries, particularly in Victorian Britain, when dog shows became fashionable and breeders began to keep careful records of pedigrees. Strict breeding for appearance has sometimes caused health problems, such as breathing difficulties in dogs with very short faces, and many vets are now calling for breeding standards that put health first.",
+    "The partnership between humans and dogs has shaped both species. Dogs helped early humans to hunt, guarded their camps and later herded their animals, while humans provided food and protection. Today, dogs guide blind people, search for survivors after disasters and detect diseases by smell, as well as providing companionship to millions of people. After thousands of years together, it is hardly an exaggeration to say that dogs and humans have grown up side by side."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "Breeds shaped by fashion",
+      "Genes, dates and an early burial",
+      "Why wolves cannot be trained",
+      "Taming foxes over generations",
+      "Two theories of domestication",
+      "Reading human signals",
+      "A long-standing mystery",
+      "Shared chemistry and a special expression"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 6
+      },
+      {
+       "q": "B",
+       "a": 1
+      },
+      {
+       "q": "C",
+       "a": 4
+      },
+      {
+       "q": "D",
+       "a": 3
+      },
+      {
+       "q": "E",
+       "a": 5
+      },
+      {
+       "q": "F",
+       "a": 7
+      },
+      {
+       "q": "G",
+       "a": 0
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Dogs were domesticated before people started farming.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "Dogs are descended from a wolf population that still exists today.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Belyaev's team deliberately bred foxes for floppy ears.",
+       "a": "FALSE",
+       "p": "D"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The Bonn-Oberkassel dog had been seriously ill as a ____.",
+       "a": [
+        "puppy"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Gazing into each other's eyes raises levels of ____ in dogs and owners.",
+       "a": [
+        "oxytocin"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "Breeding for very short faces can cause ____.",
+       "a": [
+        "breathing difficulties"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 50,
+   "title": "Four Days a Week",
+   "topic": "Society",
+   "paragraphs": [
+    "In 1930, the economist John Maynard Keynes predicted that, within a hundred years, technological progress would make people so productive that they would need to work only around fifteen hours a week. As that deadline approaches, most people in full-time employment still work five days a week, and many work considerably more. In recent years, however, a growing movement has argued that it is time to take the next step: a standard working week of four days.",
+    "The five-day week itself is a relatively recent invention. During the Industrial Revolution, factory workers commonly worked six days a week for ten hours or more a day. Over the following century, trade unions campaigned for shorter hours, and in 1926 the American car manufacturer Henry Ford introduced a five-day, forty-hour week in his factories without reducing wages. Ford argued that workers who had more leisure time would also have more opportunity to buy consumer goods, including cars. Over the following decades, the five-day week became the norm in many countries.",
+    "Supporters of a four-day week usually promote a model sometimes described as one hundred, eighty, one hundred: employees receive one hundred per cent of their pay for eighty per cent of their previous working time, in return for a commitment to maintain one hundred per cent of their productivity. The idea is that much working time is wasted in unnecessary meetings, interruptions and tiredness, and that rested, motivated employees can achieve as much in four days as they previously did in five.",
+    "Some of the most widely discussed evidence comes from Iceland, where between 2015 and 2019 more than two thousand public-sector workers took part in trials of shorter working hours, typically reducing their week from forty hours to thirty-five or thirty-six with no loss of pay. Researchers who analysed the trials reported that productivity and the quality of services stayed the same or improved in most workplaces, while workers reported less stress and a better balance between work and family life. Following the trials, unions negotiated agreements that gave a large majority of Iceland's workforce the right to shorter hours, although most of these involved reduced daily hours rather than a full four-day week.",
+    "In 2022, around sixty companies in the United Kingdom, employing nearly three thousand people, took part in a six-month trial of a four-day week organised by researchers and campaign groups. The participating organisations ranged from small marketing firms to a fish-and-chip shop. At the end of the trial, the great majority of companies chose to continue with the shorter week, reporting that revenue had remained broadly stable while sick days and staff resignations had fallen. Similar trials have taken place in other countries, and some companies have reported dramatic gains: a Japanese branch of a large technology company claimed that productivity rose by around forty per cent during a one-month trial in 2019.",
+    "Critics, however, urge caution. Many of the organisations that volunteered for trials were already enthusiastic about the idea and may not be typical of businesses in general. Jobs in which work cannot easily be compressed, such as those in hospitals, schools, shops and transport, require staff to be present for fixed periods, and reducing hours there may simply mean employing more people, which raises costs. Some employees have also found that squeezing five days of work into four makes each day longer and more stressful.",
+    "Governments have so far moved cautiously. In 2022, Belgium gave workers the right to request a four-day week, but with the same total number of hours spread over four longer days rather than a reduction in working time. Some other governments and local authorities are running their own experiments, and a number of companies have adopted shorter weeks to attract and keep staff in competitive job markets.",
+    "Whether the four-day week becomes the norm may depend less on the results of individual trials than on wider changes in the economy, including the effects of new technologies such as artificial intelligence on productivity. What the debate has already achieved is to remind people that the length of the working week is not fixed by nature. It has changed before, and it may well change again."
+   ],
+   "groups": [
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "Why did Henry Ford introduce the five-day week?",
+       "options": [
+        "His factories had too few orders.",
+        "Workers had gone on strike.",
+        "The government required it.",
+        "He believed workers with more free time would buy more goods."
+       ],
+       "a": "D",
+       "p": "B"
+      },
+      {
+       "q": "In the one hundred, eighty, one hundred model, employees",
+       "options": [
+        "keep full pay for less time while keeping productivity the same.",
+        "work four days but are paid for three.",
+        "are paid according to how much they produce.",
+        "work one hundred per cent of their hours for eighty per cent of their pay."
+       ],
+       "a": "A",
+       "p": "C"
+      },
+      {
+       "q": "What did most Icelandic workers gain after the trials?",
+       "options": [
+        "Longer holidays.",
+        "The right to shorter working hours.",
+        "Higher wages.",
+        "A full four-day week."
+       ],
+       "a": "B",
+       "p": "D"
+      },
+      {
+       "q": "Why do critics say trial results may be misleading?",
+       "options": [
+        "The trials lasted too long.",
+        "Workers were not paid during the trials.",
+        "Companies that volunteered may not be typical.",
+        "The results were never published."
+       ],
+       "a": "C",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Keynes believed people would one day work around fifteen hours a week.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "Ford reduced his workers' wages when he shortened their week.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "A fish-and-chip shop took part in the UK trial.",
+       "a": "TRUE",
+       "p": "E"
+      },
+      {
+       "q": "Belgian workers can now work fewer total hours for the same pay.",
+       "a": "FALSE",
+       "p": "G"
+      },
+      {
+       "q": "Most British companies have now adopted a four-day week.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "During the Industrial Revolution, factory workers commonly worked ____ a week.",
+       "a": [
+        "six days"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "The companies in the UK took part in a ____ trial.",
+       "a": [
+        "six-month",
+        "six month"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "The Icelandic trials involved workers in the ____.",
+       "a": [
+        "public sector"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Some companies use shorter weeks to attract and keep ____.",
+       "a": [
+        "staff"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

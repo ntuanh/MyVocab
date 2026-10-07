@@ -1,0 +1,574 @@
+{
+ "parts": [
+  {
+   "id": 21,
+   "title": "Power from the Sun",
+   "topic": "Technology",
+   "paragraphs": [
+    "Every hour, the sun delivers more energy to the Earth's surface than the whole of humanity uses in a year. For most of history, people could use this energy only indirectly, through plants, wind and running water. Today, millions of solar panels turn sunlight directly into electricity, and solar power has become one of the fastest-growing sources of energy in the world.",
+    "The scientific basis of solar panels was discovered almost two centuries ago. In 1839, the nineteen-year-old French physicist Edmond Becquerel noticed that certain materials produced a small electric current when exposed to light. This is now known as the photovoltaic effect. For more than a century, however, it remained little more than a laboratory curiosity, because the materials available converted only a tiny fraction of sunlight into electricity.",
+    "The first practical solar cell was produced in 1954 by researchers at Bell Laboratories in the United States, using silicon, the same element found in sand. It turned about six per cent of the sunlight that fell on it into electricity, which was impressive at the time but very expensive. The first important use for these cells was in space. Satellites needed a reliable source of power far from any fuel supply, and from the late 1950s solar panels were fitted to many of them.",
+    "On Earth, the high cost of solar cells kept them in specialist uses for decades, powering things like remote lighthouses and calculators. The situation changed dramatically in the twenty-first century. Governments in countries such as Germany offered generous payments for solar electricity, creating large markets, and factories, especially in China, began to produce panels on a vast scale. As production grew and techniques improved, prices fell by around ninety per cent in a single decade, and in many sunny regions solar power became the cheapest form of new electricity generation.",
+    "Solar panels can be installed in many different ways. Huge solar farms cover areas of desert or farmland, while rooftop panels allow homes and businesses to produce their own electricity. Some countries have even placed floating panels on reservoirs, where the water helps to keep the panels cool and the panels reduce evaporation. Vietnam experienced a dramatic example of rapid growth when, after offering attractive prices for solar electricity, it saw a huge number of rooftop systems installed in a single year.",
+    "The great weakness of solar power is that the sun does not always shine. Output falls on cloudy days and stops completely at night, while demand for electricity often peaks in the evening, just as the sun is setting. In places with a lot of solar power, this creates a daily pattern in which electricity is plentiful at midday and scarce a few hours later. Grid operators sometimes have to switch off solar farms when production exceeds demand.",
+    "Storing energy is therefore becoming as important as producing it. Large batteries can store solar electricity produced at midday and release it in the evening, and their cost has also been falling quickly. Other solutions include connecting power grids across wide regions, so that areas with surplus electricity can supply those without, and using cheap midday power to pump water uphill, so that it can later flow down through turbines when electricity is needed."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "A discovery waiting for the right materials",
+      "Matching supply with demand",
+      "From space to rooftops",
+      "An enormous untapped resource",
+      "Why solar panels are banned in some cities",
+      "Falling prices and new markets",
+      "Many places to put a panel",
+      "Ways of saving power for later"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 3
+      },
+      {
+       "q": "B",
+       "a": 0
+      },
+      {
+       "q": "D",
+       "a": 5
+      },
+      {
+       "q": "E",
+       "a": 6
+      },
+      {
+       "q": "F",
+       "a": 1
+      },
+      {
+       "q": "G",
+       "a": 7
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Becquerel discovered the photovoltaic effect when he was a teenager.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "The first silicon solar cell was cheap to produce.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Germany was the first country to build a solar farm.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Floating panels can help to reduce the loss of water from reservoirs.",
+       "a": "TRUE",
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The first practical solar cell was made from ____.",
+       "a": [
+        "silicon"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Solar panels were first used on a large scale to power ____.",
+       "a": [
+        "satellites"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Demand for electricity often reaches its peak in the ____.",
+       "a": [
+        "evening"
+       ],
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 22,
+   "title": "Clever Crows",
+   "topic": "Nature",
+   "paragraphs": [
+    "Crows have a mixed reputation. In many cultures they are associated with bad luck or death, and farmers have long regarded them as pests. Over the past few decades, however, scientists have discovered that crows and their relatives, a family of birds known as corvids that also includes ravens, jays and magpies, are among the most intelligent animals on the planet, with abilities that in some tests rival those of great apes.",
+    "Some of the most striking evidence comes from New Caledonia, a group of islands in the Pacific. Crows there make tools to extract insects from holes in dead wood. They shape twigs into hooks and cut strips from the tough leaves of a local plant, giving them a saw-like edge. Different populations of crows on the islands make tools in slightly different styles, and young birds appear to learn these styles by watching older ones, a form of tradition that was once thought to be unique to humans.",
+    "In laboratory experiments, corvids have solved problems that require planning and an understanding of cause and effect. In one well-known test, based on an ancient fable by Aesop, a piece of food floats on water at the bottom of a narrow tube, out of reach of the bird's beak. Rooks, a type of corvid, and later New Caledonian crows learned to drop stones into the tube to raise the water level until they could reach the food. They also chose heavy stones that sink rather than light objects that float.",
+    "Crows are also remarkably good at recognising individual people. In a long-running study at a university in the United States, researchers trapped and released a number of wild crows while wearing a particular mask. For years afterwards, crows on the campus scolded and dived at anyone wearing that mask, while ignoring people wearing a different one. More surprisingly, crows that had never been trapped also joined in, suggesting that the birds had passed on information about the dangerous face to others.",
+    "Corvids that hide food for later use show another sophisticated skill. Studies of jays have found that if a bird is watched by another while hiding food, it will often return later, when it is alone, and move the food to a new hiding place. Birds that have themselves stolen food in the past are especially likely to do this, which suggests that they understand what another bird might be thinking.",
+    "Some urban crows have even learned to use human technology. In the Japanese city of Sendai, crows have been seen placing walnuts on roads so that passing cars will crack them open, and then waiting for the traffic lights to change before collecting the pieces. Crows have also been observed gathering noisily around a dead crow, behaviour that some researchers believe helps them learn about places or people that could be dangerous.",
+    "How can a bird with a brain the size of a walnut achieve so much? Part of the answer is that brain size is not everything. Recent research has shown that the brains of corvids and parrots contain very large numbers of nerve cells packed closely together, so that in some respects their brains are as powerful as those of much larger mammals. The intelligence of crows, it seems, has been badly underestimated."
+   ],
+   "groups": [
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "an experiment showing that crows can remember a person's face",
+       "a": "D"
+      },
+      {
+       "q": "an example of crows taking advantage of road traffic",
+       "a": "F"
+      },
+      {
+       "q": "a description of crows passing on a way of making tools",
+       "a": "B"
+      },
+      {
+       "q": "an explanation of how a small brain can be so capable",
+       "a": "G"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Ravens and magpies belong to the same family as crows.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "All crows in New Caledonia make their tools in exactly the same way.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "In the tube experiment, the birds preferred objects that would float.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "The masked researchers fed the crows after trapping them.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Jays that have stolen food themselves are more likely to move their hidden food.",
+       "a": "TRUE",
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The tube experiment was based on an ancient ____.",
+       "a": [
+        "fable"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "The birds raised the water level by dropping ____ into the tube.",
+       "a": [
+        "stones",
+        "heavy stones"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "In Sendai, crows wait for the ____ to change before collecting the nuts.",
+       "a": [
+        "traffic lights"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "The nerve cells in corvid brains are ____ together.",
+       "a": [
+        "packed closely",
+        "closely"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 23,
+   "title": "The Story of Vaccination",
+   "topic": "Health",
+   "paragraphs": [
+    "For thousands of years, smallpox was one of the most feared diseases in the world. It spread easily from person to person, killed a large proportion of those it infected, and left many survivors with deep scars or blindness. Yet people had long noticed something important about it: those who survived an attack of smallpox never caught it again. This observation led to the first attempts to protect people against the disease.",
+    "In parts of Asia and Africa, people practised a technique known as variolation. Material taken from the sores of a person with a mild case of smallpox was rubbed into a small cut in the skin of a healthy person, or, in China, blown into the nose as a powder. The person usually developed a mild illness and then became immune. In the early eighteenth century, the English writer Lady Mary Wortley Montagu, who had seen the practice in the Ottoman Empire and had her own children treated, helped to introduce it to Britain. Variolation was not without danger, however, since some people died of the smallpox they were given, and they could infect others.",
+    "The safer method that replaced it came from the English countryside. It was widely said among farm workers that milkmaids who caught cowpox, a mild disease of cattle, did not get smallpox. In 1796, a doctor named Edward Jenner decided to test this idea. He took material from a cowpox sore on the hand of a milkmaid and introduced it into a cut on the arm of an eight-year-old boy, James Phipps. Some weeks later, he exposed the boy to smallpox. The boy did not become ill.",
+    "Jenner published his results and promoted the new procedure, which became known as vaccination, from the Latin word for cow. It spread quickly across Europe and the Americas, although it also met resistance from people who were suspicious of putting material from an animal into a human body. Jenner did not know why vaccination worked, since the germs that cause disease had not yet been discovered.",
+    "That explanation came later in the nineteenth century, when scientists such as Louis Pasteur showed that many diseases are caused by microorganisms. Pasteur also found ways of weakening germs in the laboratory so that they could be used to create vaccines against other diseases, and in 1885 he successfully used a vaccine to treat a boy who had been bitten by a dog with rabies. Over the following century, vaccines were developed against many deadly illnesses, including polio, measles and tetanus.",
+    "The greatest triumph of vaccination came in the twentieth century. In 1967, the World Health Organization launched an intensive campaign to wipe out smallpox, vaccinating people around every new case to stop the disease from spreading. The last natural case occurred in Somalia in 1977, and in 1980 smallpox was officially declared eradicated, the first human disease to be completely defeated.",
+    "Vaccination works best when most people in a community are protected, because this makes it hard for a disease to spread, protecting even those who cannot be vaccinated. Research continues to produce new types of vaccine. During the COVID-19 pandemic, vaccines based on a technology called messenger RNA were developed and approved in less than a year, far faster than any vaccine before them."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "People who recovered from smallpox could catch it a second time.",
+       "a": "FALSE",
+       "p": "A"
+      },
+      {
+       "q": "Variolation sometimes caused the death of the person treated.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Lady Mary Wortley Montagu's children were treated with variolation.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Jenner was the first person to notice that milkmaids rarely caught smallpox.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "James Phipps later became a doctor himself.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "Why were some people opposed to Jenner's vaccination?",
+       "options": [
+        "It was illegal in Britain.",
+        "It used material from an animal.",
+        "It had killed many patients.",
+        "It was too expensive."
+       ],
+       "a": "B",
+       "p": "D"
+      },
+      {
+       "q": "What could Jenner NOT explain?",
+       "options": [
+        "Why vaccination protected people.",
+        "Why milkmaids caught cowpox.",
+        "Where cowpox came from.",
+        "How smallpox spread."
+       ],
+       "a": "A",
+       "p": "D"
+      },
+      {
+       "q": "How did the WHO campaign stop smallpox spreading?",
+       "options": [
+        "By vaccinating people around each new case.",
+        "By testing every child in the world.",
+        "By treating cattle with cowpox.",
+        "By closing national borders."
+       ],
+       "a": "A",
+       "p": "F"
+      },
+      {
+       "q": "According to the last paragraph, vaccinating most of a community",
+       "options": [
+        "makes diseases more dangerous.",
+        "was first suggested by Jenner.",
+        "is no longer necessary.",
+        "also protects people who cannot be vaccinated."
+       ],
+       "a": "D",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "In China, smallpox material was sometimes blown into the nose as a ____.",
+       "a": [
+        "powder"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "The word vaccination comes from the ____ for cow.",
+       "a": [
+        "Latin word"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Pasteur showed that many diseases are caused by ____.",
+       "a": [
+        "microorganisms"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "The last natural case of smallpox was in ____.",
+       "a": [
+        "Somalia"
+       ],
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 24,
+   "title": "Worth Its Salt",
+   "topic": "History",
+   "paragraphs": [
+    "Today salt is so cheap that we scatter it on icy roads by the tonne, but for most of human history it was a precious and sometimes costly substance. The human body cannot survive without the sodium it contains, which is needed for nerves and muscles to work. When people began to farm, eating more grain and less meat, they needed to add salt to their diet, and they also discovered another vital use for it: preserving food.",
+    "Before refrigerators and canning, salt was one of the main ways of keeping food from going bad. Salt draws water out of meat and fish, and bacteria cannot grow without water. Salted fish and meat could be stored for months and carried on long journeys, which made it possible to feed armies, sailors and cities through the winter. Salted fish from the North Sea and the Atlantic became a major part of European trade.",
+    "Because it was so important, salt was traded over long distances. Caravans of camels carried blocks of salt across the Sahara Desert to the markets of West Africa, where it was sometimes exchanged for gold. In Europe, old roads used for transporting salt can still be traced today. A popular story claims that Roman soldiers were paid in salt and that this is the origin of the English word salary. The word does come from the Latin for salt, but historians are uncertain whether soldiers were ever actually paid in it.",
+    "Governments quickly realised that something everyone needed was an ideal thing to tax. In China, more than two thousand years ago, the state took control of the production and sale of salt and iron to raise money, a policy that was hotly debated at the time. In France, a salt tax called the gabelle was in force for centuries. People were required to buy a minimum amount of salt each year at prices set by the state, and the tax was so unpopular that it became one of the grievances behind the French Revolution.",
+    "Salt also played a part in one of the most famous protests of the twentieth century. In British-ruled India, the colonial government controlled the production of salt and taxed it heavily, so that even the poorest people paid the tax every time they used it. In 1930, Mahatma Gandhi led thousands of followers on a march of nearly four hundred kilometres to the coast, where he picked up a handful of natural salt in defiance of the law. The Salt March drew attention from around the world and became an important step towards Indian independence.",
+    "Salt has always been produced in two main ways. In warm, sunny places, seawater is allowed into shallow pools, where the sun and wind evaporate the water and leave the salt behind. Elsewhere, salt is mined from underground deposits left by ancient seas. One of the most famous mines, near Krakow in Poland, was worked for centuries, and miners carved entire chapels, statues and chandeliers out of the rock salt.",
+    "Today, only a small proportion of the salt produced is eaten. Most of it is used by the chemical industry or spread on roads in winter. In many countries, the main concern about salt has reversed: rather than having too little, people eat too much, mostly in processed foods, and doctors warn that this can raise blood pressure and increase the risk of heart disease."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "A hated tax and a revolution",
+      "Why salt stops food going bad",
+      "A substance that bodies need",
+      "Salt and the end of slavery",
+      "A march to the sea",
+      "Trade routes and a doubtful story",
+      "Evaporation pools and underground mines",
+      "Too much rather than too little"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 2
+      },
+      {
+       "q": "B",
+       "a": 1
+      },
+      {
+       "q": "C",
+       "a": 5
+      },
+      {
+       "q": "D",
+       "a": 0
+      },
+      {
+       "q": "E",
+       "a": 4
+      },
+      {
+       "q": "F",
+       "a": 6
+      },
+      {
+       "q": "G",
+       "a": 7
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Farmers needed more salt in their diet than hunters who ate mainly meat.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "Salt was exchanged for gold in West African markets.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "Historians have proved that Roman soldiers were paid in salt.",
+       "a": "FALSE",
+       "p": "C"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Bacteria cannot grow in salted food because salt removes the ____.",
+       "a": [
+        "water"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Gandhi's protest is known as the ____.",
+       "a": [
+        "Salt March"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Most of the salt eaten today is found in ____.",
+       "a": [
+        "processed foods"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 25,
+   "title": "Music and the Mind",
+   "topic": "Psychology",
+   "paragraphs": [
+    "Every known human culture makes music. Archaeologists have found flutes carved from bird bones and mammoth ivory that are tens of thousands of years old, and lullabies, work songs and dances exist in societies all over the world. Yet music has no obvious practical purpose: it does not feed or shelter us. Why, then, does it affect us so deeply? In recent decades, scientists have begun to answer this question by studying what happens in the brain when we listen to and play music.",
+    "One clear finding is that music engages far more of the brain than might be expected. Listening to a piece of music activates not only the areas that process sound but also regions involved in movement, memory and emotion. This helps to explain why music makes people want to tap their feet or dance, and why a familiar song can instantly bring back memories of a particular time or place.",
+    "Music's emotional power appears to be linked to the brain's reward system. In one study, researchers asked volunteers to bring recordings of music that gave them chills, a tingling sensation that some people feel at especially moving moments. Brain scans showed that the volunteers' brains released dopamine, a chemical associated with pleasure, not only at the peak moment but also in the seconds leading up to it, as they anticipated what was coming. Composers, it seems, are skilled at building and then satisfying our expectations.",
+    "Popular claims about music's effects have not always been supported by evidence. In 1993, a small study reported that students who had just listened to a piece by Mozart performed slightly better on certain spatial reasoning tasks. The finding was widely reported as the Mozart effect, and some parents began playing classical music to their babies in the hope of making them more intelligent. Later research, however, found that the effect was small, short-lived and probably due simply to the music improving the listeners' mood and alertness.",
+    "Learning to play an instrument may have more lasting effects. Brain scans of professional musicians show differences in areas related to hearing and to the control of the hands. Studies of children who take music lessons have found improvements in some language and listening skills. Researchers are careful, however, to point out that many such studies cannot prove that music causes these differences; children from families who can afford lessons may have other advantages too.",
+    "Music has also become a valuable tool in medicine. People with dementia who struggle to remember recent events can often recognise and sing along to songs from their youth, and familiar music can calm anxiety and improve mood in care homes. For patients with Parkinson's disease, who may have difficulty walking, a strong regular beat can help them to move more smoothly, as their steps fall into time with the rhythm.",
+    "Perhaps the most intriguing evidence comes from babies. Studies suggest that even very young infants can detect a regular beat and notice when a rhythm is disrupted, long before they can speak. Some researchers believe that music may have developed alongside language, and that singing to infants helped to create strong bonds between parents and children. If so, the songs we cannot get out of our heads may be among the oldest features of human nature."
+   ],
+   "groups": [
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "According to paragraph B, music makes people want to dance because it",
+       "options": [
+        "is processed only by the hearing areas.",
+        "activates brain areas involved in movement.",
+        "reminds them of past events.",
+        "releases chemicals in the muscles."
+       ],
+       "a": "B",
+       "p": "B"
+      },
+      {
+       "q": "In the chills study, dopamine was released",
+       "options": [
+        "only at the most moving moment.",
+        "only after the music had finished.",
+        "before and during the most moving moment.",
+        "only when the music was unfamiliar."
+       ],
+       "a": "C",
+       "p": "C"
+      },
+      {
+       "q": "Later research suggested that the Mozart effect was mainly caused by",
+       "options": [
+        "long-term changes in the brain.",
+        "an improvement in mood and alertness.",
+        "the special structure of Mozart's music.",
+        "the students' musical training."
+       ],
+       "a": "B",
+       "p": "D"
+      },
+      {
+       "q": "Why are researchers cautious about studies of children who take music lessons?",
+       "options": [
+        "Other advantages may explain the results.",
+        "The children were too young to test.",
+        "The lessons were too short.",
+        "Brain scans are unreliable."
+       ],
+       "a": "A",
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Some ancient flutes were made from animal bones.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "Everyone feels chills when listening to music they love.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "The Mozart effect study was carried out on young babies.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "Music therapy has been shown to cure dementia.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "A regular beat can help people with Parkinson's disease to walk.",
+       "a": "TRUE",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Music's emotional effects seem to be connected to the brain's ____.",
+       "a": [
+        "reward system"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "People with dementia can often sing songs from their ____.",
+       "a": [
+        "youth"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "Some researchers think music may have developed alongside ____.",
+       "a": [
+        "language"
+       ],
+       "p": "G"
+      },
+      {
+       "q": "Singing to infants may have helped to create strong ____ between parents and children.",
+       "a": [
+        "bonds"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

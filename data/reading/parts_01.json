@@ -1,0 +1,559 @@
+{
+ "parts": [
+  {
+   "id": 1,
+   "title": "The Dance Language of Honeybees",
+   "topic": "Nature",
+   "paragraphs": [
+    "When a honeybee finds a rich patch of flowers, she does not keep the discovery to herself. Within minutes of returning to the hive, she can send dozens of her sisters to the same spot, even if it lies several kilometres away. For centuries, beekeepers noticed that a successful forager seemed to recruit others, but nobody could explain how the information was passed on inside the crowded, dark interior of a hive.",
+    "The answer came from the Austrian scientist Karl von Frisch, who spent decades watching bees through glass-walled observation hives. He noticed that returning foragers performed a curious movement on the vertical surface of the honeycomb. The bee would run forward in a straight line while shaking her body from side to side, then loop back to the start and repeat the run. Von Frisch called this the waggle dance, and in 1973 his work on bee communication earned him a share of the Nobel Prize in Physiology or Medicine.",
+    "The dance turned out to be a kind of map. The angle of the straight run, measured against an imaginary vertical line on the comb, shows the direction of the food in relation to the sun. A run pointing straight up tells other bees to fly directly towards the sun, while a run angled sixty degrees to the right means the food lies sixty degrees to the right of it. The length of each waggle run carries a second message: the longer the bee waggles, the further away the flowers are.",
+    "Because the sun moves across the sky during the day, a dance that was accurate in the morning would send bees the wrong way by the afternoon. Remarkably, dancing bees adjust for this. A forager that stays inside the hive for some time gradually changes the angle of her dance, keeping it correct even though she cannot see the sun. Bees appear to carry an internal clock that tells them how far the sun has travelled.",
+    "The hive is almost completely dark, so the bees following a dance cannot simply watch it. Instead, they stay close to the dancer, touching her with their antennae and sensing the vibrations of her body and the comb. They also pick up the scent of the flowers she has visited, which helps them recognise the right plants when they arrive. Not every follower succeeds; many make several trips before they find the advertised flowers.",
+    "Today, researchers use the dance as a tool. By filming dances and decoding them, they can map where a colony is collecting food across an entire landscape without following a single bee. Such studies have shown how far bees must travel in different seasons and which habitats matter most to them, information that is increasingly valuable as wild flowers disappear from farmland."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Beekeepers had long suspected that foragers could direct other bees to food.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "Von Frisch carried out his observations on bees kept outdoors in ordinary hives.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Von Frisch was the first scientist to keep bees in glass-walled hives.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "A longer waggle run indicates that the food source is further from the hive.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "Bees inside the hive stop dancing when the sun goes behind clouds.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The direction of the straight run is judged against an imaginary ____ on the comb.",
+       "a": [
+        "vertical line"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Bees seem to have an internal ____ that allows them to correct their dances for the moving sun.",
+       "a": [
+        "clock"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Followers detect the dance partly by touching the dancer with their ____.",
+       "a": [
+        "antennae"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "The ____ of the flowers helps followers recognise the correct plants.",
+       "a": [
+        "scent"
+       ],
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "A waggle run pointing straight up the comb tells bees to fly",
+       "options": [
+        "directly towards the sun.",
+        "towards the nearest flowers.",
+        "at sixty degrees to the sun.",
+        "away from the sun."
+       ],
+       "a": "A",
+       "p": "C"
+      },
+      {
+       "q": "What problem does the moving sun create for dancing bees?",
+       "options": [
+        "They cannot see it from inside the hive.",
+        "A fixed dance angle would become inaccurate.",
+        "Their dances become shorter in the afternoon.",
+        "Followers lose interest in older dances."
+       ],
+       "a": "B",
+       "p": "D"
+      },
+      {
+       "q": "According to the passage, followers of a dance",
+       "options": [
+        "always find the flowers on their first trip.",
+        "learn the route mainly by watching the dancer.",
+        "perform the dance themselves before leaving.",
+        "often need more than one attempt to find the food."
+       ],
+       "a": "D",
+       "p": "E"
+      },
+      {
+       "q": "Modern researchers decode dances in order to",
+       "options": [
+        "measure how fast individual bees fly.",
+        "prove that von Frisch was mistaken.",
+        "find out where a colony gathers its food.",
+        "teach bees to visit particular farms."
+       ],
+       "a": "C",
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "title": "How Tea Conquered the World",
+   "topic": "History",
+   "paragraphs": [
+    "After water, tea is the most widely drunk beverage on the planet, yet every cup of black, green or oolong tea comes from the leaves of a single species, Camellia sinensis. The differences between the types depend almost entirely on how the leaves are processed after picking. Green tea is heated soon after harvesting to stop the leaves from oxidising, while black tea is left to oxidise fully, which darkens the leaves and gives the drink its stronger flavour.",
+    "The plant is native to the borderlands of south-western China and neighbouring regions, and Chinese legend credits the discovery of tea to the mythical emperor Shennong, who is said to have tasted leaves that blew into his boiling water. Whatever its true origins, tea was well established in China by the Tang dynasty. In the eighth century the writer Lu Yu produced The Classic of Tea, a detailed guide to growing, preparing and serving it, which helped to turn tea drinking into a refined art.",
+    "From China, tea spread to Japan, carried by Buddhist monks who valued it for keeping them alert during long hours of meditation. Over time the Japanese developed their own ceremony around powdered green tea, in which every movement of the host follows a carefully prescribed pattern. Tea also travelled overland along trade routes into Central Asia and Tibet, where it was often pressed into hard bricks that could survive long journeys and even be used as a form of money.",
+    "Europeans encountered tea much later. Dutch traders brought the first shipments to Europe in the early seventeenth century, and the drink became fashionable in England after the Portuguese princess Catherine of Braganza, who married King Charles II in 1662, made it popular at court. For a long time tea was expensive and heavily taxed, which encouraged widespread smuggling. Resentment over taxes on tea also played a part in the Boston Tea Party of 1773, a protest that helped to spark the American Revolution.",
+    "As demand grew, Britain became uncomfortable about depending on China for its supply. In the 1840s the East India Company sent the Scottish botanist Robert Fortune into China, where he secretly collected tea plants and seeds and learned the techniques of processing. These were taken to India, where plantations were established in regions such as Darjeeling. At around the same time, a variety of the tea plant growing wild in Assam was being developed, and Indian tea soon rivalled the Chinese product.",
+    "Today tea is grown in dozens of countries, from Kenya to Vietnam, and the ways of drinking it are as varied as the places it is grown. It is served with butter and salt in Tibet, with plenty of milk and sugar in Britain, and with mint in Morocco. The leaf that began as a local medicine in the hills of southern China has become one of the most familiar products on earth."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "Spreading to neighbouring lands",
+      "Many countries, many customs",
+      "One plant, many teas",
+      "A dangerous voyage around Africa",
+      "Ending a dependence on one supplier",
+      "An early handbook and a legendary beginning",
+      "From fashion at court to political protest",
+      "The health benefits of green tea"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 2
+      },
+      {
+       "q": "B",
+       "a": 5
+      },
+      {
+       "q": "C",
+       "a": 0
+      },
+      {
+       "q": "D",
+       "a": 6
+      },
+      {
+       "q": "E",
+       "a": 4
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Black tea and green tea are made from different species of plant.",
+       "a": "FALSE",
+       "p": "A"
+      },
+      {
+       "q": "Buddhist monks drank tea to help them stay awake while meditating.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "Catherine of Braganza was the first person to bring tea to England.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "High taxes on tea led some people to smuggle it.",
+       "a": "TRUE",
+       "p": "D"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 3,
+     "questions": [
+      {
+       "q": "Lu Yu's book, The Classic of Tea, was written in the ____.",
+       "a": [
+        "eighth century"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "In Tibet and Central Asia, tea pressed into ____ was sometimes used as money.",
+       "a": [
+        "hard bricks",
+        "bricks"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Robert Fortune was sent to China by the ____.",
+       "a": [
+        "East India Company"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "A wild variety of the tea plant was found growing in ____.",
+       "a": [
+        "Assam"
+       ],
+       "p": "E"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "title": "Cities That Make Their Own Heat",
+   "topic": "Environment",
+   "paragraphs": [
+    "On a still summer evening, a person walking from the centre of a large city into the surrounding countryside may feel the air become noticeably cooler with every kilometre. This difference is known as the urban heat island effect. Cities are often several degrees warmer than nearby rural areas, and the gap is usually largest not in the middle of the day but at night, when the countryside cools quickly while the city holds on to its warmth.",
+    "Much of the extra heat comes from the materials cities are built with. Asphalt roads, concrete pavements and dark roofs absorb a large share of the sunlight that falls on them and store it as heat. After sunset, these surfaces slowly release that heat into the air. In the countryside, by contrast, fields and forests reflect more sunlight and store less of it, so temperatures fall rapidly once the sun goes down.",
+    "Plants also play an important cooling role. Trees and other vegetation take up water from the soil and release it through their leaves, a process called evapotranspiration, which uses energy and cools the surrounding air. Trees provide shade as well. Where natural ground has been replaced by buildings and paved surfaces, this cooling effect is largely lost, and rainwater runs into drains instead of evaporating slowly from the soil.",
+    "The shape of a city matters too. Tall buildings standing close together form narrow urban canyons, where heat reflected from one wall is absorbed by another and the wind is blocked. On top of this, cities produce heat directly. Vehicles, factories and air conditioners all release waste heat, and in hot weather the use of air conditioning creates a vicious circle: as the city warms, more machines are switched on, adding still more heat outside.",
+    "The consequences can be serious. During heatwaves, high night-time temperatures prevent people's bodies from recovering from the heat of the day, and older people and those with health conditions are particularly at risk. Higher temperatures also increase demand for electricity and can worsen air pollution, since some harmful pollutants form more quickly in hot, sunny conditions.",
+    "Fortunately, there are practical ways to cool a city. Painting roofs white or covering them with reflective materials, often called cool roofs, can greatly reduce the heat they absorb. Green roofs covered with plants offer both shade and evapotranspiration, and planting trees along streets can lower temperatures at ground level. Some cities are also experimenting with paving materials that allow water to soak through and evaporate. None of these measures is expensive on its own, but together they can make a significant difference to life in a warming world."
+   ],
+   "groups": [
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "an explanation of how vegetation lowers air temperature",
+       "a": "C"
+      },
+      {
+       "q": "a reference to people who are especially vulnerable to heat",
+       "a": "E"
+      },
+      {
+       "q": "a description of how the layout of buildings can trap heat",
+       "a": "D"
+      },
+      {
+       "q": "a comparison of how quickly city and country areas cool after dark",
+       "a": "B"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "The temperature difference between a city and the countryside is usually greatest at midday.",
+       "a": "FALSE",
+       "p": "A"
+      },
+      {
+       "q": "Paved surfaces cause rainwater to drain away instead of evaporating from the soil.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "Air conditioners make the air outside buildings warmer.",
+       "a": "TRUE",
+       "p": "D"
+      },
+      {
+       "q": "Most large cities now have laws requiring cool roofs on new buildings.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Green roofs cool buildings more effectively than cool roofs do.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "According to the passage, dark urban surfaces",
+       "options": [
+        "absorb sunlight and release the heat later.",
+        "are mainly found in the countryside.",
+        "cool down faster than fields and forests.",
+        "reflect most of the sunlight that reaches them."
+       ],
+       "a": "A",
+       "p": "B"
+      },
+      {
+       "q": "The 'vicious circle' described in paragraph D involves",
+       "options": [
+        "factories and electricity prices.",
+        "tall buildings and strong winds.",
+        "traffic and air pollution.",
+        "rising temperatures and greater use of air conditioning."
+       ],
+       "a": "D",
+       "p": "D"
+      },
+      {
+       "q": "Why are high night-time temperatures dangerous during heatwaves?",
+       "options": [
+        "They cause electricity supplies to fail.",
+        "They stop the body recovering from daytime heat.",
+        "They make people stay indoors.",
+        "They reduce the number of trees in cities."
+       ],
+       "a": "B",
+       "p": "E"
+      },
+      {
+       "q": "What does the writer say about the measures in paragraph F?",
+       "options": [
+        "They have not yet been tested.",
+        "They work only in very hot countries.",
+        "They are most effective when combined.",
+        "They are too costly for most cities."
+       ],
+       "a": "C",
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "title": "Why We Sleep",
+   "topic": "Health",
+   "paragraphs": [
+    "Humans spend roughly a third of their lives asleep, yet for most of history sleep was regarded simply as a period of rest when the body and mind switched off. Modern research has overturned this view. Far from being inactive, the sleeping brain passes through a carefully organised series of stages, each with its own pattern of activity, and many of the most important processes for our health appear to take place while we are unconscious.",
+    "Sleep is divided into two main types. Non-rapid eye movement sleep, or NREM sleep, has three stages, moving from light sleep, from which we are easily woken, to deep sleep, when brain waves become slow and large and it is hard to wake a person up. The second type, rapid eye movement or REM sleep, is when most vivid dreams occur. During REM sleep the eyes move quickly behind closed lids and the brain is highly active, yet most of the body's muscles are temporarily paralysed, which prevents us from acting out our dreams.",
+    "Over a night, the brain cycles through these stages several times, with each cycle lasting around ninety minutes. Deep sleep tends to dominate the early part of the night, while periods of REM sleep become longer towards the morning. This is one reason why cutting sleep short by waking early may reduce the amount of REM sleep a person gets by more than might be expected.",
+    "One of the clearest functions of sleep is to help us remember. Experiments have repeatedly shown that people who sleep after learning new information recall it better than people who stay awake for the same length of time. During sleep, the brain seems to replay the day's experiences, strengthening important memories and linking them to existing knowledge. Sleep may also help to clean the brain: studies in mice have suggested that waste products are cleared away more efficiently during sleep than during waking hours.",
+    "The timing of sleep is controlled by an internal circadian rhythm, a roughly twenty-four-hour cycle that responds strongly to light. As evening falls, the brain releases the hormone melatonin, which helps to prepare the body for sleep. Bright light at night, including light from screens, can delay this process. Body clocks also change with age: during adolescence they shift later, which is why many teenagers find it hard to fall asleep early and even harder to get up for school.",
+    "Health organisations generally recommend that adults sleep for seven to nine hours a night, but many people regularly get less. In the short term, lack of sleep affects concentration, mood and reaction times, making accidents more likely. Over longer periods, it has been linked with a range of health problems. Researchers increasingly argue that sleep should be treated as seriously as diet and exercise as one of the foundations of good health."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "In the past, sleep was generally seen as a time when the brain did very little.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "It is easier to wake someone from deep sleep than from light sleep.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Vivid dreams are most common during NREM sleep.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "REM sleep periods are longer in the second half of the night.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "The evidence that sleep helps to clear waste from the brain comes from experiments on people.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "Older adults need less sleep than younger adults.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "During REM sleep, most of the body's muscles are temporarily ____.",
+       "a": [
+        "paralysed",
+        "paralyzed"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "A complete sleep cycle lasts around ____ minutes.",
+       "a": [
+        "ninety",
+        "90"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "The hormone ____ helps to prepare the body for sleep.",
+       "a": [
+        "melatonin"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Body clocks shift later during ____.",
+       "a": [
+        "adolescence"
+       ],
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "a recommendation about how much sleep adults should get",
+       "a": "F"
+      },
+      {
+       "q": "evidence that sleep improves the ability to remember",
+       "a": "D"
+      },
+      {
+       "q": "an explanation of why waking early may reduce dreaming sleep",
+       "a": "C"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "title": "The Machine That Spread Ideas",
+   "topic": "History",
+   "paragraphs": [
+    "Few inventions have changed the world as profoundly as the printing press. Before it existed, books in Europe were copied by hand, usually by monks or professional scribes. Producing a single copy of a long book could take months, so books were rare and expensive, and owning even a small collection was a sign of great wealth. Errors also crept in each time a text was copied, so no two versions of a book were exactly the same.",
+    "Printing itself was not a European invention. In China, texts were printed from carved wooden blocks for centuries, and in the eleventh century a craftsman named Bi Sheng created movable type made from baked clay, so that individual characters could be arranged, used and then reused. In Korea, metal movable type was in use by the fourteenth century; a Buddhist text printed there in 1377 is the oldest surviving book produced in this way. However, the thousands of characters needed for Chinese writing made movable type less practical than in languages with small alphabets.",
+    "In the German city of Mainz, around the middle of the fifteenth century, the goldsmith Johannes Gutenberg brought together several technologies to create a much faster system. He developed a method of casting large numbers of identical metal letters, an oil-based ink that stuck well to metal type, and a press adapted from those already used to make wine and olive oil. His most famous work, a large and beautiful Bible, was completed in the mid-1450s.",
+    "The new technology spread with astonishing speed. Within a few decades, printing workshops had opened in cities across Europe, and by 1500 millions of books had been printed. Prices fell dramatically, and for the first time books came within reach of merchants, teachers and other people of modest means. Because every copy of a printed edition was identical, scholars in different countries could be sure they were reading exactly the same text.",
+    "The effects were felt far beyond the world of books. Printed pamphlets allowed new ideas to travel quickly, and in 1517 the arguments of the religious reformer Martin Luther were reprinted and read across Germany within weeks, helping to start the Reformation. Scientists were able to share detailed drawings and data accurately, which supported the rapid progress of science in the following centuries.",
+    "Printing also shaped languages. Printers wanted to sell books to as many readers as possible, so they tended to choose one form of spelling and grammar rather than many local varieties. Over time this helped to establish standard national languages. Some historians compare the printing press to the internet, arguing that both technologies transformed not only how information was shared but also who was able to share it."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "A world of handwritten books",
+      "Combining existing technologies",
+      "The fall of the scribes' profession",
+      "Earlier inventions in Asia",
+      "Cheaper books and reliable texts",
+      "The influence on religion and science",
+      "The search for a better ink",
+      "A force for common languages"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 0
+      },
+      {
+       "q": "B",
+       "a": 3
+      },
+      {
+       "q": "C",
+       "a": 1
+      },
+      {
+       "q": "D",
+       "a": 4
+      },
+      {
+       "q": "E",
+       "a": 5
+      },
+      {
+       "q": "F",
+       "a": 7
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Hand-copied books often contained mistakes that differed from one copy to another.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "Bi Sheng's movable type was made of metal.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Gutenberg had worked as a goldsmith.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "Gutenberg became very rich from selling his Bible.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The oldest surviving book printed with metal movable type dates from ____.",
+       "a": [
+        "1377"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Gutenberg's press was based on presses used for wine and ____.",
+       "a": [
+        "olive oil"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Luther's ideas spread through printed ____.",
+       "a": [
+        "pamphlets"
+       ],
+       "p": "E"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

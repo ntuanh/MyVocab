@@ -1,0 +1,305 @@
+{
+ "about": "50 episodes of BBC Learning English's 6 Minute English, newest first, played from the BBC's own YouTube channel. Only the video IDs, titles and lengths are kept here; the topics are MyVocab's. The programmes, transcripts and worksheets belong to the BBC.",
+ "episodes": [
+  {
+   "id": "GDwLjLHsGGg",
+   "title": "What can science tell us about the pain of a broken heart?",
+   "duration": "6:05",
+   "topic": "Mind & feelings"
+  },
+  {
+   "id": "1VQNMDSzWpE",
+   "title": "What is that unpleasant feeling on our skin and is scratching good for us?",
+   "duration": "6:02",
+   "topic": "Health"
+  },
+  {
+   "id": "rCIs5x0SGTY",
+   "title": "How do you feel when someone says 'no'?",
+   "duration": "6:22",
+   "topic": "Mind & feelings"
+  },
+  {
+   "id": "-XcALxwXJVY",
+   "title": "Can apps teach you a language?",
+   "duration": "6:16",
+   "topic": "Language & learning"
+  },
+  {
+   "id": "D9jZMLm72a8",
+   "title": "Who does the housework?",
+   "duration": "6:14",
+   "topic": "Society"
+  },
+  {
+   "id": "SC_opiKLohg",
+   "title": "Sharing the road with driverless cars",
+   "duration": "6:16",
+   "topic": "Technology"
+  },
+  {
+   "id": "pEO9-iPZQWA",
+   "title": "Climate and extreme weather",
+   "duration": "6:15",
+   "topic": "Science & nature"
+  },
+  {
+   "id": "xwseWCSXD3Y",
+   "title": "How are smell adjectives different?",
+   "duration": "6:16",
+   "topic": "Language & learning"
+  },
+  {
+   "id": "sv9DItmJvlI",
+   "title": "How do climate scientists make predictions?",
+   "duration": "6:16",
+   "topic": "Science & nature"
+  },
+  {
+   "id": "0XccoTXPu_c",
+   "title": "What if athletes were allowed to take drugs?",
+   "duration": "6:16",
+   "topic": "Sport"
+  },
+  {
+   "id": "ut3b9qDHvEQ",
+   "title": "Children in war zones",
+   "duration": "6:32",
+   "topic": "Society"
+  },
+  {
+   "id": "MSJMJxd1udk",
+   "title": "How do footballers cope with high-pressure scenarios?",
+   "duration": "6:11",
+   "topic": "Sport"
+  },
+  {
+   "id": "vxoPApiNZBU",
+   "title": "Rude emails",
+   "duration": "6:15",
+   "topic": "Work & money"
+  },
+  {
+   "id": "m7IlyBEyi3c",
+   "title": "Limiting screen time for children",
+   "duration": "6:25",
+   "topic": "Technology"
+  },
+  {
+   "id": "vOuhs1mA0xo",
+   "title": "How advertisers make us spend money",
+   "duration": "6:14",
+   "topic": "Work & money"
+  },
+  {
+   "id": "-idY8F7LOSE",
+   "title": "Stress-free family meals",
+   "duration": "6:16",
+   "topic": "Food"
+  },
+  {
+   "id": "dgFm7A8pyzo",
+   "title": "Living with debt",
+   "duration": "6:16",
+   "topic": "Work & money"
+  },
+  {
+   "id": "Cq8v437OWyU",
+   "title": "The power of poetry",
+   "duration": "6:14",
+   "topic": "Language & learning"
+  },
+  {
+   "id": "_PIlvBI9rXY",
+   "title": "How reading shapes your brain",
+   "duration": "6:14",
+   "topic": "Language & learning"
+  },
+  {
+   "id": "hhmNNs47PMo",
+   "title": "Searching for life on another planet",
+   "duration": "6:14",
+   "topic": "Science & nature"
+  },
+  {
+   "id": "YjwHsdFZPxE",
+   "title": "The future of food",
+   "duration": "6:16",
+   "topic": "Food"
+  },
+  {
+   "id": "QdE63sYqwd8",
+   "title": "Why are we all so stressed?",
+   "duration": "6:15",
+   "topic": "Mind & feelings"
+  },
+  {
+   "id": "uRftuSXN1q0",
+   "title": "Should we eat ultra-processed food?",
+   "duration": "6:15",
+   "topic": "Food"
+  },
+  {
+   "id": "qI2LxF5sR2c",
+   "title": "Love the food you hate",
+   "duration": "6:11",
+   "topic": "Food"
+  },
+  {
+   "id": "GPbPAC0xS1s",
+   "title": "How do we adapt to the cold?",
+   "duration": "6:16",
+   "topic": "Health"
+  },
+  {
+   "id": "Af4kqQ8hdhE",
+   "title": "Weight loss drugs",
+   "duration": "6:16",
+   "topic": "Health"
+  },
+  {
+   "id": "28EFRJaA2JQ",
+   "title": "Are saunas good for you?",
+   "duration": "6:17",
+   "topic": "Health"
+  },
+  {
+   "id": "fi3uJy8KsUU",
+   "title": "Should we pay more for chocolate?",
+   "duration": "5:58",
+   "topic": "Food"
+  },
+  {
+   "id": "nx2BboYL2Y0",
+   "title": "Dreaming of being a chef",
+   "duration": "6:16",
+   "topic": "Work & money"
+  },
+  {
+   "id": "8uFBMD23d5k",
+   "title": "The power of pepper",
+   "duration": "6:16",
+   "topic": "Food"
+  },
+  {
+   "id": "a5UADG2c0sw",
+   "title": "Why are some animals black and white?",
+   "duration": "6:16",
+   "topic": "Science & nature"
+  },
+  {
+   "id": "YAsDeXcYyTg",
+   "title": "Scared to speak English?",
+   "duration": "6:48",
+   "topic": "Language & learning"
+  },
+  {
+   "id": "u5TITb4P2Mg",
+   "title": "What English phrases really mean",
+   "duration": "6:16",
+   "topic": "Language & learning"
+  },
+  {
+   "id": "oeoQU26Lx0A",
+   "title": "Is it OK to disagree?",
+   "duration": "6:16",
+   "topic": "Society"
+  },
+  {
+   "id": "GiQZAXCjsf4",
+   "title": "Rethinking dyslexia",
+   "duration": "6:13",
+   "topic": "Language & learning"
+  },
+  {
+   "id": "ezg6dyRcR4E",
+   "title": "How are horses helping to heal humans?",
+   "duration": "6:13",
+   "topic": "Health"
+  },
+  {
+   "id": "cGJCcidYYaY",
+   "title": "Do you have good dining etiquette?",
+   "duration": "6:16",
+   "topic": "Society"
+  },
+  {
+   "id": "EAMoWvtjvag",
+   "title": "What's your favourite flavour of crisp?",
+   "duration": "6:14",
+   "topic": "Food"
+  },
+  {
+   "id": "Mn0mXeor0ug",
+   "title": "How important is play?",
+   "duration": "6:16",
+   "topic": "Mind & feelings"
+  },
+  {
+   "id": "Pej48NfVg2I",
+   "title": "How are influencers affecting politics?",
+   "duration": "6:19",
+   "topic": "Society"
+  },
+  {
+   "id": "C830bmzNjDc",
+   "title": "Is breakfast the most important meal of the day?",
+   "duration": "6:13",
+   "topic": "Food"
+  },
+  {
+   "id": "MSk_8ayzUpE",
+   "title": "Do you like garlic?",
+   "duration": "6:16",
+   "topic": "Food"
+  },
+  {
+   "id": "VsBSCbBm_NA",
+   "title": "Are we too fixated on protein?",
+   "duration": "6:16",
+   "topic": "Food"
+  },
+  {
+   "id": "vNQUAtFQf9A",
+   "title": "What makes a good citizen?",
+   "duration": "6:14",
+   "topic": "Society"
+  },
+  {
+   "id": "7F1iJZr-p4E",
+   "title": "Are you drinking enough water?",
+   "duration": "6:15",
+   "topic": "Health"
+  },
+  {
+   "id": "2lxvNnGkdTo",
+   "title": "What's your favourite snack?",
+   "duration": "6:15",
+   "topic": "Food"
+  },
+  {
+   "id": "j2PdEQpu5js",
+   "title": "Why you need a good night's sleep",
+   "duration": "6:20",
+   "topic": "Health"
+  },
+  {
+   "id": "9ifQ3xRz4hM",
+   "title": "Learning multiple languages",
+   "duration": "7:03",
+   "topic": "Language & learning"
+  },
+  {
+   "id": "yz0oYPfON2g",
+   "title": "Can climate change affect our mental health?",
+   "duration": "6:14",
+   "topic": "Mind & feelings"
+  },
+  {
+   "id": "LrZGtTuMpk8",
+   "title": "Having acne",
+   "duration": "6:19",
+   "topic": "Health"
+  }
+ ]
+}

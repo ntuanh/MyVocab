@@ -1,0 +1,573 @@
+{
+ "parts": [
+  {
+   "id": 26,
+   "title": "The Grain That Feeds Half the World",
+   "topic": "Food",
+   "paragraphs": [
+    "More than half of the world's people depend on rice as their main source of food. In much of Asia, the word for a meal is closely connected with the word for cooked rice, and the crop shapes not only diets but landscapes, festivals and ways of life. Yet the plant at the centre of all this is a grass, closely related to wheat and barley, which was transformed by thousands of years of careful selection by farmers.",
+    "Most of the rice eaten today belongs to a species that was domesticated in China, probably in the valley of the Yangtze River, around nine thousand years ago. Early farmers gradually chose plants whose grains stayed on the stem instead of falling to the ground before harvest, and whose seeds were larger. A separate species of rice was domesticated much later in West Africa, along the River Niger, and is still grown there, although it has largely been replaced by Asian varieties.",
+    "Rice is unusual among grain crops in its ability to grow in standing water. Many farmers grow it in paddies, small fields surrounded by low walls of earth and flooded for much of the growing season. The water provides a constant supply of moisture, but it has another important benefit: most weeds cannot survive in flooded fields, while rice can. In hilly regions, from the north of Vietnam to the Philippines, farmers have carved entire mountainsides into terraces, creating some of the most spectacular agricultural landscapes on Earth.",
+    "In the middle of the twentieth century, many experts feared that Asia would be unable to feed its rapidly growing population. Part of the answer came from new varieties of rice developed by plant breeders. In 1966, the International Rice Research Institute in the Philippines released a variety known as IR8, which quickly became famous as miracle rice. Its short, sturdy stems could support heavy heads of grain without falling over, and when grown with fertiliser and irrigation it produced far more rice than traditional varieties. Within a few decades, harvests in many countries had increased dramatically.",
+    "These gains came at a cost. The new varieties often needed large amounts of fertiliser, pesticides and water, and the spread of a small number of high-yielding types meant that many traditional varieties were no longer grown. Flooded paddies also have an environmental impact: bacteria living in the waterlogged soil produce methane, a powerful greenhouse gas. Rice farming is estimated to be responsible for a significant share of the methane released by human activity.",
+    "Researchers and farmers are now testing ways of growing rice with less water and lower emissions. One technique, known as alternate wetting and drying, involves allowing the fields to dry out for short periods instead of keeping them flooded all the time. Studies have shown that this can reduce water use and methane emissions considerably, without lowering yields. Plant breeders are also developing varieties that can survive being completely underwater for days during floods, or that tolerate salty soils.",
+    "Salt is a growing concern in places such as the Mekong Delta in southern Vietnam, one of the most productive rice-growing regions in the world and a major source of rice exports. As sea levels rise and less fresh water flows down the river during the dry season, salty water from the sea is pushing further inland, damaging crops. Some farmers have responded by switching from rice to shrimp farming or by alternating between the two. The future of rice, it seems, will depend as much on adapting to a changing climate as on producing ever larger harvests."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Rice is closely related to wheat and barley.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "African rice was domesticated before Asian rice.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Flooding rice fields helps to control weeds.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "IR8 had short, strong stems.",
+       "a": "TRUE",
+       "p": "D"
+      },
+      {
+       "q": "Alternate wetting and drying reduces the amount of rice harvested.",
+       "a": "FALSE",
+       "p": "F"
+      },
+      {
+       "q": "Most farmers in the Mekong Delta have stopped growing rice.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Rice was probably first domesticated in the valley of the ____.",
+       "a": [
+        "Yangtze River",
+        "Yangtze"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Small flooded rice fields surrounded by earth walls are called ____.",
+       "a": [
+        "paddies"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "IR8 became famous under the name ____.",
+       "a": [
+        "miracle rice"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Bacteria in flooded fields produce a greenhouse gas called ____.",
+       "a": [
+        "methane"
+       ],
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "a reference to farming in mountainous areas",
+       "a": "C"
+      },
+      {
+       "q": "a description of how sea water is affecting crops",
+       "a": "G"
+      },
+      {
+       "q": "a mention of traditional varieties that stopped being grown",
+       "a": "E"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 27,
+   "title": "Measuring the Hours",
+   "topic": "Science",
+   "paragraphs": [
+    "For most of human history, people told the time by watching the sky. The rising and setting of the sun marked the day, the phases of the moon marked the month, and the positions of the stars marked the seasons. As societies grew more complex, however, people needed more precise ways of dividing the day, whether to organise prayers, trade or work, and the search for an accurate clock became one of the great technological quests.",
+    "Some of the earliest devices were sundials, used in ancient Egypt and elsewhere, which showed the time by the position of a shadow. They were simple and reliable, but useless at night or on cloudy days. Water clocks offered a solution: water dripped at a steady rate from one container into another, and the level showed how much time had passed. Water clocks were used in Egypt, Babylon, Greece, China and the Islamic world, where engineers built elaborate versions with moving figures and bells.",
+    "Mechanical clocks appeared in Europe towards the end of the thirteenth century, often in church towers. They were driven by falling weights, and a mechanism called an escapement released the energy in small, regular steps. These early clocks were impressive machines, but they were not very accurate, gaining or losing many minutes each day, and they often had only an hour hand.",
+    "A major advance came from the study of pendulums. The Italian scientist Galileo noticed that a swinging pendulum seemed to take the same time for each swing, and in 1656 the Dutch scientist Christiaan Huygens built the first pendulum clock. It was dramatically more accurate than anything that had come before, and minute hands soon became common on clocks. For the next two and a half centuries, pendulum clocks were the most precise timekeepers in the world.",
+    "Pendulums, however, do not work on a rolling ship, and sailors faced a serious problem. To calculate how far east or west they had travelled, they needed to know the exact time at their home port, but no clock could keep accurate time at sea for long. Many ships were lost because of navigation errors. In the eighteenth century, an English carpenter and clockmaker, John Harrison, spent decades developing a series of marine clocks, and his fourth design proved accurate enough on a voyage to the Caribbean to solve the problem.",
+    "Even on land, the time differed from place to place, since each town set its clocks by the local position of the sun. This caused little difficulty until the arrival of railways, when timetables required everyone to agree. British railway companies adopted a single national time based on Greenwich in London, and in 1884 an international conference in Washington chose the meridian passing through Greenwich as the starting point for the world's time zones.",
+    "The twentieth century brought even greater accuracy. Quartz clocks, developed in the 1920s, use the regular vibrations of a small quartz crystal when electricity passes through it, and cheap quartz watches later made accurate time available to almost everyone. Atomic clocks, first built in the 1950s, measure the vibrations of atoms of the element caesium, and they are so precise that since 1967 the second itself has been officially defined by them. Today, satellite navigation systems depend on atomic clocks: an error of just a millionth of a second could place a position hundreds of metres from where it should be."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "Weights, towers and limited accuracy",
+      "Trains and the need for common time",
+      "The ancient instruments of shadow and water",
+      "A swinging solution",
+      "Why clocks run faster in space",
+      "Watching the sky",
+      "Vibrating crystals and atoms",
+      "Keeping time on the ocean"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 5
+      },
+      {
+       "q": "B",
+       "a": 2
+      },
+      {
+       "q": "C",
+       "a": 0
+      },
+      {
+       "q": "D",
+       "a": 3
+      },
+      {
+       "q": "E",
+       "a": 7
+      },
+      {
+       "q": "F",
+       "a": 1
+      },
+      {
+       "q": "G",
+       "a": 6
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Sundials could not be used at night.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Early mechanical clocks usually had both hour and minute hands.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Harrison's first marine clock was the one that solved the problem.",
+       "a": "FALSE",
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "In mechanical clocks, energy was released in small steps by the ____.",
+       "a": [
+        "escapement"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Atomic clocks measure vibrations of atoms of ____.",
+       "a": [
+        "caesium",
+        "cesium"
+       ],
+       "p": "G"
+      },
+      {
+       "q": "Satellite navigation systems rely on ____.",
+       "a": [
+        "atomic clocks"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 28,
+   "title": "When a Language Falls Silent",
+   "topic": "Society",
+   "paragraphs": [
+    "There are around seven thousand languages spoken in the world today, but they are very unevenly shared. A small number of major languages, such as Chinese, English, Spanish and Hindi, are spoken by hundreds of millions of people each, and roughly half the world's population speaks one of just a couple of dozen languages as a first language. At the other extreme, thousands of languages have fewer than ten thousand speakers, and many have only a handful, most of them elderly.",
+    "Linguists estimate that around forty per cent of the world's languages are endangered, meaning that they may stop being spoken within a few generations. When the last speaker of a language dies, the language becomes extinct, unless it has been recorded and someone later learns it again. Some experts predict that, without action, a large proportion of today's languages could disappear by the end of this century.",
+    "Languages rarely die because all their speakers die. More often, a community gradually shifts to a different language, usually one that offers more economic opportunities or greater prestige. Parents who want their children to succeed at school and find good jobs may choose to speak the dominant language at home, and once children stop learning a language from their parents, it is in serious danger. In the past, many governments actively discouraged minority languages, and children were sometimes punished for speaking them at school.",
+    "Why should the loss of a language matter? Each language represents a unique way of understanding the world. Many contain detailed knowledge about local plants, animals and environments that has never been written down; some languages have words for dozens of varieties of plants used as food or medicine. Languages also carry stories, songs and histories, and for many communities their language is closely tied to their sense of identity. For linguists, every language provides evidence about the possibilities of human thought and communication.",
+    "Languages can, however, be brought back from the brink. The most remarkable example is Hebrew, which for centuries was used mainly for religious and written purposes. In the late nineteenth and twentieth centuries it was revived as an everyday spoken language and now has millions of native speakers. In Wales, the number of Welsh speakers, which had fallen for many years, has been supported by teaching the language in schools and broadcasting radio and television programmes in Welsh.",
+    "In New Zealand, the Maori community developed an influential approach in the early 1980s: language nests, preschools in which young children are cared for entirely in the Maori language by fluent elders. The idea has since been copied by indigenous communities in other countries. Such programmes work best when children hear the language not only at school but also at home and in the wider community.",
+    "Technology offers new tools as well. Linguists record the speech of the last fluent speakers, create dictionaries and grammars, and make archives available online. Communities use social media, messaging apps and online courses to keep their languages in daily use, especially among young people. The United Nations has declared the years from 2022 to 2032 an international decade of indigenous languages, hoping to encourage such efforts. Whether they succeed will depend above all on whether new generations choose to speak the languages of their grandparents."
+   ],
+   "groups": [
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "According to the passage, languages usually disappear because",
+       "options": [
+        "their speakers die out.",
+        "governments ban them.",
+        "communities gradually change to another language.",
+        "they have no written form."
+       ],
+       "a": "C",
+       "p": "C"
+      },
+      {
+       "q": "The writer mentions words for plant varieties to show that languages",
+       "options": [
+        "change very quickly.",
+        "borrow words from each other.",
+        "are difficult to learn.",
+        "contain valuable local knowledge."
+       ],
+       "a": "D",
+       "p": "D"
+      },
+      {
+       "q": "Hebrew is described as remarkable because it",
+       "options": [
+        "is spoken by more people than Welsh.",
+        "was never written down.",
+        "became an everyday spoken language again.",
+        "is used only in religious services."
+       ],
+       "a": "C",
+       "p": "E"
+      },
+      {
+       "q": "According to the writer, language nests work best when",
+       "options": [
+        "teachers are trained abroad.",
+        "children start school early.",
+        "classes are held online.",
+        "the language is also used at home and in the community."
+       ],
+       "a": "D",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Around half of the world's people have one of about two dozen languages as their first language.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "An extinct language can never be learned again.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "In the past, some schools punished children for speaking minority languages.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "The number of Welsh speakers is now higher than ever before.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Language nests were first developed in Wales.",
+       "a": "FALSE",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 3,
+     "questions": [
+      {
+       "q": "Around ____ of the world's languages are thought to be endangered.",
+       "a": [
+        "forty per cent",
+        "40 per cent",
+        "40%"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "For many communities, their language is closely linked to their sense of ____.",
+       "a": [
+        "identity"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "In language nests, children are cared for by fluent ____.",
+       "a": [
+        "elders"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "Communities use social media, messaging apps and ____ to keep languages alive.",
+       "a": [
+        "online courses"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 29,
+   "title": "Buildings That Bend",
+   "topic": "Technology",
+   "paragraphs": [
+    "Engineers have a saying that earthquakes do not kill people; buildings do. When the ground shakes, most deaths and injuries are caused not by the movement itself but by collapsing walls, floors and roofs. Making buildings that can survive strong earthquakes is therefore one of the most effective ways of saving lives in the many parts of the world that lie along the boundaries of the Earth's tectonic plates.",
+    "The main danger in an earthquake comes from the ground moving rapidly from side to side. A building is designed mainly to support its own weight, which pushes straight down, and it may be poorly prepared for strong sideways forces. As the ground moves, the base of the building moves with it, while the upper floors tend to stay where they are, so the structure is twisted and bent. If its walls and joints cannot cope, it may crack or collapse.",
+    "One approach is to make buildings stronger and stiffer. Concrete is strengthened with steel bars, which prevent it from cracking when it is bent. Walls designed to resist sideways forces, known as shear walls, and diagonal steel braces help to hold the frame in shape. Careful attention is also paid to the weakest points. In many past earthquakes, buildings with open ground floors, such as shops or car parks with few walls, have collapsed because the floors above were much stronger than the level supporting them.",
+    "However, strength alone is not always the best solution, and many modern designs aim instead to reduce the forces that reach the building. In a technique called base isolation, the whole building rests on special bearings, often made of layers of rubber and steel, placed between the foundations and the structure above. When the ground shakes, the bearings move and absorb much of the energy, so that the building itself moves far more gently. Base isolation is particularly common in hospitals and other buildings that must continue working after a disaster.",
+    "Tall buildings often use dampers, devices that absorb the energy of movement. The most famous example is in Taipei 101, a skyscraper in Taiwan, where a huge steel ball weighing several hundred tonnes hangs near the top of the tower. When the building sways in an earthquake or a strong wind, the ball swings in the opposite direction and reduces the movement. It has become a tourist attraction in its own right.",
+    "Ideas about earthquake-resistant design are not entirely new. Wooden pagodas in Japan, some of which have stood for over a thousand years, have survived many earthquakes. Their floors are stacked loosely so that they can slide slightly, and many have a central wooden pillar that is not firmly fixed to the floors around it. Engineers believe that this flexible structure allows the pagodas to sway without falling, and similar principles have influenced modern skyscrapers in Japan.",
+    "The greatest challenge is often not designing new buildings but improving old ones. Building codes, the rules that set minimum standards for construction, have become much stricter in earthquake-prone countries, and buildings constructed to modern codes generally perform far better than older ones. In Japan, buildings designed under rules introduced in 1981 suffered much less damage in the Kobe earthquake of 1995 than those built before. Strengthening millions of older buildings, however, is expensive, and in many poorer countries rules are not properly enforced. As a result, the same strength of earthquake can have very different consequences depending on where it strikes."
+   ],
+   "groups": [
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "an example of an old type of building that has survived many earthquakes",
+       "a": "F"
+      },
+      {
+       "q": "an explanation of why buildings struggle with sideways movement",
+       "a": "B"
+      },
+      {
+       "q": "a reference to a feature that attracts visitors",
+       "a": "E"
+      },
+      {
+       "q": "the types of building in which base isolation is often used",
+       "a": "D"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Most earthquake deaths are caused by falling parts of buildings.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "Buildings with open ground floors have often performed well in earthquakes.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Base isolation bearings are always made entirely of rubber.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "The damper in Taipei 101 was designed by a Japanese engineer.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Rules about earthquake safety are not always enforced in poorer countries.",
+       "a": "TRUE",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 3,
+     "questions": [
+      {
+       "q": "Concrete is strengthened with ____ so that it does not crack when bent.",
+       "a": [
+        "steel bars"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Walls that are designed to resist sideways forces are called ____.",
+       "a": [
+        "shear walls"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Many Japanese pagodas have a ____ that is not firmly fixed to the floors.",
+       "a": [
+        "central wooden pillar",
+        "central pillar"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "Minimum standards for construction are set out in ____.",
+       "a": [
+        "building codes"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 30,
+   "title": "The Story of Glass",
+   "topic": "History",
+   "paragraphs": [
+    "Glass is so common in modern life, in windows, bottles, screens and spectacles, that we rarely think about what a strange material it is. It is hard yet brittle, solid yet transparent, and it is made from some of the most ordinary substances on Earth. Its history stretches back thousands of years and includes some closely guarded secrets.",
+    "Long before people learned to make glass, they used a natural form of it. Obsidian, a black volcanic glass formed when lava cools very quickly, can be broken to produce extremely sharp edges, and it was widely used for knives and arrowheads. The first glass made by humans appeared in Mesopotamia, the region of modern Iraq and Syria, more than four thousand years ago. At first it was used mainly for small objects such as beads, which were valued as highly as precious stones.",
+    "The basic recipe has changed surprisingly little. The main ingredient is silica, usually in the form of sand. On its own, sand melts only at extremely high temperatures, so glassmakers add soda, which lowers the melting point, and lime, which makes the finished glass stronger and prevents it from dissolving in water. When the mixture is heated until it melts and then allowed to cool, it forms glass.",
+    "For centuries, glass vessels were made slowly, by shaping the hot material around a core or pressing it into moulds. A revolution came in the first century BC, when craftsmen in the eastern Mediterranean discovered that they could blow air through a tube into a lump of molten glass, inflating it like a balloon. Glassblowing made it possible to produce vessels quickly and cheaply, and under the Roman Empire glass bottles, cups and even windows became common.",
+    "In medieval Europe, the city of Venice became famous for its glass. In 1291, the city's glassmakers were ordered to move their furnaces to the nearby island of Murano, partly to reduce the risk of fire in the crowded city. The move also helped the authorities to protect the secrets of the craft, and glassmakers were for a long time forbidden to leave. In the fifteenth century, Venetian craftsmen developed an exceptionally clear glass, which they called cristallo, and their products were sold all over Europe.",
+    "Glass also changed science. Lenses made it possible to correct poor eyesight with spectacles, which appeared in Italy in the late thirteenth century, and later led to the invention of the microscope and the telescope, which revealed tiny organisms and distant planets. Without high-quality glass, many of the discoveries of modern science would have been impossible.",
+    "Making large, flat sheets of glass for windows remained difficult until the 1950s, when the British engineer Alastair Pilkington introduced the float glass process. Molten glass is poured onto a bath of molten tin, where it spreads out and floats, forming a perfectly flat and smooth surface. Most window glass in the world is now made this way. Today glass has also become essential to communications: thin optical fibres made of extremely pure glass carry pulses of light that transmit much of the world's internet traffic. And unlike many materials, glass can be melted down and recycled again and again without losing its quality."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Obsidian is formed when lava cools slowly.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Early glass beads were highly valued.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Lime helps to stop glass dissolving in water.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "Glassblowing was invented in Rome.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "Venetian glassmakers were well paid for keeping their secrets.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "Why do glassmakers add soda to sand?",
+       "options": [
+        "To give the glass colour.",
+        "To lower the temperature at which it melts.",
+        "To make the glass clearer.",
+        "To make the glass stronger."
+       ],
+       "a": "B",
+       "p": "C"
+      },
+      {
+       "q": "One reason for moving the glassmakers to Murano was",
+       "options": [
+        "to reduce the danger of fire.",
+        "to give them more space.",
+        "to bring them closer to the sea.",
+        "to increase their profits."
+       ],
+       "a": "A",
+       "p": "E"
+      },
+      {
+       "q": "In the float glass process, molten glass is poured onto",
+       "options": [
+        "molten tin.",
+        "water.",
+        "wet sand.",
+        "cold steel."
+       ],
+       "a": "A",
+       "p": "G"
+      },
+      {
+       "q": "What advantage of glass is mentioned in the final sentence?",
+       "options": [
+        "It is cheap to transport.",
+        "It can be recycled repeatedly without losing quality.",
+        "It conducts electricity well.",
+        "It never breaks."
+       ],
+       "a": "B",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The main ingredient of glass is ____.",
+       "a": [
+        "silica"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Venetian craftsmen called their very clear glass ____.",
+       "a": [
+        "cristallo"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Lenses led to the invention of the microscope and the ____.",
+       "a": [
+        "telescope"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "Internet traffic is carried by thin ____.",
+       "a": [
+        "optical fibres",
+        "optical fibers"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

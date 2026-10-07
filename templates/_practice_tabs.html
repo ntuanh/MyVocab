@@ -1,0 +1,15 @@
+{# Switches between the practice pages; the top bar's Practice button covers them all. #}
+<nav class="practice-tabs" aria-label="Practice">
+    <a href="/practice"{% if request.path == '/practice' %} aria-current="page"{% endif %}>
+        <i class="fas fa-pen" aria-hidden="true"></i> Vocab &amp; grammar
+    </a>
+    <a href="/listening"{% if request.path == '/listening' %} aria-current="page"{% endif %}>
+        <i class="fas fa-headphones" aria-hidden="true"></i> Listening
+    </a>
+    <a href="/reading"{% if request.path == '/reading' %} aria-current="page"{% endif %}>
+        <i class="fas fa-book-reader" aria-hidden="true"></i> Reading
+    </a>
+    <a href="/writing"{% if request.path == '/writing' %} aria-current="page"{% endif %}>
+        <i class="fas fa-pen-fancy" aria-hidden="true"></i> Writing
+    </a>
+</nav>

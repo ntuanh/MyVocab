@@ -6,9 +6,11 @@
     <title>MyVocab - Vocabulary Exam</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="exam-body">
+    {% include '_nav.html' %}
 
     <div id="exam-layout-container">
 
@@ -20,7 +22,6 @@
                 <p>Loading topics...</p>
             </div>
             <button id="start-exam-btn">Start Exam</button>
-            <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dictionary</a>
         </div>
 
         <!-- Màn hình 2: Làm bài kiểm tra (Mặc định ẩn) -->
@@ -69,6 +70,7 @@
             </div>
 
             <button id="change-topics-btn">Change Topics</button>
+            <p class="shortcut-hint"><kbd>Enter</kbd> submit &middot; <kbd>R</kbd> reveal &middot; <kbd>N</kbd> next word</p>
         </div>
 
     </div>

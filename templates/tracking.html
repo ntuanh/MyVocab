@@ -1,0 +1,118 @@
+{% from '_goal_panel.html' import goal_panel %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyVocab - Tracking</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    {% include '_nav.html' %}
+
+    <main id="tracking-page" class="tracking-page">
+        <header class="tracking-head">
+            <div>
+                <h1>Tracking</h1>
+                <p>Your weekly score for each skill, one band each. A week runs Monday to Sunday,
+                    and points a week falls short of are added to the next week's target.</p>
+            </div>
+            <button type="button" id="targets-btn" class="targets-btn" aria-expanded="false" aria-controls="targets-form">
+                <i class="fas fa-bullseye" aria-hidden="true"></i> Set targets
+            </button>
+        </header>
+
+        <!-- Every band's weekly target in one go; tracking.js fills in the current ones. -->
+        <form id="targets-form" class="targets-form" hidden novalidate>
+            <h2 class="targets-title">Weekly targets</h2>
+            <p class="targets-help">Points to reach each week, from {{ min_target }} to {{ max_target }}.
+                New targets count from this week on; earlier weeks keep theirs.</p>
+            <div class="targets-grid">
+                {% for band in bands %}
+                <label class="target-field" for="target-{{ band.skill }}">
+                    <span><i class="fas {{ band.icon }}" aria-hidden="true"></i> {{ band.name }}</span>
+                    <input type="number" id="target-{{ band.skill }}" name="{{ band.skill }}"
+                           min="{{ min_target }}" max="{{ max_target }}" step="10" inputmode="numeric" required>
+                </label>
+                {% endfor %}
+            </div>
+            <p id="targets-error" class="targets-error" role="alert" hidden></p>
+            <div class="targets-actions">
+                <button type="submit" class="targets-save">Save targets</button>
+                <button type="button" id="targets-cancel" class="targets-cancel">Cancel</button>
+            </div>
+        </form>
+        <p id="targets-saved" class="targets-saved" role="status" hidden></p>
+
+        <!-- One tile per band: this week at a glance. Picking one opens its band
+             below; tracking.js fills the numbers in. -->
+        <div class="band-tabs" role="tablist" aria-label="Skills">
+            {% for band in bands %}
+            <button type="button" role="tab" class="band-tab"
+                    id="band-tab-{{ band.skill }}" data-skill="{{ band.skill }}"
+                    aria-controls="band-{{ band.skill }}" aria-selected="false" tabindex="-1">
+                <span class="band-tab-name"><i class="fas {{ band.icon }}" aria-hidden="true"></i> {{ band.name }}</span>
+                <span class="band-tab-value" data-tile="value"><span data-tile="points">&hellip;</span> / <span data-tile="due"></span></span>
+                <span class="band-meter" aria-hidden="true"><span data-tile="fill"></span></span>
+                <span class="band-tab-status" data-tile="status">Loading...</span>
+            </button>
+            {% endfor %}
+        </div>
+
+        {% for band in bands %}
+        <section class="band-panel" id="band-{{ band.skill }}" role="tabpanel"
+                 aria-labelledby="band-tab-{{ band.skill }}" tabindex="0" hidden>
+            <div class="band-grid">
+                {% if band.skill in ('vocab', 'listening', 'reading', 'writing') %}
+                    {% call goal_panel(band.skill, band.name ~ ' score', past_weeks=7, past_list=False) %}
+                        {% include '_' ~ band.skill ~ '_rules.html' %}
+                    {% endcall %}
+                {% else %}
+                    {{ goal_panel(band.skill, band.name ~ ' score', past_weeks=7, past_list=False) }}
+                {% endif %}
+
+                <!-- The last 8 weeks as columns: points against each week's target.
+                     The table below holds the same numbers without the chart. -->
+                <div class="band-history" data-skill="{{ band.skill }}">
+                    <h3 class="viz-title">Last 8 weeks</h3>
+                    <ul class="history-legend">
+                        <li><span class="key key-met"></span>Target met</li>
+                        <li><span class="key key-short"></span>Fell short</li>
+                        <li><span class="key key-now"></span>This week so far</li>
+                        <li><span class="key key-goal"></span>Target</li>
+                    </ul>
+                    <div class="history-chart" data-history="chart"></div>
+                    <p class="history-note" data-history="note"></p>
+                    <details class="history-table-wrap">
+                        <summary>Show as a table</summary>
+                        <table class="history-table">
+                            <thead><tr><th scope="col">Week</th><th scope="col">Points</th><th scope="col">Target</th><th scope="col">Result</th></tr></thead>
+                            <tbody data-history="table"></tbody>
+                        </table>
+                    </details>
+                    {% if band.practice_url %}
+                    <a class="band-practice" href="{{ band.practice_url }}">
+                        <i class="fas fa-pen" aria-hidden="true"></i> Practise {{ band.name|lower }}
+                    </a>
+                    {% else %}
+                    <p class="band-no-practice">
+                        <i class="fas fa-info-circle" aria-hidden="true"></i>
+                        There is no {{ band.name|lower }} practice in MyVocab yet, so this band has
+                        nothing to count. Your target waits for it.
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+        {% endfor %}
+    </main>
+
+    <div id="viz-tooltip" class="viz-tooltip" aria-hidden="true" hidden></div>
+
+    <script src="{{ url_for('static', filename='goals.js') }}"></script>
+    <script src="{{ url_for('static', filename='tracking.js') }}"></script>
+</body>
+</html>

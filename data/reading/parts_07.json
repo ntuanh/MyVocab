@@ -1,0 +1,572 @@
+{
+ "parts": [
+  {
+   "id": 31,
+   "title": "Harvesting the Wind",
+   "topic": "Technology",
+   "paragraphs": [
+    "People have been using the power of the wind for thousands of years. Sails carried boats across rivers and seas long before the invention of the wheel, and windmills have been grinding grain and pumping water for well over a thousand years. Today, wind is once again becoming one of the world's most important sources of energy, this time in the form of giant turbines that generate electricity.",
+    "Some of the earliest known windmills were built in Persia, in what is now eastern Iran, more than a thousand years ago. They had sails that turned around a vertical axis, like a revolving door, and were used to grind grain. Windmills with sails turning around a horizontal axis, the familiar shape seen in paintings of the European countryside, appeared in Europe in the Middle Ages. In the Netherlands, thousands of windmills were used to pump water out of low-lying land, helping to create the fields known as polders, much of which lies below sea level.",
+    "The first windmills to generate electricity were built at the end of the nineteenth century. In 1887, the Scottish engineer James Blyth built a wind turbine to light his holiday cottage, and around the same time inventors in the United States and Denmark were carrying out similar experiments. For most of the twentieth century, however, wind power remained a small-scale technology, used mainly on farms far from the electricity grid. Coal, oil and later nuclear power were cheaper and more reliable.",
+    "Interest grew after the oil crises of the 1970s, when sudden rises in oil prices persuaded several countries to look for alternatives. Denmark in particular invested heavily in wind power, and Danish companies became world leaders in turbine manufacturing. Over the following decades, turbines grew enormously in size. A modern machine typically has three long blades mounted on a tall tower, and the largest offshore turbines have blades so long that the circle they sweep is bigger than two football pitches placed end to end.",
+    "There is a good reason for this growth. The power that can be extracted from the wind rises very steeply with wind speed: if the speed of the wind doubles, the power available increases about eight times. Winds are generally stronger and steadier higher above the ground, so taller towers and longer blades produce much more electricity. For the same reason, many new wind farms are being built at sea, where winds are stronger and there are no hills or buildings to slow them down. In Vietnam, for example, rows of turbines now stand in the shallow coastal waters of the Mekong Delta.",
+    "Most offshore turbines stand on foundations fixed to the seabed, which limits them to fairly shallow water. To reach the strong winds over deeper seas, engineers have developed floating turbines, which are anchored to the sea floor by cables. The first commercial floating wind farm began operating off the coast of Scotland in 2017, and the technology could open up large areas of ocean to wind power.",
+    "Wind power is not without problems. Like solar power, it is variable: turbines produce nothing on calm days, and their output cannot be planned precisely. Some people object to the appearance of wind farms in beautiful landscapes or to the noise they make, and birds and bats can be killed by turning blades, although careful choice of sites can reduce the risk. Another challenge is what to do with old blades, which are made of strong composite materials that are difficult to recycle.",
+    "Despite these difficulties, wind power has grown into a major industry. In several countries it now provides a large share of the electricity supply, and on particularly windy days some national grids have been supplied mainly by wind. As turbines become larger and more efficient, the oldest source of mechanical power may become one of the pillars of a low-carbon future."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "Building turbines on mountain tops",
+      "A turbine that floats",
+      "Early mills in Asia and Europe",
+      "Drawbacks and objections",
+      "The first electric turbines and a slow start",
+      "Why turbines have grown so big",
+      "Crisis brings new investment",
+      "Why wind farms are cheaper than coal"
+     ],
+     "questions": [
+      {
+       "q": "B",
+       "a": 2
+      },
+      {
+       "q": "C",
+       "a": 4
+      },
+      {
+       "q": "D",
+       "a": 6
+      },
+      {
+       "q": "E",
+       "a": 5
+      },
+      {
+       "q": "F",
+       "a": 1
+      },
+      {
+       "q": "G",
+       "a": 3
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "The sails of early Persian windmills turned around a vertical axis.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "James Blyth's turbine supplied electricity to a whole village.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Danish turbines are more expensive than those made in other countries.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Blades of old turbines are easy to recycle.",
+       "a": "FALSE",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Land drained by Dutch windmills became fields called ____.",
+       "a": [
+        "polders"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "If wind speed doubles, available power rises about ____ times.",
+       "a": [
+        "eight"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Floating turbines are attached to the sea floor by ____.",
+       "a": [
+        "cables"
+       ],
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 32,
+   "title": "The First Olympic Games",
+   "topic": "History",
+   "paragraphs": [
+    "Every four years, athletes from almost every country in the world gather to compete in the Olympic Games. The modern Games are just over a century old, but they were inspired by a festival that took place in ancient Greece for more than a thousand years. The ancient Olympics were very different from today's competition, yet many of their traditions, and even some of their problems, would be familiar to modern audiences.",
+    "The ancient Games were held at Olympia, a sanctuary in southern Greece dedicated to Zeus, the king of the gods. They were therefore as much a religious festival as a sporting event, and sacrifices and ceremonies took place alongside the competitions. According to tradition, the first Games were held in 776 BC, and they took place every four years after that. The four-year period between Games, called an Olympiad, was even used by Greek writers as a way of counting time.",
+    "At first, the Games are said to have consisted of a single event, a running race of about two hundred metres along the length of the stadium. Over the centuries, more events were added, including longer races, wrestling, boxing and chariot racing. There was also the pentathlon, which combined running, wrestling, the long jump, and throwing the discus and the javelin. One of the most violent events was the pankration, a brutal mixture of boxing and wrestling in which almost anything was allowed except biting and gouging an opponent's eyes.",
+    "Competitors had to be free Greek men, and they competed naked. Married women were not allowed to watch the main events, although women could take part in a separate festival in honour of the goddess Hera, and a woman could win the chariot race as the owner of the horses, even though she did not drive them herself. During the Games, a sacred truce was announced, so that athletes and spectators could travel safely to and from Olympia, even if their cities were at war.",
+    "Officially, the only prize for a winner was a crown made of leaves from a sacred olive tree. In reality, victory brought fame and wealth. Winners were welcomed home as heroes, poems were written in their honour, and their cities often rewarded them with money, free meals for life and statues. Not surprisingly, some athletes were tempted to cheat. Those caught breaking the rules or bribing opponents had to pay fines, which were used to build bronze statues of Zeus along the path to the stadium, each one recording the name of the cheat.",
+    "The Games continued under Roman rule, but they eventually came to an end. Historians traditionally connect their end with the Roman emperor Theodosius I, who banned many non-Christian festivals at the end of the fourth century AD. Over the following centuries, the site at Olympia was damaged by earthquakes and floods and gradually buried, until archaeologists began to uncover it in the nineteenth century.",
+    "The idea of reviving the Games came from a French educator, Pierre de Coubertin, who believed that sport could build character and promote peace between nations. The first modern Olympics were held in Athens in 1896, with a few hundred athletes, all of them men. A new event, the marathon, was introduced, based on a legend about a messenger who ran from the battlefield of Marathon to Athens. Women first competed in 1900, and the Games have grown ever since. The Olympic flame, lit at Olympia using the sun's rays and carried by relay to the host city, is a reminder of their ancient origins."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "The ancient Olympics combined sport with religious ceremonies.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Greek writers sometimes used the period between Games to measure time.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Biting was allowed in the pankration.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "A woman could be declared the winner of a chariot race.",
+       "a": "TRUE",
+       "p": "D"
+      },
+      {
+       "q": "The sacred truce ended all wars between Greek cities permanently.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "The first modern Olympics included female athletes.",
+       "a": "FALSE",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "What was the official prize for an Olympic winner?",
+       "options": [
+        "Free meals for life.",
+        "A sum of money.",
+        "A bronze statue.",
+        "A crown of olive leaves."
+       ],
+       "a": "D",
+       "p": "E"
+      },
+      {
+       "q": "Fines paid by cheats were used to",
+       "options": [
+        "repair the stadium.",
+        "reward honest athletes.",
+        "build statues of Zeus.",
+        "pay the judges."
+       ],
+       "a": "C",
+       "p": "E"
+      },
+      {
+       "q": "Coubertin wanted to revive the Games because he believed sport could",
+       "options": [
+        "train soldiers for war.",
+        "make Greece wealthy.",
+        "replace religious festivals.",
+        "build character and encourage peace."
+       ],
+       "a": "D",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The ancient Games were held at a sanctuary dedicated to ____.",
+       "a": [
+        "Zeus"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Women could take part in a separate festival honouring the goddess ____.",
+       "a": [
+        "Hera"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "The site of Olympia was gradually buried after being damaged by earthquakes and ____.",
+       "a": [
+        "floods"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "The Olympic flame is lit using the ____.",
+       "a": [
+        "sun's rays"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 33,
+   "title": "From Bitter Drink to Sweet Bar",
+   "topic": "Food",
+   "paragraphs": [
+    "Chocolate is one of the world's favourite treats, but for most of its long history it was not eaten at all. It was drunk, it was bitter, and it was so highly valued that its raw material was used as money. The story of how it became the sweet, solid product we know today stretches across thousands of years and several continents.",
+    "Chocolate comes from the seeds of the cacao tree, which grows in the warm, wet tropical forests of Central and South America. The seeds, often called beans, grow inside large pods attached directly to the trunk and branches. Archaeologists have found traces of cacao in pottery in what is now Ecuador that are more than five thousand years old, and in Central America the Olmec people were preparing cacao drinks by around 1900 BC.",
+    "The Maya and later the Aztecs made cacao an important part of their culture. They roasted and ground the beans and mixed them with water, spices such as chilli, and sometimes maize, pouring the mixture from one container to another to create a thick foam. The drink was associated with rulers, warriors and religious ceremonies. Among the Aztecs, cacao beans were so valuable that they were used as a currency to buy everyday goods, and some people even made counterfeit beans by filling empty shells with mud.",
+    "Spanish explorers encountered cacao in the early sixteenth century, and by the end of the century the drink had reached Spain. Europeans found the original bitter taste unpleasant, so they began to sweeten it with sugar and flavour it with cinnamon or vanilla. Hot chocolate became a fashionable drink among the wealthy in Spain, and in the seventeenth century it spread to France, Italy and England, where chocolate houses opened alongside the coffeehouses of the time.",
+    "Turning chocolate into something that could be eaten took a series of inventions. In 1828, the Dutch chemist Coenraad van Houten developed a press that removed much of the fat, known as cocoa butter, from roasted cacao beans, leaving a powder that mixed more easily with water. Later, manufacturers discovered that by adding cocoa butter back to the ground beans together with sugar, they could make a paste that set into a solid bar. A British company produced one of the first chocolate bars in 1847.",
+    "Swiss makers made the next major advances. In 1875, Daniel Peter created milk chocolate by adding condensed milk, which had recently been developed by his neighbour Henri Nestle. A few years later, Rodolphe Lindt invented a machine that stirred chocolate for many hours, a process called conching, which made it much smoother. These inventions helped Switzerland to become famous for chocolate, even though the country cannot grow a single cacao tree.",
+    "Today, most of the world's cacao is no longer grown in the Americas but in West Africa, especially in Cote d'Ivoire and Ghana, mainly on small family farms. Many farmers earn very little from the crop, and there have been serious concerns about child labour in some growing areas. Cacao trees are also sensitive to disease and to changes in temperature and rainfall, and researchers fear that climate change could make some regions unsuitable for growing them. Some companies and farmers are responding by planting cacao in the shade of taller trees, as it grows naturally in the forest, which can protect the crop and support wildlife at the same time."
+   ],
+   "groups": [
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "a description of fake cacao beans",
+       "a": "C"
+      },
+      {
+       "q": "the reason why Europeans added sugar to chocolate",
+       "a": "D"
+      },
+      {
+       "q": "a process that made chocolate smoother",
+       "a": "F"
+      },
+      {
+       "q": "a method of farming that may protect both crops and wildlife",
+       "a": "G"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Cacao pods grow on the trunk and branches of the tree.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "The Aztecs sweetened their cacao drink with honey.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Chocolate houses existed in England in the seventeenth century.",
+       "a": "TRUE",
+       "p": "D"
+      },
+      {
+       "q": "Van Houten's press added extra fat to cacao powder.",
+       "a": "FALSE",
+       "p": "E"
+      },
+      {
+       "q": "Most cacao today is grown on large plantations owned by companies.",
+       "a": "FALSE",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The Maya and Aztecs poured the drink between containers to create a thick ____.",
+       "a": [
+        "foam"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "The fat removed from cacao beans is known as ____.",
+       "a": [
+        "cocoa butter"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Daniel Peter made milk chocolate using ____.",
+       "a": [
+        "condensed milk"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "Some growers plant cacao in the ____ of taller trees.",
+       "a": [
+        "shade"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 34,
+   "title": "The Secret of Silk",
+   "topic": "History",
+   "paragraphs": [
+    "For thousands of years, silk was one of the most desirable materials in the world. Light, smooth, strong and able to take brilliant colours, it was worn by emperors and traded across continents, and for a long time only one country knew how to make it. The source of this luxury, remarkably, is a small caterpillar.",
+    "Silk is produced by the larvae of a moth that has been domesticated for so long that it can no longer survive in the wild. The caterpillars, known as silkworms, feed almost entirely on the leaves of the mulberry tree and eat enormous quantities as they grow. When they are ready to change into moths, each one spins a cocoon around itself from a single continuous thread of silk, which can be several hundred metres long. To obtain the thread, producers heat the cocoons before the moths can break out, then soften them in hot water and carefully unwind the fibre.",
+    "According to Chinese legend, silk was discovered by an empress who was drinking tea beneath a mulberry tree when a cocoon fell into her cup. As she pulled it out, the thread began to unwind. Whatever the truth of the story, archaeological evidence shows that silk was being produced in China several thousand years ago, and over time it became central to the Chinese economy and culture. Silk was used not only for clothing but also for writing, fishing lines and musical instrument strings, and at times it was even used to pay taxes and the salaries of officials.",
+    "China guarded its knowledge carefully. Silk cloth was exported in large quantities, travelling along the trade routes to Central Asia, Persia and eventually the Roman Empire, where it was so expensive that some Roman writers complained about the money flowing out of the empire to pay for it. The Romans had little idea how silk was made, and some believed that it grew on trees. The methods of raising silkworms, however, remained a closely kept secret, and taking silkworms or their eggs out of the country was forbidden.",
+    "The secret did not last forever. Silk production spread to Korea and Japan and, according to tradition, to Central Asia when a Chinese princess hid silkworm eggs in her headdress on her way to marry a foreign king. The Byzantine Empire, based in Constantinople, obtained the secret in the sixth century, when monks are said to have smuggled silkworm eggs out of Asia hidden inside hollow walking sticks. The Byzantines soon built up their own silk industry, which they in turn controlled tightly.",
+    "From the Byzantine world and the Islamic lands, silk making spread to Italy and later to France, where the city of Lyon became a great centre of silk weaving. Lyon was also the birthplace of an invention that would have consequences far beyond textiles. In 1804, Joseph Marie Jacquard introduced a loom controlled by a chain of punched cards, which allowed complex patterns to be woven automatically. The idea of storing instructions on punched cards later influenced the designers of the first calculating machines and computers.",
+    "Today, China and India produce most of the world's silk, and traditional silk villages, such as Van Phuc near Hanoi, continue to attract visitors. Scientists, meanwhile, remain fascinated by silk's properties. It is strong, flexible and accepted by the human body, which has led researchers to explore its use in medicine, for example in stitches and materials that help wounds to heal."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "From silk weaving to computing",
+      "A legendary beginning and a valuable product",
+      "How synthetic fibres replaced silk",
+      "A caterpillar and its cocoon",
+      "A carefully protected secret",
+      "Smuggled eggs and new industries",
+      "Old crafts and new uses",
+      "The dangers of the silk trade"
+     ],
+     "questions": [
+      {
+       "q": "B",
+       "a": 3
+      },
+      {
+       "q": "C",
+       "a": 1
+      },
+      {
+       "q": "D",
+       "a": 4
+      },
+      {
+       "q": "E",
+       "a": 5
+      },
+      {
+       "q": "F",
+       "a": 0
+      },
+      {
+       "q": "G",
+       "a": 6
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Domesticated silkworm moths can no longer live in the wild.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Silk was sometimes used to pay officials in China.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "The Romans understood exactly how silk was produced.",
+       "a": "FALSE",
+       "p": "D"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Silkworms feed mainly on the leaves of the ____.",
+       "a": [
+        "mulberry tree"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Monks are said to have hidden silkworm eggs inside hollow ____.",
+       "a": [
+        "walking sticks"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Jacquard's loom was controlled by a chain of ____.",
+       "a": [
+        "punched cards"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "Researchers are exploring the use of silk in medicine, for example in ____.",
+       "a": [
+        "stitches"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 35,
+   "title": "The Underrated Sense",
+   "topic": "Science",
+   "paragraphs": [
+    "Of the five senses, smell has often been treated as the least important. Philosophers dismissed it as a primitive sense, and many people say that, if they had to lose one sense, it would be smell. Yet research over the past few decades has revealed that the human sense of smell is far more sensitive than was once believed, and that it plays a surprisingly large role in how we experience food, form memories and even choose our friends.",
+    "Smell begins in a small patch of tissue high inside the nose. When we breathe in, molecules from the air reach this tissue, where they attach to special receptors on nerve cells. In the early 1990s, the American scientists Richard Axel and Linda Buck identified the large family of genes that produce these receptors, a discovery that earned them a Nobel Prize in 2004. Humans have around four hundred different types of smell receptor, and each smell activates a particular combination of them, rather like a chord played on a piano.",
+    "This combination system allows us to distinguish an enormous number of different smells. One study in 2014 claimed that humans could tell apart at least a trillion different odours, although other scientists later questioned the calculations. Even so, it is clear that the human nose is much better than its reputation. Dogs, it is true, have far more receptors than we do, which is why they are used to detect drugs, explosives and even some diseases, but in tests humans have been able to follow a scent trail across a field, much as a dog does.",
+    "Smell is closely bound up with emotion and memory. Signals from the nose travel directly to parts of the brain that handle feelings and memories, whereas information from the eyes and ears passes through other areas first. This may explain why a particular smell, such as a perfume or a dish from childhood, can suddenly bring back a vivid memory together with the emotions attached to it. Writers have described this experience for centuries.",
+    "Smell is also responsible for much of what we call taste. The tongue can detect only a few basic tastes, such as sweet, salty, sour, bitter and savoury. The rich variety of flavours we experience when eating comes mainly from smells that travel from the back of the mouth up into the nose. This is why food seems to have little flavour when we have a heavy cold, and why holding your nose makes it difficult to tell the difference between, for example, an apple and a raw potato.",
+    "For most people, the importance of smell becomes obvious only when it is lost. Loss of smell, known as anosmia, can be caused by head injuries, infections and ageing, and it became much more widely discussed during the COVID-19 pandemic, when sudden loss of smell was one of the most common symptoms. People who lose their sense of smell often find eating less enjoyable, and they can be at greater risk from dangers such as gas leaks or spoiled food. Many also report feeling isolated or depressed. Some patients have been helped by smell training, which involves sniffing a set of strong smells every day to encourage the system to recover.",
+    "Scientists are also investigating smell as an early warning signal. A declining sense of smell can be one of the first signs of conditions such as Parkinson's disease, sometimes appearing years before other symptoms. Simple smell tests may one day help doctors to identify such illnesses at an early stage, when treatment could be most effective."
+   ],
+   "groups": [
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "Axel and Buck received a Nobel Prize for",
+       "options": [
+        "identifying the genes for smell receptors.",
+        "explaining how memories are formed.",
+        "showing that dogs can detect diseases.",
+        "inventing a smell test."
+       ],
+       "a": "A",
+       "p": "B"
+      },
+      {
+       "q": "The writer compares the way smells activate receptors to",
+       "options": [
+        "a key opening a lock.",
+        "a dog following a trail.",
+        "a chord played on a piano.",
+        "a perfume bringing back memories."
+       ],
+       "a": "C",
+       "p": "B"
+      },
+      {
+       "q": "Why can smells bring back strong memories?",
+       "options": [
+        "The eyes and ears help to identify smells.",
+        "Smell signals go directly to brain areas for emotion and memory.",
+        "People pay more attention to smells than to sounds.",
+        "Smells are stored in the nose for many years."
+       ],
+       "a": "B",
+       "p": "D"
+      },
+      {
+       "q": "According to the passage, smell training involves",
+       "options": [
+        "taking medicine every day.",
+        "eating food without salt.",
+        "avoiding strong smells.",
+        "sniffing strong smells every day."
+       ],
+       "a": "D",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Many people consider smell the sense they could most easily live without.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "All scientists accept that humans can distinguish a trillion smells.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "In tests, people have followed a scent across a field.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "Women generally have a better sense of smell than men.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Loss of smell can make people more vulnerable to some dangers.",
+       "a": "TRUE",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "When smell molecules reach the nose, they attach to ____ on nerve cells.",
+       "a": [
+        "receptors",
+        "special receptors"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Most of the flavour of food comes from smells reaching the nose from the back of the ____.",
+       "a": [
+        "mouth"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "The medical term for loss of smell is ____.",
+       "a": [
+        "anosmia"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "A weaker sense of smell can be an early sign of ____.",
+       "a": [
+        "Parkinson's disease"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

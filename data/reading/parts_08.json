@@ -1,0 +1,566 @@
+{
+ "parts": [
+  {
+   "id": 36,
+   "title": "A City Frozen in Time",
+   "topic": "History",
+   "paragraphs": [
+    "Nearly two thousand years ago, Pompeii was a busy Roman town on the Bay of Naples, in southern Italy. Its streets were lined with shops, bakeries, bars and houses decorated with colourful paintings, and its citizens enjoyed public baths, a theatre and an amphitheatre for gladiator fights. Towering over the town was Mount Vesuvius, which the people of Pompeii did not recognise as a volcano, since it had not erupted for many centuries and its slopes were covered with vineyards.",
+    "In AD 79, Vesuvius erupted with devastating force. The date is traditionally given as 24 August, although some evidence found by archaeologists, such as remains of autumn fruits, suggests that it may have happened later in the year. A huge column of ash and pumice, a light volcanic rock full of air bubbles, rose many kilometres into the sky and then began to fall on Pompeii. Over the following hours, the town was buried under several metres of material. Many people fled, but those who stayed behind were killed, most of them by surges of extremely hot gas and ash that swept down the mountain the next morning. The nearby town of Herculaneum was buried in a similar way.",
+    "We know a great deal about the eruption thanks to a remarkable eyewitness. A young man known today as Pliny the Younger watched the disaster from across the bay and later described it in two letters to the historian Tacitus. His uncle, Pliny the Elder, a famous writer and commander of the Roman fleet in the area, had sailed towards the volcano to rescue people and died on the shore. The younger Pliny's description of the giant cloud was so accurate that eruptions of this type are still called Plinian eruptions.",
+    "After the disaster, Pompeii was largely forgotten. Its site was rediscovered in the eighteenth century, and organised excavations began in 1748. The early diggers were mainly interested in finding treasures and works of art, and their methods damaged much of what they uncovered. In the nineteenth century, however, the excavations became more scientific. The archaeologist Giuseppe Fiorelli noticed that the bodies of victims had decayed inside the hardened ash, leaving empty spaces in the shape of the people who had died. By pouring plaster into these spaces, his team created casts that preserve the final positions, and sometimes even the expressions, of the victims.",
+    "What makes Pompeii so valuable to historians is that it preserves the details of everyday life, not just the monuments of the rich and powerful. Archaeologists have found loaves of bread still in their ovens, counters where hot food was sold to people in the street, and thousands of messages written on walls. Some of these are election notices supporting candidates for local office; others are jokes, insults, love messages and records of debts. Together they give a vivid picture of ordinary people's lives that no history book could provide.",
+    "Pompeii today faces a different kind of threat. Around two-thirds of the ancient town has been uncovered, and the exposed buildings are vulnerable to rain, plants, earthquakes and the millions of tourists who visit each year. In 2010, the collapse of a building known as the House of the Gladiators caused international concern about the state of the site. Since then, major conservation projects have repaired many buildings, and new excavations continue to reveal well-preserved rooms and paintings. Archaeologists must constantly balance the excitement of new discoveries against the need to protect what has already been found, and some areas are deliberately left buried for future generations, who may have better techniques for studying them."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "The people of Pompeii knew that Vesuvius was an active volcano.",
+       "a": "FALSE",
+       "p": "A"
+      },
+      {
+       "q": "Some archaeologists question the traditional date of the eruption.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Most victims who stayed in Pompeii were killed by falling rocks.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Pliny the Younger wrote his account of the eruption on the same day.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "The first excavations at Pompeii were carried out with great care.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "Some parts of Pompeii are being left unexcavated on purpose.",
+       "a": "TRUE",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "Why are certain eruptions called Plinian eruptions?",
+       "options": [
+        "Pliny commanded the fleet that escaped them.",
+        "Pliny the Younger described one very accurately.",
+        "They happened during Pliny's lifetime.",
+        "Pliny the Elder discovered them."
+       ],
+       "a": "B",
+       "p": "C"
+      },
+      {
+       "q": "Fiorelli's casts were made by",
+       "options": [
+        "painting the remains of the victims.",
+        "carving the victims' shapes in stone.",
+        "filling spaces left by bodies with plaster.",
+        "covering the bodies with ash."
+       ],
+       "a": "C",
+       "p": "D"
+      },
+      {
+       "q": "The messages written on Pompeii's walls are valuable because they",
+       "options": [
+        "show the everyday lives of ordinary people.",
+        "were written by famous politicians.",
+        "explain how the town was built.",
+        "record the history of the eruption."
+       ],
+       "a": "A",
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The light volcanic rock that fell on Pompeii is called ____.",
+       "a": [
+        "pumice"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Pliny the Younger described the eruption in letters to the historian ____.",
+       "a": [
+        "Tacitus"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Organised excavations of Pompeii started in ____.",
+       "a": [
+        "1748"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "In 2010, the ____ of the House of the Gladiators caused international concern.",
+       "a": [
+        "collapse"
+       ],
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 37,
+   "title": "The Silent Army",
+   "topic": "History",
+   "paragraphs": [
+    "In the spring of 1974, a group of farmers digging a well near the city of Xi'an in central China struck something hard. Among the earth they found pieces of clay, including what appeared to be a human head. They had stumbled upon one of the greatest archaeological discoveries of the twentieth century: an army of life-size clay soldiers, buried more than two thousand years earlier to guard the tomb of China's first emperor.",
+    "That emperor, Qin Shi Huang, came to power as the king of the state of Qin and in 221 BC completed the conquest of the other warring states, uniting China under a single ruler for the first time. During his reign he standardised writing, coins, weights and measures, and even the width of cart axles, and he began linking existing defensive walls into an early version of the Great Wall. He also devoted enormous resources to preparing for life after death. According to the historian Sima Qian, who wrote about a century later, hundreds of thousands of workers laboured on the emperor's tomb complex.",
+    "Archaeologists have so far identified several large pits containing the army. The figures are arranged in battle formation, with rows of infantry, archers who kneel or stand, officers and charioteers with horses. Estimates suggest that the pits contain around eight thousand soldiers, many of them still unexcavated. Each figure is made of terracotta, a type of baked clay, and the bodies were produced using moulds in a kind of assembly line. The heads and faces, however, were finished individually, so that the soldiers have different hairstyles, expressions and features. Some researchers believe the faces were based on real people.",
+    "When they were made, the soldiers were not the plain brown colour that visitors see today. They were painted in bright colours, including red, green, blue and purple. Unfortunately, the paint was applied over a layer of lacquer which, after two thousand years underground, begins to curl and flake within minutes of being exposed to dry air. Much of the colour has been lost, and this is one of the main reasons why excavation has proceeded slowly. Scientists are developing techniques to preserve the paint before uncovering more figures.",
+    "The soldiers originally carried real weapons, including bronze swords, spears and crossbows, many of which have survived in good condition. Close study of these weapons has revealed a remarkably organised system of production. Many are inscribed with the names of the workshops and officials responsible for them, which allowed the quality of each item to be checked and any faults traced back to the people who made it.",
+    "Excavations have shown that the army is only part of a much larger complex designed to recreate the emperor's world. Other pits have contained clay figures of officials, entertainers such as acrobats, and musicians, as well as bronze birds placed beside an artificial river. The emperor's burial mound itself has never been opened. Sima Qian wrote that it contained a model of the empire with rivers of mercury, and modern tests of the soil around the mound have found unusually high levels of mercury, suggesting that his account may contain some truth.",
+    "The Chinese authorities have decided not to excavate the burial mound for the time being, partly because of the risk of damaging whatever lies inside and partly out of respect for the site. Archaeologists hope that future technology will allow them to investigate it without digging. Meanwhile, the Terracotta Army, which became a UNESCO World Heritage Site in 1987, attracts millions of visitors every year, and exhibitions of a few selected soldiers have drawn large crowds around the world."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "A ruler who unified a country",
+      "Weapons that reveal careful quality control",
+      "Lost colours and slow progress",
+      "An accidental find",
+      "Why the emperor's tomb was robbed",
+      "Mass production with individual faces",
+      "A whole world beneath the earth",
+      "Waiting for better technology"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 3
+      },
+      {
+       "q": "B",
+       "a": 0
+      },
+      {
+       "q": "C",
+       "a": 5
+      },
+      {
+       "q": "D",
+       "a": 2
+      },
+      {
+       "q": "E",
+       "a": 1
+      },
+      {
+       "q": "F",
+       "a": 6
+      },
+      {
+       "q": "G",
+       "a": 7
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Qin Shi Huang standardised the width of cart axles.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "All of the soldiers in the pits have now been excavated.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "The soldiers' bodies were each made individually by hand.",
+       "a": "FALSE",
+       "p": "C"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The soldiers are made of ____, a type of baked clay.",
+       "a": [
+        "terracotta"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Soil tests near the burial mound have found high levels of ____.",
+       "a": [
+        "mercury"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "The Terracotta Army has been a UNESCO World Heritage Site since ____.",
+       "a": [
+        "1987"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 38,
+   "title": "The Brothers Who Learned to Fly",
+   "topic": "Technology",
+   "paragraphs": [
+    "On a cold, windy morning in December 1903, on a beach in North Carolina, a fragile machine made of wood, wire and cloth rose into the air with a man lying on its lower wing. The flight lasted only twelve seconds and covered about thirty-six metres, less than the wingspan of a modern passenger jet. Yet it was the first time that a powered, heavier-than-air machine had made a controlled and sustained flight with a pilot on board, and it marked the beginning of the age of aviation.",
+    "The men responsible, Wilbur and Orville Wright, had no university education and no formal training as engineers. They ran a bicycle business in Dayton, Ohio, where they designed, built and repaired bicycles. This work gave them practical skills and also, perhaps, an important insight. A bicycle is unstable, yet a skilled rider can balance it through constant small adjustments. The brothers believed that an aeroplane, too, need not be completely stable, as long as the pilot could control it.",
+    "Their interest in flight was encouraged by the work of the German engineer Otto Lilienthal, who made more than two thousand flights in gliders he had built, before dying in a crash in 1896. Lilienthal controlled his gliders by shifting the weight of his body, a method the Wrights considered too limited. Control, they decided, was the central problem that previous inventors had failed to solve. Many others had concentrated on building powerful engines, but an aircraft that could not be steered was of little use.",
+    "The brothers' solution was a technique they called wing warping. By twisting the tips of the wings in opposite directions, using cables, the pilot could make one wing produce more lift than the other, so that the aircraft would roll and turn, much as a bird adjusts its wings. Wilbur is said to have got the idea while absent-mindedly twisting a long, empty cardboard box in the shop.",
+    "Between 1900 and 1902, the Wrights tested a series of gliders at Kitty Hawk on the coast of North Carolina. They chose the site because it had strong and steady winds, soft sand for landing, and few people to observe them. Their early gliders performed worse than expected, and the brothers realised that the published scientific data on wing shapes was unreliable. Rather than give up, they built their own small wind tunnel and tested around two hundred different wing shapes, producing far more accurate measurements than any available before.",
+    "With a successful glider design, the Wrights needed an engine. No manufacturer could supply one that was light enough and powerful enough, so they built their own with the help of their mechanic, Charlie Taylor. They also designed their own propellers, after discovering that little was known about how they worked. On 17 December 1903, they made four flights, taking turns as pilot. Orville flew first, and in the final flight of the day Wilbur stayed in the air for nearly a minute.",
+    "Surprisingly, the achievement attracted little attention at first. Few newspapers reported it, and many people simply did not believe it. The brothers continued to improve their designs in private, and it was not until 1908, when Wilbur gave public demonstrations in France, that the world was convinced. Crowds were amazed by the ease with which he turned, circled and landed. Within a few years, aeroplanes were being built across Europe and America, and less than seventy years after that first short flight, people walked on the moon."
+   ],
+   "groups": [
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "the reason why the Wrights chose a particular place for their tests",
+       "a": "E"
+      },
+      {
+       "q": "how a piece of everyday packaging may have inspired an idea",
+       "a": "D"
+      },
+      {
+       "q": "a comparison between riding a bicycle and flying a plane",
+       "a": "B"
+      },
+      {
+       "q": "the public's reaction to the first flights",
+       "a": "G"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "The first powered flight lasted less than a minute.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "The Wright brothers had studied engineering at university.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Lilienthal died while testing one of his gliders.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "The Wrights' early gliders performed better than they had expected.",
+       "a": "FALSE",
+       "p": "E"
+      },
+      {
+       "q": "Charlie Taylor later started his own aircraft company.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Lilienthal controlled his gliders by shifting his ____.",
+       "a": [
+        "body weight",
+        "weight"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "The Wrights called their method of twisting the wing tips ____.",
+       "a": [
+        "wing warping"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "To test wing shapes, the brothers built their own ____.",
+       "a": [
+        "wind tunnel"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "The world was finally convinced by demonstrations in ____ in 1908.",
+       "a": [
+        "France"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 39,
+   "title": "Marie Curie: A Life in Science",
+   "topic": "Science",
+   "paragraphs": [
+    "Marie Curie is one of the most famous scientists in history. She was the first woman to win a Nobel Prize, the first person to win Nobel Prizes in two different sciences, and her research helped to create a new field of physics. Her achievements are all the more remarkable because she had to overcome poverty, prejudice and repeated personal tragedy to reach them.",
+    "She was born Maria Sklodowska in Warsaw in 1867, at a time when Poland was divided between neighbouring empires and the part where she lived was under Russian rule. Her parents were teachers, and she was an outstanding student, but women were not permitted to attend university in Warsaw. Like many young Poles, she attended secret classes held in private homes, known as the Flying University. To earn money, she worked for several years as a governess, helping to pay for her older sister's medical studies in Paris on the understanding that her sister would later help her in return.",
+    "In 1891 she finally moved to Paris and enrolled at the Sorbonne, where she studied physics and mathematics, often living on very little money in an unheated room. She gained degrees in both subjects and, in 1895, married the French physicist Pierre Curie. Shortly afterwards, she chose a subject for her doctoral research: the mysterious rays given off by the element uranium, rays that had recently been discovered by Henri Becquerel.",
+    "Marie Curie found that the strength of the rays depended only on the amount of uranium present, suggesting that they came from inside the atoms themselves, an idea that challenged the belief that atoms could not change. She invented the word radioactivity to describe the phenomenon. Working with Pierre, she then discovered that a mineral called pitchblende was more radioactive than its uranium content could explain, and in 1898 the couple announced the discovery of two new elements. She named the first polonium, after her homeland, and the second radium.",
+    "Proving that these elements existed required years of exhausting work. In a poorly equipped shed, the Curies processed several tonnes of pitchblende, boiling and stirring it in huge containers, to obtain a tiny quantity of pure radium. In 1903, Marie and Pierre Curie shared the Nobel Prize in Physics with Becquerel. Tragedy struck three years later, when Pierre was killed in a street accident in Paris. Marie took over his position at the Sorbonne, becoming the first woman to teach there as a professor, and in 1911 she received a second Nobel Prize, this time in Chemistry.",
+    "During the First World War, Curie turned her knowledge to practical use. Realising that X-ray machines could help surgeons to find bullets and broken bones, she helped to equip vehicles with X-ray equipment that could be driven close to the battlefields, and she trained women to operate them. The vehicles became known as little Curies, and they are thought to have helped more than a million wounded soldiers.",
+    "Curie and her colleagues did not understand the dangers of radiation. She often carried samples of radioactive material in her pockets, and she died in 1934 from a blood disease that was almost certainly caused by long exposure to radiation. Even today, her notebooks are so radioactive that they are kept in lead-lined boxes, and visitors who wish to examine them must sign a form accepting the risk. Her legacy, however, is immense: radioactivity is now used in medicine to diagnose and treat cancer, in power stations and in dating ancient objects."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Marie Curie's parents worked as teachers.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Women were allowed to study at university in Warsaw in the 1880s.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Curie's sister studied medicine in Paris.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Curie was the first person to observe the rays given off by uranium.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Pierre Curie also won a Nobel Prize in Chemistry.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "Curie's finding that the rays came from inside atoms was important because it",
+       "options": [
+        "showed that radiation was dangerous.",
+        "proved that uranium was a new element.",
+        "explained how X-rays worked.",
+        "challenged the idea that atoms could not change."
+       ],
+       "a": "D",
+       "p": "D"
+      },
+      {
+       "q": "Why did the Curies process tonnes of pitchblende?",
+       "options": [
+        "To earn money for their research.",
+        "To produce uranium for industry.",
+        "To obtain a tiny amount of pure radium.",
+        "To test the safety of their equipment."
+       ],
+       "a": "C",
+       "p": "E"
+      },
+      {
+       "q": "The vehicles known as little Curies were used to",
+       "options": [
+        "transport radium to hospitals.",
+        "take X-ray images of wounded soldiers.",
+        "carry soldiers away from battlefields.",
+        "teach women about science."
+       ],
+       "a": "B",
+       "p": "F"
+      },
+      {
+       "q": "Curie's notebooks are kept in lead-lined boxes because",
+       "options": [
+        "they are still radioactive.",
+        "they are very old and fragile.",
+        "they contain secret information.",
+        "they are extremely valuable."
+       ],
+       "a": "A",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The secret classes Curie attended were called the ____.",
+       "a": [
+        "Flying University"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Curie invented the word ____.",
+       "a": [
+        "radioactivity"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Polonium was named after Curie's ____.",
+       "a": [
+        "homeland"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Pierre Curie died in a ____ in Paris.",
+       "a": [
+        "street accident"
+       ],
+       "p": "E"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 40,
+   "title": "A Sea of Plastic",
+   "topic": "Environment",
+   "paragraphs": [
+    "Plastic is one of the most useful materials ever invented. It is cheap, light, strong and can be shaped into almost anything, from medical equipment to food packaging. These same qualities, however, have created one of the most visible environmental problems of our time. Every year, millions of tonnes of plastic waste find their way into the oceans, and once there, it is extremely difficult to remove.",
+    "Most of this plastic comes from the land rather than from ships. Waste that is dropped as litter, blown from open rubbish dumps or washed into drains is carried by rivers to the sea. A large share comes from countries where the amount of plastic used has grown faster than the systems for collecting and processing waste. Fishing is another important source: lost or abandoned nets, ropes and traps, sometimes called ghost gear, can continue to catch and kill marine animals for years.",
+    "Unlike materials such as paper or wood, most plastics do not biodegrade, meaning that they are not broken down by living organisms. Instead, sunlight, waves and changes in temperature gradually break them into smaller and smaller pieces. Fragments smaller than five millimetres are known as microplastics. Some microplastics are also made deliberately, such as the tiny beads once commonly added to cosmetics, and others are released when synthetic clothes are washed.",
+    "Ocean currents carry floating plastic over vast distances, and much of it collects in the centres of the great circular currents called gyres. The best known of these areas lies in the North Pacific and is often described as the Great Pacific Garbage Patch. Despite its name, it is not a solid island of rubbish that could be walked on; most of it consists of small pieces spread through the water, although large items such as fishing nets make up a significant part of its total weight. Plastic has now been found everywhere scientists have looked, from Arctic sea ice to the deepest ocean trenches.",
+    "The effects on wildlife can be severe. Seals, turtles and seabirds become entangled in nets and packaging, which can injure or drown them. Many animals also swallow plastic, mistaking it for food: sea turtles may confuse floating bags with jellyfish, and some seabirds feed pieces of plastic to their chicks. A stomach full of plastic can leave an animal feeling full while it slowly starves.",
+    "Microplastics raise further questions. They have been found in seafood, in salt and in drinking water, and recent studies have detected them in human blood and organs. Scientists do not yet know what effects, if any, these particles have on human health, and research in this area is growing rapidly. Some researchers are particularly concerned about chemicals that are added to plastics or that stick to their surfaces in the sea.",
+    "Cleaning up the plastic already in the ocean is enormously difficult, especially once it has broken into tiny pieces. Several projects are attempting to collect floating waste, but many experts argue that the most effective solution is to stop plastic reaching the sea in the first place. Many countries have banned or taxed single-use plastic bags, and some have introduced schemes in which customers pay a small deposit on bottles that is returned when they are recycled. Improving waste collection in fast-growing cities is seen as particularly important. Since 2022, countries have also been negotiating a global agreement under the United Nations to reduce plastic pollution, although reaching agreement on how far to limit plastic production has proved difficult."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "A long journey to the middle of the ocean",
+      "Unknown risks to human health",
+      "A useful material with a downside",
+      "Why recycling has failed",
+      "Prevention rather than cure",
+      "Harm to animals",
+      "Where the waste comes from",
+      "Breaking down without disappearing"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 2
+      },
+      {
+       "q": "B",
+       "a": 6
+      },
+      {
+       "q": "C",
+       "a": 7
+      },
+      {
+       "q": "D",
+       "a": 0
+      },
+      {
+       "q": "E",
+       "a": 5
+      },
+      {
+       "q": "F",
+       "a": 1
+      },
+      {
+       "q": "G",
+       "a": 4
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Most ocean plastic is thrown from ships.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Lost fishing nets can go on killing animals for a long time.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "The Great Pacific Garbage Patch is a solid mass that people can walk on.",
+       "a": "FALSE",
+       "p": "D"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Abandoned fishing equipment is sometimes called ____.",
+       "a": [
+        "ghost gear"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Pieces of plastic smaller than five millimetres are known as ____.",
+       "a": [
+        "microplastics"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Microplastics are released when ____ are washed.",
+       "a": [
+        "synthetic clothes"
+       ],
+       "p": "C"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,591 @@
+{
+ "parts": [
+  {
+   "id": 16,
+   "title": "The Long Road to the Modern Bicycle",
+   "topic": "Technology",
+   "paragraphs": [
+    "The bicycle seems such a simple machine that it is easy to assume it was invented all at once. In fact, it took most of the nineteenth century, and the efforts of many inventors in several countries, to arrive at the familiar design of two equal wheels, pedals, a chain and air-filled tyres. Along the way came a series of strange and sometimes dangerous machines, each solving one problem while creating another.",
+    "The story usually begins in 1817 in the German city of Mannheim, where Karl Drais demonstrated what he called a running machine. It had two wheels in a line and a seat, but no pedals: the rider pushed along the ground with his feet, rather like a child on a modern balance bike. Some historians have suggested that Drais was looking for an alternative to the horse after poor harvests had made animal feed scarce. His machine was briefly fashionable, but it was heavy, and riders were soon banned from the pavements of several cities.",
+    "In the 1860s, French makers attached pedals directly to the front wheel. These machines, called velocipedes, could be ridden without touching the ground, but they had iron tyres and wooden frames, and on the cobbled streets of the time the ride was so uncomfortable that they earned the nickname boneshakers. Because each turn of the pedals turned the front wheel only once, the only way to go faster was to make that wheel bigger.",
+    "The result was the high-wheeler, later known in Britain as the penny-farthing, after the difference in size between a large and a small coin. Its front wheel could be well over a metre across, and the rider sat high above it. It was fast and, on a good road, surprisingly smooth, but it was also hard to mount and dangerous to ride: if the front wheel hit an obstacle, the rider could be thrown forward over the handlebars and land head first. Riding it was largely a sport for confident young men.",
+    "The breakthrough came in 1885, when the English inventor John Kemp Starley produced the Rover, a so-called safety bicycle. It had two wheels of similar size and a chain that drove the rear wheel through gears, so the bicycle could be fast without an enormous front wheel. Riders could now reach the ground with their feet, and falls became far less serious. Three years later, the Scottish vet John Boyd Dunlop, trying to make his son's tricycle more comfortable, developed a practical air-filled tyre, which made riding much smoother.",
+    "The combination proved irresistible, and the 1890s saw a worldwide bicycle boom. For the first time, ordinary people could travel quickly and cheaply over long distances under their own power. The bicycle had a particularly important effect on women, who gained a new freedom of movement; the American campaigner Susan B. Anthony remarked that cycling had done more to free women than almost anything else. It even influenced fashion, as heavy skirts gave way to more practical clothing.",
+    "The bicycle also played a part in other inventions. Many of its technologies, including ball bearings, chain drives and lightweight steel tubes, were later used in early cars and aircraft, and Wilbur and Orville Wright were running a bicycle business when they began their experiments with flight. Today, more than a century later, bicycles are again being promoted as a solution to modern problems, from traffic jams and pollution to lack of exercise, and electric bicycles are bringing cycling to people who once considered it too tiring."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "Equal wheels, a chain and air-filled tyres",
+      "A machine with no pedals",
+      "Racing becomes a professional sport",
+      "A gradual and complicated invention",
+      "Speed at the cost of safety",
+      "Freedom, especially for women",
+      "Pedals on the front wheel and a rough ride",
+      "Technologies that went on to other machines"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 3
+      },
+      {
+       "q": "B",
+       "a": 1
+      },
+      {
+       "q": "C",
+       "a": 6
+      },
+      {
+       "q": "D",
+       "a": 4
+      },
+      {
+       "q": "E",
+       "a": 0
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Karl Drais's running machine was banned from some city pavements.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "The velocipede was made mainly of steel.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "The penny-farthing was popular with older riders.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "Dunlop's tyre was first sold to bicycle racing teams.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Velocipedes were nicknamed ____ because they were so uncomfortable.",
+       "a": [
+        "boneshakers"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "On the safety bicycle, a chain drove the ____.",
+       "a": [
+        "rear wheel"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Dunlop wanted to make his son's ____ more comfortable.",
+       "a": [
+        "tricycle"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Technologies such as ball bearings were later used in early cars and ____.",
+       "a": [
+        "aircraft"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 17,
+   "title": "The Puzzle of the QWERTY Keyboard",
+   "topic": "Technology",
+   "paragraphs": [
+    "Look at almost any computer keyboard in the English-speaking world and the top row of letters begins Q, W, E, R, T, Y. The same arrangement appears on the touch screens of mobile phones, even though they have no moving parts at all. Few people stop to ask why the letters are placed in this apparently random order, yet the history of the layout is a fascinating story of technology, business and habit.",
+    "The QWERTY layout was developed in the 1860s and 1870s by Christopher Latham Sholes, a newspaper publisher and inventor in Milwaukee in the United States, who was working with partners to build one of the first commercially successful typewriters. Early versions of his machine had the keys arranged roughly in alphabetical order. Over several years of experiments, Sholes rearranged the letters many times, and in 1873 the design was sold to E. Remington and Sons, a company better known for making guns and sewing machines. Remington's typewriter, launched the following year, used a layout very close to the one we know today.",
+    "The most popular explanation for the strange order concerns the machinery inside the typewriter. Each key was connected to a metal arm, or typebar, which swung up to strike the paper. If two neighbouring typebars were used one after the other very quickly, they could collide and stick together. According to this theory, Sholes separated letters that often appear next to each other in English words, so that their typebars would be far apart and less likely to jam.",
+    "Not everyone accepts this account. Two Japanese researchers who studied the early history of the typewriter have argued that the layout was shaped largely by the needs of telegraph operators, who were among the first customers for the machines and used them to write down messages received in Morse code. They point out that the layout changed in ways that made sense for this work. Other historians suspect that the final arrangement was the result of many small, practical decisions rather than a single clear plan.",
+    "Whatever its origins, QWERTY was not designed for speed, and alternative layouts have been proposed many times. The best known was patented in 1936 by August Dvorak, an American professor of education, who placed the most frequently used letters on the middle row, where the fingers naturally rest. Dvorak and his supporters claimed that typists using his layout were faster and made fewer mistakes, but later studies have suggested that the advantages were much smaller than claimed, and the layout never became popular.",
+    "Economists often use QWERTY as an example of what they call lock-in. Once a large number of typists had learned one layout, and offices had bought machines that used it, there was little reason for any individual to switch. Typing schools taught QWERTY because employers expected it, and manufacturers produced QWERTY machines because typists knew it. Even if a better design existed, the cost of changing was simply too high.",
+    "The layout has nevertheless been adapted to different languages. In France and Belgium, many keyboards use the AZERTY arrangement, while German keyboards swap the Y and Z keys to create QWERTZ, since Z is much more common in German than in English. Despite these local variations, the basic pattern designed for a nineteenth-century machine has survived the arrival of electric typewriters, computers and smartphones."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Sholes's earliest machines had keys in roughly alphabetical order.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Remington was mainly known for products other than typewriters.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Telegraph operators were among the first people to buy typewriters.",
+       "a": "TRUE",
+       "p": "D"
+      },
+      {
+       "q": "All historians agree that QWERTY was designed to stop typebars jamming.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "Dvorak taught typing at a business school.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "According to the popular explanation, Sholes separated certain letters in order to",
+       "options": [
+        "stop the typebars sticking together.",
+        "make typing faster.",
+        "make the keyboard easier to learn.",
+        "help telegraph operators."
+       ],
+       "a": "A",
+       "p": "C"
+      },
+      {
+       "q": "Dvorak placed the most common letters on the middle row because",
+       "options": [
+        "typewriters jammed less often.",
+        "the fingers normally rest there.",
+        "it suited the Morse code.",
+        "it was easier to manufacture."
+       ],
+       "a": "B",
+       "p": "E"
+      },
+      {
+       "q": "What did later studies suggest about the Dvorak layout?",
+       "options": [
+        "It was too difficult to learn.",
+        "It caused more typing errors.",
+        "It was much faster than QWERTY.",
+        "Its benefits had been exaggerated."
+       ],
+       "a": "D",
+       "p": "E"
+      },
+      {
+       "q": "The writer uses the term lock-in to describe a situation in which",
+       "options": [
+        "machines are designed to prevent copying.",
+        "companies are forbidden from using new layouts.",
+        "a familiar design continues because changing is too costly.",
+        "typists refuse to use computers."
+       ],
+       "a": "C",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Remington was better known for making guns and ____.",
+       "a": [
+        "sewing machines"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Each key on early typewriters was connected to a metal arm called a ____.",
+       "a": [
+        "typebar"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "In France and Belgium, many keyboards use the ____ layout.",
+       "a": [
+        "AZERTY"
+       ],
+       "p": "G"
+      },
+      {
+       "q": "German keyboards swap the Y and Z keys because Z is more ____ in German.",
+       "a": [
+        "common"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 18,
+   "title": "Surviving the Desert",
+   "topic": "Nature",
+   "paragraphs": [
+    "Deserts are usually defined not by heat or sand but by a lack of water. A region is generally considered a desert if it receives less than about 250 millimetres of rain a year, and some deserts receive far less, with years passing between showers. For plants, which need water to grow and lose it constantly through their leaves, such places present an extreme challenge. Yet deserts are far from empty of plant life, and the species that live there have developed a remarkable variety of solutions.",
+    "Some plants simply avoid the dry periods altogether. After a heavy rain, desert floors that have looked bare for years can suddenly be covered with flowers. These plants, often called ephemerals, germinate, grow, flower and produce seeds within a few weeks, before the soil dries out again. Their seeds can then lie dormant in the ground for many years, waiting for the next good rain. Some seeds contain chemicals that stop them from germinating after a light shower, ensuring they only start growing when there is enough water to complete their life cycle.",
+    "Other plants store water when it is available. Cacti, which are native to the Americas, keep water in their thick stems, which are often pleated like an accordion so that they can expand after rain and shrink during droughts. A large saguaro cactus in the deserts of Arizona and Mexico can absorb enormous quantities of water after a single storm. Similar water-storing plants, known as succulents, have evolved independently in the deserts of Africa and elsewhere.",
+    "Reducing water loss is just as important as storing water. Most cacti have no ordinary leaves; their spines are in fact modified leaves, which lose very little water and also protect the plant from thirsty animals. Many desert plants have thick, waxy surfaces that keep moisture in, and some have pale or hairy coverings that reflect sunlight and keep the plant cooler.",
+    "Many desert plants also use a special form of photosynthesis. Ordinary plants open small pores in their leaves, called stomata, during the day to take in carbon dioxide, but this also allows water to escape. Cacti and many succulents instead open their stomata at night, when the air is cooler and more humid, and store the carbon dioxide as an acid until daylight allows photosynthesis to take place. This process, known as CAM photosynthesis, greatly reduces the amount of water they lose.",
+    "Roots are another key to survival, and desert plants use two very different strategies. Many cacti have shallow roots that spread widely just below the surface, so that they can collect water quickly from even a brief shower before it evaporates. Other plants, such as the mesquite tree, send their roots extraordinarily deep, sometimes tens of metres, to reach water stored underground. Some desert shrubs also release chemicals into the soil that discourage other plants from growing nearby and competing for water.",
+    "The ability to survive on so little can also make desert plants extremely long-lived. Some rings of creosote bushes in North America, which grow outward slowly from a single original plant, are believed to be thousands of years old. As climate change makes many regions drier, scientists are studying such plants closely, in the hope that their strategies could help to develop crops able to cope with drought."
+   ],
+   "groups": [
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "an explanation of how some plants take in carbon dioxide while losing little water",
+       "a": "E"
+      },
+      {
+       "q": "a reason why scientists are interested in desert plants",
+       "a": "G"
+      },
+      {
+       "q": "a description of plants whose seeds wait for heavy rain",
+       "a": "B"
+      },
+      {
+       "q": "a comparison of two different kinds of root system",
+       "a": "F"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "A desert is defined mainly by its high temperatures.",
+       "a": "FALSE",
+       "p": "A"
+      },
+      {
+       "q": "Some seeds will not germinate after a light shower of rain.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Cacti originally came from Africa.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Saguaro cacti can live for more than two hundred years.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "The spines of a cactus help to protect it from animals.",
+       "a": "TRUE",
+       "p": "D"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Plants that complete their life cycle within a few weeks after rain are often called ____.",
+       "a": [
+        "ephemerals"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "The stems of many cacti are pleated like an ____.",
+       "a": [
+        "accordion"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "The small pores in leaves that let in carbon dioxide are called ____.",
+       "a": [
+        "stomata"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "The roots of the ____ can reach water tens of metres underground.",
+       "a": [
+        "mesquite tree",
+        "mesquite"
+       ],
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 19,
+   "title": "The Journey of the Coffee Bean",
+   "topic": "Food",
+   "paragraphs": [
+    "Coffee is one of the most traded agricultural products in the world, and billions of cups are drunk every day. Yet for most of human history it was unknown outside a small part of north-east Africa, where the coffee plant grows wild in the highland forests of Ethiopia. Its rise from a local plant to a global commodity is a story of religion, trade, smuggling and empire.",
+    "A popular legend tells of an Ethiopian goat herder named Kaldi who noticed that his goats became unusually lively after eating red berries from a certain bush. When he tried the berries himself, he too felt full of energy. The story is charming, but it was first written down many centuries after the events it describes, and historians treat it as folklore rather than fact.",
+    "The earliest reliable evidence of coffee drinking comes from Yemen, across the Red Sea from Ethiopia, in the fifteenth century. There, members of religious communities called Sufis drank coffee to help them stay awake during prayers that lasted late into the night. Yemen soon became the centre of the coffee trade, and its port of Mocha gave its name to a style of coffee that is still familiar today.",
+    "From Yemen, coffee spread across the Islamic world. By the sixteenth century, coffeehouses had opened in cities such as Mecca, Cairo and Istanbul, where men gathered to drink, talk, listen to music and play games. They became such important centres of conversation and debate that some rulers viewed them with suspicion, and there were several attempts to close them or ban coffee altogether. None of these bans lasted long.",
+    "European travellers who visited the Ottoman Empire brought back reports of the strange black drink, and in the seventeenth century coffee arrived in Europe through trading cities such as Venice. Coffeehouses opened in England from the 1650s and quickly multiplied. Like their Middle Eastern models, they were places for news and discussion, and some developed into businesses: the famous insurance market Lloyd's of London began in a coffeehouse where merchants and shipowners met to share information about ships.",
+    "For a long time, Yemen tried to keep control of production by selling only beans that could not be planted. Eventually, however, living plants and fertile seeds were taken out of the region. The Dutch established plantations on the island of Java in the late seventeenth century, and in the following century the French brought coffee to their colonies in the Caribbean. From there it reached Central and South America, and by the nineteenth century Brazil had become the largest producer in the world, a position it still holds. Much of this production depended on the forced labour of enslaved people, a dark side of coffee's history.",
+    "Vietnam's story is more recent. Coffee was introduced by the French in the nineteenth century, but large-scale production began only in the late twentieth century. Today Vietnam is the world's second-largest producer, and most of its crop is robusta, a hardy variety with a stronger, more bitter taste than the arabica preferred by many cafes. Meanwhile, coffee growers everywhere face a new challenge, as rising temperatures threaten the areas where the plant can grow well."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "The coffee plant grows naturally in the forests of Ethiopia.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "Historians believe the story of Kaldi is true.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Sufis drank coffee to help them keep awake.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "Bans on coffee in the Islamic world remained in place for centuries.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "Venice was the first European city to have a coffeehouse.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Brazil is currently the world's largest coffee producer.",
+       "a": "TRUE",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "Why did some rulers view coffeehouses with suspicion?",
+       "options": [
+        "They were centres of discussion and debate.",
+        "They were run by foreigners.",
+        "They sold alcohol.",
+        "They were too expensive."
+       ],
+       "a": "A",
+       "p": "D"
+      },
+      {
+       "q": "Lloyd's of London is mentioned as an example of",
+       "options": [
+        "a company that imported coffee.",
+        "the first coffeehouse in England.",
+        "a business that grew out of a coffeehouse.",
+        "a coffeehouse that was closed by the government."
+       ],
+       "a": "C",
+       "p": "E"
+      },
+      {
+       "q": "How did Yemen try to protect its control of coffee production?",
+       "options": [
+        "By sending plants to Java.",
+        "By banning foreign merchants.",
+        "By keeping prices very low.",
+        "By selling only beans that could not grow."
+       ],
+       "a": "D",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Yemen's port of ____ gave its name to a style of coffee.",
+       "a": [
+        "Mocha"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "The Dutch set up coffee plantations on the island of ____.",
+       "a": [
+        "Java"
+       ],
+       "p": "F"
+      },
+      {
+       "q": "Most of Vietnam's coffee crop is a variety called ____.",
+       "a": [
+        "robusta"
+       ],
+       "p": "G"
+      },
+      {
+       "q": "Rising ____ threaten many areas where coffee grows well.",
+       "a": [
+        "temperatures"
+       ],
+       "p": "G"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 20,
+   "title": "Cutting a Continent in Two",
+   "topic": "History",
+   "paragraphs": [
+    "Before 1914, a ship travelling from New York to San Francisco had to sail all the way around the southern tip of South America, a voyage of about twenty thousand kilometres through some of the stormiest seas on Earth. The narrow strip of land in Panama, which separates the Atlantic and Pacific Oceans by less than eighty kilometres at one point, had long seemed the obvious place for a shortcut. Building one, however, would prove to be one of the greatest engineering challenges of the age.",
+    "The first serious attempt was made by the French. In 1881, a company led by Ferdinand de Lesseps, who had successfully built the Suez Canal in Egypt, began work on a canal at sea level, like the one at Suez. But Panama was very different from the flat, dry Egyptian desert. The workers faced dense jungle, heavy rain, mountains of unstable rock and soil, and a river that flooded violently in the wet season. Worst of all were tropical diseases, especially yellow fever and malaria, which killed many thousands of workers. After years of struggle and enormous costs, the French company collapsed in 1889.",
+    "The United States took over the project in 1904, shortly after Panama had become independent from Colombia with American support. The Americans made two decisions that changed everything. The first was to fight disease. Medical officers led by William Gorgas, following recent discoveries that mosquitoes spread yellow fever and malaria, drained standing water, installed screens on windows and sprayed breeding areas. Within a few years yellow fever had been eliminated from the canal zone.",
+    "The second decision was to abandon the idea of a sea-level canal. Under the chief engineer John Stevens, and later George Goethals, the Americans designed a canal with locks, huge chambers with gates at each end, in which water levels can be raised or lowered. Ships are lifted in a series of steps from the ocean to an artificial lake about twenty-six metres above sea level, sail across it, and are then lowered back down to the other ocean. The lake was created by building a dam across the troublesome Chagres River, turning it from an obstacle into a source of water for the locks.",
+    "The most difficult part of the work was cutting through the mountains of the central ridge. Thousands of workers, many of them recruited from the Caribbean, used dynamite, steam shovels and trains to remove vast quantities of rock. Landslides repeatedly filled the cutting, undoing months of work. Finally, in August 1914, the canal opened to shipping, just as the First World War was beginning in Europe.",
+    "The canal transformed world trade, cutting thousands of kilometres from many voyages. It remained under American control until the end of 1999, when it was handed over to Panama. In 2016, a larger set of locks opened, allowing much bigger ships to pass through. The canal faces new challenges, however. Every ship that passes through the locks uses millions of litres of fresh water from the lake, and during a severe drought in 2023 the number of ships allowed to cross each day had to be reduced, a reminder that even this great engineering achievement depends on the weather."
+   ],
+   "groups": [
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "Why did de Lesseps plan a canal at sea level?",
+       "options": [
+        "It was cheaper than using locks.",
+        "He had used this design successfully at Suez.",
+        "The United States insisted on it.",
+        "Panama's land was flat and dry."
+       ],
+       "a": "B",
+       "p": "B"
+      },
+      {
+       "q": "What was the main cause of death among workers on the French project?",
+       "options": [
+        "Tropical diseases.",
+        "Accidents with dynamite.",
+        "Landslides.",
+        "Floods."
+       ],
+       "a": "A",
+       "p": "B"
+      },
+      {
+       "q": "How did Gorgas's team reduce disease?",
+       "options": [
+        "By building hospitals in Colombia.",
+        "By vaccinating workers.",
+        "By moving the canal route.",
+        "By controlling mosquitoes."
+       ],
+       "a": "D",
+       "p": "C"
+      },
+      {
+       "q": "Why did the number of ships crossing the canal have to be reduced in 2023?",
+       "options": [
+        "The new locks were being repaired.",
+        "Landslides had blocked the cutting.",
+        "A drought left too little water for the locks.",
+        "Ships had become too large."
+       ],
+       "a": "C",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Ships sailing around South America faced dangerous storms.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "The French company finished half of the canal before it collapsed.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Panama became independent from Colombia without any help from other countries.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "The canal first opened to ships in August 1914.",
+       "a": "TRUE",
+       "p": "E"
+      },
+      {
+       "q": "Panama took control of the canal at the end of 1999.",
+       "a": "TRUE",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The Americans designed a canal with ____ instead of a sea-level channel.",
+       "a": [
+        "locks"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "A dam across the ____ created the lake used by the canal.",
+       "a": [
+        "Chagres River"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Many of the workers who cut through the central ridge came from the ____.",
+       "a": [
+        "Caribbean"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "The work in the central cutting was repeatedly undone by ____.",
+       "a": [
+        "landslides"
+       ],
+       "p": "E"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

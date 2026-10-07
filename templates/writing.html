@@ -1,0 +1,101 @@
+{% from '_goal_panel.html' import goal_panel %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyVocab - Writing</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="practice-body">
+    {% include '_nav.html' %}
+    {% include '_practice_tabs.html' %}
+
+    <div id="practice-layout">
+        <!-- LEFT COLUMN: what to write, and the writing target -->
+        <aside id="practice-setup">
+            <h2>Writing</h2>
+            <p>Write, then AI marks it like a teacher: four criteria out of 20, so {{ max_score }} in all,
+                with corrections, better words and an improved version.</p>
+
+            <fieldset id="kind-list" class="kind-list">
+                <legend>What do you want to write?</legend>
+                {% set icons = {'diary': 'fa-book', 'task1': 'fa-chart-bar', 'task2': 'fa-feather-alt'} %}
+                {% set blurbs = {'diary': 'A few paragraphs about your day. One idea is suggested each day.',
+                                 'task1': 'Describe a chart or table: the main trends and comparisons.',
+                                 'task2': 'An essay giving and supporting your opinion.'} %}
+                {% for key, kind in kinds.items() %}
+                <label class="mode-option kind-option">
+                    <input type="radio" name="kind" value="{{ key }}"{% if loop.first %} checked{% endif %}>
+                    <span class="mode-name"><i class="fas {{ icons[key] }}" aria-hidden="true"></i> {{ kind.name }}</span>
+                    <span class="mode-desc">{{ blurbs[key] }} About {{ kind.words }} words{% if kind.minutes %}, {{ kind.minutes }} minutes{% endif %}.</span>
+                </label>
+                {% endfor %}
+            </fieldset>
+
+            {% call goal_panel('writing', 'Writing score', more_link=True) %}
+                {% include '_writing_rules.html' %}
+            {% endcall %}
+        </aside>
+
+        <!-- RIGHT COLUMN: the task, the page to write on, the teacher's marks, past writing -->
+        <main id="writing-area">
+            <section id="task-panel" class="panel task-panel" aria-labelledby="task-title">
+                <div class="task-head">
+                    <p id="task-kicker" class="task-kicker"></p>
+                    <button type="button" id="task-another" class="task-another">
+                        <i class="fas fa-random" aria-hidden="true"></i> <span>Another one</span>
+                    </button>
+                </div>
+                <h3 id="task-title">Loading...</h3>
+                <p id="task-instructions" class="task-instructions hidden"></p>
+                <figure id="task-chart" class="task-chart hidden"></figure>
+                <div id="words-to-try" class="words-to-try hidden">
+                    <p>Try to use:</p>
+                    <ul id="words-to-try-list"></ul>
+                </div>
+                <p id="task-note" class="task-note hidden"></p>
+            </section>
+
+            <section id="editor-panel" class="panel editor-panel" aria-labelledby="editor-label">
+                <div class="editor-head">
+                    <label id="editor-label" for="writing-text">Your writing</label>
+                    <span id="writing-timer" class="writing-timer hidden" role="timer"><i class="fas fa-stopwatch" aria-hidden="true"></i> <span></span></span>
+                </div>
+                <p id="revising-note" class="revising-note hidden"></p>
+                <textarea id="writing-text" rows="14" spellcheck="false" placeholder="Start writing here..."></textarea>
+                <div class="editor-foot">
+                    <div class="word-meter" aria-hidden="true"><span id="word-meter-fill"></span></div>
+                    <p id="word-count" class="word-count" aria-live="polite">0 words</p>
+                    <button type="button" id="check-writing" class="check-writing">
+                        <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> <span>Mark my writing</span>
+                    </button>
+                </div>
+                <p id="writing-error" class="writing-error hidden" role="alert"></p>
+            </section>
+
+            <!-- While marking: a short wait with something to look at -->
+            <section id="marking-panel" class="panel marking-panel hidden" aria-live="polite">
+                <div class="marking-pen" aria-hidden="true"><i class="fas fa-pen-nib"></i></div>
+                <p class="marking-title">Your teacher is reading...</p>
+                <p id="marking-step" class="marking-step">Checking grammar</p>
+            </section>
+
+            <section id="result-panel" class="panel result-panel hidden" aria-labelledby="result-title"></section>
+
+            <section id="history-panel" class="panel history-panel" aria-labelledby="history-title">
+                <h3 id="history-title">Your writing</h3>
+                <p id="history-note" class="history-note">Loading...</p>
+                <ul id="history-list" class="history-list"></ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='goals.js') }}"></script>
+    <script src="{{ url_for('static', filename='charts.js') }}"></script>
+    <script src="{{ url_for('static', filename='writing.js') }}"></script>
+</body>
+</html>

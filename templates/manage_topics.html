@@ -7,10 +7,12 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
     <!-- Link to shared CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
     <!-- Link to Font Awesome icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="data-body">
+    {% include '_nav.html' %}
 
     <div id="data-container">
         <div class="data-header">
@@ -39,9 +41,7 @@
             </table>
         </div>
 
-        <a href="/" class="back-link">
-            <i class="fas fa-arrow-left"></i> Back to Dictionary
-        </a>
+        <a href="/data" class="back-link"><i class="fas fa-arrow-left"></i> Back to My Words</a>
     </div>
 
     <!-- [REFACTOR] All JavaScript logic is moved to an external file for better organization -->

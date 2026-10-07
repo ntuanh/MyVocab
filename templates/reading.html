@@ -1,0 +1,94 @@
+{% from '_goal_panel.html' import goal_panel %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyVocab - Reading</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="practice-body">
+    {% include '_nav.html' %}
+    {% include '_practice_tabs.html' %}
+
+    <!-- THE PLAN: one part a day for {{ parts }} days -->
+    <div id="practice-layout" class="reading-plan-view">
+        <aside id="practice-setup">
+            <h2>Reading</h2>
+            <p>{{ parts }} IELTS-style Academic Reading parts, one a day. Each has a passage
+                and 13 questions in the real test's formats, with the answers once you submit.
+                The early days are shorter; by the end the passages reach full IELTS length.</p>
+            <ul class="listen-steps reading-facts">
+                <li><strong>About {{ minutes }} minutes</strong> a part, a third of the real test's hour.</li>
+                <li><strong>+{{ points_right }}</strong> for each right answer, <strong>−{{ wrong_loses }}</strong> for each wrong one, nothing for a blank.</li>
+                <li>Your answers are kept on this device until you submit.</li>
+            </ul>
+            {% call goal_panel('reading', 'Reading score', more_link=True) %}
+                {% include '_reading_rules.html' %}
+            {% endcall %}
+        </aside>
+
+        <main id="reading-area">
+            <section id="today-card" class="panel today-card" aria-labelledby="today-title">
+                <p class="today-kicker" id="today-kicker">Today</p>
+                <h3 id="today-title">Loading your plan...</h3>
+                <p id="today-meta" class="today-meta"></p>
+                <p id="today-note" class="today-note hidden"></p>
+                <div class="today-actions">
+                    <button type="button" id="today-start" class="today-start hidden">
+                        <i class="fas fa-book-open" aria-hidden="true"></i> <span>Start today's part</span>
+                    </button>
+                    <span id="day-streak" class="day-streak hidden"></span>
+                </div>
+            </section>
+
+            <section class="panel plan-card" aria-labelledby="plan-title">
+                <div class="plan-head">
+                    <h3 id="plan-title">Your {{ parts }}-day plan</h3>
+                    <p id="plan-count" class="plan-count"></p>
+                </div>
+                <ol id="plan-grid" class="plan-grid"></ol>
+                <p class="plan-legend">
+                    <span><i class="key key-done"></i> Done</span>
+                    <span><i class="key key-next"></i> Up next</span>
+                    <span><i class="key key-later"></i> Later</span>
+                    Pick any day to read it now.
+                </p>
+            </section>
+        </main>
+    </div>
+
+    <!-- THE TEST: passage and questions side by side, as in the computer-based exam -->
+    <section id="reading-test" class="reading-test hidden" aria-labelledby="test-title">
+        <header class="test-bar">
+            <button type="button" id="test-exit" class="test-exit"><i class="fas fa-arrow-left" aria-hidden="true"></i> Plan</button>
+            <div class="test-heading">
+                <p id="test-day" class="test-day"></p>
+                <h2 id="test-title"></h2>
+            </div>
+            <div id="test-timer" class="test-timer" role="timer" aria-live="off" title="Time left">
+                <i class="fas fa-stopwatch" aria-hidden="true"></i> <span id="timer-text">20:00</span>
+            </div>
+            <button type="button" id="test-submit" class="test-submit">Submit answers</button>
+        </header>
+
+        <div class="test-switch" role="tablist" aria-label="Show">
+            <button type="button" role="tab" id="show-passage" aria-selected="true">Passage</button>
+            <button type="button" role="tab" id="show-questions" aria-selected="false">Questions <span id="answered-count"></span></button>
+        </div>
+
+        <div id="test-result" class="test-result hidden" role="status"></div>
+
+        <div class="test-panes">
+            <article id="passage-pane" class="test-pane passage-pane" aria-label="Reading passage"></article>
+            <form id="questions-pane" class="test-pane questions-pane" aria-label="Questions" novalidate></form>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='goals.js') }}"></script>
+    <script src="{{ url_for('static', filename='reading.js') }}"></script>
+</body>
+</html>

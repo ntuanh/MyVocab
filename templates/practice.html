@@ -1,0 +1,138 @@
+{% from '_goal_panel.html' import goal_panel %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyVocab - Practice</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="practice-body">
+    {% include '_nav.html' %}
+    {% include '_practice_tabs.html' %}
+    <div id="practice-layout">
+
+        <!-- LEFT COLUMN: choose a practice type and topics -->
+        <aside id="practice-setup">
+            <h2>Practice</h2>
+            <p>Choose how you want to practise. AI marks your grammar and vocabulary.</p>
+
+            <!-- Vocab points this week against the weekly target. Every skill's
+                 score is on the Tracking page. -->
+            {% call goal_panel('vocab', 'Vocab score', more_link=True) %}
+                {% include '_vocab_rules.html' %}
+            {% endcall %}
+
+            <fieldset id="mode-list">
+                <legend>Practice type</legend>
+                <label class="mode-option">
+                    <input type="radio" name="mode" value="fill_blank" checked>
+                    <span class="mode-name"><i class="fas fa-pen"></i> Fill the blank</span>
+                    <span class="mode-desc">AI writes a sentence with one of your words missing. You fill it in.</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="mode" value="fix_mistake">
+                    <span class="mode-name"><i class="fas fa-wrench"></i> Fix the mistake</span>
+                    <span class="mode-desc">A sentence has one mistake. Rewrite it correctly.</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="mode" value="translate">
+                    <span class="mode-name"><i class="fas fa-language"></i> Translate</span>
+                    <span class="mode-desc">Turn a Vietnamese sentence into English, using your word.</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="mode" value="use_it">
+                    <span class="mode-name"><i class="fas fa-feather-alt"></i> Use it in a sentence</span>
+                    <span class="mode-desc">Write your own sentence with a saved word.</span>
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="mode" value="grammar">
+                    <span class="mode-name"><i class="fas fa-spell-check"></i> Check my writing</span>
+                    <span class="mode-desc">Paste any English text and get it corrected.</span>
+                </label>
+            </fieldset>
+
+            <div id="practice-topics">
+                <h3>Topics</h3>
+                <p>Leave blank to practise all your words.</p>
+                <div id="practice-topic-list">
+                    <p>Loading topics...</p>
+                </div>
+            </div>
+
+            <button id="start-practice-btn">Start</button>
+            <p class="shortcut-hint"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> check &middot; <kbd>N</kbd> next</p>
+        </aside>
+
+        <!-- RIGHT COLUMN: the exercise and its feedback -->
+        <main id="practice-area">
+            <div id="practice-intro" class="panel">
+                <p>Pick a practice type and press <strong>Start</strong>.</p>
+            </div>
+
+            <p id="practice-notice" class="hidden" role="status"></p>
+
+            <section id="exercise-card" class="panel hidden">
+                <div class="exercise-meta">
+                    <span id="exercise-mode-label"></span>
+                    <span id="exercise-progress"></span>
+                </div>
+                <p id="exercise-instruction"></p>
+                <p id="exercise-prompt"></p>
+
+                <div id="exercise-hints">
+                    <button type="button" id="hint-btn" class="hint-btn"><i class="fas fa-lightbulb"></i> Show hint</button>
+                    <p id="hint-text" class="hidden"></p>
+                </div>
+
+                <form id="practice-form">
+                    <label for="practice-answer" id="practice-answer-label">Your answer</label>
+                    <textarea id="practice-answer" rows="2" autocomplete="off" spellcheck="false"></textarea>
+                    <div class="practice-actions">
+                        <button type="submit" id="check-btn">Check</button>
+                        <button type="button" id="give-up-btn">Show answer</button>
+                    </div>
+                </form>
+
+                <section id="practice-feedback" class="hidden" aria-live="polite">
+                    <div class="feedback-head">
+                        <h3 id="feedback-verdict"></h3>
+                        <span id="feedback-points" class="points-badge hidden"></span>
+                    </div>
+                    <p id="feedback-points-why" class="feedback-points-why hidden"></p>
+                    <div id="feedback-corrected-block" class="feedback-block hidden">
+                        <h4>Corrected</h4>
+                        <p id="feedback-corrected"></p>
+                    </div>
+                    <div id="feedback-mistakes-block" class="feedback-block hidden">
+                        <h4>Mistakes</h4>
+                        <ul id="feedback-mistakes"></ul>
+                    </div>
+                    <p id="feedback-vocab" class="feedback-note hidden"></p>
+                    <p id="feedback-explanation" class="feedback-note hidden"></p>
+                    <p id="feedback-tip" class="feedback-note hidden"></p>
+                    <div id="feedback-reference-block" class="feedback-block hidden">
+                        <h4 id="feedback-reference-label">Answer</h4>
+                        <p id="feedback-reference"></p>
+                    </div>
+                    <p id="feedback-source"></p>
+                    <button type="button" id="next-exercise-btn">Next</button>
+                </section>
+            </section>
+
+            <div id="session-score" class="hidden">
+                <span><strong id="score-correct">0</strong> correct</span>
+                <span><strong id="score-almost">0</strong> almost</span>
+                <span><strong id="score-incorrect">0</strong> to review</span>
+                <span><strong id="score-points">0</strong> points</span>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='goals.js') }}"></script>
+    <script src="{{ url_for('static', filename='practice.js') }}"></script>
+</body>
+</html>

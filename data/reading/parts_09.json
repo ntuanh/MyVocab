@@ -1,0 +1,576 @@
+{
+ "parts": [
+  {
+   "id": 41,
+   "title": "The Power of Believing",
+   "topic": "Psychology",
+   "paragraphs": [
+    "A placebo is a treatment that has no active ingredient: a sugar pill, an injection of salt water or a fake procedure. On its own, it should do nothing. Yet doctors have long known that patients who receive a placebo, believing it to be a real medicine, often report that they feel better. This curious result, known as the placebo effect, has become one of the most studied phenomena in medicine, and it reveals a great deal about the connection between the mind and the body.",
+    "One famous story about the placebo effect comes from the Second World War. An American anaesthetist, Henry Beecher, is said to have run out of morphine while treating wounded soldiers. A nurse injected a soldier with salt water but told him that he was receiving a powerful painkiller, and to Beecher's surprise, the soldier's pain was relieved. After the war, Beecher studied the subject systematically and, in 1955, published an influential paper arguing that placebos could have powerful effects.",
+    "Beecher's work helped to change the way new medicines are tested. If patients improve simply because they expect to, a drug cannot be judged by whether people feel better after taking it. Modern clinical trials therefore compare a new drug with a placebo that looks identical. Patients are assigned to the two groups at random, and in the best trials neither the patients nor the doctors treating them know who is receiving the real drug, so that their expectations cannot affect the results. A drug is considered effective only if it performs better than the placebo.",
+    "The placebo effect is not simply imaginary. Experiments have shown that when people expect pain relief from a placebo, their brains release natural painkilling chemicals called endorphins. In one study, a drug that blocks the action of endorphins also blocked the pain relief produced by a placebo, showing that the effect had a physical basis. Brain scans have also found changes in regions linked to pain and reward when people respond to placebos.",
+    "The strength of the effect depends on surprisingly small details. Studies suggest that two placebo pills tend to work better than one, that injections often produce stronger effects than pills, and that capsules of certain colours are associated with particular effects. In one experiment, volunteers who were told that a placebo painkiller was expensive reported greater pain relief than those told it was cheap. The relationship between doctor and patient matters too: warmth, attention and confidence can increase the benefits of a treatment.",
+    "However, there are clear limits. Placebos work best on symptoms that people experience subjectively, such as pain, nausea and tiredness. There is little evidence that they can shrink tumours, heal broken bones or cure infections. A patient who takes a placebo instead of an effective treatment for a serious disease may come to great harm, which is why most doctors believe that placebos should not be used to replace real medicine.",
+    "Expectations can also work in the opposite direction. In the nocebo effect, people who expect a treatment to cause unpleasant side effects are more likely to experience them, even when the treatment is a placebo. In clinical trials, a significant number of patients in placebo groups report side effects such as headaches, apparently because they have been warned that these might occur.",
+    "Traditionally, it was assumed that a placebo works only if the patient is deceived. Some recent studies have challenged this idea. In trials of so-called open-label placebos, patients with conditions such as irritable bowel syndrome were told honestly that they were receiving pills containing no medicine, yet many still reported significant improvements. Researchers are now investigating whether the healing power of expectation can be used ethically, without lying to patients."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Beecher's nurse told the soldier that he was being given salt water.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "In the best clinical trials, doctors do not know which patients are receiving the real drug.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "Placebo pain relief can be stopped by a drug that blocks endorphins.",
+       "a": "TRUE",
+       "p": "D"
+      },
+      {
+       "q": "Expensive placebos have been found to cause more side effects than cheap ones.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Placebos are effective at curing infections.",
+       "a": "FALSE",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "Why are new drugs compared with a placebo in clinical trials?",
+       "options": [
+        "It makes trials shorter.",
+        "Patients may improve just because they expect to.",
+        "Placebos are cheaper to produce.",
+        "Doctors prefer placebos."
+       ],
+       "a": "B",
+       "p": "C"
+      },
+      {
+       "q": "Which of the following is said to increase the effect of a placebo?",
+       "options": [
+        "A warm and confident doctor.",
+        "Using pills rather than injections.",
+        "Giving one pill instead of two.",
+        "Telling patients it is cheap."
+       ],
+       "a": "A",
+       "p": "E"
+      },
+      {
+       "q": "What is the nocebo effect?",
+       "options": [
+        "Refusing to take any medicine.",
+        "A placebo that has no effect at all.",
+        "Experiencing side effects because one expects them.",
+        "Feeling better after taking a placebo."
+       ],
+       "a": "C",
+       "p": "G"
+      },
+      {
+       "q": "What was surprising about the open-label placebo trials?",
+       "options": [
+        "The pills contained real medicine.",
+        "Patients refused to take the pills.",
+        "Doctors could not tell the groups apart.",
+        "Patients improved even though they knew the pills were fake."
+       ],
+       "a": "D",
+       "p": "H"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 3,
+     "questions": [
+      {
+       "q": "Beecher published an important paper about placebos in ____.",
+       "a": [
+        "1955"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Patients in clinical trials are placed in groups at ____.",
+       "a": [
+        "random"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "The brain's natural painkilling chemicals are called ____.",
+       "a": [
+        "endorphins"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Open-label placebos were tested on patients with ____.",
+       "a": [
+        "irritable bowel syndrome"
+       ],
+       "p": "H"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 42,
+   "title": "Drawing the World",
+   "topic": "History",
+   "paragraphs": [
+    "Every map is an argument. It decides what to include and what to leave out, what to put at the centre and how to show the shape and size of places. For thousands of years, people have made maps to find their way, to claim territory, to collect taxes and to express their beliefs about the world, and the history of mapmaking reveals as much about the mapmakers as about the places they drew.",
+    "Some of the oldest surviving maps were made on clay tablets in ancient Mesopotamia. One famous Babylonian tablet, made around two and a half thousand years ago, shows the world as a flat disc surrounded by a ring of ocean, with the city of Babylon near the centre. Such maps were not intended to help travellers; they expressed a view of the world and of Babylon's place within it.",
+    "A far more scientific approach was developed by the Greeks. In the second century AD, the scholar Ptolemy, working in the Egyptian city of Alexandria, wrote a book called Geography, which explained how to draw maps using a grid of lines similar to the latitude and longitude we use today, and listed the positions of thousands of places. His work was largely forgotten in Western Europe for centuries, but it was preserved in the Byzantine and Islamic worlds and translated into Latin in the early fifteenth century, when it had a great influence on European mapmakers.",
+    "Medieval European maps often served religious rather than practical purposes. Large world maps, such as one kept in Hereford Cathedral in England, placed Jerusalem at the centre and filled the world with scenes from the Bible and imaginary creatures. Meanwhile, scholars in the Islamic world produced highly detailed geographical works. In 1154, the geographer al-Idrisi completed a famous map of the known world for King Roger II of Sicily, based on years of collecting reports from travellers. Like many Islamic maps of the time, it placed south at the top.",
+    "All flat maps of the world face a basic problem: it is impossible to show the curved surface of a globe on a flat sheet without distorting it, just as it is impossible to flatten an orange peel without tearing or stretching it. Every method of projection, as mapmakers call it, must sacrifice something, whether accurate shapes, accurate sizes, accurate distances or accurate directions.",
+    "The most famous projection was published in 1569 by the Flemish mapmaker Gerardus Mercator. On his map, a straight line between two points represents a constant compass direction, which made it extremely useful for sailors. The price of this advantage was a severe distortion of size, which increases towards the poles. On a Mercator map, Greenland appears roughly as large as Africa, although Africa is in fact about fourteen times bigger. Because the projection was so widely used in schools and atlases, some critics argued in the twentieth century that it gave people a false impression of the importance of countries in the north, and they promoted alternative maps that show areas accurately.",
+    "Accurate mapping on land required careful measurement. From the seventeenth century onwards, surveyors used a technique called triangulation, measuring one baseline very precisely and then calculating other distances by measuring angles. Using this method, the Cassini family produced a detailed map of the whole of France over several generations, and in the nineteenth century the Great Trigonometrical Survey measured India with great accuracy. The world's highest mountain was named in English after George Everest, a former head of that survey.",
+    "Today, satellites can photograph every part of the planet, and digital maps on our phones can show our position to within a few metres. Yet the old questions have not disappeared. Mapmakers and technology companies still decide which names to use, which borders to show and what to place at the centre, reminding us that maps continue to shape the way we see the world."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "The impossibility of a perfect flat map",
+      "A practical projection with a hidden cost",
+      "Clay tablets and a central city",
+      "Why ancient sailors avoided maps",
+      "Measuring countries with angles",
+      "A Greek system lost and found",
+      "Religion, imagination and detailed reports",
+      "Old questions in a digital age"
+     ],
+     "questions": [
+      {
+       "q": "B",
+       "a": 2
+      },
+      {
+       "q": "C",
+       "a": 5
+      },
+      {
+       "q": "D",
+       "a": 6
+      },
+      {
+       "q": "E",
+       "a": 0
+      },
+      {
+       "q": "F",
+       "a": 1
+      },
+      {
+       "q": "G",
+       "a": 4
+      },
+      {
+       "q": "H",
+       "a": 7
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "The Babylonian world map was designed mainly to help travellers.",
+       "a": "FALSE",
+       "p": "B"
+      },
+      {
+       "q": "Al-Idrisi's map placed north at the top.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "Mercator's map was popular with sailors.",
+       "a": "TRUE",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Ptolemy worked in the city of ____.",
+       "a": [
+        "Alexandria"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Mapmakers call a method of showing a globe on a flat surface a ____.",
+       "a": [
+        "projection"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Africa is about ____ times bigger than Greenland.",
+       "a": [
+        "fourteen",
+        "14"
+       ],
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 43,
+   "title": "Where the Dragon Descended",
+   "topic": "Geography",
+   "paragraphs": [
+    "In the north-east of Vietnam, in the province of Quang Ninh, around two thousand limestone islands rise steeply out of the emerald waters of the Gulf of Tonkin. Many are covered with dense forest, and some are so tall and narrow that they look like towers. This is Ha Long Bay, one of the most famous landscapes in Asia and a destination for millions of visitors every year.",
+    "Its name means descending dragon, and it comes from a local legend. Long ago, when the Vietnamese people were threatened by invaders arriving by sea, the gods are said to have sent a family of dragons to help them. The dragons spat out jewels and pearls, which turned into the islands and formed a wall against the enemy ships. After the battle, the dragons were so charmed by the peaceful bay that they decided to stay and live there.",
+    "The scientific explanation is equally remarkable, though it takes far longer to tell. The rock of Ha Long Bay is limestone, formed over hundreds of millions of years from the remains of sea creatures that settled on the floor of ancient oceans. Over time, movements of the Earth's crust lifted these layers above sea level. Rainwater, which is slightly acidic, then began slowly to dissolve the limestone, especially along cracks, carving the land into steep towers, deep valleys and caves. Landscapes shaped in this way are called karst.",
+    "For much of this time, the area was dry land. During the last ice age, when huge amounts of water were locked up in ice sheets, the sea level was far lower than it is today. As the ice melted at the end of the ice age, the sea rose and flooded the valleys between the limestone towers, leaving their tops standing above the water as islands. Ha Long Bay is therefore a drowned karst landscape, and the bay continues to be shaped by the waves, which cut notches into the base of the islands.",
+    "Many of the islands contain spectacular caves, decorated with stalactites and stalagmites formed by water dripping slowly over thousands of years. Some caves have yielded evidence of people who lived in the area long ago, and the bay is also rich in wildlife. Its forests and waters are home to many species, including some plants found nowhere else in the world.",
+    "The international importance of the bay was recognised in 1994, when UNESCO added it to its list of World Heritage Sites for its outstanding natural beauty. A few years later, the listing was extended to recognise its geological value. In 2023, the protected area was expanded again to include the nearby Cat Ba archipelago, forming a single World Heritage Site.",
+    "For generations, many families lived on the water itself, in floating villages of houses built on rafts, and made their living from fishing. Some of these communities have since been moved to homes on land, partly to reduce pollution in the bay and to improve living conditions, though the change has also brought the loss of a traditional way of life. Today, tourism is the main source of income in the area.",
+    "The popularity of Ha Long Bay has brought its own problems. Hundreds of tour boats operate in the bay, and waste from boats, visitors and the growing towns and industries along the coast threatens the quality of the water. The authorities have introduced measures such as limiting some activities and encouraging environmentally friendly boats. The challenge is to allow visitors to enjoy the bay without damaging the beauty that attracts them in the first place."
+   ],
+   "groups": [
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "an explanation of how the islands were separated by the sea",
+       "a": "D"
+      },
+      {
+       "q": "a story about creatures that protected the country",
+       "a": "B"
+      },
+      {
+       "q": "a description of how people's homes on the water have changed",
+       "a": "G"
+      },
+      {
+       "q": "a reference to the expansion of a protected area",
+       "a": "F"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Some of the islands of Ha Long Bay are covered with forest.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "The limestone of Ha Long Bay formed only a few thousand years ago.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "The sea level was higher during the last ice age than it is now.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "Most visitors to Ha Long Bay come from other Asian countries.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Landscapes carved from limestone by rainwater are known as ____.",
+       "a": [
+        "karst"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Waves cut ____ into the base of the islands.",
+       "a": [
+        "notches"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "The caves contain stalactites and ____.",
+       "a": [
+        "stalagmites"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Some families used to live in houses built on ____.",
+       "a": [
+        "rafts"
+       ],
+       "p": "G"
+      },
+      {
+       "q": "The authorities encourage the use of ____ boats.",
+       "a": [
+        "environmentally friendly"
+       ],
+       "p": "H"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 44,
+   "title": "The Mother of Waters",
+   "topic": "Geography",
+   "paragraphs": [
+    "The Mekong is one of the great rivers of the world. Rising on the high Tibetan Plateau, it flows for nearly five thousand kilometres through or along the borders of six countries, China, Myanmar, Laos, Thailand, Cambodia and Vietnam, before reaching the South China Sea. Its name is often translated as mother of waters, and for the tens of millions of people who live in its basin, it is a source of food, water, transport and livelihoods.",
+    "The river's most important gift is fish. The Mekong supports one of the largest freshwater fisheries in the world, and fish provide much of the protein eaten by people living along its banks. It is also home to an extraordinary variety of species, including some of the largest freshwater fish on Earth. The giant Mekong catfish can grow to around three metres in length, and in 2022 fishermen in Cambodia caught a giant freshwater stingray weighing about three hundred kilograms, believed to be the largest freshwater fish ever recorded.",
+    "The life of the river follows the rhythm of the monsoon. During the rainy season, the volume of water increases dramatically, and in Cambodia something remarkable happens: the Tonle Sap River, which normally drains the great Tonle Sap lake into the Mekong, reverses its direction. Water flows back into the lake, which expands to several times its dry-season size, flooding surrounding forests that become breeding grounds for fish. When the dry season comes, the flow reverses again.",
+    "Near the end of its journey, the Mekong divides into many branches and spreads out into a vast delta in southern Vietnam. The Vietnamese call it Cuu Long, meaning nine dragons, after its many channels. The delta's fertile soils, built from sediment carried down the river over thousands of years, make it one of the most productive farming regions in Asia. It produces around half of Vietnam's rice as well as large quantities of fruit and fish, much of it for export.",
+    "In recent decades, the river has been changing. China has built a series of large dams on the upper Mekong, and Laos, which hopes to sell electricity to its neighbours, has constructed many more on the river and its tributaries. Dams provide electricity and can help to control floods, but they also block the migration of fish that travel up and down the river to breed, and they trap much of the sediment that once flowed downstream. Without this sediment, riverbanks and coastlines erode more easily, and the delta receives fewer of the nutrients that have kept its soil fertile.",
+    "The delta faces other threats too. Large amounts of sand are dug from the riverbed for construction, and heavy pumping of groundwater is causing the land to sink in many places, in some areas faster than the sea is rising. During droughts, when less fresh water reaches the coast, salty water from the sea moves further up the river channels, damaging crops and drinking-water supplies. Severe droughts in recent years have shown how vulnerable the region has become.",
+    "Because the river crosses so many borders, managing it requires cooperation. In 1995, Cambodia, Laos, Thailand and Vietnam formed the Mekong River Commission to coordinate the use of the river, although China and Myanmar are not full members. Scientists, governments and local communities are increasingly sharing information about water levels, fish and sediment. The future of the Mekong, and of the millions who depend on it, may depend on whether the countries along its banks can balance their own needs against those of their neighbours downstream."
+   ],
+   "groups": [
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "What happens to the Tonle Sap River in the rainy season?",
+       "options": [
+        "It dries up.",
+        "It changes the direction in which it flows.",
+        "It becomes too salty for fish.",
+        "It floods the delta."
+       ],
+       "a": "B",
+       "p": "C"
+      },
+      {
+       "q": "Why do the Vietnamese call the delta nine dragons?",
+       "options": [
+        "Because of a local legend.",
+        "Because of its fierce floods.",
+        "Because of its many channels.",
+        "Because it has nine provinces."
+       ],
+       "a": "C",
+       "p": "D"
+      },
+      {
+       "q": "Which of the following is NOT mentioned as an effect of dams?",
+       "options": [
+        "Increasing salt in rice fields.",
+        "Providing electricity.",
+        "Trapping sediment.",
+        "Blocking fish migration."
+       ],
+       "a": "A",
+       "p": "E"
+      },
+      {
+       "q": "According to the passage, the land in parts of the delta is sinking because of",
+       "options": [
+        "rising sea levels.",
+        "earthquakes.",
+        "the weight of new buildings.",
+        "heavy pumping of groundwater."
+       ],
+       "a": "D",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "The Mekong flows through or along the borders of six countries.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "The stingray caught in 2022 was released back into the river.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "The Mekong Delta produces most of the rice grown in Cambodia.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "China is a full member of the Mekong River Commission.",
+       "a": "FALSE",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "The Mekong rises on the ____.",
+       "a": [
+        "Tibetan Plateau"
+       ],
+       "p": "A"
+      },
+      {
+       "q": "Flooded forests around the Tonle Sap lake become ____ for fish.",
+       "a": [
+        "breeding grounds"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "The delta's soils were built from ____ carried by the river.",
+       "a": [
+        "sediment"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Laos hopes to sell ____ to neighbouring countries.",
+       "a": [
+        "electricity"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Large quantities of ____ are dug from the riverbed for building.",
+       "a": [
+        "sand"
+       ],
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 45,
+   "title": "The Year Without a Summer",
+   "topic": "Science",
+   "paragraphs": [
+    "In 1816, much of Europe and North America experienced a summer unlike any in living memory. Snow fell in parts of New England in June, frosts killed crops in July and August, and in Europe cold, rain and storms ruined harvests. Food prices rose sharply, and in some regions people faced hunger and even famine. At the time, nobody understood the cause. Today, scientists believe that the strange weather was the result of an event that had taken place on the other side of the world the year before.",
+    "In April 1815, Mount Tambora, a volcano on the Indonesian island of Sumbawa, exploded in the largest eruption in recorded history. The explosion was heard more than a thousand kilometres away, and the eruption and the famine and disease that followed killed tens of thousands of people in the region. The volcano also threw enormous quantities of ash and gas high into the atmosphere, and it was this material that affected the climate of the entire planet.",
+    "The key to a volcano's effect on climate is not the ash, most of which falls back to the ground within days or weeks, but a gas called sulphur dioxide. When a powerful eruption sends this gas into the stratosphere, the layer of the atmosphere above the clouds, it reacts with water to form tiny droplets of sulphuric acid. These droplets can remain in the stratosphere for a year or more, spreading around the globe and reflecting part of the sun's energy back into space. As a result, temperatures at the Earth's surface fall.",
+    "The cold summer of 1816 had cultural as well as economic consequences. During a stormy, gloomy June beside Lake Geneva in Switzerland, a group of English writers, unable to go outside, challenged each other to write ghost stories. One of them, the young Mary Shelley, began the novel Frankenstein. Some historians have also suggested that the vivid orange skies painted by artists in the following years may have been influenced by volcanic particles in the atmosphere.",
+    "Later eruptions have allowed scientists to measure these effects directly. After the eruption of Krakatoa in Indonesia in 1883, people around the world reported strangely colourful sunsets for months. The eruption of Mount Pinatubo in the Philippines in 1991, the second-largest of the twentieth century, was observed with modern instruments, including satellites. It lowered average global temperatures by about half a degree Celsius over the following year or so, before the effect gradually faded as the particles fell out of the atmosphere.",
+    "Evidence of much older eruptions can be found in the ice of Greenland and Antarctica. Each year's snowfall traps a small sample of the atmosphere, and when sulphur from a great eruption falls with the snow, it leaves a layer that scientists can detect in ice cores drilled deep into the ice sheets. These records allow researchers to identify eruptions that occurred thousands of years ago and to study their effects on climate and on human societies.",
+    "It is sometimes claimed that volcanoes release more carbon dioxide than human activities, but this is not true. Volcanoes do emit carbon dioxide, but human activities currently release far more each year, probably more than a hundred times as much. The cooling caused by even the largest eruptions lasts only a few years, whereas the warming caused by greenhouse gases continues for centuries.",
+    "The cooling effect of volcanoes has nevertheless inspired a controversial idea. Some scientists have suggested that, if global warming became extremely dangerous, particles could be deliberately released into the stratosphere to reflect sunlight, imitating a volcanic eruption. Critics warn that such a scheme could disrupt rainfall patterns, would do nothing to reduce the build-up of carbon dioxide, and could cause sudden warming if it were ever stopped. For now, the idea remains a subject of research and fierce debate."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "People in 1816 understood that a volcano had caused the cold weather.",
+       "a": "FALSE",
+       "p": "A"
+      },
+      {
+       "q": "The sound of the Tambora eruption travelled more than a thousand kilometres.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Volcanic ash is the main reason why eruptions cool the climate.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Mary Shelley wrote Frankenstein because she was afraid of volcanoes.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "The cooling caused by Pinatubo lasted for more than ten years.",
+       "a": "FALSE",
+       "p": "E"
+      },
+      {
+       "q": "Volcanoes release more carbon dioxide than human activities.",
+       "a": "FALSE",
+       "p": "G"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Mount Tambora is on the island of ____.",
+       "a": [
+        "Sumbawa"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "The layer of the atmosphere above the clouds is called the ____.",
+       "a": [
+        "stratosphere"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Sulphur dioxide forms tiny droplets of ____.",
+       "a": [
+        "sulphuric acid",
+        "sulfuric acid"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "After Krakatoa erupted, people saw unusually colourful ____.",
+       "a": [
+        "sunsets"
+       ],
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "a method of discovering eruptions from the distant past",
+       "a": "F"
+      },
+      {
+       "q": "a proposal to copy the effect of an eruption on purpose",
+       "a": "H"
+      },
+      {
+       "q": "the use of modern equipment to observe an eruption",
+       "a": "E"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

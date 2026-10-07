@@ -1,3 +1,4 @@
+import difflib
 import os
 import time
 import requests
@@ -89,35 +90,28 @@ SAFETY_SETTINGS = [
 ]
 
 
-def get_content_from_gemini(word):
-    """Returns (content, status). An empty content dict is never silent -- the
-    status and the log line say whether the key was missing, the call failed, or
-    the model declined to answer."""
+def call_gemini_json(prompt, label, model=None, timeout=None):
+    """Sends one prompt that asks for JSON and returns (parsed JSON, status).
+    `label` names the request in log lines; `timeout` (seconds) overrides
+    GEMINI_TIMEOUT for long jobs such as marking an essay. An empty result is never silent --
+    the status and the log line say whether the key was missing, the call
+    failed, or the model declined to answer."""
     if not GEMINI_API_KEY:
         return {}, SKIPPED
+    model = model or GEMINI_MODEL
     try:
-        prompt = f"""
-        Analyze the English word "{word}". 
-        Please provide a JSON object with the following keys. If a piece of information is not available, provide an empty string or an empty list.
-        {{
-            "english_definition": "A clear and common English definition.",
-            "vietnamese_meaning": "A concise Vietnamese meaning.",
-            "example_sentence": "A practical example sentence using the word.",
-            "family_words": ["related_noun", "related_verb", "related_adjective"]
-        }}
-        """
         response = requests.post(
-            f"{GEMINI_API_URL}/{GEMINI_MODEL}:generateContent",
+            f"{GEMINI_API_URL}/{model}:generateContent",
             headers={"x-goog-api-key": GEMINI_API_KEY},
             json={
                 "contents": [{"parts": [{"text": prompt}]}],
                 "generationConfig": {"response_mime_type": "application/json"},
                 "safetySettings": SAFETY_SETTINGS,
             },
-            timeout=GEMINI_TIMEOUT,
+            timeout=timeout or GEMINI_TIMEOUT,
         )
         if response.status_code != 200:
-            print(f"ERROR: Gemini returned {response.status_code} for '{word}': {response.text[:300]}")
+            print(f"ERROR: Gemini ({model}) returned {response.status_code} for {label}: {response.text[:300]}")
             return {}, UNAVAILABLE
 
         payload = response.json()
@@ -125,18 +119,77 @@ def get_content_from_gemini(word):
         if not candidates:
             # A safety block or a truncated generation comes back with no
             # candidate at all rather than with an error status.
-            print(f"WARN: Gemini returned no candidates for '{word}': {json.dumps(payload)[:300]}")
+            print(f"WARN: Gemini returned no candidates for {label}: {json.dumps(payload)[:300]}")
             return {}, UNAVAILABLE
 
         parts = candidates[0].get("content", {}).get("parts", [])
         text = "".join(p.get("text", "") for p in parts)
         if not text:
-            print(f"WARN: Gemini returned an empty body for '{word}'.")
+            print(f"WARN: Gemini returned an empty body for {label}.")
             return {}, UNAVAILABLE
         return json.loads(text), OK
     except Exception as e:
-        print(f"ERROR calling Gemini for '{word}': {e}")
+        print(f"ERROR calling Gemini for {label}: {e}")
         return {}, UNAVAILABLE
+
+
+def get_content_from_gemini(word):
+    """Returns (content, status) for a dictionary lookup."""
+    prompt = f"""
+    Analyze the English word "{word}".
+    Please provide a JSON object with the following keys. If a piece of information is not available, provide an empty string or an empty list.
+    {{
+        "english_definition": "A clear and common English definition.",
+        "vietnamese_meaning": "A concise Vietnamese meaning.",
+        "example_sentence": "A practical example sentence using the word.",
+        "family_words": ["related_noun", "related_verb", "related_adjective"]
+    }}
+    """
+    content, status = call_gemini_json(prompt, f"'{word}'")
+    if status == OK and not isinstance(content, dict):
+        print(f"WARN: Gemini returned {type(content).__name__} instead of an object for '{word}'.")
+        return {}, UNAVAILABLE
+    return content, status
+
+
+MAX_TOPIC_NAME = 40
+
+
+def choose_topic(word, definition, topic_names):
+    """Returns ({"topic": name, "is_new": bool}, status): the one topic the word
+    belongs in. An existing topic is preferred and comes back spelled exactly as
+    given, so the caller can map it to an id; a new name only when none fits."""
+    listed = "\n".join(f"- {name}" for name in topic_names) or "(none yet)"
+    prompt = f"""
+    Put the English word "{word}" into ONE vocabulary topic for a learner.
+    Meaning: {definition or "(not given)"}
+
+    Existing topics:
+    {listed}
+
+    Choose the existing topic that fits best, copied exactly. Only if none of
+    them fits at all, make up a short new topic name (1-3 words, Title case).
+    Return a JSON object: {{"topic": "the topic name", "is_new": true or false}}
+    """
+    content, status = call_gemini_json(prompt, f"topic for '{word}'")
+    if status != OK:
+        return {}, status
+    name = content.get("topic") if isinstance(content, dict) else None
+    name = name.strip()[:MAX_TOPIC_NAME] if isinstance(name, str) else ""
+    if not name:
+        print(f"WARN: Gemini named no topic for '{word}': {str(content)[:200]}")
+        return {}, UNAVAILABLE
+
+    # The model sometimes changes the case or spelling of an existing topic;
+    # treat a near miss as that topic rather than creating a lookalike.
+    by_lower = {n.lower(): n for n in topic_names}
+    close = difflib.get_close_matches(name.lower(), list(by_lower), n=1, cutoff=0.85)
+    if close:
+        return {"topic": by_lower[close[0]], "is_new": False}, OK
+    if content.get("is_new") is not True:
+        print(f"WARN: Gemini picked '{name}' for '{word}', which is not an existing topic.")
+        return {}, UNAVAILABLE
+    return {"topic": name, "is_new": True}, OK
 
 
 def get_image_from_pexels(query):

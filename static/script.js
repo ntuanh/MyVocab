@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. ELEMENT SELECTION ---
     const searchForm = document.getElementById('search-form');
     const wordInput = document.getElementById('word-input');
+    const recentWordsEl = document.getElementById('recent-words');
+    const statusEl = document.getElementById('lookup-status');
+
+    const wordCard = document.getElementById('word-card');
+    const wordTitleEl = document.getElementById('word-title');
     const imagePanel = document.getElementById('image-panel');
     const vietnamesePanel = document.getElementById('vietnamese-panel');
     const vietnameseMeaningEl = document.getElementById('vietnamese-meaning');
@@ -12,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const synonymListEl = document.getElementById('synonym-list');
     const familyListEl = document.getElementById('family-list');
     const saveBtn = document.getElementById('save-btn');
-    const viewDataBtn = document.getElementById('view-data-btn');
 
     // Save Word Modal
     const saveModal = document.getElementById('save-modal');
@@ -22,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const addTopicBtn = document.getElementById('add-topic-btn');
     const cancelSaveBtn = document.getElementById('modal-btn-cancel-save');
     const confirmSaveBtn = document.getElementById('modal-btn-confirm-save');
+    const aiSaveBtn = document.getElementById('ai-save-btn');
+    const aiTasksEl = document.getElementById('ai-tasks');
 
     // Password Modal
     const passwordModalOverlay = document.getElementById('password-modal-overlay');
@@ -33,6 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toast Notification
     const toast = document.getElementById('toast-notification');
     const toastMessage = document.getElementById('toast-message');
+
+    // Recent searches live in this browser only, newest first.
+    const RECENT_KEY = 'myvocab-recent';
+    const RECENT_MAX = 10;
+
     let toastTimeout;
     let currentWordData = null;
 
@@ -48,100 +59,131 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
+    // A field the lookup could not fill comes back as 'N/A'; treat it as missing
+    // so its row is hidden instead of printed.
+    function present(value) {
+        return Boolean(value) && value !== 'N/A';
+    }
+
+    function showRow(id, visible) {
+        document.getElementById(id).classList.toggle('hidden', !visible);
+    }
+
+    // Returns whether there was anything to show.
+    function fillTags(element, list) {
+        element.replaceChildren(...(list || []).map(item => {
+            const tag = document.createElement('span');
+            tag.className = 'tag';
+            tag.textContent = item;
+            return tag;
+        }));
+        return Boolean(list && list.length);
+    }
+
+    function setStatus(message, isError = false) {
+        statusEl.textContent = message || '';
+        statusEl.classList.toggle('error', isError);
+        statusEl.classList.toggle('hidden', !message);
+    }
+
+    function setSaved(isSaved) {
+        saveBtn.disabled = isSaved;
+        saveBtn.innerHTML = isSaved
+            ? '<i class="fas fa-check"></i> Already Saved'
+            : '<i class="fas fa-save"></i> Save Word';
+    }
+
+    function setRevealed(revealed) {
+        vietnamesePanel.classList.toggle('is-hidden', !revealed);
+        vietnamesePanel.classList.toggle('is-revealed', revealed);
+        vietnamesePanel.setAttribute('aria-pressed', String(revealed));
+    }
+
+    function toggleReveal() {
+        setRevealed(vietnamesePanel.classList.contains('is-hidden'));
+    }
+
     function updateUI(data) {
         currentWordData = data;
-        definitionEl.textContent = data.english_definition || 'N/A';
-        exampleEl.textContent = data.example || 'N/A';
+        setStatus('');
+
+        wordTitleEl.textContent = data.word;
+        ipaEl.textContent = present(data.pronunciation_ipa) ? data.pronunciation_ipa : '';
         vietnameseMeaningEl.textContent = data.vietnamese_meaning || 'N/A';
-        ipaEl.textContent = data.pronunciation_ipa || 'N/A';
+        definitionEl.textContent = data.english_definition || 'N/A';
+        exampleEl.textContent = present(data.example) ? data.example : '';
+        showRow('example-panel', present(data.example));
+        showRow('synonym-panel', fillTags(synonymListEl, data.synonyms));
+        showRow('family-panel', fillTags(familyListEl, data.family_words));
 
-        // Restore the "Click to reveal" functionality
-        vietnamesePanel.classList.add('is-hidden');
-        vietnamesePanel.classList.remove('is-revealed');
+        // Every new word starts with its meaning hidden, so you can test yourself first.
+        setRevealed(false);
 
-        const createTagList = (element, list) => {
-            element.innerHTML = '';
-            if (list && list.length > 0) {
-                list.forEach(item => {
-                    const tag = document.createElement('span');
-                    tag.className = 'tag';
-                    tag.textContent = item;
-                    element.appendChild(tag);
-                });
-            } else {
-                element.innerHTML = 'N/A';
-            }
-        };
-
-        createTagList(synonymListEl, data.synonyms);
-        createTagList(familyListEl, data.family_words);
-
-        imagePanel.innerHTML = '';
+        imagePanel.replaceChildren();
         if (data.image_url) {
             const img = document.createElement('img');
             img.id = 'word-image';
             img.src = data.image_url;
             img.alt = `Image for '${data.word}'`;
             imagePanel.appendChild(img);
-        } else {
-            const placeholder = document.createElement('p');
-            placeholder.textContent = 'No Image Found';
-            imagePanel.appendChild(placeholder);
         }
+        imagePanel.classList.toggle('hidden', !data.image_url);
 
-        if (data.is_saved) {
-            saveBtn.disabled = true;
-            saveBtn.innerHTML = '<i class="fas fa-check"></i> Already Saved';
-        } else {
-            saveBtn.disabled = false;
-            saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Word';
-        }
+        setSaved(Boolean(data.is_saved));
+        wordCard.classList.remove('hidden');
+        addRecent(data.word);
     }
 
-    function resetUI(message) {
+    function resetUI(message, isError = false) {
         currentWordData = null;
-        definitionEl.textContent = message;
-        ['example-sentence', 'vietnamese-meaning', 'pronunciation-ipa'].forEach(id => {
-            document.getElementById(id).textContent = '...';
-        });
-        ['synonym-list', 'family-list'].forEach(id => {
-            document.getElementById(id).innerHTML = '';
-        });
-        imagePanel.innerHTML = '<p>Image Placeholder</p>';
-        saveBtn.disabled = false;
-        saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Word';
+        wordCard.classList.add('hidden');
+        setStatus(message, isError);
     }
 
-    // [FIX] Define the showSaveModal function properly
-    async function showSaveModal() {
-        if (!currentWordData) return;
-        modalWordEl.textContent = currentWordData.word;
+    // --- 3. RECENT SEARCHES ---
+
+    // Storage can be blocked (private window, site data off); the page then
+    // simply has no history.
+    function loadRecent() {
         try {
-            const response = await fetch('/api/get_topics');
-            const topics = await response.json();
-            modalTopicList.innerHTML = '';
-            topics.forEach(topic => {
-                const topicDiv = document.createElement('div');
-                topicDiv.className = 'topic-checkbox';
-                topicDiv.innerHTML = `
-                    <input type="checkbox" id="modal-topic-${topic.id}" name="modal-topics" value="${topic.id}">
-                    <label for="modal-topic-${topic.id}">${topic.name}</label>
-                `;
-                modalTopicList.appendChild(topicDiv);
-            });
-            // [FIX] Use the standardized class to show the modal
-            saveModal.classList.add('visible');
+            const list = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
+            return Array.isArray(list) ? list.filter(word => typeof word === 'string') : [];
         } catch (error) {
-            showToast("Could not load topics.", "error");
+            return [];
         }
     }
 
-    // --- 3. EVENT LISTENERS ---
+    function renderRecent(list) {
+        recentWordsEl.replaceChildren();
+        recentWordsEl.classList.toggle('hidden', list.length === 0);
+        if (!list.length) return;
 
-    searchForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const word = wordInput.value.trim();
-        if (!word) return;
+        const label = document.createElement('span');
+        label.className = 'recent-label';
+        label.textContent = 'Recent';
+        recentWordsEl.append(label);
+        list.forEach(word => {
+            const chip = document.createElement('button');
+            chip.type = 'button';
+            chip.className = 'recent-chip';
+            chip.textContent = word;
+            chip.addEventListener('click', () => lookup(word));
+            recentWordsEl.append(chip);
+        });
+    }
+
+    function addRecent(word) {
+        const list = [word, ...loadRecent().filter(w => w !== word)].slice(0, RECENT_MAX);
+        try {
+            localStorage.setItem(RECENT_KEY, JSON.stringify(list));
+        } catch (error) { /* not remembered, still shown below */ }
+        renderRecent(list);
+    }
+
+    // --- 4. LOOKUP ---
+
+    async function lookup(word) {
+        wordInput.value = word;
         resetUI('Searching...');
         try {
             const response = await fetch('/api/lookup', {
@@ -153,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 updateUI(data);
             } else {
-                resetUI(data.error || 'An unknown error occurred.');
+                resetUI(data.error || 'An unknown error occurred.', true);
                 // A retryable failure means the upstream dictionary stalled, not
                 // that the word is missing -- searching again usually works.
                 if (data.retryable) {
@@ -161,86 +203,203 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         } catch (error) {
-            resetUI('Failed to connect to the server.');
+            resetUI('Failed to connect to the server.', true);
+        }
+    }
+
+    searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const word = wordInput.value.trim();
+        if (word) lookup(word);
+    });
+
+    vietnamesePanel.addEventListener('click', toggleReveal);
+    vietnamesePanel.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleReveal();
         }
     });
 
-    vietnamesePanel.addEventListener('click', () => {
-        vietnamesePanel.classList.toggle('is-hidden');
-        vietnamesePanel.classList.toggle('is-revealed');
-    });
+    // --- 5. SAVE WORD MODAL ---
 
-    // --- [FIX] Correctly attach event listener for Save Button ---
-    if (saveBtn) {
-        console.log("SUCCESS: Attaching event listener to Save Word button."); // Debug log
-        saveBtn.addEventListener('click', () => {
-            console.log("EVENT: Save Word button clicked!"); // Debug log
-            if (!currentWordData || !currentWordData.word) {
-                console.log("DEBUG: Save condition failed. currentWordData is missing."); // Debug log
-                showToast('Please search for a word first!', 'error');
-                return;
-            }
-            console.log("DEBUG: Save condition passed. Showing save modal."); // Debug log
-            showSaveModal();
-        });
-    } else {
-        console.error("ERROR: Could not find element with id='save-btn'"); // Debug log
+    function topicCheckbox(topic, checked) {
+        const row = document.createElement('div');
+        row.className = 'topic-checkbox';
+        const box = document.createElement('input');
+        box.type = 'checkbox';
+        box.id = `modal-topic-${topic.id}`;
+        box.name = 'modal-topics';
+        box.value = topic.id;
+        box.checked = checked;
+        const label = document.createElement('label');
+        label.htmlFor = box.id;
+        label.textContent = topic.name;
+        row.append(box, label);
+        return row;
     }
 
-    // --- Save Word Modal Events ---
-    addTopicBtn.addEventListener('click', async () => {
-        const newTopicName = newTopicInput.value.trim();
-        if (!newTopicName) return;
+    // Creates a topic and adds it to the list, ticked. Returns its row, or null.
+    async function createTopic(name) {
         try {
             const response = await fetch('/api/add_topic', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ topic_name: newTopicName })
+                body: JSON.stringify({ topic_name: name })
             });
             const newTopic = await response.json();
             if (newTopic && newTopic.id) {
-                const topicDiv = document.createElement('div');
-                topicDiv.className = 'topic-checkbox';
-                topicDiv.innerHTML = `
-                    <input type="checkbox" id="modal-topic-${newTopic.id}" name="modal-topics" value="${newTopic.id}" checked>
-                    <label for="modal-topic-${newTopic.id}">${newTopic.name}</label>
-                `;
-                modalTopicList.appendChild(topicDiv);
-                newTopicInput.value = '';
+                const row = topicCheckbox(newTopic, true);
+                modalTopicList.appendChild(row);
+                return row;
             }
-        } catch (error) {
-            showToast("Failed to add topic.", "error");
-        }
-    });
+        } catch (error) { /* reported below */ }
+        showToast("Failed to add topic.", "error");
+        return null;
+    }
 
-    confirmSaveBtn.addEventListener('click', async () => {
-        const selectedCheckboxes = document.querySelectorAll('input[name="modal-topics"]:checked');
-        const selectedTopicIds = Array.from(selectedCheckboxes).map(cb => cb.value);
+    function selectedTopicIds() {
+        return Array.from(document.querySelectorAll('input[name="modal-topics"]:checked'), box => box.value);
+    }
+
+    async function showSaveModal() {
+        if (!currentWordData) return;
+        modalWordEl.textContent = currentWordData.word;
+        try {
+            const response = await fetch('/api/get_topics');
+            const topics = await response.json();
+            modalTopicList.replaceChildren(...topics.map(topic => topicCheckbox(topic, false)));
+            saveModal.classList.add('visible');
+        } catch (error) {
+            showToast("Could not load topics.", "error");
+        }
+    }
+
+    function hideSaveModal() {
+        saveModal.classList.remove('visible');
+    }
+
+    // --- 5a. SAVE, AND LET AI PICK THE TOPIC ---
+    // The dialog closes at once and a small card in the corner follows the
+    // word while the server saves it and AI files it under one topic. The page
+    // stays free meanwhile, so the next word can be looked up straight away.
+
+    function strong(text) {
+        const element = document.createElement('strong');
+        element.textContent = text;
+        return element;
+    }
+
+    function aiTaskCard() {
+        const card = document.createElement('div');
+        card.className = 'ai-task';
+        const icon = document.createElement('i');
+        icon.setAttribute('aria-hidden', 'true');
+        const text = document.createElement('p');
+        const close = document.createElement('button');
+        close.type = 'button';
+        close.className = 'ai-task-close';
+        close.setAttribute('aria-label', 'Dismiss');
+        close.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+        close.addEventListener('click', () => card.remove());
+        card.append(icon, text, close);
+        aiTasksEl.appendChild(card);
+
+        const ICONS = { working: 'fas fa-spinner fa-spin', done: 'fas fa-check-circle', failed: 'fas fa-exclamation-circle' };
+        return function show(state, parts, note) {
+            card.classList.toggle('failed', state === 'failed');
+            icon.className = ICONS[state];
+            text.replaceChildren(...parts);
+            if (note) {
+                const line = document.createElement('span');
+                line.className = 'ai-task-note';
+                line.textContent = note;
+                text.append(line);
+            }
+            // A finished card leaves by itself; a problem stays a little longer.
+            if (state !== 'working') setTimeout(() => card.remove(), state === 'done' ? 6000 : 12000);
+        };
+    }
+
+    async function saveWithAI(wordData, topicIds) {
+        const show = aiTaskCard();
+        const stillShowing = () => currentWordData === wordData;
+        show('working', ['Saving ', strong(wordData.word), ' and picking its topic...']);
+        saveBtn.disabled = true;  // no second save of this word while it is on its way
         try {
             const response = await fetch('/api/save_word', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ word_data: currentWordData, topic_ids: selectedTopicIds })
+                body: JSON.stringify({ word_data: wordData, topic_ids: topicIds, ai_topic: true })
+            });
+            const result = await response.json();
+            if (!response.ok || result.status === 'error') throw new Error(result.message || result.error);
+            if (stillShowing()) setSaved(true);
+
+            const ai = result.ai || {};
+            if (ai.topic) {
+                show('done', [strong(wordData.word), ' saved to ', strong(ai.topic)],
+                     ai.is_new ? 'A new topic, made for this word.' : '');
+            } else {
+                show('failed', [strong(wordData.word), topicIds.length ? ' saved to your topics.' : ' saved without a topic.'],
+                     ai.error || 'AI could not choose a topic.');
+            }
+        } catch (error) {
+            if (stillShowing()) setSaved(false);
+            show('failed', ['Could not save ', strong(wordData.word), '.'], 'Try the Save button again.');
+        }
+    }
+
+    aiSaveBtn.addEventListener('click', () => {
+        const wordData = currentWordData;
+        const topicIds = selectedTopicIds();
+        hideSaveModal();
+        saveWithAI(wordData, topicIds);
+        // Ready for the next word at once.
+        wordInput.focus();
+        wordInput.select();
+    });
+
+    saveBtn.addEventListener('click', () => {
+        if (!currentWordData || !currentWordData.word) {
+            showToast('Please search for a word first!', 'error');
+            return;
+        }
+        showSaveModal();
+    });
+
+    addTopicBtn.addEventListener('click', async () => {
+        const newTopicName = newTopicInput.value.trim();
+        if (!newTopicName) return;
+        if (await createTopic(newTopicName)) newTopicInput.value = '';
+    });
+
+    confirmSaveBtn.addEventListener('click', async () => {
+        try {
+            const response = await fetch('/api/save_word', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ word_data: currentWordData, topic_ids: selectedTopicIds() })
             });
             const result = await response.json();
             showToast(result.message, result.status === 'error' ? 'error' : 'success');
-            // [FIX] Use the standardized class to hide the modal
-            saveModal.classList.remove('visible');
-            if (result.status !== 'error') {
-                saveBtn.disabled = true;
-                saveBtn.innerHTML = '<i class="fas fa-check"></i> Already Saved';
-            }
+            hideSaveModal();
+            if (result.status !== 'error') setSaved(true);
         } catch (error) {
             showToast("Failed to save word.", "error");
         }
     });
 
     cancelSaveBtn.addEventListener('click', () => {
-        // [FIX] Use the standardized class to hide the modal
-        saveModal.classList.remove('visible');
+        hideSaveModal();
     });
 
-    // --- Password Modal Logic ---
+    // --- 6. PASSWORD MODAL (My Words) ---
+
+    // The server sends you here with ?unlock=1 when you open My Words before
+    // entering the password.
+    const wantsUnlock = new URLSearchParams(window.location.search).has('unlock');
+
     function showPasswordModal() {
         passwordInput.value = '';
         passwordErrorEl.textContent = '';
@@ -250,6 +409,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function hidePasswordModal() {
         passwordModalOverlay.classList.remove('visible');
+        // Drop ?unlock from the address so a reload does not ask again.
+        if (wantsUnlock) history.replaceState(null, '', window.location.pathname);
     }
 
     async function handlePasswordSubmit() {
@@ -265,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ password: password }),
             });
             if (response.ok) {
-                window.location.href = viewDataBtn.href;
+                window.location.href = '/data';
             } else {
                 passwordErrorEl.textContent = 'Incorrect password. Please try again.';
             }
@@ -275,28 +436,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    if (viewDataBtn) {
-        viewDataBtn.addEventListener('click', (event) => {
+    cancelPasswordBtn.addEventListener('click', hidePasswordModal);
+    submitPasswordBtn.addEventListener('click', handlePasswordSubmit);
+    passwordModalOverlay.addEventListener('click', (event) => {
+        if (event.target === passwordModalOverlay) hidePasswordModal();
+    });
+    passwordInput.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') handlePasswordSubmit();
+    });
+
+    // --- 7. KEYBOARD SHORTCUTS: / search, S save, R reveal, Esc close ---
+
+    function isTyping(event) {
+        return event.target.closest('input, textarea, select')
+            || event.ctrlKey || event.metaKey || event.altKey;
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            if (saveModal.classList.contains('visible')) hideSaveModal();
+            if (passwordModalOverlay.classList.contains('visible')) hidePasswordModal();
+            return;
+        }
+        if (isTyping(event) || document.querySelector('.modal-overlay.visible')) return;
+
+        const key = event.key.toLowerCase();
+        if (key === '/') {
             event.preventDefault();
-            showPasswordModal();
-        });
-    }
+            wordInput.focus();
+            wordInput.select();
+        } else if (key === 's' && currentWordData && !saveBtn.disabled) {
+            event.preventDefault();
+            showSaveModal();
+        } else if (key === 'r' && currentWordData) {
+            toggleReveal();
+        }
+    });
 
-    if (cancelPasswordBtn) cancelPasswordBtn.addEventListener('click', hidePasswordModal);
-    if (submitPasswordBtn) submitPasswordBtn.addEventListener('click', handlePasswordSubmit);
-    if (passwordModalOverlay) {
-        passwordModalOverlay.addEventListener('click', (event) => {
-            if (event.target === passwordModalOverlay) {
-                hidePasswordModal();
-            }
-        });
-    }
-    if (passwordInput) {
-        passwordInput.addEventListener('keyup', (event) => {
-            if (event.key === 'Enter') {
-                handlePasswordSubmit();
-            }
-        });
-    }
-
-}); // End of DOMContentLoaded
+    // --- 8. INITIALIZATION ---
+    renderRecent(loadRecent());
+    if (wantsUnlock) showPasswordModal();
+    else wordInput.focus();
+});

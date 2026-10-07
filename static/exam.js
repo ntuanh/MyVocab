@@ -31,24 +31,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentWord = null;
 
+    // The topics ticked last time, shared with the Practice page, so a study
+    // session can start with one click. Kept in this browser only.
+    const TOPICS_KEY = 'myvocab-topics';
+
+    function loadSavedTopics() {
+        try {
+            const ids = JSON.parse(localStorage.getItem(TOPICS_KEY) || '[]');
+            return Array.isArray(ids) ? ids.map(String) : [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function saveTopics(ids) {
+        try {
+            localStorage.setItem(TOPICS_KEY, JSON.stringify(ids));
+        } catch (error) { /* not remembered */ }
+    }
+
     // --- 2. CORE LOGIC FUNCTIONS ---
 
     async function loadTopics() {
         try {
             const response = await fetch('/api/get_topics');
             const topics = await response.json();
-            topicListContainer.innerHTML = '';
+            const remembered = loadSavedTopics();
+            topicListContainer.replaceChildren();
             topics.forEach(topic => {
                 const topicDiv = document.createElement('div');
                 topicDiv.className = 'topic-checkbox';
-                topicDiv.innerHTML = `
-                    <input type="checkbox" id="topic-${topic.id}" name="topics" value="${topic.id}">
-                    <label for="topic-${topic.id}">${topic.name} (${topic.word_count})</label>
-                `;
+                const box = document.createElement('input');
+                box.type = 'checkbox';
+                box.id = `topic-${topic.id}`;
+                box.name = 'topics';
+                box.value = topic.id;
+                box.checked = remembered.includes(String(topic.id));
+                const label = document.createElement('label');
+                label.htmlFor = box.id;
+                label.textContent = `${topic.name} (${topic.word_count})`;
+                topicDiv.append(box, label);
                 topicListContainer.appendChild(topicDiv);
             });
         } catch (error) {
-            topicListContainer.innerHTML = '<p>Error loading topics.</p>';
+            topicListContainer.textContent = 'Error loading topics.';
         }
     }
 
@@ -194,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 3. EVENT LISTENERS ---
 
     startExamBtn.addEventListener('click', () => {
+        saveTopics(Array.from(document.querySelectorAll('input[name="topics"]:checked')).map(cb => cb.value));
         topicSelectionContainer.classList.add('hidden');
         examContainer.classList.remove('hidden');
         getNextWord();
@@ -229,6 +256,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnDontKnow.addEventListener('click', () => {
         submitResult(false, currentWord.vietnamese_meaning);
+    });
+
+    // Keyboard: R reveals a long meaning, N moves on once the answer is shown.
+    // Ignored while typing, so the letters still reach the answer box.
+    document.addEventListener('keydown', (event) => {
+        if (event.target.closest('input, textarea, select') || event.ctrlKey || event.metaKey || event.altKey) return;
+        if (examContainer.classList.contains('hidden')) return;
+
+        const key = event.key.toLowerCase();
+        if (key === 'r' && !selfAssessmentAnswer.classList.contains('hidden')
+                && !revealMeaningBtn.classList.contains('hidden')) {
+            revealMeaningBtn.click();
+        } else if (key === 'n' && !feedbackCard.classList.contains('hidden')) {
+            getNextWord();
+        }
     });
 
     // --- 4. INITIALIZATION ---

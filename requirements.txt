@@ -1,5 +1,7 @@
-Flask
-python-dotenv
-googletrans==4.0.0-rc1
-requests
-psycopg2-binary
+# What the app needs to run, here and online (Vercel installs this file).
+# Versions are pinned so every computer gets exactly the same libraries.
+Flask==3.1.3
+python-dotenv==1.2.4
+googletrans==4.0.0rc1
+requests==2.34.2
+psycopg2-binary==2.9.13

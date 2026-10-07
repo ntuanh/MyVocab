@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 // If unauthorized (password not entered), redirect to home
                 if (response.status === 401) {
-                    window.location.href = '/';
+                    window.location.href = '/?unlock=1';
                 }
                 throw new Error('Failed to fetch data');
             }

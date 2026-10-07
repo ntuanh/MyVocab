@@ -1,0 +1,582 @@
+{
+ "parts": [
+  {
+   "id": 6,
+   "title": "The Fragile Partnership Behind Coral Reefs",
+   "topic": "Environment",
+   "paragraphs": [
+    "Coral reefs are often described as the rainforests of the sea. Although they cover less than one per cent of the ocean floor, they are home to roughly a quarter of all known marine species. Fish shelter among their branches, feed on the creatures living there and lay their eggs in their crevices. Reefs also protect coastlines from storms by breaking the force of waves, and millions of people depend on them for food and income from fishing and tourism.",
+    "Many people assume that corals are plants or rocks, but they are in fact animals. Each coral is made up of many tiny creatures called polyps, which are related to jellyfish. Reef-building corals produce hard skeletons of calcium carbonate, and over thousands of years these skeletons build up into the enormous structures that we call reefs. The largest of them, the Great Barrier Reef off the coast of Australia, can be seen from space.",
+    "The success of reef-building corals depends on an unusual partnership. Living inside the tissue of the polyps are microscopic algae which, like other plants, use sunlight to make food. The algae share much of this food with the coral, and in return the coral provides them with shelter and the materials they need. The algae also give corals most of their colour. This relationship explains why most reefs grow in clear, shallow, sunlit water.",
+    "The partnership is easily disturbed. When the water becomes too warm for too long, the corals expel the algae living inside them. Without the algae the coral tissue becomes transparent, so the white skeleton shows through, and the coral is said to be bleached. Bleached corals are not dead, and if temperatures return to normal quickly the algae can return. If the heat continues, however, the corals begin to starve, and many of them die.",
+    "Bleaching on a massive scale is a fairly recent problem. As ocean temperatures have risen, mass bleaching events affecting huge areas of reef have become more frequent, leaving corals less time to recover between them. Warming is not the only threat. As the oceans absorb carbon dioxide from the atmosphere, the water becomes more acidic, which makes it harder for corals to build their skeletons. Pollution from farms and towns and damaging fishing methods add further pressure.",
+    "Scientists are searching for ways to help. Some are growing young corals in underwater nurseries and replanting them on damaged reefs, a technique sometimes called coral gardening. Others are studying corals that survive unusually high temperatures, in the hope of breeding more heat-tolerant reefs. Researchers agree, however, that such projects can only buy time, and that the long-term future of reefs depends on reducing the warming of the oceans."
+   ],
+   "groups": [
+    {
+     "type": "para",
+     "questions": [
+      {
+       "q": "an explanation of why corals lose their colour",
+       "a": "D"
+      },
+      {
+       "q": "a description of attempts to restore damaged reefs",
+       "a": "F"
+      },
+      {
+       "q": "a mention of the ways in which reefs benefit people",
+       "a": "A"
+      },
+      {
+       "q": "a reason why reefs are mostly found in shallow water",
+       "a": "C"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Corals are closely related to jellyfish.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "A bleached coral has already died.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "The Great Barrier Reef is growing larger each year.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Mass bleaching events now happen more often than in the past.",
+       "a": "TRUE",
+       "p": "E"
+      },
+      {
+       "q": "Coral gardening has fully restored several large reefs.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Reef-building corals produce skeletons made of ____.",
+       "a": [
+        "calcium carbonate"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "The algae living in the polyps use ____ to make food.",
+       "a": [
+        "sunlight"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Absorbing carbon dioxide makes sea water more ____.",
+       "a": [
+        "acidic"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "Young corals can be grown in underwater ____ before being replanted.",
+       "a": [
+        "nurseries"
+       ],
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "title": "Along the Silk Road",
+   "topic": "History",
+   "paragraphs": [
+    "For more than a thousand years, a vast network of trade routes linked China with Central Asia, India, the Middle East and the Mediterranean. Today we call this network the Silk Road, although the name is surprisingly modern: it was invented in 1877 by the German geographer Ferdinand von Richthofen. The people who used the routes never thought of them as a single road, and in fact there were many different paths across deserts, mountains and grasslands.",
+    "The routes began to develop in the second century BC, when the Han dynasty in China sent the envoy Zhang Qian westward on diplomatic missions. His reports of the kingdoms of Central Asia, and especially of their fine horses, encouraged the Chinese to expand trade with the west. Chinese silk, which was highly valued for its softness and beauty, became one of the most famous goods to travel along the routes, eventually reaching as far as Rome.",
+    "Silk was far from the only product to be traded. Spices, precious stones, glass, metals, paper and horses all moved along the network, as did foods and plants such as grapes. Very few merchants travelled the entire distance from one end to the other. Instead, goods were usually passed from trader to trader, changing hands many times and becoming more expensive at every stage. Along the way, travellers rested at caravanserais, roadside inns where people and animals could find food, water and shelter.",
+    "The Silk Road carried ideas as well as objects. Buddhism travelled from India into Central Asia and China along the routes, followed later by other religions. Technologies also moved between civilisations; the knowledge of how to make paper, for example, spread from China to the Islamic world and later to Europe. Musicians, artists and scholars exchanged styles and knowledge, so that the cultures along the routes influenced each other in countless ways.",
+    "Not everything that travelled was welcome. The movement of people and animals also allowed diseases to spread over long distances, and many historians believe that the plague known as the Black Death reached Europe in the fourteenth century partly through trade routes linking Asia and Europe. Travel itself was dangerous: merchants faced bandits, extreme heat and cold, and the long crossing of deserts where water was scarce.",
+    "Overland trade declined from the fifteenth century onwards. Improvements in shipbuilding and navigation made it cheaper to transport goods by sea, and political changes made some routes less safe. Yet the idea of the Silk Road has never disappeared. Many of the cities that grew rich from the trade still stand, and modern governments have borrowed the name for new projects that aim to connect Asia and Europe through railways, roads and ports."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "Goods that passed through many hands",
+      "The risks of travel and the spread of illness",
+      "A modern name for an ancient network",
+      "The rise of sea routes and a lasting legacy",
+      "How the trade made China the richest empire",
+      "An envoy's journey and a desirable fabric",
+      "A highway for beliefs and knowledge",
+      "Why silk was kept a secret"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 2
+      },
+      {
+       "q": "B",
+       "a": 5
+      },
+      {
+       "q": "C",
+       "a": 0
+      },
+      {
+       "q": "D",
+       "a": 6
+      },
+      {
+       "q": "E",
+       "a": 1
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Traders in ancient times referred to the network as the Silk Road.",
+       "a": "FALSE",
+       "p": "A"
+      },
+      {
+       "q": "Zhang Qian reported on the horses he saw in Central Asia.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Most merchants travelled the full length of the routes.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "Caravanserais were built by the Han dynasty.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "Why did goods become more expensive as they travelled?",
+       "options": [
+        "They were damaged on the way.",
+        "They were taxed by every city.",
+        "They changed hands many times.",
+        "They were carried by camels."
+       ],
+       "a": "C",
+       "p": "C"
+      },
+      {
+       "q": "The example of paper is used to show that",
+       "options": [
+        "China kept its inventions secret.",
+        "technology moved between civilisations.",
+        "Europe was the first to print books.",
+        "religions spread along the routes."
+       ],
+       "a": "B",
+       "p": "D"
+      },
+      {
+       "q": "According to the writer, many historians believe the Black Death",
+       "options": [
+        "was carried by merchants' horses.",
+        "ended trade on the Silk Road.",
+        "started in Europe.",
+        "partly reached Europe through trade routes."
+       ],
+       "a": "D",
+       "p": "E"
+      },
+      {
+       "q": "Overland trade became less important mainly because",
+       "options": [
+        "sea transport became cheaper.",
+        "silk was no longer fashionable.",
+        "China stopped producing goods.",
+        "deserts became impossible to cross."
+       ],
+       "a": "A",
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "title": "The Clever Mind of the Octopus",
+   "topic": "Nature",
+   "paragraphs": [
+    "Octopuses belong to a group of animals called molluscs, which also includes snails, clams and oysters. It is hard to imagine a less likely relative for one of the most intelligent creatures in the sea. Octopuses can solve puzzles, use tools and recognise individual people, abilities that are usually associated with animals such as apes, dolphins and crows. Because their ancestors split from ours hundreds of millions of years ago, their intelligence must have evolved quite separately from that of mammals and birds.",
+    "Part of what makes the octopus so unusual is the way its nervous system is organised. An octopus has around five hundred million nerve cells, far more than almost any other animal without a backbone, but only about a third of them are in its brain. The rest are spread through its eight arms, which can taste and touch the world around them and appear able to carry out some actions with little direction from the brain. In a sense, each arm has a mind of its own.",
+    "In aquariums, octopuses have gained a reputation as escape artists. They can squeeze their soft bodies through any gap larger than their beak, the only hard part of their body, and some have been seen leaving their tanks at night to visit nearby tanks before returning. Keepers report that octopuses quickly learn to open jars to reach food inside, and that individuals may react differently to different staff members, squirting water at people they seem to dislike.",
+    "In the wild, octopuses have been filmed using tools. Some carry empty coconut shells across the sea floor and later assemble them into a shelter when danger appears. Their best-known skill, however, is camouflage. Special cells in their skin, called chromatophores, allow them to change colour in a fraction of a second, and many species can also alter the texture of their skin to match rocks or seaweed. Surprisingly, octopuses appear to be colour-blind, and scientists are still not sure how they match their surroundings so precisely.",
+    "Despite their intelligence, most octopuses live remarkably short lives. Many species survive for only one or two years. Females usually lay a single batch of eggs, guard them without eating, and die shortly after the young hatch. This means that, unlike many intelligent animals, octopuses do not learn from their parents. Everything they know, they must work out for themselves.",
+    "The study of octopuses raises interesting questions about the nature of intelligence. It suggests that complex minds can develop in very different bodies and in very different ways. As a result, some countries have begun to include octopuses in laws that protect animals used in scientific research, recognising that they may be capable of feeling pain and distress."
+   ],
+   "groups": [
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Octopuses are closely related to dolphins.",
+       "a": "FALSE",
+       "p": "A"
+      },
+      {
+       "q": "Most of an octopus's nerve cells are located outside its brain.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Octopuses can pass through any opening wider than their beak.",
+       "a": "TRUE",
+       "p": "C"
+      },
+      {
+       "q": "Octopuses in aquariums prefer some foods to others.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Scientists fully understand how octopuses match the colours around them.",
+       "a": "FALSE",
+       "p": "D"
+      },
+      {
+       "q": "Young octopuses learn hunting skills by watching their mothers.",
+       "a": "FALSE",
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Snails, clams and octopuses all belong to a group called ____.",
+       "a": [
+        "molluscs",
+        "mollusks"
+       ],
+       "p": "A"
+      },
+      {
+       "q": "The only hard part of an octopus's body is its ____.",
+       "a": [
+        "beak"
+       ],
+       "p": "C"
+      },
+      {
+       "q": "Some octopuses build a shelter from empty ____.",
+       "a": [
+        "coconut shells"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Octopuses change colour using skin cells called ____.",
+       "a": [
+        "chromatophores"
+       ],
+       "p": "D"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "The writer says that the intelligence of octopuses",
+       "options": [
+        "is limited to escaping from danger.",
+        "evolved separately from that of mammals.",
+        "is greater than that of apes.",
+        "developed from the same ancestor as ours."
+       ],
+       "a": "B",
+       "p": "A"
+      },
+      {
+       "q": "What do some aquarium octopuses do to people they seem to dislike?",
+       "options": [
+        "They hide from them.",
+        "They change colour.",
+        "They squirt water at them.",
+        "They refuse to eat."
+       ],
+       "a": "C",
+       "p": "C"
+      },
+      {
+       "q": "Some countries have changed their laws because octopuses",
+       "options": [
+        "are useful for research.",
+        "are becoming rare.",
+        "escape from laboratories.",
+        "may be able to feel pain."
+       ],
+       "a": "D",
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 9,
+   "title": "Drinking the Sea",
+   "topic": "Technology",
+   "paragraphs": [
+    "Almost all of the water on Earth is in the oceans, and only a small fraction is fresh water that people can drink or use for farming. As populations grow and droughts become more severe in many regions, governments are increasingly turning to the sea itself. Desalination, the process of removing salt from seawater, now supplies drinking water to many millions of people, particularly in dry coastal countries in the Middle East and North Africa.",
+    "The oldest method of desalination copies nature's own water cycle. In thermal desalination, seawater is heated until it turns into vapour, leaving the salt behind; the vapour is then cooled so that it condenses into fresh water. Sailors used simple versions of this process centuries ago. Large thermal plants are reliable, but heating such enormous quantities of water requires a great deal of energy, which makes the water they produce expensive.",
+    "Most new plants use a different technique called reverse osmosis. Instead of being boiled, seawater is pumped at high pressure through special membranes with holes so small that water molecules can pass through but salt cannot. Because no heating is involved, reverse osmosis uses much less energy than thermal methods, and improvements in membrane technology have made it steadily cheaper. Even so, the pumps still need a large and constant supply of electricity.",
+    "Desalination also creates an environmental problem. For every litre of fresh water produced, plants are left with a highly salty liquid known as brine, which is usually returned to the sea. If it is released in one place without being properly mixed, the brine can sink to the sea floor and harm the plants and animals living there. Engineers now design outlets that spread the brine more widely, and some researchers are investigating ways of extracting useful minerals from it.",
+    "Energy use remains the main concern. Where electricity comes from burning fossil fuels, desalination adds to the greenhouse gases that contribute to climate change, which in turn can make droughts worse. To break this cycle, several countries have begun to power desalination plants with solar and wind energy. Sunny desert regions are particularly well suited to this, since the places that most need fresh water often receive the most sunshine.",
+    "Desalination is not a complete answer to water shortages. It is still more expensive than using rivers or underground water, and it is practical mainly for places near the coast. Many experts argue that reducing waste, repairing leaking pipes and reusing treated wastewater should come first. Nevertheless, for countries with few natural sources of fresh water, the sea has become an essential part of the supply."
+   ],
+   "groups": [
+    {
+     "type": "mcq",
+     "questions": [
+      {
+       "q": "According to paragraph A, governments are turning to desalination because",
+       "options": [
+        "demand is rising and droughts are getting worse.",
+        "seawater is cleaner than river water.",
+        "fresh water is running out everywhere.",
+        "it is cheaper than other sources."
+       ],
+       "a": "A",
+       "p": "A"
+      },
+      {
+       "q": "What is the main drawback of thermal desalination?",
+       "options": [
+        "It needs a great deal of energy.",
+        "It is unreliable.",
+        "It was invented by sailors.",
+        "It cannot remove all the salt."
+       ],
+       "a": "A",
+       "p": "B"
+      },
+      {
+       "q": "Reverse osmosis works by",
+       "options": [
+        "boiling seawater at low pressure.",
+        "forcing water through very fine membranes.",
+        "cooling seawater until salt separates.",
+        "mixing seawater with fresh water."
+       ],
+       "a": "B",
+       "p": "C"
+      },
+      {
+       "q": "Why are sunny desert regions well suited to solar-powered desalination?",
+       "options": [
+        "Their seawater contains less salt.",
+        "They have no other source of energy.",
+        "Places that need water often get the most sunshine.",
+        "Solar panels work better in dry air."
+       ],
+       "a": "C",
+       "p": "E"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Most of the planet's water is unsuitable for drinking without treatment.",
+       "a": "TRUE",
+       "p": "A"
+      },
+      {
+       "q": "Reverse osmosis requires more energy than thermal desalination.",
+       "a": "FALSE",
+       "p": "C"
+      },
+      {
+       "q": "The membranes used in reverse osmosis must be replaced every year.",
+       "a": "NOT GIVEN"
+      },
+      {
+       "q": "Badly released brine can damage life on the sea floor.",
+       "a": "TRUE",
+       "p": "D"
+      },
+      {
+       "q": "Desalination is now cheaper than taking water from rivers.",
+       "a": "FALSE",
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "In thermal desalination, the vapour is cooled so that it ____ into fresh water.",
+       "a": [
+        "condenses"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "The very salty liquid left over after desalination is called ____.",
+       "a": [
+        "brine"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Some researchers hope to extract useful ____ from this liquid.",
+       "a": [
+        "minerals"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Many experts say that repairing leaking ____ should be a priority.",
+       "a": [
+        "pipes"
+       ],
+       "p": "F"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 10,
+   "title": "The Curve of Forgetting",
+   "topic": "Psychology",
+   "paragraphs": [
+    "In the 1880s, the German psychologist Hermann Ebbinghaus set out to do something that many people at the time thought impossible: to measure memory scientifically. With no laboratory or volunteers, he used himself as the only subject of his experiments. Over several years he memorised long lists of items, tested how much he could recall after different periods of time, and recorded the results with great care. In 1885 he published his findings in a short book that is still cited by psychologists today.",
+    "To make his tests fair, Ebbinghaus needed material that had no meaning, since meaningful words would remind him of things he already knew. He therefore invented thousands of nonsense syllables, short combinations of letters such as a consonant, a vowel and another consonant, which were not real words. He would read a list aloud until he could repeat it perfectly, and later count how many repetitions he needed to learn it again. The fewer repetitions he needed, the more he had remembered.",
+    "His results produced what is now called the forgetting curve. Ebbinghaus found that memory fades extremely quickly at first: a large part of what he had learned was lost within the first hour, and much more by the following day. After this, however, the rate of forgetting slowed down considerably, so that the small amount he still remembered after several days tended to stay with him for a long time.",
+    "Ebbinghaus also discovered how to fight this decline. He found that reviewing material several times, with gaps between the reviews, produced much stronger memories than studying it many times in a single session. This finding, known as the spacing effect, has been confirmed in hundreds of later studies. It suggests that students who cram the night before an examination may pass the test but are likely to forget most of what they learned soon afterwards.",
+    "Modern research has added a second powerful technique, retrieval practice. Simply rereading notes creates a feeling of familiarity, but actively trying to recall information, for example by answering questions or testing oneself with flashcards, makes memories much more durable. Each successful attempt to remember seems to strengthen the memory, especially when the task is slightly difficult.",
+    "These ideas are the basis of spaced repetition, a method widely used by language learners. In the 1970s a German writer, Sebastian Leitner, described a simple system of flashcards stored in a series of boxes: cards that a learner answered correctly moved to a box that was reviewed less often, while forgotten cards went back to the beginning. Today many learning apps use computer programs that follow the same principle, scheduling each review for the moment just before an item is likely to be forgotten."
+   ],
+   "groups": [
+    {
+     "type": "heading",
+     "headings": [
+      "Testing yourself is better than rereading",
+      "Why some memories last a lifetime",
+      "A researcher who studied his own mind",
+      "From cardboard boxes to computer programs",
+      "Rapid loss followed by slow decline",
+      "Material designed to have no meaning",
+      "The value of reviewing in stages",
+      "Why children learn languages faster"
+     ],
+     "questions": [
+      {
+       "q": "A",
+       "a": 2
+      },
+      {
+       "q": "B",
+       "a": 5
+      },
+      {
+       "q": "C",
+       "a": 4
+      },
+      {
+       "q": "D",
+       "a": 6
+      },
+      {
+       "q": "E",
+       "a": 0
+      }
+     ]
+    },
+    {
+     "type": "gap",
+     "words": 2,
+     "questions": [
+      {
+       "q": "Ebbinghaus measured memory by counting how many ____ he needed to relearn a list.",
+       "a": [
+        "repetitions"
+       ],
+       "p": "B"
+      },
+      {
+       "q": "Reviewing material with gaps between sessions is known as the ____.",
+       "a": [
+        "spacing effect"
+       ],
+       "p": "D"
+      },
+      {
+       "q": "Actively trying to recall information is called ____.",
+       "a": [
+        "retrieval practice"
+       ],
+       "p": "E"
+      },
+      {
+       "q": "In Leitner's system, forgotten cards go back to the ____.",
+       "a": [
+        "beginning"
+       ],
+       "p": "F"
+      }
+     ]
+    },
+    {
+     "type": "tfng",
+     "questions": [
+      {
+       "q": "Ebbinghaus tested a large group of volunteers.",
+       "a": "FALSE",
+       "p": "A"
+      },
+      {
+       "q": "Ebbinghaus used nonsense syllables because real words would make the tests unfair.",
+       "a": "TRUE",
+       "p": "B"
+      },
+      {
+       "q": "Students who cram may still pass their examinations.",
+       "a": "TRUE",
+       "p": "D"
+      },
+      {
+       "q": "Leitner was a professional psychologist.",
+       "a": "NOT GIVEN"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -6,85 +6,130 @@
     <title>MyVocab - Smart Dictionary</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    <div id="app-container">
-        <!-- LEFT COLUMN: Search and Image -->
-        <aside id="left-panel">
-            <div id="search-container">
-                <form id="search-form">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="word-input" placeholder="Search for a word..." autocomplete="off">
-                </form>
-            </div>
-            <div id="image-panel" class="panel">
-                <p>Image will appear here</p>
-            </div>
-        </aside>
+<body class="dictionary-body">
+    {% include '_nav.html' %}
 
-        <!-- CENTER COLUMN: Main word details -->
-        <main id="main-content">
-            <div id="vietnamese-panel" class="panel pink is-hidden">
-                <h3>Vietnamese Meaning</h3>
-                <p id="vietnamese-meaning">...</p>
-            </div>
-            <div id="definition-panel" class="panel blue">
-                <h3>English Definition</h3>
-                <p id="english-definition">Enter a word in the search box to begin.</p>
-            </div>
-            <div id="example-panel" class="panel pink">
-                <h3>Example</h3>
-                <p id="example-sentence">...</p>
-            </div>
-        </main>
+    <main id="dictionary">
+        <!-- SEARCH -->
+        <form id="search-form" role="search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="word-input" placeholder="Search for a word..." autocomplete="off"
+                   aria-label="Search for an English word">
+            <kbd title="Press / to search from anywhere on the page">/</kbd>
+        </form>
 
-        <!-- RIGHT COLUMN: Supplementary word details -->
-        <aside id="right-panel">
-            <div id="ipa-panel" class="panel pink">
-                <h3>IPA</h3>
-                <p id="pronunciation-ipa">...</p>
-            </div>
-            <div id="synonym-panel" class="panel pink">
-                <h3>Similar Meaning</h3>
-                <div id="synonym-list" class="tag-list"></div>
-            </div>
-            <div id="family-panel" class="panel dark-blue">
-                <h3>Family Words</h3>
-                <div id="family-list" class="tag-list"></div>
-            </div>
-        </aside>
+        <!-- Filled in by script.js from this browser's search history. -->
+        <div id="recent-words" class="recent-words hidden" aria-label="Recent searches"></div>
 
-        <!-- ACTION BUTTONS ROW -->
-        <div id="actions-panel">
-            <button id="save-btn" class="action-btn">
-                <i class="fas fa-save"></i> Save Word
-            </button>
-            <a href="/exam" class="action-btn exam-link">
-                <i class="fas fa-graduation-cap"></i> Go to Exam
-            </a>
-            <a href="/data" id="view-data-btn" class="action-btn data-link">
-                <i class="fas fa-database"></i> View Data
-            </a>
+        <p id="lookup-status" class="lookup-status" role="status">Type an English word and press Enter.</p>
+
+        <!-- THE WORD CARD: everything about one word, read top to bottom -->
+        <article id="word-card" class="panel word-card hidden" aria-live="polite">
+            <div class="word-head">
+                <div id="image-panel" class="word-image hidden"></div>
+                <div class="word-heading">
+                    <div class="word-title-row">
+                        <h1 id="word-title"></h1>
+                        <span id="pronunciation-ipa" class="ipa"></span>
+                    </div>
+                    <div id="vietnamese-panel" class="meaning is-hidden" role="button" tabindex="0"
+                         aria-pressed="false" aria-label="Vietnamese meaning. Press to reveal or hide.">
+                        <span class="detail-label">Vietnamese</span>
+                        <p id="vietnamese-meaning"></p>
+                    </div>
+                    <div class="word-actions">
+                        <button id="save-btn" class="action-btn">
+                            <i class="fas fa-save"></i> Save Word
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <dl class="word-details">
+                <div id="definition-panel" class="detail-row">
+                    <dt>Definition</dt>
+                    <dd id="english-definition"></dd>
+                </div>
+                <div id="example-panel" class="detail-row">
+                    <dt>Example</dt>
+                    <dd id="example-sentence"></dd>
+                </div>
+                <div id="synonym-panel" class="detail-row">
+                    <dt>Similar</dt>
+                    <dd id="synonym-list" class="tag-list"></dd>
+                </div>
+                <div id="family-panel" class="detail-row">
+                    <dt>Family</dt>
+                    <dd id="family-list" class="tag-list"></dd>
+                </div>
+            </dl>
+        </article>
+
+        <!-- TODAY: a word of the day from your saved words, and your week at a glance (home.js) -->
+        <section id="today-home" class="today-home hidden" aria-label="Today">
+            <article id="wotd" class="panel wotd hidden" aria-labelledby="wotd-word">
+                <p class="wotd-kicker"><i class="fas fa-sun" aria-hidden="true"></i> Word of the day</p>
+                <div class="wotd-body">
+                    <img id="wotd-image" class="wotd-image hidden" alt="" loading="lazy">
+                    <div class="wotd-text">
+                        <div class="wotd-title">
+                            <h2 id="wotd-word"></h2>
+                            <span id="wotd-ipa" class="ipa"></span>
+                        </div>
+                        <p id="wotd-definition" class="wotd-definition"></p>
+                        <p id="wotd-example" class="wotd-example hidden"></p>
+                        <button type="button" id="wotd-reveal" class="wotd-reveal" aria-expanded="false" aria-controls="wotd-meaning">
+                            <i class="fas fa-eye" aria-hidden="true"></i> Show the Vietnamese
+                        </button>
+                        <p id="wotd-meaning" class="wotd-meaning hidden"></p>
+                        <button type="button" id="wotd-open" class="wotd-open">Open the word card <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="panel week-glance" aria-labelledby="glance-title">
+                <div class="glance-head">
+                    <h2 id="glance-title">Your week</h2>
+                    <a href="/tracking" class="glance-link">Tracking <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                </div>
+                <ul id="glance-bands" class="glance-bands"></ul>
+            </article>
+        </section>
+
+        <footer class="page-footer">
+            <p class="shortcut-hint">
+                <kbd>/</kbd> search &middot; <kbd>S</kbd> save &middot; <kbd>R</kbd> reveal &middot; <kbd>Esc</kbd> close
+            </p>
             <a href="https://github.com/ntuanh/MyVocab" target="_blank" class="github-star-button">
                 <i class="fab fa-github"></i> Star us on GitHub
             </a>
-        </div>
-    </div>
+        </footer>
+    </main>
 
     <!-- MODALS AND NOTIFICATIONS -->
 
-    <!-- Toast Notification for feedback -->
-    <div id="toast-notification" class="toast"> <!-- Removed 'hidden' for JS control -->
+    <div id="toast-notification" class="toast">
         <span id="toast-message"></span>
     </div>
 
+    <!-- Words AI is filing under a topic, in the corner while you keep working -->
+    <div id="ai-tasks" class="ai-tasks" aria-live="polite"></div>
+
     <!-- Modal for saving a word to topics -->
-    <!-- [FIX] Removed 'hidden' class. CSS will handle initial state. -->
     <div id="save-modal" class="modal-overlay">
-        <div class="modal-content">
-            <h3>Save '<span id="modal-word-to-save"></span>'</h3>
-            <p>Select topics for this word. If none are selected, it will be saved to "Daily life".</p>
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="save-modal-title">
+            <h3 id="save-modal-title">Save '<span id="modal-word-to-save"></span>'</h3>
+            <button type="button" id="ai-save-btn" class="ai-save-btn">
+                <i class="fas fa-magic" aria-hidden="true"></i>
+                <span>
+                    <strong>Save, and let AI pick the topic</strong>
+                    <small>It works in the corner, so you can keep searching.</small>
+                </span>
+            </button>
+            <p class="modal-or">Or pick topics yourself. You can also leave them all unticked.</p>
             <div id="modal-topic-list" class="topic-list-container">
                 <!-- JavaScript populates this -->
             </div>
@@ -99,11 +144,10 @@
         </div>
     </div>
 
-    <!-- Modal for password-protected data view -->
-    <!-- [FIX] This structure is now consistent with the save-modal -->
+    <!-- Modal for the password-protected My Words page -->
     <div id="password-modal-overlay" class="modal-overlay">
-        <div id="password-modal" class="modal-content">
-            <h3>View Protected Data</h3>
+        <div id="password-modal" class="modal-content" role="dialog" aria-modal="true" aria-labelledby="password-modal-title">
+            <h3 id="password-modal-title">Open My Words</h3>
             <p>Please enter the password to continue.</p>
             <input type="password" id="password-input" placeholder="Password...">
             <p id="password-error" class="error-message"></p>
@@ -114,7 +158,7 @@
         </div>
     </div>
 
-    <!-- Link to JavaScript file -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
 </body>
 </html>

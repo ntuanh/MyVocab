@@ -165,10 +165,6 @@ def main():
     mode = "COMMIT" if args.commit else "DRY RUN (nothing will be written)"
     print(f"mode:    {mode}\n")
 
-    print("topics:")
-    topic_ids = resolve_topics(entries, args.commit)
-    print()
-
     # A word already in the table is skipped outright rather than re-saved.
     # save_word() deletes and rewrites a word's topic rows, so calling it on an
     # existing word would silently discard topic choices made in the UI.
@@ -184,6 +180,11 @@ def main():
     if not todo:
         print("\nNothing to do.")
         return
+    print()
+
+    # Only the topics of the words being added, so --limit leaves no empty topics.
+    print("topics:")
+    topic_ids = resolve_topics(todo, args.commit)
     print()
 
     added = failed = no_image = 0
