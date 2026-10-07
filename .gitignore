@@ -20,7 +20,7 @@ myvocab.db
 backup/
 
 # Made by tools/make_shortcut.py on Windows
-static/favicon.ico
+static/img/favicon.ico
 
 # Updates on an installed copy (updates.py, tools/update.py)
 .version

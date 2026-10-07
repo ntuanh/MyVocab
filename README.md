@@ -10,7 +10,7 @@
 </td>
 <td width="30%" style="vertical-align: top; text-align: center;">
 
-<img src="./images/MyVocabQR.png" alt="MyVocab QR" width="350" height="350" style="display: block; margin: 0 auto;">
+<img src="./docs/images/MyVocabQR.png" alt="MyVocab QR" width="350" height="350" style="display: block; margin: 0 auto;">
 
 </td>
 </tr>
@@ -56,7 +56,7 @@ If a blue box says *Windows protected your PC*, click **More info**, then
 | 3 | Installs Python 3.12 if the computer does not have it. A small window shows its progress bar | No |
 | 4 | Opens the **setup page** in your browser: a progress bar for installing packages, preparing your database and adding the icons | Paste your keys (step 3 below) |
 
-<p align="center"><img src="./images/setup-progress.png" alt="The setup page: a progress bar at 46% while packages install" width="560"></p>
+<p align="center"><img src="./docs/images/setup-progress.png" alt="The setup page: a progress bar at 46% while packages install" width="560"></p>
 
 If Windows Firewall asks about *Python* or *postgres*, click **Cancel**.
 MyVocab only talks to your own computer.
@@ -92,7 +92,7 @@ Also choose a **password** for the *My Words* page, then click **Save keys**.
 MyVocab checks each key right away. A green tick means the key works. A red
 message means the key was copied wrong: copy it again and paste it.
 
-<p align="center"><img src="./images/setup-keys.png" alt="The keys box with Get a Gemini key and Get a Pexels key buttons, paste fields and a password" width="560"></p>
+<p align="center"><img src="./docs/images/setup-keys.png" alt="The keys box with Get a Gemini key and Get a Pexels key buttons, paste fields and a password" width="560"></p>
 
 No keys yet? Click **Skip for now**. Your saved words, Exam, Listening and
 Reading still work. To add the keys later: Start menu → **MyVocab Setup**.
@@ -100,7 +100,7 @@ If step 2 found your keys in an old MyVocab folder, they are already filled in.
 
 **Step 4. Done.** When the bar reaches 100%, MyVocab opens by itself.
 
-<p align="center"><img src="./images/setup-done.png" alt="All set: from now on double-click the MyVocab icon on your desktop" width="560"></p>
+<p align="center"><img src="./docs/images/setup-done.png" alt="All set: from now on double-click the MyVocab icon on your desktop" width="560"></p>
 
 ### Every time
 
@@ -230,8 +230,8 @@ overwrite a database that already has words unless you add `--force`.
 
 To fill a new, empty database with Destination B1 words:
 ```bash
-.venv/bin/python tools/seed_words.py --limit 200 --commit --allow-no-image
-.venv/bin/python tools/fill_missing.py --commit
+.venv/bin/python dev/seed_words.py --limit 200 --commit --allow-no-image
+.venv/bin/python dev/fill_missing.py --commit
 ```
 Leave out `--limit 200` for all 500 words in 25 topics, and `--allow-no-image`
 if `PEXELS_API_KEY` is set. `fill_missing.py` adds pictures (`PEXELS_API_KEY`),
@@ -262,9 +262,10 @@ again after adding a key.
 ---
 
 ## Demo
-[Click hiaaaa:))](./images)
 
-![search](./images/Search.png)
+| Home | Reading | Writing |
+| :---: | :---: | :---: |
+| <img src="./docs/images/demo-home.png" alt="Home: search, word of the day and this week's skills" width="300"> | <img src="./docs/images/demo-reading.png" alt="Reading: today's part and the 50-day plan" width="300"> | <img src="./docs/images/demo-writing.png" alt="Writing: an IELTS Task 1 line graph to describe" width="300"> |
 
 ---
 
@@ -302,90 +303,78 @@ again after adding a key.
 
 ## Project Structure
 
+Where to look when you change something:
+
+| To change... | Look in |
+| :--- | :--- |
+| a page's layout | `templates/<page>.html`, and the shared pieces in `templates/partials/` |
+| how it looks | `static/css/style.css` (colour tokens at the top, one numbered section per page) |
+| what a page does in the browser | `static/js/<page>.js` |
+| what the server does (routes) | `app.py`, which calls the code in `myvocab/` |
+| words, reading parts, writing prompts | `data/` |
+| installing, starting, updating | `run.py` and `tools/` |
+| content and releases (only you run these) | `dev/` |
+
 ```
 MyVocab/
+├── app.py                 # Flask: every page and /api route
+├── run.py                 # Sets up and starts MyVocab on a computer (Windows, Linux, macOS)
+├── run.bat  run.sh        # Start it (the desktop icon opens these)
+├── install.bat            # Windows: set this folder up / change the keys (Start menu: MyVocab Setup)
+├── backup.bat             # Windows: save your words to backup/ (Start menu: MyVocab Backup)
+├── MyVocab-Setup.bat      # Windows: the one file to download; installs or updates everything
+├── requirements.txt       # Python packages, here and online (pinned)
+├── requirements-local.txt # ... plus the database program, for a computer
+├── .env.example           # Template for .env (keys and settings; .env is never committed)
+├── vercel.json            # Vercel build and routing
 │
-├── api/
-│   └── index.py          # Vercel entrypoint (exposes `app`)
+├── myvocab/               # The app's Python code, used by app.py
+│   ├── database.py        # PostgreSQL: words, topics, points, targets, attempts (+ schema)
+│   ├── handle_request.py  # Looking a word up: dictionary API, Gemini, Pexels
+│   ├── practice.py        # Practice exercises and AI marking
+│   ├── listening.py       # Listening episodes and how their scores become points
+│   ├── reading.py         # Reading parts: loading and checking them, marking, the plan
+│   ├── writing.py         # Writing: prompts, AI marking out of 80, points
+│   └── updates.py         # New versions: asks GitHub for the newest release, starts an update
 │
-├── app.py                # Flask app and routes
-├── handle_request.py     # Gemini / Pexels / dictionary lookups
-├── database.py           # PostgreSQL logic + schema migration
-├── practice.py           # Practice exercises and AI marking
-├── listening.py          # Listening episodes and how their scores become points
-├── reading.py            # Reading parts: loading and checking them, marking, the plan
-├── writing.py            # Writing: prompts, AI marking out of 80, points
-├── updates.py            # New versions: asks GitHub for the newest release, starts an update
+├── templates/             # One file per page
+│   ├── index.html  exam.html  practice.html  listening.html  reading.html
+│   ├── writing.html  tracking.html  data.html  manage_topics.html
+│   └── partials/          # Pieces shared by pages
+│       ├── nav.html           # Top bar, weather layers, Update button
+│       ├── trees.html         # The two big trees (drawn by dev/draw_trees.py)
+│       ├── goal_panel.html    # A skill's weekly target panel
+│       ├── practice_tabs.html # Vocab / Listening / Reading / Writing tabs
+│       └── rules/             # How each skill scores: vocab, listening, reading, writing
 │
-├── static/               # JS, CSS, client assets
-│   ├── style.css
-│   ├── script.js
-│   ├── data.js
-│   ├── exam.js
-│   ├── practice.js
-│   ├── goals.js          # Weekly goal panel, shared by Practice and Tracking
-│   ├── tracking.js       # Tracking page: band tiles, the 8-week chart and table
-│   ├── listening.js      # Listening page: episode library, player, score entry
-│   ├── reading.js        # Reading page: the plan, the timed test, marking
-│   ├── home.js           # Home page: word of the day and the week at a glance
-│   ├── writing.js        # Writing page: the task, the editor, the teacher's marks, past writing
-│   ├── charts.js         # Draws Writing Task 1 charts (line, bar, pie, table)
-│   ├── fx.js             # Confetti, floating points, achievement cards, counting numbers
-│   ├── manage_topics.js
-│   ├── theme.js          # Applies the time-of-day look and weather before first paint
-│   ├── sky.js            # Open-Meteo weather + the place picker
-│   └── scene-*.svg, clouds.svg, fx-*.svg   # Scenery, rain and snow
-│
-├── templates/            # HTML templates (Jinja2)
-│   ├── _nav.html         # Top bar shared by every page
-│   ├── _trees.html       # The two background trees (made by tools/draw_trees.py)
-│   ├── _goal_panel.html  # A skill's weekly goal (macro), used by Practice and Tracking
-│   ├── _vocab_rules.html # How Vocab points are won and lost
-│   ├── _listening_rules.html # How Listening points are won and lost
-│   ├── _reading_rules.html # How Reading points are won and lost
-│   ├── _writing_rules.html # How Writing points are won
-│   ├── _practice_tabs.html # Switch between the practice pages
-│   ├── index.html
-│   ├── exam.html
-│   ├── practice.html
-│   ├── tracking.html
-│   ├── listening.html
-│   ├── reading.html
-│   ├── writing.html
-│   ├── data.html
-│   └── manage_topics.html
+├── static/
+│   ├── css/style.css      # All styles
+│   ├── js/                # One script per page, plus shared ones:
+│   │                      #   theme, sky (weather), fx (effects), goals, charts, update
+│   └── img/               # Favicon, the three scenes, clouds, rain and snow
 │
 ├── data/
-│   ├── b1_words.json     # 500 Destination B1 words with meanings and examples
-│   ├── bbc_6min.json     # 50 BBC 6 Minute English episodes: YouTube IDs, titles, lengths, topics
-│   ├── reading/          # 50 IELTS-style reading parts with answers (parts_01-10.json)
-│   └── writing/          # Diary ideas, 16 Task 1 charts, 40 Task 2 questions
+│   ├── b1_words.json      # 500 Destination B1 words with meanings and examples
+│   ├── bbc_6min.json      # 50 BBC 6 Minute English episodes
+│   ├── reading/           # 50 IELTS-style reading parts with answers
+│   └── writing/           # Diary ideas, 16 Task 1 charts, 40 Task 2 questions
 │
-├── tools/
-│   ├── seed_words.py     # Loads b1_words.json into the database
-│   ├── fill_missing.py   # Adds missing pictures, IPA, synonyms, family words
-│   ├── draw_trees.py     # Draws templates/_trees.html
-│   ├── local_db.py       # The database on this computer: start, stop, backup, restore
-│   ├── local_db.sh       # Same, for the old command
-│   ├── make_shortcut.py  # Puts a MyVocab icon on the desktop and in the menu (Linux, Windows)
-│   ├── setup.html        # The setup page: progress bar and the box for your keys
-│   ├── windows_setup.ps1 # What MyVocab-Setup.bat runs: download, find backup and keys, set up
-│   ├── update.py         # Puts a new release in: download, backup, close, copy, reopen
-│   ├── release.py        # For the developer: publish a new version (a GitHub release)
-│   └── get_python.ps1    # Installs Python 3.12 on Windows when it is missing
+├── tools/                 # Run by installed copies
+│   ├── windows_setup.ps1  # What MyVocab-Setup.bat runs: download, find backup and keys, set up
+│   ├── get_python.ps1     # Installs Python 3.12 on Windows when it is missing
+│   ├── setup.html         # The setup page: progress bar and the keys box
+│   ├── local_db.py        # The database on this computer: start, stop, backup, restore
+│   ├── make_shortcut.py   # Desktop and Start menu icons
+│   └── update.py          # Puts a new release in: download, backup, close, copy, reopen
 │
-├── run.py                # Sets up and starts the app on your computer (any system)
-├── run.sh                # Starts it on Linux and macOS
-├── MyVocab-Setup.bat     # Windows: the one file to download; installs or updates everything
-├── install.bat           # Windows: sets up this folder and shows the setup page (run.bat --setup)
-├── run.bat               # Starts it on Windows (what the desktop icon opens)
-├── backup.bat            # Saves your words to backup/ on Windows (double-click)
-├── .env.example          # Template for .env (your local keys)
-├── requirements.txt      # Python packages the app needs (pinned), here and online
-├── requirements-local.txt # Plus the database program, for your own computer
-├── vercel.json           # Vercel build + routing config
-├── LICENSE
-└── README.md
+├── dev/                   # Only for the developer
+│   ├── release.py         # Publish a new version (a GitHub release)
+│   ├── seed_words.py      # Load data/b1_words.json into a database
+│   ├── fill_missing.py    # Add missing pictures, IPA, synonyms, family words
+│   └── draw_trees.py      # Draw templates/partials/trees.html
+│
+├── api/index.py           # Vercel entry point (exposes `app`)
+└── docs/images/           # Pictures for this README
 ```
 
 ---
@@ -412,19 +401,19 @@ changes is ready, run this on your computer:
 
 ```bash
 git add -A && git commit -m "feat: what you added"   # commit as usual
-python3 tools/release.py                             # v1.1 -> v1.2: pushes main, publishes the release
+python3 dev/release.py                             # v1.1 -> v1.2: pushes main, publishes the release
 ```
 
 It shows the new version number and a "What's new" list made from the commit
 messages since the last release, and asks before publishing. You can also give
-the version and notes yourself: `python3 tools/release.py 2.0 --notes "- Speaking practice"`.
+the version and notes yourself: `python3 dev/release.py 2.0 --notes "- Speaking practice"`.
 It needs the GitHub CLI (`gh auth login`).
 
 Within about half an hour, every installed MyVocab shows the **Update** button
 with that list:
 
-- `updates.py` asks GitHub for the newest release (`/api/update/status`);
-- `static/update.js` shows the button and follows the update;
+- `myvocab/updates.py` asks GitHub for the newest release (`/api/update/status`);
+- `static/js/update.js` shows the button and follows the update;
 - `run.py` starts `tools/update.py`, which:
   1. downloads the release;
   2. saves a backup to `backup/myvocab-<date>-before-<version>.sql`;

@@ -1,6 +1,7 @@
 .venv
 Debug
-images
+docs
+dev
 myvocab.db
 .idea
 README.md

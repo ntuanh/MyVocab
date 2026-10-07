@@ -1,18 +1,18 @@
-{% from '_goal_panel.html' import goal_panel %}
+{% from 'partials/goal_panel.html' import goal_panel %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyVocab - Practice</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="practice-body">
-    {% include '_nav.html' %}
-    {% include '_practice_tabs.html' %}
+    {% include 'partials/nav.html' %}
+    {% include 'partials/practice_tabs.html' %}
     <div id="practice-layout">
 
         <!-- LEFT COLUMN: choose a practice type and topics -->
@@ -23,7 +23,7 @@
             <!-- Vocab points this week against the weekly target. Every skill's
                  score is on the Tracking page. -->
             {% call goal_panel('vocab', 'Vocab score', more_link=True) %}
-                {% include '_vocab_rules.html' %}
+                {% include 'partials/rules/vocab.html' %}
             {% endcall %}
 
             <fieldset id="mode-list">
@@ -132,7 +132,7 @@
         </main>
     </div>
 
-    <script src="{{ url_for('static', filename='goals.js') }}"></script>
-    <script src="{{ url_for('static', filename='practice.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/goals.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/practice.js') }}"></script>
 </body>
 </html>

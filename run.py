@@ -261,6 +261,29 @@ def setup_env():
     return env
 
 
+# Where files were before v1.2 sorted them into folders. An update only adds
+# files, so an installed copy that came from an older version still has these.
+OLD_LAYOUT = [
+    "database.py", "handle_request.py", "practice.py", "listening.py", "reading.py", "writing.py", "updates.py",
+    "static/*.js", "static/*.css", "static/*.svg", "static/favicon.png",  # static/favicon.ico: old desktop icons use it
+    "templates/_*.html",
+    "tools/seed_words.py", "tools/fill_missing.py", "tools/draw_trees.py", "tools/release.py", "tools/local_db.sh",
+    "images/*.png",
+]
+
+
+def tidy_old_layout():
+    """Removes the old copies once the new layout is in. Never in a git clone: git moved those files itself."""
+    if os.path.isdir(os.path.join(ROOT, ".git")) or not os.path.exists(os.path.join(ROOT, "myvocab", "__init__.py")):
+        return
+    import glob
+    for pattern in OLD_LAYOUT:
+        for path in glob.glob(os.path.join(ROOT, pattern)):
+            os.remove(path)
+    for folder in ("images", "__pycache__"):
+        shutil.rmtree(os.path.join(ROOT, folder), ignore_errors=True)
+
+
 def local_db(*args):
     return subprocess.run([PYTHON, os.path.join("tools", "local_db.py"), *args], capture_output=True, text=True,
                           errors="replace")
@@ -358,9 +381,9 @@ class SetupPage:
                 elif path == "/state":
                     page.last_seen = time.time()
                     self.reply(200, dict(page.progress.snapshot(), keys=page.keys(), answered=page.answered))
-                elif path.startswith("/static/") and os.path.basename(path) in ("favicon.png", "scene-morning.svg"):
+                elif path in ("/static/img/favicon.png", "/static/img/scene-morning.svg"):
                     kind = "image/png" if path.endswith(".png") else "image/svg+xml"
-                    self.reply(200, open(os.path.join(ROOT, "static", os.path.basename(path)), "rb").read(), kind)
+                    self.reply(200, open(os.path.join(ROOT, "static", "img", os.path.basename(path)), "rb").read(), kind)
                 else:
                     self.reply(404, {"error": "not found"})
 
@@ -455,6 +478,7 @@ def main():
         if hasattr(signal, name):
             signal.signal(getattr(signal, name), stop)
 
+    tidy_old_layout()
     progress = Progress()
     first_time = not os.path.exists(PYTHON) or not os.path.exists(".env")
     global SETUP_PAGE

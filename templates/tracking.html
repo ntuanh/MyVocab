@@ -1,17 +1,17 @@
-{% from '_goal_panel.html' import goal_panel %}
+{% from 'partials/goal_panel.html' import goal_panel %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyVocab - Tracking</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    {% include '_nav.html' %}
+    {% include 'partials/nav.html' %}
 
     <main id="tracking-page" class="tracking-page">
         <header class="tracking-head">
@@ -68,7 +68,7 @@
             <div class="band-grid">
                 {% if band.skill in ('vocab', 'listening', 'reading', 'writing') %}
                     {% call goal_panel(band.skill, band.name ~ ' score', past_weeks=7, past_list=False) %}
-                        {% include '_' ~ band.skill ~ '_rules.html' %}
+                        {% include 'partials/rules/' ~ band.skill ~ '.html' %}
                     {% endcall %}
                 {% else %}
                     {{ goal_panel(band.skill, band.name ~ ' score', past_weeks=7, past_list=False) }}
@@ -112,7 +112,7 @@
 
     <div id="viz-tooltip" class="viz-tooltip" aria-hidden="true" hidden></div>
 
-    <script src="{{ url_for('static', filename='goals.js') }}"></script>
-    <script src="{{ url_for('static', filename='tracking.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/goals.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tracking.js') }}"></script>
 </body>
 </html>

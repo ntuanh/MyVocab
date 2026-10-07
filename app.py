@@ -12,17 +12,17 @@ except ImportError:
 
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 
-from handle_request import get_dictionary_data, choose_topic, OK, SKIPPED
-from practice import DEFAULT_COUNT, MAX_COUNT, make_exercises, check_answer, check_grammar, give_up
-from practice import SKILL as PRACTICE_SKILL
-from listening import POINTS_PER_ANSWER, WRONG_LOSES, episodes_with_scores, save_score
-from listening import SKILL as LISTENING_SKILL
-from reading import POINTS_RIGHT, WRONG_LOSES as READING_WRONG_LOSES, MINUTES_PER_PART, PARTS_BY_ID, public_part, plan as reading_plan
-from reading import submit as submit_reading, SKILL as READING_SKILL
-from writing import KINDS as WRITING_KINDS, MAX_SCORE as WRITING_MAX, SKILL as WRITING_SKILL
-from writing import prompt_for as writing_prompt, check as check_writing, retry as retry_writing
-import updates
-from database import (
+from myvocab.handle_request import get_dictionary_data, choose_topic, OK, SKIPPED
+from myvocab.practice import DEFAULT_COUNT, MAX_COUNT, make_exercises, check_answer, check_grammar, give_up
+from myvocab.practice import SKILL as PRACTICE_SKILL
+from myvocab.listening import POINTS_PER_ANSWER, WRONG_LOSES, episodes_with_scores, save_score
+from myvocab.listening import SKILL as LISTENING_SKILL
+from myvocab.reading import POINTS_RIGHT, WRONG_LOSES as READING_WRONG_LOSES, MINUTES_PER_PART, PARTS_BY_ID, public_part, plan as reading_plan
+from myvocab.reading import submit as submit_reading, SKILL as READING_SKILL
+from myvocab.writing import KINDS as WRITING_KINDS, MAX_SCORE as WRITING_MAX, SKILL as WRITING_SKILL
+from myvocab.writing import prompt_for as writing_prompt, check as check_writing, retry as retry_writing
+from myvocab import updates
+from myvocab.database import (
     get_writing_history,
     get_writing_piece,
     SKILLS,
@@ -526,7 +526,7 @@ def grammar_check_route():
 
 @app.route('/api/update/status', methods=['GET'])
 def update_status_route():
-    """Whether a newer MyVocab is out, and how far an update has got (static/update.js)."""
+    """Whether a newer MyVocab is out, and how far an update has got (static/js/update.js)."""
     return jsonify(updates.status())
 
 

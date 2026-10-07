@@ -15,7 +15,7 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ICON_PNG = os.path.join(ROOT, "static", "favicon.png")
+ICON_PNG = os.path.join(ROOT, "static", "img", "favicon.png")
 
 
 def windows_folder(name):
@@ -75,7 +75,7 @@ def png_to_ico(png_path, ico_path):
 
 
 def windows():
-    ico = os.path.join(ROOT, "static", "favicon.ico")
+    ico = os.path.join(ROOT, "static", "img", "favicon.ico")
     png_to_ico(ICON_PNG, ico)
     # (shortcut, what it opens, its tooltip)
     links = [(os.path.join(desktop_dir(), "MyVocab.lnk"), "run.bat", "Start MyVocab")]

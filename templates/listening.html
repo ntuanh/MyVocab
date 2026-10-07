@@ -1,18 +1,18 @@
-{% from '_goal_panel.html' import goal_panel %}
+{% from 'partials/goal_panel.html' import goal_panel %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyVocab - Listening</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="practice-body">
-    {% include '_nav.html' %}
-    {% include '_practice_tabs.html' %}
+    {% include 'partials/nav.html' %}
+    {% include 'partials/practice_tabs.html' %}
     <div id="practice-layout">
 
         <!-- LEFT COLUMN: how it works, and the listening target -->
@@ -29,7 +29,7 @@
             </ol>
 
             {% call goal_panel('listening', 'Listening score', more_link=True) %}
-                {% include '_listening_rules.html' %}
+                {% include 'partials/rules/listening.html' %}
             {% endcall %}
         </aside>
 
@@ -85,7 +85,7 @@
         </main>
     </div>
 
-    <script src="{{ url_for('static', filename='goals.js') }}"></script>
-    <script src="{{ url_for('static', filename='listening.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/goals.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/listening.js') }}"></script>
 </body>
 </html>

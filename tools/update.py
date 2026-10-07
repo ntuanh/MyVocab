@@ -28,7 +28,7 @@ import zipfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 os.chdir(ROOT)
-from updates import REPO, STATE_DIR, VERSION_FILE, write_status  # noqa: E402
+from myvocab.updates import REPO, STATE_DIR, VERSION_FILE, write_status  # noqa: E402
 
 STOP_FILE = os.path.join(STATE_DIR, "stop")
 WINDOWS = os.name == "nt"
