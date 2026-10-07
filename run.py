@@ -1,6 +1,6 @@
 """Start MyVocab on this computer, on Linux, macOS or Windows:
 
-    python run.py           (Windows: install.bat the first time, then the desktop icon;
+    python run.py           (Windows: MyVocab-Setup.bat the first time, then the desktop icon;
                              Linux/macOS: ./run.sh)
     python run.py --setup   show the setup page again, to change your keys
 

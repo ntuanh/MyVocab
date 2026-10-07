@@ -210,7 +210,7 @@ button:disabled { opacity: .6; cursor: wait; }
     <section class="card error hidden" id="error-card" role="alert">
         <h2>Something went wrong</h2>
         <p id="error-text"></p>
-        <p>The black MyVocab window shows the details. Check your internet connection and double-click <b>install.bat</b> again.</p>
+        <p>The black MyVocab window shows the details. Check your internet connection and run <b>MyVocab-Setup</b> again.</p>
     </section>
 
     <section class="card keys" id="keys-card" aria-labelledby="keys-title">
@@ -272,7 +272,7 @@ button:disabled { opacity: .6; cursor: wait; }
         <h2 id="finish-title">🎉 All set!</h2>
         <p>MyVocab is ready. From now on:</p>
         <ol>
-            <li>Double-click the <b>MyVocab</b> icon on your desktop (it is in the Start menu too).</li>
+            <li>Double-click the <b>MyVocab</b> icon on your desktop (it is in the Start menu too, with <b>MyVocab Backup</b> and <b>MyVocab Setup</b>).</li>
             <li>A black window opens, then MyVocab opens in your browser. Keep that black window open while you study.</li>
             <li>When you finish, close the black window.</li>
         </ol>
@@ -375,7 +375,7 @@ async function poll() {
     } catch (e) {
         failures += 1;
         if (failures > 5) {
-            $("now").textContent = "The setup window was closed. Double-click install.bat to start again.";
+            $("now").textContent = "The setup window was closed. Run MyVocab-Setup again to finish.";
             return;
         }
     }
@@ -414,7 +414,7 @@ $("save").addEventListener("click", async () => {
 
 $("skip").addEventListener("click", async () => {
     await post("/skip").catch(() => {});
-    $("answered-note").textContent = "OK. You can add the keys later: double-click install.bat again.";
+    $("answered-note").textContent = "OK. To add the keys later, open the Start menu and click “MyVocab Setup”.";
     showAnswered(true);
 });
 

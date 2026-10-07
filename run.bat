@@ -1,7 +1,7 @@
 @echo off
 rem Start MyVocab on Windows: double-click this file or the MyVocab icon.
-rem The first time, use install.bat instead: it does the same, and also shows
-rem the setup page. If Python 3.12 is missing, it is installed first. run.py
+rem The first time, use MyVocab-Setup.bat (or install.bat in this folder): it
+rem also shows the setup page. If Python 3.12 is missing, it is installed first. run.py
 rem does the rest. Keep this window open while you study; close it to stop.
 cd /d "%~dp0"
 title MyVocab
@@ -15,7 +15,7 @@ if defined PY goto start
 echo.
 echo Python could not be installed automatically. Install it yourself from
 echo https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe
-echo (tick "Add python.exe to PATH"), then double-click install.bat again.
+echo (tick "Add python.exe to PATH"), then run MyVocab-Setup again.
 pause
 exit /b 1
 

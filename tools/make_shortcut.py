@@ -77,22 +77,27 @@ def png_to_ico(png_path, ico_path):
 def windows():
     ico = os.path.join(ROOT, "static", "favicon.ico")
     png_to_ico(ICON_PNG, ico)
-    links = [os.path.join(desktop_dir(), "MyVocab.lnk")]
+    # (shortcut, what it opens, its tooltip)
+    links = [(os.path.join(desktop_dir(), "MyVocab.lnk"), "run.bat", "Start MyVocab")]
     programs = windows_folder("Programs")
-    if programs:
-        links.append(os.path.join(programs, "MyVocab.lnk"))  # so it can be found from the Start menu
+    if programs:  # the Start menu
+        links += [
+            (os.path.join(programs, "MyVocab.lnk"), "run.bat", "Start MyVocab"),
+            (os.path.join(programs, "MyVocab Setup.lnk"), "install.bat", "Change your keys or set MyVocab up again"),
+            (os.path.join(programs, "MyVocab Backup.lnk"), "backup.bat", "Save a copy of your words"),
+        ]
     quote = lambda text: "'" + text.replace("'", "''") + "'"  # a PowerShell string literal
     script = "".join(
         f"$s = (New-Object -ComObject WScript.Shell).CreateShortcut({quote(link)});"
-        f"$s.TargetPath = {quote(os.path.join(ROOT, 'run.bat'))}; $s.WorkingDirectory = {quote(ROOT)};"
-        f"$s.IconLocation = {quote(ico)}; $s.Description = 'Start MyVocab'; $s.Save();"
-        for link in links
+        f"$s.TargetPath = {quote(os.path.join(ROOT, target))}; $s.WorkingDirectory = {quote(ROOT)};"
+        f"$s.IconLocation = {quote(ico)}; $s.Description = {quote(tip)}; $s.Save();"
+        for link, target, tip in links
     )
     result = subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", script],
                             capture_output=True, text=True)
     if result.returncode != 0:
         sys.exit("Could not make the shortcut: " + result.stderr.strip())
-    print("Shortcuts: " + ", ".join(links))
+    print("Shortcuts: " + ", ".join(link for link, _, _ in links))
 
 
 if __name__ == "__main__":

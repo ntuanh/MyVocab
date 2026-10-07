@@ -32,48 +32,49 @@
 
 ## Install on Windows (no technical knowledge needed)
 
-You download one folder, double-click one file, and wait. MyVocab installs
-everything it needs, shows a progress bar, and puts a **MyVocab** icon on your
-desktop. After that, you only click the icon.
+Download **one file** and double-click it. A window opens and does every step
+by itself, with a progress bar. At the end, a **MyVocab** icon is on your
+desktop, and from then on you only click that icon.
 
 ### The first time (about 5 minutes, with internet)
 
-**Step 1. Download MyVocab**
+**Step 1. Download the setup file**
 
-1. Open <https://github.com/ntuanh/MyVocab>.
-2. Click the green **Code** button, then **Download ZIP**.
-3. Open your **Downloads** folder. Right-click **MyVocab-main.zip**, choose
-   **Extract All...**, pick **Documents** and click **Extract**.
+<p align="center"><a href="https://github.com/ntuanh/MyVocab/releases/latest/download/MyVocab-Setup.bat"><b>⬇ Download MyVocab-Setup.bat</b></a></p>
 
-> [!IMPORTANT]
-> Keep the folder where you extracted it (for example *Documents\MyVocab-main*).
-> The desktop icon opens MyVocab from this folder, so do not delete or move it.
+If the browser warns about the file, choose **Keep** (in Edge: click **...** next to the file first, then **Keep**).
 
-**Step 2. Moving from another computer? Bring your words** (new users: skip this)
-
-1. On the **old** computer, double-click **backup** (`backup.bat`) in the
-   MyVocab folder. (On Linux: `python3 tools/local_db.py backup`.)
-2. Copy the **backup** folder from the old MyVocab folder into the new one.
-
-Do this before step 3: the first start loads your newest backup.
-
-**Step 3. Double-click `install`** (`install.bat`) in the MyVocab folder
+**Step 2. Double-click `MyVocab-Setup`** (in your **Downloads** folder)
 
 If a blue box says *Windows protected your PC*, click **More info**, then
-**Run anyway**. Then MyVocab installs itself:
+**Run anyway**. A window opens and works through 4 steps by itself:
 
-1. **Python** (only if this computer does not have Python 3.12 yet). A small
-   window with a progress bar downloads and installs it. You do not need to
-   click anything.
-2. **The setup page** opens in your browser. Its progress bar shows each step:
-   installing packages, preparing your database, and adding the desktop icon.
+| | What the window does | Do you need to do anything? |
+| :---: | :--- | :--- |
+| 1 | Downloads MyVocab into its own folder | No |
+| 2 | Looks for your words and keys from before: a backup file (`myvocab-....sql`) on the Desktop, in Downloads or Documents, or on a USB stick, and the keys in an old MyVocab folder | If it finds a backup, press **Enter** to load it |
+| 3 | Installs Python 3.12 if the computer does not have it. A small window shows its progress bar | No |
+| 4 | Opens the **setup page** in your browser: a progress bar for installing packages, preparing your database and adding the icons | Paste your keys (step 3 below) |
 
 <p align="center"><img src="./images/setup-progress.png" alt="The setup page: a progress bar at 46% while packages install" width="560"></p>
 
 If Windows Firewall asks about *Python* or *postgres*, click **Cancel**.
 MyVocab only talks to your own computer.
 
-**Step 4. Paste your free keys** into the box on the setup page, while the bar runs
+> [!NOTE]
+> **Moving from another computer?** Before step 2, make a backup on the old
+> computer: Start menu → **MyVocab Backup** (or double-click **backup** in the
+> old MyVocab folder). Put the `myvocab-<date>.sql` file it makes on this
+> computer's **Desktop** or on a USB stick. Step 2 finds it.
+
+**No file wanted?** Press **Windows + R**, paste this line and press **Enter**.
+It does exactly the same:
+
+```
+powershell -ExecutionPolicy Bypass -c "irm https://raw.githubusercontent.com/ntuanh/MyVocab/main/tools/windows_setup.ps1 | iex"
+```
+
+**Step 3. Paste your free keys** into the box on the setup page, while the bar runs
 
 > [!TIP]
 > **Gemini key** (needed: meanings, examples, Vietnamese, marking your writing)
@@ -94,9 +95,10 @@ message means the key was copied wrong: copy it again and paste it.
 <p align="center"><img src="./images/setup-keys.png" alt="The keys box with Get a Gemini key and Get a Pexels key buttons, paste fields and a password" width="560"></p>
 
 No keys yet? Click **Skip for now**. Your saved words, Exam, Listening and
-Reading still work. To add the keys later, double-click **install** again.
+Reading still work. To add the keys later: Start menu → **MyVocab Setup**.
+If step 2 found your keys in an old MyVocab folder, they are already filled in.
 
-**Step 5. Done.** When the bar reaches 100%, MyVocab opens by itself.
+**Step 4. Done.** When the bar reaches 100%, MyVocab opens by itself.
 
 <p align="center"><img src="./images/setup-done.png" alt="All set: from now on double-click the MyVocab icon on your desktop" width="560"></p>
 
@@ -110,28 +112,36 @@ Reading still work. To add the keys later, double-click **install** again.
 Closed the browser tab by mistake? Double-click the icon again: it only
 opens the page again.
 
-**Once a week**, double-click **backup** (`backup.bat`) in the MyVocab folder.
-That keeps a copy of your words.
+The Start menu also has:
+
+| Start menu | What it does |
+| :--- | :--- |
+| **MyVocab** | Starts MyVocab (same as the desktop icon) |
+| **MyVocab Backup** | Saves a copy of your words and opens the folder it is in. Do this **once a week** |
+| **MyVocab Setup** | Opens the setup page again, to change your keys or password |
+
+### Getting a new version
+
+Double-click **MyVocab-Setup** again. It saves a backup of your words first,
+then downloads the new version. Your words, keys and backups are kept.
 
 ### If something goes wrong
 
 | You see | Do this |
 | :--- | :--- |
-| *Python could not be installed automatically* | Install it yourself: <https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe>. Tick **Add python.exe to PATH**, click **Install Now**, then double-click **install** again. |
-| *Installing packages failed* | Check your internet and double-click **install** again. If it still fails: delete the **.venv** folder inside MyVocab and try once more. |
+| The browser will not download the file | Use the **Windows + R** line above instead. |
+| *The setup stopped* | Check your internet and double-click **MyVocab-Setup** again. It continues where it stopped. |
+| *Python could not be installed automatically* | Install it yourself: <https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe>. Tick **Add python.exe to PATH**, click **Install Now**, then run **MyVocab-Setup** again. |
+| *Installing packages failed* | Check your internet and run **MyVocab-Setup** again. If it still fails: delete the **.venv** folder in the MyVocab folder (see below) and try once more. |
 | The setup page shows *Something went wrong* | Read the last lines in the black window: they say what is missing. Restarting the computer and trying again often helps. |
 | The browser says *This site can't be reached* | Wait 10 seconds and refresh the page. Make sure the black window is still open. |
-| No icon on the desktop | Double-click **install** again: it makes the icon again. |
-| Your old words are not there | You started MyVocab before copying the **backup** folder. If you have not saved anything new on this computer yet, close MyVocab and delete the **.localdb** folder inside MyVocab. Then double-click **install** again, and it loads the backup. |
+| No icon on the desktop | Start menu → **MyVocab Setup** (or run **MyVocab-Setup** again): it makes the icons again. |
+| Your old words are not there | The backup was not found in step 2. Close MyVocab, delete the **.localdb** folder in the MyVocab folder, put the backup file on the Desktop, and run **MyVocab-Setup** again. Only do this if you have not saved new words on this computer yet. |
 | *Out of quota*, or the AI marking stops | The free AI allows about 20 requests a day. Try again tomorrow. |
 
-### Getting a new version of MyVocab
-
-1. Double-click **backup** in your current MyVocab folder.
-2. Download and extract the new ZIP (step 1) into a **new** folder.
-3. Copy the **backup** folder and the **.env** file (your keys) into the new folder.
-4. Double-click **install** in the new folder. Your words are loaded and the
-   desktop icon now opens the new folder. You can then delete the old folder.
+**Where is the MyVocab folder?** Press **Windows + R**, type
+`%LOCALAPPDATA%\MyVocab` and press **Enter**. It holds your keys (`.env`), your
+database (`.localdb`) and your backups (`backup`).
 
 ---
 
@@ -153,10 +163,20 @@ On Ubuntu or Linux Mint, also run `sudo apt install python3-venv` once.
 
 ### Windows
 
-See [Install on Windows](#install-on-windows-no-technical-knowledge-needed):
-double-click **`install.bat`**. If Python 3.12 is missing, it installs it for
-this user (`tools/get_python.ps1`, no administrator rights needed). It makes
-desktop and Start menu icons that open `run.bat`. `backup.bat` saves your words.
+See [Install on Windows](#install-on-windows-no-technical-knowledge-needed).
+`MyVocab-Setup.bat` (attached to each GitHub release) runs
+`tools/windows_setup.ps1` from GitHub. That script:
+
+- downloads the `main` branch into `%LOCALAPPDATA%\MyVocab`. On an update, it
+  makes a backup first;
+- finds a `myvocab-*.sql` backup and an old `.env` (only its keys are copied);
+- installs Python 3.12 for this user if it is missing (`tools/get_python.ps1`,
+  no administrator rights needed);
+- runs `install.bat` (`run.bat --setup`).
+
+The shortcuts open `run.bat` (MyVocab), `backup.bat` (MyVocab Backup) and
+`install.bat` (MyVocab Setup). In a cloned or extracted folder, double-click
+`install.bat` the first time.
 
 ### What the first run does
 
@@ -173,7 +193,7 @@ desktop and Start menu icons that open `run.bat`. `backup.bat` saves your words.
 - starts the app at http://127.0.0.1:5000, and the setup page moves on to it.
   If MyVocab is already running, the shortcut only opens the browser.
 
-To change the keys later, run `python3 run.py --setup` (Windows: `install.bat`),
+To change the keys later, run `python3 run.py --setup` (Windows: *MyVocab Setup* in the Start menu),
 or edit `.env` (the [table below](#environment-variables) says what each key is
 for). Closing the window (or Ctrl+C) stops the app and its database.
 
@@ -341,11 +361,13 @@ MyVocab/
 │   ├── local_db.sh       # Same, for the old command
 │   ├── make_shortcut.py  # Puts a MyVocab icon on the desktop and in the menu (Linux, Windows)
 │   ├── setup.html        # The setup page: progress bar and the box for your keys
+│   ├── windows_setup.ps1 # What MyVocab-Setup.bat runs: download, find backup and keys, set up
 │   └── get_python.ps1    # Installs Python 3.12 on Windows when it is missing
 │
 ├── run.py                # Sets up and starts the app on your computer (any system)
 ├── run.sh                # Starts it on Linux and macOS
-├── install.bat           # Windows, the first time: installs and sets up everything (double-click)
+├── MyVocab-Setup.bat     # Windows: the one file to download; installs or updates everything
+├── install.bat           # Windows: sets up this folder and shows the setup page (run.bat --setup)
 ├── run.bat               # Starts it on Windows (what the desktop icon opens)
 ├── backup.bat            # Saves your words to backup/ on Windows (double-click)
 ├── .env.example          # Template for .env (your local keys)
