@@ -14,3 +14,5 @@ requirements-local.txt
 backup.bat
 install.bat
 MyVocab-Setup.bat
+requirements-dev.txt
+tests

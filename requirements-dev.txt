@@ -1,0 +1,5 @@
+# For the developer only: what tests/run_all.py needs on top of the app.
+# Then, once: .venv/bin/python -m playwright install chromium
+-r requirements-local.txt
+playwright==1.63.0
+pillow==12.3.0

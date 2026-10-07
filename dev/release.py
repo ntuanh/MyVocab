@@ -5,8 +5,10 @@ after committing:
     python3 dev/release.py                  # the next version: v1.2 -> v1.3
     python3 dev/release.py 2.0              # a version of your choice
     python3 dev/release.py --notes "..."    # your own "What's new" instead of the commit list
+    python3 dev/release.py --skip-tests     # publish without running tests/run_all.py first
 
-It pushes main to GitHub and makes a GitHub release with MyVocab-Setup.bat
+It runs the tests first (tests/run_all.py, about 5 minutes) and stops if any
+fail. Then it pushes main to GitHub and makes a GitHub release with MyVocab-Setup.bat
 attached (the README's download link points to the newest release). Its notes
 list the commits since the last release, so users see what changed. Needs the
 GitHub CLI (gh), logged in.
@@ -53,6 +55,7 @@ def main():
     parser.add_argument("version", nargs="?", help="for example 1.3 (default: the next one)")
     parser.add_argument("--notes", help="what's new, in your own words")
     parser.add_argument("--yes", action="store_true", help="do not ask before publishing")
+    parser.add_argument("--skip-tests", action="store_true", help="publish without running the tests")
     args = parser.parse_args()
 
     if not shutil.which("gh"):
@@ -71,6 +74,11 @@ def main():
 
     print(f"Last version: {last or 'none'}")
     print(f"New version:  {tag}\n\nWhat's new:\n{notes}\n")
+    if not args.skip_tests:
+        python = os.path.join(ROOT, ".venv", "Scripts" if os.name == "nt" else "bin", "python")
+        print("Running the tests first (tests/run_all.py) ...")
+        if subprocess.run([python, os.path.join(ROOT, "tests", "run_all.py")], cwd=ROOT).returncode != 0:
+            sys.exit("Some tests failed, so nothing was published. Fix them, or use --skip-tests.")
     if not args.yes and input("Publish it? Every installed MyVocab will offer this update. [y/N] ").strip().lower() != "y":
         sys.exit("Nothing was published.")
 

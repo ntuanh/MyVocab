@@ -88,7 +88,8 @@ powershell -ExecutionPolicy Bypass -c "irm https://raw.githubusercontent.com/ntu
 > 2. Fill in the short form (for the website, write *personal English study*).
 > 3. Copy **Your API Key** and click **Paste** next to the Pexels box.
 
-Also choose a **password** for the *My Words* page, then click **Save keys**.
+Then click **Save keys**. (The *My Words* password is optional: on your own
+computer your word list opens without it.)
 MyVocab checks each key right away. A green tick means the key works. A red
 message means the key was copied wrong: copy it again and paste it.
 
@@ -314,6 +315,7 @@ Where to look when you change something:
 | words, reading parts, writing prompts | `data/` |
 | installing, starting, updating | `run.py` and `tools/` |
 | content and releases (only you run these) | `dev/` |
+| checking nothing broke | `tests/run_all.py` |
 
 ```
 MyVocab/
@@ -325,6 +327,7 @@ MyVocab/
 ├── MyVocab-Setup.bat      # Windows: the one file to download; installs or updates everything
 ├── requirements.txt       # Python packages, here and online (pinned)
 ├── requirements-local.txt # ... plus the database program, for a computer
+├── requirements-dev.txt   # ... plus what the tests need (Playwright)
 ├── .env.example           # Template for .env (keys and settings; .env is never committed)
 ├── vercel.json            # Vercel build and routing
 │
@@ -367,6 +370,8 @@ MyVocab/
 │   ├── make_shortcut.py   # Desktop and Start menu icons
 │   └── update.py          # Puts a new release in: download, backup, close, copy, reopen
 │
+├── tests/                 # run_all.py and 9 suites (see Testing); fixtures/
+│
 ├── dev/                   # Only for the developer
 │   ├── release.py         # Publish a new version (a GitHub release)
 │   ├── seed_words.py      # Load data/b1_words.json into a database
@@ -404,7 +409,8 @@ git add -A && git commit -m "feat: what you added"   # commit as usual
 python3 dev/release.py                             # v1.1 -> v1.2: pushes main, publishes the release
 ```
 
-It shows the new version number and a "What's new" list made from the commit
+It runs the tests first and stops if any fail (see [Testing](#testing)). Then it
+shows the new version number and a "What's new" list made from the commit
 messages since the last release, and asks before publishing. You can also give
 the version and notes yourself: `python3 dev/release.py 2.0 --notes "- Speaking practice"`.
 It needs the GitHub CLI (`gh auth login`).
@@ -427,6 +433,24 @@ get the newest release too.
 The button only shows in a copy that `run.py` started and that is not a git
 clone. Your own clone updates with `git pull`, and Vercel deploys every push to
 `main` by itself.
+
+### Testing
+
+`tests/` has 9 suites, about 340 checks. Browser checks with Playwright cover
+every page on desktop and phone, the effects, the trees, the update button and
+the setup page. Logic checks cover marking, points and targets.
+`tests/run_all.py` runs them against a **separate** copy of MyVocab: it gets its
+own database, filled from your newest backup, so your words are never touched.
+
+```bash
+.venv/bin/pip install -r requirements-dev.txt          # once
+.venv/bin/python -m playwright install chromium        # once
+.venv/bin/python tests/run_all.py                      # all suites, about 3 minutes
+.venv/bin/python tests/run_all.py reading writing      # only some
+.venv/bin/python tests/run_all.py --install            # plus a full first install (needs internet)
+```
+
+`dev/release.py` runs them before every release.
 
 ---
 
@@ -474,6 +498,8 @@ Set these in **Project Settings -> Environment Variables**:
 | `WRITING_TIMEOUT` | No | Seconds to wait for a piece to be marked (default 90; an essay takes longer than a word lookup). |
 | `LANGUAGETOOL_URL` | No | Grammar checker used when Gemini is unavailable. Defaults to LanguageTool's free public API. |
 | `LANGUAGETOOL_LANGUAGE` | No | Defaults to `en-GB`, matching the British spelling of the saved words. |
+| `TRANSLATE_TIMEOUT` | No | Seconds for the Vietnamese fallback when Gemini gives none (default 5). It uses MyMemory's free API, no key needed. |
+| `MYVOCAB_DEBUG` | No | `1` runs Flask in debug mode on an installed copy. A git clone always does; installed copies do not. |
 
 ### How Practice saves Gemini requests
 

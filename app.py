@@ -1,3 +1,4 @@
+import hmac
 import os
 from datetime import datetime, timedelta, timezone
 
@@ -58,12 +59,13 @@ if not app.secret_key:
     app.secret_key = "a_super_secret_key_for_local_development_only"
 
 def has_data_access():
-    """My Words needs the password, except on your own computer: ./run.sh starts
-    Flask's debug server, and a request to it from this same machine is you.
-    Vercel never runs in debug mode, so online the password is always asked."""
+    """My Words needs the password, except on your own computer: run.py starts the
+    app there (MYVOCAB_LOCAL=1) listening only to this machine, so a request from
+    127.0.0.1 is you. Online (Vercel) the password is always asked."""
     if session.get('data_access_granted'):
         return True
-    return app.debug and request.remote_addr in ('127.0.0.1', '::1')
+    on_this_computer = app.debug or os.environ.get('MYVOCAB_LOCAL') == '1'
+    return on_this_computer and request.remote_addr in ('127.0.0.1', '::1')
 
 @app.route('/')
 def index():
@@ -124,7 +126,8 @@ def verify_password():
     data = request.get_json(silent=True) or {}
     submitted_password = data.get('password')
 
-    if submitted_password == correct_password:
+    # compare_digest takes as long for a near miss as for a far one, so timing gives nothing away.
+    if hmac.compare_digest(str(submitted_password or '').encode(), correct_password.encode()):
         session['data_access_granted'] = True
         return jsonify({'status': 'success'}), 200
     else:

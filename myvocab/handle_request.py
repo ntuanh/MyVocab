@@ -6,7 +6,6 @@ import json
 from flask import jsonify
 from concurrent.futures import ThreadPoolExecutor
 
-from googletrans import Translator
 from .database import find_word_in_db, derive_keywords
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
@@ -56,7 +55,10 @@ NOT_FOUND = "not_found"
 UNAVAILABLE = "unavailable"
 SKIPPED = "skipped"
 
-translator_client = None
+# Vietnamese when Gemini gave none: MyMemory's free translation API, no key needed
+# (about 5,000 words a day per address, 500 characters a request).
+TRANSLATE_URL = "https://api.mymemory.translated.net/get"
+TRANSLATE_TIMEOUT = float(os.environ.get("TRANSLATE_TIMEOUT", 5))
 
 if GEMINI_API_KEY:
     print(f"INFO: Gemini configured with model '{GEMINI_MODEL}'.")
@@ -65,22 +67,24 @@ else:
           "dictionary API, so there will be no family words and no Gemini "
           "definitions. Set it in your Vercel project's Environment Variables.")
 
-try:
-    translator_client = Translator()
-    print("INFO: Googletrans Translator initialized successfully.")
-except Exception as e:
-    print(f"CRITICAL ERROR during initialization: {e}")
-
 
 # --- API ---
 
 def get_translation(text_to_translate):
-    if not translator_client or not text_to_translate: return "N/A"
-    try:
-        return translator_client.translate(text_to_translate, src='en', dest='vi').text
-    except Exception as e:
-        print(f"ERROR in get_translation: {e}")
+    """English to Vietnamese, or "N/A" when the service cannot say."""
+    if not text_to_translate:
         return "N/A"
+    try:
+        response = requests.get(TRANSLATE_URL, params={"q": text_to_translate[:450], "langpair": "en|vi"},
+                                timeout=TRANSLATE_TIMEOUT)
+        data = response.json()
+        translated = (data.get("responseData") or {}).get("translatedText")
+        if response.status_code == 200 and data.get("responseStatus") == 200 and translated:
+            return translated
+        print(f"ERROR in get_translation: MyMemory answered {data.get('responseStatus')}: {data.get('responseDetails')}")
+    except (requests.RequestException, ValueError) as e:
+        print(f"ERROR in get_translation: {e}")
+    return "N/A"
 
 
 SAFETY_SETTINGS = [

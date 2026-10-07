@@ -1,0 +1,165 @@
+{
+ "piece": {
+  "band": null,
+  "counted": true,
+  "created_at": "2026-10-07T15:25:08.380652+07:00",
+  "feedback": {
+   "criteria": [
+    {
+     "comment": "You clearly describe your day and how you felt, but at 82 words, it is a bit too short for a full diary entry and needs more detail.",
+     "name": "Content and ideas",
+     "score": 11
+    },
+    {
+     "comment": "The text flows chronologically from morning to evening, though it is written as one single paragraph and uses comma splices.",
+     "name": "Organisation",
+     "score": 14
+    },
+    {
+     "comment": "You tried to use the word 'crowded' (though you wrote 'crowd') and 'commute', but you missed using 'crowded' correctly and missed 'commute'.",
+     "name": "Vocabulary",
+     "score": 11
+    },
+    {
+     "comment": "There are several basic tense shifts and verb form errors, such as mixing past and present tenses ('go', 'was', 'feeled', 'make').",
+     "name": "Grammar",
+     "score": 11
+    }
+   ],
+   "improved": "Today was a rather hectic day. In the morning, I went to the university by bus because my motorbike had broken down. The bus was extremely crowded, and I felt quite tired. In the afternoon, I studied English with my friend in the library; we learned many new words and practised speaking. After that, I cooked dinner for my family and made pho. Everyone said it was delicious. I am happy because I learned a lot, and tomorrow I want to commute by bicycle.",
+   "mistakes": [
+    {
+     "right": "went",
+     "type": "grammar",
+     "why": "The story is about yesterday, so you need the past simple tense.",
+     "wrong": "go"
+    },
+    {
+     "right": "very crowded",
+     "type": "vocabulary",
+     "why": "'Crowd' is a noun; you need the adjective 'crowded' here.",
+     "wrong": "very crowd"
+    },
+    {
+     "right": "felt",
+     "type": "grammar",
+     "why": "The past tense of 'feel' is irregular and is 'felt', not 'feeled'.",
+     "wrong": "feeled"
+    },
+    {
+     "right": "made",
+     "type": "grammar",
+     "why": "Keep your past tense consistent since you are talking about earlier today.",
+     "wrong": "make"
+    },
+    {
+     "right": "library. We",
+     "type": "punctuation",
+     "why": "Avoid joining two complete sentences with just a comma; use a full stop or conjunction.",
+     "wrong": "library, we"
+    }
+   ],
+   "next_step": "Practise using regular and irregular past simple verbs correctly in your paragraphs.",
+   "overall": "Hello! You have written a nice, honest diary entry about your busy day, and it is great to see you trying new words. Just be careful with your past tense verbs and spelling, and try to write a little more next time to reach the word count.",
+   "source": "ai",
+   "strengths": [
+    "Clear chronological story from morning to night",
+    "Good use of feelings and direct speech from family",
+    "Positive attitude towards learning English"
+   ],
+   "summary_vi": "Bạn đã kể lại một ngày bận rộn khá sinh động, nhưng cần chú ý chia đúng thì quá khứ đơn và tránh lỗi ngữ pháp nhỏ nhé.",
+   "vocabulary": [
+    {
+     "better": [
+      "hectic",
+      "action-packed"
+     ],
+     "note": "Use these to describe a day that was very full of activity.",
+     "word": "busy"
+    },
+    {
+     "better": [
+      "tasty",
+      "mouth-watering"
+     ],
+     "note": "Great alternatives when describing how food tasted.",
+     "word": "delicious"
+    }
+   ],
+   "words_to_try": [
+    "commute",
+    "crowded"
+   ],
+   "words_used": [
+    {
+     "note": "You wrote 'crowd' instead of the adjective 'crowded'.",
+     "used_well": false,
+     "word": "crowded"
+    },
+    {
+     "note": "You used 'commute' correctly at the end of your entry.",
+     "used_well": true,
+     "word": "commute"
+    }
+   ]
+  },
+  "id": 9,
+  "kind": "diary",
+  "points": 47,
+  "prompt": "Was today busy or relaxing? Describe how you spent your time.",
+  "prompt_id": "diary",
+  "revision_of": null,
+  "score": 47,
+  "scored_at": "2026-10-07T15:25:12.557938+07:00",
+  "status": "scored",
+  "text": "Today was a busy day. In the morning I go to the university by bus because my motorbike was broken. The bus was very crowd and I feeled tired. In the afternoon I studied English with my friend in the library, we learned many new words and practised speaking. After that I cooked dinner for my family, I make pho. Everyone said it was delicious. I am happy because I learned a lot today and tomorrow I want to commute by bicycle.",
+  "words": 82
+ },
+ "progress": {
+  "carried": 0,
+  "days": [
+   {
+    "date": "2026-10-05",
+    "points": 0
+   },
+   {
+    "date": "2026-10-06",
+    "points": 0
+   },
+   {
+    "date": "2026-10-07",
+    "points": 47
+   },
+   {
+    "date": "2026-10-08",
+    "points": 0
+   },
+   {
+    "date": "2026-10-09",
+    "points": 0
+   },
+   {
+    "date": "2026-10-10",
+    "points": 0
+   },
+   {
+    "date": "2026-10-11",
+    "points": 0
+   }
+  ],
+  "days_left": 5,
+  "due": 300,
+  "past_weeks": [],
+  "per_day_needed": 51,
+  "points": 47,
+  "remaining": 253,
+  "skill": "writing",
+  "started": true,
+  "streak": 0,
+  "target": 300,
+  "week_start": "2026-10-05",
+  "weeks_done": 0,
+  "weeks_met": 0
+ },
+ "waiting": false
+}

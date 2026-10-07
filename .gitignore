@@ -25,3 +25,6 @@ static/img/favicon.ico
 # Updates on an installed copy (updates.py, tools/update.py)
 .version
 .update/
+
+# Screenshots and logs from tests/run_all.py
+tests/.shots/

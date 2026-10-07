@@ -42,7 +42,7 @@ LOCAL_DB_URL = f"postgresql://myvocab@127.0.0.1:{LOCAL_DB_PORT}/myvocab"
 REQUIREMENTS = ["requirements.txt", "requirements-local.txt"]
 OPEN_BROWSER = os.environ.get("OPEN_BROWSER", "1") != "0"
 UPDATE_DIR = os.path.join(ROOT, ".update")  # the Update button's requests (updates.py, tools/update.py)
-EXPECTED_PACKAGES = 30  # what requirements-local.txt pulls in, with everything those need
+EXPECTED_PACKAGES = 19  # what requirements-local.txt pulls in with everything those need (18, +colorama on Windows)
 
 # The setup, as the progress bar shows it: (name, what the learner reads, share of the bar).
 STEPS = [
@@ -502,12 +502,15 @@ def main():
             page.wait_for_keys()
             progress.update(0.1, "")
 
-        # Flask's reloader runs the server in a second process, so the app gets a
-        # process group of its own (on Linux and macOS) and the whole group is stopped.
         for leftover in ("request.json", "stop"):  # from a run that did not end cleanly
             if os.path.exists(os.path.join(UPDATE_DIR, leftover)):
                 os.remove(os.path.join(UPDATE_DIR, leftover))
-        app = subprocess.Popen([PYTHON, "-m", "flask", "--app", "app", "run", "--debug", "--port", PORT],
+        # Debug mode (reload on save, error pages) only in a developer's git clone:
+        # installed copies do without the debugger, and nothing reloads mid-update.
+        # Its reloader runs the server in a second process, so the app gets a
+        # process group of its own (on Linux and macOS) and the whole group is stopped.
+        debug = ["--debug"] if os.path.isdir(os.path.join(ROOT, ".git")) or os.environ.get("MYVOCAB_DEBUG") == "1" else []
+        app = subprocess.Popen([PYTHON, "-m", "flask", "--app", "app", "run", *debug, "--port", PORT],
                                stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors="replace",
                                env=dict(os.environ, MYVOCAB_LOCAL="1"),
                                **({} if WINDOWS else {"start_new_session": True}))
