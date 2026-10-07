@@ -7,7 +7,8 @@ after committing:
     python3 dev/release.py --notes "..."    # your own "What's new" instead of the commit list
     python3 dev/release.py --skip-tests     # publish without running tests/run_all.py first
 
-It runs the tests first (tests/run_all.py, about 5 minutes) and stops if any
+It saves your words into data/word_pack.json first (tools/word_pack.py export;
+committed if they changed), so new computers start with the same words. It runs the tests first (tests/run_all.py, about 5 minutes) and stops if any
 fail. Then it pushes main to GitHub and makes a GitHub release with MyVocab-Setup.bat
 attached (the README's download link points to the newest release). Its notes
 list the commits since the last release, so users see what changed. Needs the
@@ -65,6 +66,13 @@ def main():
     if git("status", "--porcelain", "--untracked-files=no"):
         sys.exit("Commit your changes first (git status shows what is not committed).")
 
+    python = os.path.join(ROOT, ".venv", "Scripts" if os.name == "nt" else "bin", "python")
+    subprocess.run([python, os.path.join(ROOT, "tools", "word_pack.py"), "export"], cwd=ROOT, check=True)
+    if git("status", "--porcelain", "data/word_pack.json"):
+        git("add", "data/word_pack.json")
+        git("commit", "-m", "data: update the word pack")
+        print("Committed the updated word pack.")
+
     git("fetch", "--tags", "origin")
     last = last_release()
     tag = ("v" + args.version.lstrip("v")) if args.version else next_version(last)
@@ -75,7 +83,6 @@ def main():
     print(f"Last version: {last or 'none'}")
     print(f"New version:  {tag}\n\nWhat's new:\n{notes}\n")
     if not args.skip_tests:
-        python = os.path.join(ROOT, ".venv", "Scripts" if os.name == "nt" else "bin", "python")
         print("Running the tests first (tests/run_all.py) ...")
         if subprocess.run([python, os.path.join(ROOT, "tests", "run_all.py")], cwd=ROOT).returncode != 0:
             sys.exit("Some tests failed, so nothing was published. Fix them, or use --skip-tests.")

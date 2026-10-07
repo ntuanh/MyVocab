@@ -1,0 +1,1602 @@
+[
+ {
+  "word": "habit",
+  "level": "B1",
+  "topic": "Daily life",
+  "vietnamese_meaning": "thói quen",
+  "english_definition": "Something you do regularly, often without thinking about it.",
+  "example": "Checking my phone first thing in the morning is a bad habit."
+ },
+ {
+  "word": "lifestyle",
+  "level": "B1",
+  "topic": "Daily life",
+  "vietnamese_meaning": "lối sống",
+  "english_definition": "The way a person lives, including their work, activities and habits.",
+  "example": "Moving to the countryside gave her a much calmer lifestyle."
+ },
+ {
+  "word": "cope",
+  "level": "B2",
+  "topic": "Daily life",
+  "vietnamese_meaning": "đương đầu, xoay xở",
+  "english_definition": "To deal successfully with a difficult situation.",
+  "example": "She copes with a full-time job and two young children."
+ },
+ {
+  "word": "hectic",
+  "level": "B2",
+  "topic": "Daily life",
+  "vietnamese_meaning": "bận rộn, tất bật",
+  "english_definition": "Full of activity, with no time to rest.",
+  "example": "Mornings are hectic in our house because everyone leaves at the same time."
+ },
+ {
+  "word": "unwind",
+  "level": "B2",
+  "topic": "Daily life",
+  "vietnamese_meaning": "thư giãn, xả hơi",
+  "english_definition": "To relax after a period of work or worry.",
+  "example": "A hot bath helps me unwind after a long day."
+ },
+ {
+  "word": "clutter",
+  "level": "C1",
+  "topic": "Daily life",
+  "vietnamese_meaning": "đồ đạc bừa bộn, sự lộn xộn",
+  "english_definition": "A lot of things lying around in an untidy way.",
+  "example": "I spent Sunday clearing the clutter from my desk."
+ },
+ {
+  "word": "mundane",
+  "level": "C1",
+  "topic": "Daily life",
+  "vietnamese_meaning": "tẻ nhạt, bình thường nhàm chán",
+  "english_definition": "Very ordinary and not interesting.",
+  "example": "Even mundane tasks like ironing feel better with music on."
+ },
+ {
+  "word": "procrastinate",
+  "level": "C1",
+  "topic": "Daily life",
+  "vietnamese_meaning": "trì hoãn, chần chừ",
+  "english_definition": "To keep delaying something you should do, usually because it is boring or difficult.",
+  "example": "I always procrastinate when I have to fill in forms."
+ },
+ {
+  "word": "unemployed",
+  "level": "B1",
+  "topic": "Work",
+  "vietnamese_meaning": "thất nghiệp",
+  "english_definition": "Without a paid job.",
+  "example": "He has been unemployed since the factory closed."
+ },
+ {
+  "word": "candidate",
+  "level": "B1",
+  "topic": "Work",
+  "vietnamese_meaning": "ứng viên",
+  "english_definition": "A person who is applying for a job or taking an exam.",
+  "example": "We interviewed six candidates for the position."
+ },
+ {
+  "word": "workload",
+  "level": "B2",
+  "topic": "Work",
+  "vietnamese_meaning": "khối lượng công việc",
+  "english_definition": "The amount of work a person has to do.",
+  "example": "My workload doubles at the end of every month."
+ },
+ {
+  "word": "flexible",
+  "level": "B2",
+  "topic": "Work",
+  "vietnamese_meaning": "linh hoạt",
+  "english_definition": "Able to change easily to suit different situations.",
+  "example": "The company offers flexible working hours for parents."
+ },
+ {
+  "word": "redundant",
+  "level": "B2",
+  "topic": "Work",
+  "vietnamese_meaning": "bị cho thôi việc (vì dư thừa nhân sự)",
+  "english_definition": "Having lost your job because your employer no longer needs you.",
+  "example": "Two hundred workers were made redundant when the plant closed."
+ },
+ {
+  "word": "delegate",
+  "level": "C1",
+  "topic": "Work",
+  "vietnamese_meaning": "giao phó, ủy thác",
+  "english_definition": "To give part of your work or responsibility to someone else.",
+  "example": "A good manager knows how to delegate tasks."
+ },
+ {
+  "word": "burnout",
+  "level": "C1",
+  "topic": "Work",
+  "vietnamese_meaning": "sự kiệt sức (vì làm việc quá sức)",
+  "english_definition": "Extreme tiredness caused by working too hard for too long.",
+  "example": "Long hours without a holiday led to burnout."
+ },
+ {
+  "word": "incentive",
+  "level": "C1",
+  "topic": "Work",
+  "vietnamese_meaning": "sự khuyến khích, động lực",
+  "english_definition": "Something that encourages a person to do something, such as extra money.",
+  "example": "Staff receive a bonus as an incentive to meet their targets."
+ },
+ {
+  "word": "grill",
+  "level": "B1",
+  "topic": "Cooking",
+  "vietnamese_meaning": "nướng (trên vỉ, dưới lửa)",
+  "english_definition": "To cook food over or under strong direct heat.",
+  "example": "We grilled some fish on the barbecue."
+ },
+ {
+  "word": "portion",
+  "level": "B1",
+  "topic": "Cooking",
+  "vietnamese_meaning": "khẩu phần, phần ăn",
+  "english_definition": "An amount of food for one person.",
+  "example": "The portions at this restaurant are huge."
+ },
+ {
+  "word": "simmer",
+  "level": "B2",
+  "topic": "Cooking",
+  "vietnamese_meaning": "ninh, đun liu riu",
+  "english_definition": "To cook something slowly just below boiling point.",
+  "example": "Let the soup simmer for twenty minutes."
+ },
+ {
+  "word": "bland",
+  "level": "B2",
+  "topic": "Cooking",
+  "vietnamese_meaning": "nhạt nhẽo, vô vị",
+  "english_definition": "Having very little flavour.",
+  "example": "The sauce was rather bland, so I added some chilli."
+ },
+ {
+  "word": "garnish",
+  "level": "B2",
+  "topic": "Cooking",
+  "vietnamese_meaning": "trang trí (món ăn)",
+  "english_definition": "To decorate food with a small amount of another food.",
+  "example": "Garnish each plate with fresh coriander."
+ },
+ {
+  "word": "savoury",
+  "level": "B2",
+  "topic": "Cooking",
+  "vietnamese_meaning": "(vị) mặn, không ngọt",
+  "english_definition": "Salty or spicy rather than sweet.",
+  "example": "I prefer savoury snacks to chocolate."
+ },
+ {
+  "word": "marinate",
+  "level": "C1",
+  "topic": "Cooking",
+  "vietnamese_meaning": "ướp (thực phẩm)",
+  "english_definition": "To leave food in a mixture of oil, spices and other liquids before cooking to add flavour.",
+  "example": "Marinate the chicken overnight in lemon and garlic."
+ },
+ {
+  "word": "culinary",
+  "level": "C1",
+  "topic": "Cooking",
+  "vietnamese_meaning": "thuộc về nấu nướng, ẩm thực",
+  "english_definition": "Connected with cooking.",
+  "example": "Hanoi is famous for its culinary traditions."
+ },
+ {
+  "word": "brochure",
+  "level": "B1",
+  "topic": "Travel",
+  "vietnamese_meaning": "tờ quảng cáo, sách giới thiệu",
+  "english_definition": "A small magazine with pictures and information about a product or place.",
+  "example": "We picked up a few hotel brochures at the travel agent's."
+ },
+ {
+  "word": "resort",
+  "level": "B1",
+  "topic": "Travel",
+  "vietnamese_meaning": "khu nghỉ dưỡng",
+  "english_definition": "A place where many people go for holidays.",
+  "example": "We stayed at a beach resort near Da Nang."
+ },
+ {
+  "word": "excursion",
+  "level": "B2",
+  "topic": "Travel",
+  "vietnamese_meaning": "chuyến tham quan ngắn",
+  "english_definition": "A short trip, usually made by a group of people for pleasure.",
+  "example": "The hotel organises excursions to the nearby islands."
+ },
+ {
+  "word": "scenery",
+  "level": "B2",
+  "topic": "Travel",
+  "vietnamese_meaning": "phong cảnh",
+  "english_definition": "The natural features of an area, such as mountains and rivers, especially when beautiful.",
+  "example": "The scenery along the coast road is breathtaking."
+ },
+ {
+  "word": "hospitality",
+  "level": "B2",
+  "topic": "Travel",
+  "vietnamese_meaning": "lòng hiếu khách",
+  "english_definition": "Friendly and generous behaviour towards guests.",
+  "example": "We were touched by the hospitality of the villagers."
+ },
+ {
+  "word": "itinerary",
+  "level": "C1",
+  "topic": "Travel",
+  "vietnamese_meaning": "lịch trình chuyến đi",
+  "english_definition": "A detailed plan of a journey, with the places you will visit.",
+  "example": "Our itinerary includes three days in Hue."
+ },
+ {
+  "word": "secluded",
+  "level": "C1",
+  "topic": "Travel",
+  "vietnamese_meaning": "hẻo lánh, biệt lập",
+  "english_definition": "Quiet and private, away from other people.",
+  "example": "We found a secluded beach with nobody else on it."
+ },
+ {
+  "word": "wanderlust",
+  "level": "C1",
+  "topic": "Travel",
+  "vietnamese_meaning": "niềm đam mê xê dịch",
+  "english_definition": "A strong wish to travel to many places.",
+  "example": "Her wanderlust has taken her to over forty countries."
+ },
+ {
+  "word": "access",
+  "level": "B1",
+  "topic": "Technology",
+  "vietnamese_meaning": "truy cập",
+  "english_definition": "To be able to get into or use a system or information.",
+  "example": "You need a password to access your account."
+ },
+ {
+  "word": "virus",
+  "level": "B1",
+  "topic": "Technology",
+  "vietnamese_meaning": "vi rút (máy tính)",
+  "english_definition": "A program that gets into a computer and damages it or stops it working.",
+  "example": "Don't open that attachment, because it might contain a virus."
+ },
+ {
+  "word": "upgrade",
+  "level": "B2",
+  "topic": "Technology",
+  "vietnamese_meaning": "nâng cấp",
+  "english_definition": "To make a machine or system better or more modern.",
+  "example": "I upgraded my laptop's memory last week."
+ },
+ {
+  "word": "compatible",
+  "level": "B2",
+  "topic": "Technology",
+  "vietnamese_meaning": "tương thích",
+  "english_definition": "Able to work with another machine or system.",
+  "example": "This charger isn't compatible with older phones."
+ },
+ {
+  "word": "breakthrough",
+  "level": "B2",
+  "topic": "Technology",
+  "vietnamese_meaning": "bước đột phá",
+  "english_definition": "An important new discovery or development.",
+  "example": "Scientists have made a breakthrough in battery technology."
+ },
+ {
+  "word": "obsolete",
+  "level": "C1",
+  "topic": "Technology",
+  "vietnamese_meaning": "lỗi thời",
+  "english_definition": "No longer used because something newer exists.",
+  "example": "Floppy disks became obsolete years ago."
+ },
+ {
+  "word": "encrypt",
+  "level": "C1",
+  "topic": "Technology",
+  "vietnamese_meaning": "mã hóa",
+  "english_definition": "To change information into a code so that others cannot read it.",
+  "example": "The app encrypts every message you send."
+ },
+ {
+  "word": "glitch",
+  "level": "C1",
+  "topic": "Technology",
+  "vietnamese_meaning": "trục trặc nhỏ",
+  "english_definition": "A small fault that stops something working properly.",
+  "example": "A technical glitch delayed the launch of the website."
+ },
+ {
+  "word": "allergy",
+  "level": "B1",
+  "topic": "Health",
+  "vietnamese_meaning": "dị ứng",
+  "english_definition": "A medical condition that makes you ill when you eat, touch or breathe a particular thing.",
+  "example": "I have an allergy to peanuts."
+ },
+ {
+  "word": "sore",
+  "level": "B1",
+  "topic": "Health",
+  "vietnamese_meaning": "đau, nhức",
+  "english_definition": "Painful, especially because of an injury or infection.",
+  "example": "I've got a sore throat from shouting at the match."
+ },
+ {
+  "word": "chronic",
+  "level": "B2",
+  "topic": "Health",
+  "vietnamese_meaning": "mãn tính",
+  "english_definition": "Lasting a long time or coming back again and again.",
+  "example": "She suffers from chronic back pain."
+ },
+ {
+  "word": "infection",
+  "level": "B2",
+  "topic": "Health",
+  "vietnamese_meaning": "sự nhiễm trùng",
+  "english_definition": "A disease caused by bacteria or a virus entering the body.",
+  "example": "Clean the cut carefully to avoid infection."
+ },
+ {
+  "word": "therapy",
+  "level": "B2",
+  "topic": "Health",
+  "vietnamese_meaning": "liệu pháp, sự trị liệu",
+  "english_definition": "Treatment that helps someone feel better or recover from an illness.",
+  "example": "After the accident he needed months of physical therapy."
+ },
+ {
+  "word": "diagnosis",
+  "level": "C1",
+  "topic": "Health",
+  "vietnamese_meaning": "sự chẩn đoán",
+  "english_definition": "A doctor's judgement about what illness a person has.",
+  "example": "An early diagnosis makes the disease much easier to treat."
+ },
+ {
+  "word": "immune",
+  "level": "C1",
+  "topic": "Health",
+  "vietnamese_meaning": "miễn dịch",
+  "english_definition": "Protected from a disease, so that you cannot catch it.",
+  "example": "Once you have had chickenpox, you are usually immune to it."
+ },
+ {
+  "word": "contagious",
+  "level": "C1",
+  "topic": "Health",
+  "vietnamese_meaning": "dễ lây",
+  "english_definition": "Easily passed from one person to another by contact.",
+  "example": "The flu is highly contagious, so please stay at home."
+ },
+ {
+  "word": "assignment",
+  "level": "B1",
+  "topic": "Education",
+  "vietnamese_meaning": "bài tập (được giao)",
+  "english_definition": "A piece of work that a student is given to do.",
+  "example": "I have to hand in my history assignment by Friday."
+ },
+ {
+  "word": "scholarship",
+  "level": "B1",
+  "topic": "Education",
+  "vietnamese_meaning": "học bổng",
+  "english_definition": "Money given to a student to pay for their studies.",
+  "example": "She won a scholarship to study in Australia."
+ },
+ {
+  "word": "enrol",
+  "level": "B2",
+  "topic": "Education",
+  "vietnamese_meaning": "ghi danh, đăng ký học",
+  "english_definition": "To officially join a course or school.",
+  "example": "I've enrolled on an evening course in photography."
+ },
+ {
+  "word": "tuition",
+  "level": "B2",
+  "topic": "Education",
+  "vietnamese_meaning": "học phí; sự giảng dạy",
+  "english_definition": "Money paid for being taught, especially at a college or university.",
+  "example": "Tuition fees have risen again this year."
+ },
+ {
+  "word": "literacy",
+  "level": "B2",
+  "topic": "Education",
+  "vietnamese_meaning": "khả năng đọc viết",
+  "english_definition": "The ability to read and write.",
+  "example": "The charity runs literacy classes for adults."
+ },
+ {
+  "word": "plagiarism",
+  "level": "C1",
+  "topic": "Education",
+  "vietnamese_meaning": "sự đạo văn",
+  "english_definition": "Copying someone else's work and pretending it is your own.",
+  "example": "Copying from the internet without saying so is plagiarism."
+ },
+ {
+  "word": "comprehensive",
+  "level": "C1",
+  "topic": "Education",
+  "vietnamese_meaning": "toàn diện, đầy đủ",
+  "english_definition": "Including everything or nearly everything.",
+  "example": "The book is a comprehensive guide to English grammar."
+ },
+ {
+  "word": "rote",
+  "level": "C1",
+  "topic": "Education",
+  "vietnamese_meaning": "sự học thuộc lòng, học vẹt",
+  "english_definition": "Learning by repeating something until you remember it, without understanding it.",
+  "example": "Learning by rote won't help you use the language naturally."
+ },
+ {
+  "word": "organic",
+  "level": "B1",
+  "topic": "Environment",
+  "vietnamese_meaning": "hữu cơ",
+  "english_definition": "Grown without artificial chemicals.",
+  "example": "We buy organic vegetables from the market."
+ },
+ {
+  "word": "reuse",
+  "level": "B1",
+  "topic": "Environment",
+  "vietnamese_meaning": "tái sử dụng",
+  "english_definition": "To use something again.",
+  "example": "Reuse your shopping bags instead of buying new ones."
+ },
+ {
+  "word": "endangered",
+  "level": "B2",
+  "topic": "Environment",
+  "vietnamese_meaning": "có nguy cơ tuyệt chủng",
+  "english_definition": "At risk of no longer existing.",
+  "example": "The tiger is an endangered species."
+ },
+ {
+  "word": "habitat",
+  "level": "B2",
+  "topic": "Environment",
+  "vietnamese_meaning": "môi trường sống",
+  "english_definition": "The natural home of an animal or plant.",
+  "example": "Cutting down forests destroys the habitat of many birds."
+ },
+ {
+  "word": "conservation",
+  "level": "B2",
+  "topic": "Environment",
+  "vietnamese_meaning": "sự bảo tồn",
+  "english_definition": "The protection of plants, animals and natural areas.",
+  "example": "She works for a wildlife conservation group."
+ },
+ {
+  "word": "emission",
+  "level": "C1",
+  "topic": "Environment",
+  "vietnamese_meaning": "khí thải, sự phát thải",
+  "english_definition": "Gas sent out into the air, for example by cars and factories.",
+  "example": "The city plans to cut carbon emissions by half."
+ },
+ {
+  "word": "sustainable",
+  "level": "C1",
+  "topic": "Environment",
+  "vietnamese_meaning": "bền vững",
+  "english_definition": "Able to continue for a long time without harming the environment.",
+  "example": "We need more sustainable ways of producing food."
+ },
+ {
+  "word": "deforestation",
+  "level": "C1",
+  "topic": "Environment",
+  "vietnamese_meaning": "nạn phá rừng",
+  "english_definition": "Cutting down large areas of forest.",
+  "example": "Deforestation is a major cause of climate change."
+ },
+ {
+  "word": "stressed",
+  "level": "B1",
+  "topic": "Feelings",
+  "vietnamese_meaning": "căng thẳng",
+  "english_definition": "Worried and nervous because of problems or too much work.",
+  "example": "I always feel stressed before exams."
+ },
+ {
+  "word": "homesick",
+  "level": "B1",
+  "topic": "Feelings",
+  "vietnamese_meaning": "nhớ nhà",
+  "english_definition": "Sad because you are away from your home and family.",
+  "example": "I felt homesick during my first month abroad."
+ },
+ {
+  "word": "furious",
+  "level": "B2",
+  "topic": "Feelings",
+  "vietnamese_meaning": "giận điên người",
+  "english_definition": "Extremely angry.",
+  "example": "My dad was furious when I scratched his car."
+ },
+ {
+  "word": "frustrated",
+  "level": "B2",
+  "topic": "Feelings",
+  "vietnamese_meaning": "bực bội, nản lòng",
+  "english_definition": "Annoyed because you cannot do or get what you want.",
+  "example": "I get frustrated when the internet keeps cutting out."
+ },
+ {
+  "word": "overwhelmed",
+  "level": "B2",
+  "topic": "Feelings",
+  "vietnamese_meaning": "choáng ngợp, quá tải",
+  "english_definition": "Having so much of something, such as work or emotion, that you cannot deal with it.",
+  "example": "She felt overwhelmed by all the messages of support."
+ },
+ {
+  "word": "apprehensive",
+  "level": "C1",
+  "topic": "Feelings",
+  "vietnamese_meaning": "e sợ, lo lắng (về điều sắp tới)",
+  "english_definition": "Worried that something bad might happen.",
+  "example": "I was a little apprehensive about my first day at work."
+ },
+ {
+  "word": "elated",
+  "level": "C1",
+  "topic": "Feelings",
+  "vietnamese_meaning": "vui sướng tột độ",
+  "english_definition": "Extremely happy and excited.",
+  "example": "We were elated when we heard the results."
+ },
+ {
+  "word": "indifferent",
+  "level": "C1",
+  "topic": "Feelings",
+  "vietnamese_meaning": "thờ ơ, dửng dưng",
+  "english_definition": "Not interested in something and not caring about it.",
+  "example": "He seemed completely indifferent to the news."
+ },
+ {
+  "word": "homeless",
+  "level": "B1",
+  "topic": "Society",
+  "vietnamese_meaning": "vô gia cư",
+  "english_definition": "Having nowhere to live.",
+  "example": "The charity provides meals for homeless people."
+ },
+ {
+  "word": "elderly",
+  "level": "B1",
+  "topic": "Society",
+  "vietnamese_meaning": "cao tuổi (người già)",
+  "english_definition": "Old (a polite word).",
+  "example": "The centre offers free lunches for elderly people."
+ },
+ {
+  "word": "discrimination",
+  "level": "B2",
+  "topic": "Society",
+  "vietnamese_meaning": "sự phân biệt đối xử",
+  "english_definition": "Treating a person or group unfairly because of their race, sex, age or religion.",
+  "example": "The new law bans discrimination against older workers."
+ },
+ {
+  "word": "welfare",
+  "level": "B2",
+  "topic": "Society",
+  "vietnamese_meaning": "phúc lợi xã hội",
+  "english_definition": "Help, especially money, given by the government to people who need it.",
+  "example": "The government plans to spend more on welfare."
+ },
+ {
+  "word": "minority",
+  "level": "B2",
+  "topic": "Society",
+  "vietnamese_meaning": "thiểu số",
+  "english_definition": "A small group within a larger group, often of a different race or religion.",
+  "example": "Vietnam has fifty-three ethnic minority groups."
+ },
+ {
+  "word": "inequality",
+  "level": "C1",
+  "topic": "Society",
+  "vietnamese_meaning": "sự bất bình đẳng",
+  "english_definition": "An unfair situation in which some people have more money or opportunities than others.",
+  "example": "The gap between rich and poor shows growing inequality."
+ },
+ {
+  "word": "marginalised",
+  "level": "C1",
+  "topic": "Society",
+  "vietnamese_meaning": "bị gạt ra ngoài lề xã hội",
+  "english_definition": "Treated as unimportant and kept out of the main part of society.",
+  "example": "The project helps marginalised young people find work."
+ },
+ {
+  "word": "grassroots",
+  "level": "C1",
+  "topic": "Society",
+  "vietnamese_meaning": "(thuộc) cơ sở, quần chúng",
+  "english_definition": "The ordinary people in a society or organisation, not its leaders.",
+  "example": "The campaign began at grassroots level."
+ },
+ {
+  "word": "discount",
+  "level": "B1",
+  "topic": "Shopping",
+  "vietnamese_meaning": "sự giảm giá",
+  "english_definition": "A reduction in the usual price.",
+  "example": "Students get a ten per cent discount."
+ },
+ {
+  "word": "complain",
+  "level": "B1",
+  "topic": "Shopping",
+  "vietnamese_meaning": "phàn nàn, khiếu nại",
+  "english_definition": "To say that you are not happy about something.",
+  "example": "I complained to the manager about the broken zip."
+ },
+ {
+  "word": "purchase",
+  "level": "B2",
+  "topic": "Shopping",
+  "vietnamese_meaning": "mua; sự mua sắm",
+  "english_definition": "To buy something (a formal word).",
+  "example": "You can purchase tickets online."
+ },
+ {
+  "word": "guarantee",
+  "level": "B2",
+  "topic": "Shopping",
+  "vietnamese_meaning": "sự bảo hành; cam kết",
+  "english_definition": "A written promise that a product will be repaired or replaced if it breaks.",
+  "example": "The fridge comes with a two-year guarantee."
+ },
+ {
+  "word": "overpriced",
+  "level": "B2",
+  "topic": "Shopping",
+  "vietnamese_meaning": "đắt quá mức",
+  "english_definition": "Costing more than it is worth.",
+  "example": "The drinks at the airport are terribly overpriced."
+ },
+ {
+  "word": "impulse",
+  "level": "C1",
+  "topic": "Shopping",
+  "vietnamese_meaning": "sự bốc đồng, ý muốn bất chợt",
+  "english_definition": "A sudden strong wish to do something without thinking.",
+  "example": "I bought these shoes on impulse."
+ },
+ {
+  "word": "consumerism",
+  "level": "C1",
+  "topic": "Shopping",
+  "vietnamese_meaning": "chủ nghĩa tiêu dùng",
+  "english_definition": "The belief that buying more and more things is good.",
+  "example": "Black Friday has become a symbol of modern consumerism."
+ },
+ {
+  "word": "haggle",
+  "level": "C1",
+  "topic": "Shopping",
+  "vietnamese_meaning": "mặc cả",
+  "english_definition": "To argue about the price of something before buying it.",
+  "example": "Tourists are expected to haggle at the night market."
+ },
+ {
+  "word": "coach",
+  "level": "B1",
+  "topic": "Sport",
+  "vietnamese_meaning": "huấn luyện viên",
+  "english_definition": "A person who trains a sports player or team.",
+  "example": "Our coach makes us run five kilometres before practice."
+ },
+ {
+  "word": "league",
+  "level": "B1",
+  "topic": "Sport",
+  "vietnamese_meaning": "giải đấu, liên đoàn",
+  "english_definition": "A group of teams that play against each other over a season.",
+  "example": "Our team finished third in the league."
+ },
+ {
+  "word": "stamina",
+  "level": "B2",
+  "topic": "Sport",
+  "vietnamese_meaning": "sức bền",
+  "english_definition": "The physical strength to keep doing something for a long time.",
+  "example": "Marathon runners need great stamina."
+ },
+ {
+  "word": "sprint",
+  "level": "B2",
+  "topic": "Sport",
+  "vietnamese_meaning": "chạy nước rút",
+  "english_definition": "To run very fast for a short distance.",
+  "example": "He sprinted the last hundred metres and won."
+ },
+ {
+  "word": "trophy",
+  "level": "B2",
+  "topic": "Sport",
+  "vietnamese_meaning": "cúp, chiến lợi phẩm",
+  "english_definition": "A cup or other prize given to the winner of a competition.",
+  "example": "The captain lifted the trophy above his head."
+ },
+ {
+  "word": "underdog",
+  "level": "C1",
+  "topic": "Sport",
+  "vietnamese_meaning": "đội/người yếu thế",
+  "english_definition": "A person or team that is expected to lose.",
+  "example": "Everyone loves it when the underdog wins."
+ },
+ {
+  "word": "sportsmanship",
+  "level": "C1",
+  "topic": "Sport",
+  "vietnamese_meaning": "tinh thần thể thao",
+  "english_definition": "Fair, generous and polite behaviour when playing sport.",
+  "example": "Shaking hands after the game shows good sportsmanship."
+ },
+ {
+  "word": "disqualify",
+  "level": "C1",
+  "topic": "Sport",
+  "vietnamese_meaning": "truất quyền thi đấu",
+  "english_definition": "To stop someone from taking part in a competition because they broke a rule.",
+  "example": "She was disqualified for a false start."
+ },
+ {
+  "word": "pension",
+  "level": "B1",
+  "topic": "Money",
+  "vietnamese_meaning": "lương hưu",
+  "english_definition": "Money paid regularly to a person who has stopped working because of their age.",
+  "example": "My grandfather lives on his pension."
+ },
+ {
+  "word": "fee",
+  "level": "B1",
+  "topic": "Money",
+  "vietnamese_meaning": "phí, lệ phí",
+  "english_definition": "Money paid for a service.",
+  "example": "There is a small fee for using the cash machine."
+ },
+ {
+  "word": "mortgage",
+  "level": "B2",
+  "topic": "Money",
+  "vietnamese_meaning": "khoản vay thế chấp (mua nhà)",
+  "english_definition": "A loan from a bank to buy a house.",
+  "example": "It will take us twenty-five years to pay off the mortgage."
+ },
+ {
+  "word": "bankrupt",
+  "level": "B2",
+  "topic": "Money",
+  "vietnamese_meaning": "phá sản",
+  "english_definition": "Unable to pay what you owe.",
+  "example": "The company went bankrupt last year."
+ },
+ {
+  "word": "inflation",
+  "level": "B2",
+  "topic": "Money",
+  "vietnamese_meaning": "lạm phát",
+  "english_definition": "A general rise in prices.",
+  "example": "Inflation means our money buys less every year."
+ },
+ {
+  "word": "frugal",
+  "level": "C1",
+  "topic": "Money",
+  "vietnamese_meaning": "tiết kiệm, căn cơ",
+  "english_definition": "Careful to spend very little money.",
+  "example": "My grandparents lived a frugal life."
+ },
+ {
+  "word": "lucrative",
+  "level": "C1",
+  "topic": "Money",
+  "vietnamese_meaning": "sinh lời, béo bở",
+  "english_definition": "Making a lot of money.",
+  "example": "Software development can be a lucrative career."
+ },
+ {
+  "word": "asset",
+  "level": "C1",
+  "topic": "Money",
+  "vietnamese_meaning": "tài sản",
+  "english_definition": "Something valuable that a person or company owns.",
+  "example": "Their house is their most valuable asset."
+ },
+ {
+  "word": "drizzle",
+  "level": "B1",
+  "topic": "Weather",
+  "vietnamese_meaning": "mưa phùn",
+  "english_definition": "Light rain in very small drops.",
+  "example": "Hanoi often has a fine drizzle in February."
+ },
+ {
+  "word": "pour",
+  "level": "B1",
+  "topic": "Weather",
+  "vietnamese_meaning": "mưa như trút nước",
+  "english_definition": "To rain heavily.",
+  "example": "It's pouring, so take an umbrella."
+ },
+ {
+  "word": "chilly",
+  "level": "B2",
+  "topic": "Weather",
+  "vietnamese_meaning": "se lạnh",
+  "english_definition": "Cold enough to be unpleasant.",
+  "example": "Take a jacket, because it gets chilly in the evening."
+ },
+ {
+  "word": "overcast",
+  "level": "B2",
+  "topic": "Weather",
+  "vietnamese_meaning": "u ám, nhiều mây",
+  "english_definition": "Covered with grey clouds.",
+  "example": "The sky was overcast all afternoon."
+ },
+ {
+  "word": "monsoon",
+  "level": "B2",
+  "topic": "Weather",
+  "vietnamese_meaning": "gió mùa, mùa mưa",
+  "english_definition": "The season of heavy rain in South and Southeast Asia.",
+  "example": "The monsoon usually reaches southern Vietnam in May."
+ },
+ {
+  "word": "torrential",
+  "level": "C1",
+  "topic": "Weather",
+  "vietnamese_meaning": "(mưa) xối xả",
+  "english_definition": "Very heavy (used about rain).",
+  "example": "Torrential rain caused landslides in the mountains."
+ },
+ {
+  "word": "sweltering",
+  "level": "C1",
+  "topic": "Weather",
+  "vietnamese_meaning": "oi bức, nóng ngột ngạt",
+  "english_definition": "Uncomfortably hot.",
+  "example": "It was sweltering on the bus with no air conditioning."
+ },
+ {
+  "word": "precipitation",
+  "level": "C1",
+  "topic": "Weather",
+  "vietnamese_meaning": "lượng mưa, giáng thủy",
+  "english_definition": "Rain, snow or hail that falls to the ground (a formal word).",
+  "example": "The region gets very little precipitation in winter."
+ },
+ {
+  "word": "crash",
+  "level": "B1",
+  "topic": "Transport",
+  "vietnamese_meaning": "đâm, va chạm (xe)",
+  "english_definition": "To hit something hard by accident while driving or riding.",
+  "example": "He crashed his motorbike into a wall."
+ },
+ {
+  "word": "motorway",
+  "level": "B1",
+  "topic": "Transport",
+  "vietnamese_meaning": "đường cao tốc",
+  "english_definition": "A wide road for fast traffic over long distances.",
+  "example": "The new motorway cuts the journey to two hours."
+ },
+ {
+  "word": "congestion",
+  "level": "B2",
+  "topic": "Transport",
+  "vietnamese_meaning": "sự tắc nghẽn giao thông",
+  "english_definition": "Too much traffic, so that vehicles move slowly.",
+  "example": "Congestion in the city centre is worst at six o'clock."
+ },
+ {
+  "word": "fuel",
+  "level": "B2",
+  "topic": "Transport",
+  "vietnamese_meaning": "nhiên liệu",
+  "english_definition": "A substance such as petrol that is burned to produce power.",
+  "example": "Electric cars don't need any fuel."
+ },
+ {
+  "word": "breakdown",
+  "level": "B2",
+  "topic": "Transport",
+  "vietnamese_meaning": "sự hỏng xe",
+  "english_definition": "A time when a vehicle stops working.",
+  "example": "We had a breakdown on the way to the airport."
+ },
+ {
+  "word": "infrastructure",
+  "level": "C1",
+  "topic": "Transport",
+  "vietnamese_meaning": "cơ sở hạ tầng",
+  "english_definition": "The basic systems a country needs, such as roads, bridges and power supplies.",
+  "example": "The government is investing heavily in infrastructure."
+ },
+ {
+  "word": "gridlock",
+  "level": "C1",
+  "topic": "Transport",
+  "vietnamese_meaning": "tắc đường hoàn toàn",
+  "english_definition": "A situation in which traffic cannot move at all.",
+  "example": "The accident caused gridlock across the city."
+ },
+ {
+  "word": "pedestrianise",
+  "level": "C1",
+  "topic": "Transport",
+  "vietnamese_meaning": "biến thành phố đi bộ",
+  "english_definition": "To close a street to traffic so that only people on foot can use it.",
+  "example": "The old quarter is pedestrianised at weekends."
+ },
+ {
+  "word": "trendy",
+  "level": "B1",
+  "topic": "Clothes and appearance",
+  "vietnamese_meaning": "hợp mốt, sành điệu",
+  "english_definition": "Fashionable and modern.",
+  "example": "She always wears trendy clothes."
+ },
+ {
+  "word": "hairstyle",
+  "level": "B1",
+  "topic": "Clothes and appearance",
+  "vietnamese_meaning": "kiểu tóc",
+  "english_definition": "The way your hair is cut and arranged.",
+  "example": "Do you like my new hairstyle?"
+ },
+ {
+  "word": "wrinkle",
+  "level": "B2",
+  "topic": "Clothes and appearance",
+  "vietnamese_meaning": "nếp nhăn",
+  "english_definition": "A line on the skin or a fold in cloth.",
+  "example": "Iron the shirt to get the wrinkles out."
+ },
+ {
+  "word": "elegant",
+  "level": "B2",
+  "topic": "Clothes and appearance",
+  "vietnamese_meaning": "thanh lịch",
+  "english_definition": "Graceful and attractive in appearance.",
+  "example": "She wore an elegant black dress to the party."
+ },
+ {
+  "word": "fade",
+  "level": "B2",
+  "topic": "Clothes and appearance",
+  "vietnamese_meaning": "phai màu, mờ dần",
+  "english_definition": "To lose colour or brightness.",
+  "example": "My favourite jeans have faded after so many washes."
+ },
+ {
+  "word": "flamboyant",
+  "level": "C1",
+  "topic": "Clothes and appearance",
+  "vietnamese_meaning": "rực rỡ, phô trương",
+  "english_definition": "Very colourful and confident, so that people notice.",
+  "example": "The singer is known for his flamboyant costumes."
+ },
+ {
+  "word": "dishevelled",
+  "level": "C1",
+  "topic": "Clothes and appearance",
+  "vietnamese_meaning": "xộc xệch, đầu bù tóc rối",
+  "english_definition": "Very untidy (used about hair or clothes).",
+  "example": "He arrived late and dishevelled after running for the bus."
+ },
+ {
+  "word": "tailored",
+  "level": "C1",
+  "topic": "Clothes and appearance",
+  "vietnamese_meaning": "may đo",
+  "english_definition": "Made to fit a particular person well.",
+  "example": "He wore a tailored suit to the wedding."
+ },
+ {
+  "word": "series",
+  "level": "B1",
+  "topic": "Entertainment",
+  "vietnamese_meaning": "loạt phim, loạt chương trình",
+  "english_definition": "A set of TV programmes about the same subject or characters.",
+  "example": "I watched the whole series in one weekend."
+ },
+ {
+  "word": "episode",
+  "level": "B1",
+  "topic": "Entertainment",
+  "vietnamese_meaning": "tập (phim)",
+  "english_definition": "One part of a TV or radio series.",
+  "example": "The last episode was very exciting."
+ },
+ {
+  "word": "sequel",
+  "level": "B2",
+  "topic": "Entertainment",
+  "vietnamese_meaning": "phần tiếp theo",
+  "english_definition": "A film or book that continues the story of an earlier one.",
+  "example": "The sequel was even better than the first film."
+ },
+ {
+  "word": "genre",
+  "level": "B2",
+  "topic": "Entertainment",
+  "vietnamese_meaning": "thể loại",
+  "english_definition": "A particular type of art, music, film or writing.",
+  "example": "Horror is not my favourite genre."
+ },
+ {
+  "word": "spoiler",
+  "level": "B2",
+  "topic": "Entertainment",
+  "vietnamese_meaning": "tiết lộ nội dung (phim, truyện)",
+  "english_definition": "Information that tells you what happens in a film or book before you see or read it.",
+  "example": "Don't read the reviews, because they're full of spoilers."
+ },
+ {
+  "word": "blockbuster",
+  "level": "C1",
+  "topic": "Entertainment",
+  "vietnamese_meaning": "phim bom tấn",
+  "english_definition": "A film or book that is very popular and successful.",
+  "example": "The summer blockbuster broke box-office records."
+ },
+ {
+  "word": "gripping",
+  "level": "C1",
+  "topic": "Entertainment",
+  "vietnamese_meaning": "hấp dẫn, lôi cuốn",
+  "english_definition": "So exciting that you cannot stop watching or reading.",
+  "example": "It's a gripping thriller from start to finish."
+ },
+ {
+  "word": "acclaimed",
+  "level": "C1",
+  "topic": "Entertainment",
+  "vietnamese_meaning": "được ca ngợi",
+  "english_definition": "Praised by many people, especially critics.",
+  "example": "The director's latest film was widely acclaimed."
+ },
+ {
+  "word": "robbery",
+  "level": "B1",
+  "topic": "Crime and law",
+  "vietnamese_meaning": "vụ cướp",
+  "english_definition": "The crime of stealing money or goods from a bank, shop or person, often using violence.",
+  "example": "There was an armed robbery at the bank."
+ },
+ {
+  "word": "court",
+  "level": "B1",
+  "topic": "Crime and law",
+  "vietnamese_meaning": "tòa án",
+  "english_definition": "The place where a judge decides whether someone has broken the law.",
+  "example": "He will appear in court next week."
+ },
+ {
+  "word": "fraud",
+  "level": "B2",
+  "topic": "Crime and law",
+  "vietnamese_meaning": "sự gian lận, lừa đảo",
+  "english_definition": "The crime of getting money by tricking people.",
+  "example": "She was found guilty of credit card fraud."
+ },
+ {
+  "word": "vandalism",
+  "level": "B2",
+  "topic": "Crime and law",
+  "vietnamese_meaning": "sự phá hoại của công",
+  "english_definition": "Damaging public or private property on purpose.",
+  "example": "The bus shelter was destroyed by vandalism."
+ },
+ {
+  "word": "convict",
+  "level": "B2",
+  "topic": "Crime and law",
+  "vietnamese_meaning": "kết án",
+  "english_definition": "To decide in court that someone is guilty of a crime.",
+  "example": "He was convicted of drink driving."
+ },
+ {
+  "word": "deterrent",
+  "level": "C1",
+  "topic": "Crime and law",
+  "vietnamese_meaning": "biện pháp răn đe",
+  "english_definition": "Something that makes people less likely to do something.",
+  "example": "Security cameras act as a deterrent to thieves."
+ },
+ {
+  "word": "acquit",
+  "level": "C1",
+  "topic": "Crime and law",
+  "vietnamese_meaning": "tuyên trắng án",
+  "english_definition": "To decide officially that someone is not guilty of a crime.",
+  "example": "The jury acquitted her of all charges."
+ },
+ {
+  "word": "legislation",
+  "level": "C1",
+  "topic": "Crime and law",
+  "vietnamese_meaning": "luật pháp, pháp chế",
+  "english_definition": "A law or set of laws made by a government.",
+  "example": "New legislation will ban single-use plastic bags."
+ },
+ {
+  "word": "partner",
+  "level": "B1",
+  "topic": "Family and relationships",
+  "vietnamese_meaning": "bạn đời, người yêu",
+  "english_definition": "The person you are married to or live with.",
+  "example": "She lives with her partner and two cats."
+ },
+ {
+  "word": "stepmother",
+  "level": "B1",
+  "topic": "Family and relationships",
+  "vietnamese_meaning": "mẹ kế",
+  "english_definition": "The woman who is married to your father but is not your mother.",
+  "example": "My stepmother and I get on very well."
+ },
+ {
+  "word": "upbringing",
+  "level": "B2",
+  "topic": "Family and relationships",
+  "vietnamese_meaning": "sự nuôi dạy",
+  "english_definition": "The way a child is cared for and taught how to behave.",
+  "example": "She had a strict upbringing."
+ },
+ {
+  "word": "sibling",
+  "level": "B2",
+  "topic": "Family and relationships",
+  "vietnamese_meaning": "anh chị em ruột",
+  "english_definition": "A brother or sister.",
+  "example": "I have three siblings, all older than me."
+ },
+ {
+  "word": "bond",
+  "level": "B2",
+  "topic": "Family and relationships",
+  "vietnamese_meaning": "mối gắn kết",
+  "english_definition": "A close connection between people.",
+  "example": "There is a strong bond between the two sisters."
+ },
+ {
+  "word": "estranged",
+  "level": "C1",
+  "topic": "Family and relationships",
+  "vietnamese_meaning": "bị ghẻ lạnh, xa cách",
+  "english_definition": "No longer in contact with a family member, usually after an argument.",
+  "example": "He has been estranged from his father for years."
+ },
+ {
+  "word": "rapport",
+  "level": "C1",
+  "topic": "Family and relationships",
+  "vietnamese_meaning": "mối quan hệ hòa hợp",
+  "english_definition": "A friendly relationship in which people understand each other well.",
+  "example": "The teacher has a great rapport with her students."
+ },
+ {
+  "word": "nurture",
+  "level": "C1",
+  "topic": "Family and relationships",
+  "vietnamese_meaning": "nuôi dưỡng, vun đắp",
+  "english_definition": "To care for and help someone or something grow and develop.",
+  "example": "Parents should nurture their children's interests."
+ },
+ {
+  "word": "presenter",
+  "level": "B1",
+  "topic": "Media and communication",
+  "vietnamese_meaning": "người dẫn chương trình",
+  "english_definition": "A person who introduces a TV or radio programme.",
+  "example": "She is a popular TV presenter."
+ },
+ {
+  "word": "post",
+  "level": "B1",
+  "topic": "Media and communication",
+  "vietnamese_meaning": "đăng (bài, ảnh) lên mạng",
+  "english_definition": "To put a message or picture on a website or social media.",
+  "example": "He posts photos of his food every day."
+ },
+ {
+  "word": "bias",
+  "level": "B2",
+  "topic": "Media and communication",
+  "vietnamese_meaning": "sự thiên vị, thiên lệch",
+  "english_definition": "Unfairly favouring one side or opinion.",
+  "example": "The newspaper was accused of political bias."
+ },
+ {
+  "word": "coverage",
+  "level": "B2",
+  "topic": "Media and communication",
+  "vietnamese_meaning": "sự đưa tin",
+  "english_definition": "The reporting of an event on TV, radio or in newspapers.",
+  "example": "The election received wide coverage."
+ },
+ {
+  "word": "viral",
+  "level": "B2",
+  "topic": "Media and communication",
+  "vietnamese_meaning": "lan truyền nhanh (trên mạng)",
+  "english_definition": "Spreading very quickly on the internet.",
+  "example": "The video went viral overnight."
+ },
+ {
+  "word": "censorship",
+  "level": "C1",
+  "topic": "Media and communication",
+  "vietnamese_meaning": "sự kiểm duyệt",
+  "english_definition": "Removing or banning parts of books, films or news that are thought to be harmful.",
+  "example": "Many writers have spoken out against censorship."
+ },
+ {
+  "word": "misinformation",
+  "level": "C1",
+  "topic": "Media and communication",
+  "vietnamese_meaning": "thông tin sai lệch",
+  "english_definition": "Wrong information, especially when it spreads widely.",
+  "example": "Check the source before sharing news, to avoid spreading misinformation."
+ },
+ {
+  "word": "eloquent",
+  "level": "C1",
+  "topic": "Media and communication",
+  "vietnamese_meaning": "hùng hồn, lưu loát",
+  "english_definition": "Able to express ideas clearly and well.",
+  "example": "She gave an eloquent speech at the ceremony."
+ },
+ {
+  "word": "neighbourhood",
+  "level": "B1",
+  "topic": "House and home",
+  "vietnamese_meaning": "khu dân cư, khu phố",
+  "english_definition": "The area of a town around your home.",
+  "example": "It's a quiet neighbourhood with lots of parks."
+ },
+ {
+  "word": "furnished",
+  "level": "B1",
+  "topic": "House and home",
+  "vietnamese_meaning": "có sẵn đồ đạc",
+  "english_definition": "Rented with furniture already in it.",
+  "example": "We're looking for a furnished flat near the centre."
+ },
+ {
+  "word": "renovate",
+  "level": "B2",
+  "topic": "House and home",
+  "vietnamese_meaning": "cải tạo, sửa sang",
+  "english_definition": "To repair and improve an old building.",
+  "example": "They renovated the old house before moving in."
+ },
+ {
+  "word": "cramped",
+  "level": "B2",
+  "topic": "House and home",
+  "vietnamese_meaning": "chật chội",
+  "english_definition": "Too small for the people or things in it.",
+  "example": "Five of us lived in a cramped two-room flat."
+ },
+ {
+  "word": "utility",
+  "level": "B2",
+  "topic": "House and home",
+  "vietnamese_meaning": "dịch vụ tiện ích (điện, nước, ga)",
+  "english_definition": "A service such as water, gas or electricity.",
+  "example": "The rent doesn't include utilities."
+ },
+ {
+  "word": "dilapidated",
+  "level": "C1",
+  "topic": "House and home",
+  "vietnamese_meaning": "đổ nát, xập xệ",
+  "english_definition": "Old and in very bad condition.",
+  "example": "They bought a dilapidated farmhouse and rebuilt it."
+ },
+ {
+  "word": "homely",
+  "level": "C1",
+  "topic": "House and home",
+  "vietnamese_meaning": "giản dị, ấm cúng như ở nhà",
+  "english_definition": "Simple, comfortable and making you feel at home.",
+  "example": "The guesthouse had a warm, homely feel."
+ },
+ {
+  "word": "downsize",
+  "level": "C1",
+  "topic": "House and home",
+  "vietnamese_meaning": "chuyển đến nhà nhỏ hơn; thu hẹp",
+  "english_definition": "To move to a smaller home.",
+  "example": "After the children left, they downsized to a flat."
+ },
+ {
+  "word": "hunt",
+  "level": "B1",
+  "topic": "Nature and animals",
+  "vietnamese_meaning": "săn, săn bắt",
+  "english_definition": "To chase and kill wild animals for food or sport.",
+  "example": "Owls hunt at night."
+ },
+ {
+  "word": "jungle",
+  "level": "B1",
+  "topic": "Nature and animals",
+  "vietnamese_meaning": "rừng rậm nhiệt đới",
+  "english_definition": "A thick tropical forest.",
+  "example": "Tigers once lived in the jungles of Vietnam."
+ },
+ {
+  "word": "predator",
+  "level": "B2",
+  "topic": "Nature and animals",
+  "vietnamese_meaning": "loài săn mồi",
+  "english_definition": "An animal that kills and eats other animals.",
+  "example": "Sharks are powerful predators."
+ },
+ {
+  "word": "prey",
+  "level": "B2",
+  "topic": "Nature and animals",
+  "vietnamese_meaning": "con mồi",
+  "english_definition": "An animal that is hunted and eaten by another animal.",
+  "example": "The eagle dived towards its prey."
+ },
+ {
+  "word": "migrate",
+  "level": "B2",
+  "topic": "Nature and animals",
+  "vietnamese_meaning": "di cư",
+  "english_definition": "To travel to a different place each season.",
+  "example": "Many birds migrate south for the winter."
+ },
+ {
+  "word": "hibernate",
+  "level": "C1",
+  "topic": "Nature and animals",
+  "vietnamese_meaning": "ngủ đông",
+  "english_definition": "To sleep through the winter.",
+  "example": "Bears hibernate in caves."
+ },
+ {
+  "word": "ecosystem",
+  "level": "C1",
+  "topic": "Nature and animals",
+  "vietnamese_meaning": "hệ sinh thái",
+  "english_definition": "All the living things in an area and the way they affect each other.",
+  "example": "Coral reefs are fragile ecosystems."
+ },
+ {
+  "word": "biodiversity",
+  "level": "C1",
+  "topic": "Nature and animals",
+  "vietnamese_meaning": "đa dạng sinh học",
+  "english_definition": "The number and variety of plants and animals in an area.",
+  "example": "Cuc Phuong National Park is rich in biodiversity."
+ },
+ {
+  "word": "careless",
+  "level": "B1",
+  "topic": "Personality",
+  "vietnamese_meaning": "bất cẩn, cẩu thả",
+  "english_definition": "Not giving enough attention to what you are doing.",
+  "example": "I made a lot of careless mistakes in the test."
+ },
+ {
+  "word": "humorous",
+  "level": "B1",
+  "topic": "Personality",
+  "vietnamese_meaning": "hài hước",
+  "english_definition": "Funny and entertaining.",
+  "example": "He gave a humorous speech at the wedding."
+ },
+ {
+  "word": "stubborn",
+  "level": "B2",
+  "topic": "Personality",
+  "vietnamese_meaning": "bướng bỉnh",
+  "english_definition": "Not willing to change your opinion, even when you should.",
+  "example": "He's too stubborn to admit he's wrong."
+ },
+ {
+  "word": "arrogant",
+  "level": "B2",
+  "topic": "Personality",
+  "vietnamese_meaning": "kiêu ngạo",
+  "english_definition": "Behaving as if you are better than other people.",
+  "example": "He was arrogant and refused to listen to advice."
+ },
+ {
+  "word": "considerate",
+  "level": "B2",
+  "topic": "Personality",
+  "vietnamese_meaning": "chu đáo, ân cần",
+  "english_definition": "Kind and thinking about other people's feelings.",
+  "example": "It was very considerate of you to call."
+ },
+ {
+  "word": "conscientious",
+  "level": "C1",
+  "topic": "Personality",
+  "vietnamese_meaning": "tận tâm, chu toàn",
+  "english_definition": "Careful to do your work well and thoroughly.",
+  "example": "She is a conscientious student who never misses a deadline."
+ },
+ {
+  "word": "gullible",
+  "level": "C1",
+  "topic": "Personality",
+  "vietnamese_meaning": "cả tin",
+  "english_definition": "Easily tricked because you believe whatever people tell you.",
+  "example": "Don't be so gullible, because that email is a scam."
+ },
+ {
+  "word": "resilient",
+  "level": "C1",
+  "topic": "Personality",
+  "vietnamese_meaning": "kiên cường, mau phục hồi",
+  "english_definition": "Able to recover quickly from difficult situations.",
+  "example": "Children are often more resilient than adults think."
+ },
+ {
+  "word": "advertise",
+  "level": "B1",
+  "topic": "Business",
+  "vietnamese_meaning": "quảng cáo",
+  "english_definition": "To tell people about a product or service so that they buy it.",
+  "example": "They advertise their shop on social media."
+ },
+ {
+  "word": "trade",
+  "level": "B1",
+  "topic": "Business",
+  "vietnamese_meaning": "thương mại, buôn bán",
+  "english_definition": "The buying and selling of goods between countries or people.",
+  "example": "Trade between the two countries has grown quickly."
+ },
+ {
+  "word": "invoice",
+  "level": "B2",
+  "topic": "Business",
+  "vietnamese_meaning": "hóa đơn",
+  "english_definition": "A document that lists goods or services and how much you must pay.",
+  "example": "Please send the invoice to our accounts department."
+ },
+ {
+  "word": "competitor",
+  "level": "B2",
+  "topic": "Business",
+  "vietnamese_meaning": "đối thủ cạnh tranh",
+  "english_definition": "A company that sells similar products to another.",
+  "example": "Our prices are lower than our competitors'."
+ },
+ {
+  "word": "entrepreneur",
+  "level": "B2",
+  "topic": "Business",
+  "vietnamese_meaning": "doanh nhân khởi nghiệp",
+  "english_definition": "Someone who starts their own business.",
+  "example": "Young entrepreneurs are opening cafés all over the city."
+ },
+ {
+  "word": "merger",
+  "level": "C1",
+  "topic": "Business",
+  "vietnamese_meaning": "sự sáp nhập",
+  "english_definition": "The joining of two companies into one.",
+  "example": "The merger created the country's largest bank."
+ },
+ {
+  "word": "stakeholder",
+  "level": "C1",
+  "topic": "Business",
+  "vietnamese_meaning": "bên liên quan",
+  "english_definition": "A person or group with an interest in a business and its success.",
+  "example": "We consulted every stakeholder before making the decision."
+ },
+ {
+  "word": "revenue",
+  "level": "C1",
+  "topic": "Business",
+  "vietnamese_meaning": "doanh thu",
+  "english_definition": "The money a company receives from its business.",
+  "example": "Online sales now make up half our revenue."
+ },
+ {
+  "word": "data",
+  "level": "B1",
+  "topic": "Science",
+  "vietnamese_meaning": "dữ liệu",
+  "english_definition": "Facts or numbers collected to be examined.",
+  "example": "We collected data from five hundred students."
+ },
+ {
+  "word": "observe",
+  "level": "B1",
+  "topic": "Science",
+  "vietnamese_meaning": "quan sát",
+  "english_definition": "To watch something carefully to learn about it.",
+  "example": "The students observed how the plants grew."
+ },
+ {
+  "word": "molecule",
+  "level": "B2",
+  "topic": "Science",
+  "vietnamese_meaning": "phân tử",
+  "english_definition": "The smallest unit of a substance, made of atoms joined together.",
+  "example": "A water molecule has two hydrogen atoms and one oxygen atom."
+ },
+ {
+  "word": "fossil",
+  "level": "B2",
+  "topic": "Science",
+  "vietnamese_meaning": "hóa thạch",
+  "english_definition": "The remains of an ancient plant or animal, preserved in rock.",
+  "example": "Dinosaur fossils were found in the desert."
+ },
+ {
+  "word": "variable",
+  "level": "B2",
+  "topic": "Science",
+  "vietnamese_meaning": "biến số",
+  "english_definition": "Something that can change, such as a number or condition in an experiment.",
+  "example": "Temperature was the only variable we changed."
+ },
+ {
+  "word": "hypothesis",
+  "level": "C1",
+  "topic": "Science",
+  "vietnamese_meaning": "giả thuyết",
+  "english_definition": "An idea that has not yet been proved, used as a starting point for testing.",
+  "example": "The experiment supported our hypothesis."
+ },
+ {
+  "word": "phenomenon",
+  "level": "C1",
+  "topic": "Science",
+  "vietnamese_meaning": "hiện tượng",
+  "english_definition": "Something that happens or exists, especially something unusual or hard to explain.",
+  "example": "The Northern Lights are a natural phenomenon."
+ },
+ {
+  "word": "empirical",
+  "level": "C1",
+  "topic": "Science",
+  "vietnamese_meaning": "dựa trên thực nghiệm",
+  "english_definition": "Based on experiments or experience rather than ideas.",
+  "example": "There is little empirical evidence for the claim."
+ }
+]

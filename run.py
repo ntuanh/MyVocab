@@ -314,6 +314,32 @@ def start_local_db(progress):
     return True
 
 
+def load_word_pack(progress):
+    """Words from data/word_pack.json (tools/word_pack.py): all of them on a new
+    computer, and after an update only the words added since. It runs only when
+    the pack is not the one loaded last time."""
+    pack = os.path.join(ROOT, "data", "word_pack.json")
+    if not os.path.exists(pack):
+        return
+    with open(pack, "rb") as f:
+        digest = hashlib.sha256(f.read()).hexdigest()
+    try:
+        with open(os.path.join(ROOT, ".wordpack"), encoding="utf-8") as f:
+            if f.readline().strip() == f"# {digest}":
+                return
+    except OSError:
+        pass
+    if progress.current != "database":
+        progress.begin("database")
+    progress.update(0.8, "adding the words from the word pack")
+    loaded = subprocess.run([PYTHON, os.path.join("tools", "word_pack.py"), "import"], capture_output=True,
+                            text=True, errors="replace")
+    if loaded.returncode != 0:
+        print("\n" + (loaded.stdout + loaded.stderr).strip(), flush=True)
+        say("The word pack could not be loaded; MyVocab starts without those words.")
+    progress.update(1.0, "")
+
+
 def make_shortcut(progress):
     progress.begin("shortcut", "on the desktop and in the Start menu")
     made = subprocess.run([PYTHON, os.path.join("tools", "make_shortcut.py")], capture_output=True, text=True,
@@ -493,6 +519,7 @@ def main():
         first_run = setup_python(progress)
         if f"@127.0.0.1:{LOCAL_DB_PORT}/" in env.get("DATABASE_URL", ""):
             started_db = start_local_db(progress)
+        load_word_pack(progress)
         if WINDOWS and (first_run or show_setup):
             make_shortcut(progress)
 

@@ -1,5 +1,5 @@
 """Browser checks for the setup page during a real first install (tests/run_all.py --install)."""
-import os, time
+import json, os, time
 from playwright.sync_api import sync_playwright
 
 # run_all.py --install runs this against a first install it starts in a temporary folder.
@@ -77,6 +77,9 @@ with sync_playwright() as p:
     check("sent on to the app", "MyVocab" in pg.title(), pg.title())
     stats = pg.evaluate("fetch('/api/today?utc_offset=-420').then(r => r.status)")
     check("app answers with its database", stats == 200, stats)
+    pack = json.load(open(os.path.join(INSTALL, "data", "word_pack.json"), encoding="utf-8"))
+    words = pg.evaluate("fetch('/api/all_data').then(r => r.json()).then(d => d.length)")
+    check("a new install starts with the word pack's words", words == len(pack["words"]), f"{words} of {len(pack['words'])}")
     check("no page errors", not errs, errs[:3])
 
     b.close()

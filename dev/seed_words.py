@@ -10,6 +10,10 @@ Usage (from the project root):
     python dev/seed_words.py                      # dry run, changes nothing
     python dev/seed_words.py --limit 5 --commit   # try five words for real
     python dev/seed_words.py --commit             # seed everything
+    python dev/seed_words.py --data data/b1_c1_words.json --commit   # the 200 B1-C1 words
+
+A word may carry a "level" (B1, B2 or C1). B2 and C1 words also go into a
+"Level B2" or "Level C1" topic, so the exam can test one level.
 
 Needs DATABASE_URL. PEXELS_API_KEY is optional but without it no images are
 fetched, which defeats the point -- the script refuses to commit imageless rows
@@ -115,10 +119,22 @@ def existing_words(words):
         conn.close()
 
 
+# The extra topic for a word's level. B1 has none: the 500 words before these are B1 too.
+LEVEL_TOPICS = {"B2": "Level B2", "C1": "Level C1"}
+
+
+def topics_of(entry):
+    """A word's topic names: its theme, and its level's topic when it has one."""
+    names = [entry["topic"]]
+    if LEVEL_TOPICS.get(entry.get("level")):
+        names.append(LEVEL_TOPICS[entry["level"]])
+    return names
+
+
 def resolve_topics(entries, commit):
     """Maps each topic name in the dataset to a topic id, creating any that the
     database does not have yet. Returns {name: id} (empty on a dry run)."""
-    wanted = sorted({e["topic"] for e in entries})
+    wanted = sorted({name for e in entries for name in topics_of(e)})
     existing = {t["name"]: t["id"] for t in get_all_topics()}
     mapping = {}
     for name in wanted:
@@ -228,10 +244,10 @@ def main():
             print(f"{prefix} would add  {ipa:<18} {img}")
             added += 1
         else:
-            tid = topic_ids.get(entry["topic"])
-            result = save_word(word_data, [tid] if tid else [])
+            tids = [topic_ids[name] for name in topics_of(entry) if name in topic_ids]
+            result = save_word(word_data, tids)
             if result.get("status") in ("success", "updated"):
-                print(f"{prefix} added      {ipa:<18} {img}  [{entry['topic']}]")
+                print(f"{prefix} added      {ipa:<18} {img}  [{', '.join(topics_of(entry))}]")
                 added += 1
             else:
                 print(f"{prefix} FAILED: {result.get('message')}")

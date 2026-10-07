@@ -62,10 +62,15 @@ If Windows Firewall asks about *Python* or *postgres*, click **Cancel**.
 MyVocab only talks to your own computer.
 
 > [!NOTE]
-> **Moving from another computer?** Before step 2, make a backup on the old
-> computer: Start menu → **MyVocab Backup** (or double-click **backup** in the
-> old MyVocab folder). Put the `myvocab-<date>.sql` file it makes on this
-> computer's **Desktop** or on a USB stick. Step 2 finds it.
+> **What a new computer starts with:** every word and topic from the word pack
+> (706 words, B1 to C1, with meanings, pictures and pronunciation), and the
+> weekly targets. Its scores, history and writing start at zero.
+>
+> **Want your own scores and writing too?** Before step 2, make a backup on
+> the old computer: Start menu → **MyVocab Backup** (or double-click
+> **backup** in the old MyVocab folder). Put the `myvocab-<date>.sql` file it
+> makes on this computer's **Desktop** or on a USB stick. Step 2 finds it and
+> loads everything.
 
 **No file wanted?** Press **Windows + R**, paste this line and press **Enter**.
 It does exactly the same:
@@ -213,8 +218,20 @@ for). Closing the window (or Ctrl+C) stops the app and its database.
 
 ### Moving your words to another computer
 
-Your words, topics, scores and writing live in the database on this computer.
-To take them with you:
+There are two ways:
+
+| | What comes over | How |
+| :--- | :--- | :--- |
+| **Word pack** | Every word and topic, and the weekly targets. Scores, history and writing start at zero | Nothing to do: every new install loads `data/word_pack.json` |
+| **Backup** | Everything: words, scores, history, writing | Make a backup here, then load it there (below) |
+
+The word pack is your words as they were at the last release:
+`dev/release.py` saves them into `data/word_pack.json` each time
+(`tools/word_pack.py export`). Installed copies add new words from it after
+an update, never twice. A word someone deleted is not added again, and a word
+they changed keeps their changes.
+
+To take everything with a backup:
 
 1. Here: `python3 tools/local_db.py backup` (Windows: `.venv\Scripts\python tools\local_db.py backup`).
    It writes `backup/myvocab-<date>.sql` (about 200 KB).
@@ -227,15 +244,28 @@ To take them with you:
 `tools/local_db.py restore FILE` loads a backup by hand; it refuses to
 overwrite a database that already has words unless you add `--force`.
 
-### Filling a test database
+### Adding the word lists
 
-To fill a new, empty database with Destination B1 words:
+Two ready-made lists come with MyVocab, each word with a Vietnamese meaning, a
+definition and an example:
+
+| File | Words | Level |
+| :--- | :--- | :--- |
+| `data/b1_words.json` | 500 Destination B1 words, 20 in each of 25 topics | B1 |
+| `data/b1_c1_words.json` | 200 more, 8 in each of the same 25 topics | 50 upper B1, 76 B2, 74 C1 |
+
+B2 and C1 words also go into a **Level B2** or **Level C1** topic, so the Exam
+can test one level at a time. Words you already have are skipped.
+
+To fill a database with the B1 list:
 ```bash
 .venv/bin/python dev/seed_words.py --limit 200 --commit --allow-no-image
 .venv/bin/python dev/fill_missing.py --commit
 ```
 Leave out `--limit 200` for all 500 words in 25 topics, and `--allow-no-image`
-if `PEXELS_API_KEY` is set. `fill_missing.py` adds pictures (`PEXELS_API_KEY`),
+if `PEXELS_API_KEY` is set. For the B1-C1 list, add `--data data/b1_c1_words.json`.
+Pexels allows 200 pictures an hour; if it stops there, run it again an hour
+later, and it carries on where it stopped. `fill_missing.py` adds pictures (`PEXELS_API_KEY`),
 pronunciation and synonyms (free) and family words (`GEMINI_API_KEY`); run it
 again after adding a key.
 
@@ -243,7 +273,7 @@ again after adding a key.
 
 | Part | Size |
 | :--- | :--- |
-| The code and content (Python, pages, 500 words, 50 reading parts, prompts) | about 3 MB |
+| The code and content (Python, pages, 700 words, 50 reading parts, prompts) | about 3 MB |
 | `.venv`: Python packages, including the database program | about 80 MB |
 | `.localdb`: the database (your data in it is about 8 MB; a backup is about 200 KB) | about 65 MB |
 | Memory while running: the app (two Python processes) and the database | about 160 MB |
@@ -358,6 +388,8 @@ MyVocab/
 │
 ├── data/
 │   ├── b1_words.json      # 500 Destination B1 words with meanings and examples
+│   ├── b1_c1_words.json   # 200 more words, upper B1 to C1, each with its level
+│   ├── word_pack.json     # Every saved word and topic, no scores: what new installs start with
 │   ├── bbc_6min.json      # 50 BBC 6 Minute English episodes
 │   ├── reading/           # 50 IELTS-style reading parts with answers
 │   └── writing/           # Diary ideas, 16 Task 1 charts, 40 Task 2 questions
@@ -368,13 +400,14 @@ MyVocab/
 │   ├── setup.html         # The setup page: progress bar and the keys box
 │   ├── local_db.py        # The database on this computer: start, stop, backup, restore
 │   ├── make_shortcut.py   # Desktop and Start menu icons
+│   ├── word_pack.py       # Export / import the word pack (words and topics, no scores)
 │   └── update.py          # Puts a new release in: download, backup, close, copy, reopen
 │
 ├── tests/                 # run_all.py and 9 suites (see Testing); fixtures/
 │
 ├── dev/                   # Only for the developer
 │   ├── release.py         # Publish a new version (a GitHub release)
-│   ├── seed_words.py      # Load data/b1_words.json into a database
+│   ├── seed_words.py      # Load a word list (data/*.json) into a database
 │   ├── fill_missing.py    # Add missing pictures, IPA, synonyms, family words
 │   └── draw_trees.py      # Draw templates/partials/trees.html
 │
@@ -409,7 +442,9 @@ git add -A && git commit -m "feat: what you added"   # commit as usual
 python3 dev/release.py                             # v1.1 -> v1.2: pushes main, publishes the release
 ```
 
-It runs the tests first and stops if any fail (see [Testing](#testing)). Then it
+It saves your words into the word pack (committed if they changed), so new
+computers start with them. Then it runs the tests and stops if any fail
+(see [Testing](#testing)). Then it
 shows the new version number and a "What's new" list made from the commit
 messages since the last release, and asks before publishing. You can also give
 the version and notes yourself: `python3 dev/release.py 2.0 --notes "- Speaking practice"`.

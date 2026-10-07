@@ -28,3 +28,6 @@ static/img/favicon.ico
 
 # Screenshots and logs from tests/run_all.py
 tests/.shots/
+
+# Which words of data/word_pack.json this computer has been offered (tools/word_pack.py)
+.wordpack
