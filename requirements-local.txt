@@ -1,0 +1,5 @@
+# Extra for running on your own computer (run.py installs this file):
+# a real PostgreSQL in a pip package, for the database on this computer.
+# Its wheels exist for Python 3.9-3.12, on Linux, macOS and Windows.
+-r requirements.txt
+pgserver==0.1.4

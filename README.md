@@ -24,8 +24,202 @@
 | :--- | :--- |
 | 📸 **Visual Learning** | Don't just read definitions—see them! Every word is paired with a vivid image, helping you build stronger memory connections. |
 | 🧠 **AI-Powered Context** | Get more than just a translation. Our AI provides rich details like clear definitions, practical examples, synonyms, and related "family words". |
+| ✍️ **Grammar & Vocab Practice** | Fill the blank, fix the mistake, translate, or use a word in your own sentence. AI marks your grammar and vocabulary and explains every mistake in Vietnamese. |
 | 🎯 **Smart Exam Mode** | Stop wasting time on words you already know. The exam mode intelligently tests you more on the vocabulary you find difficult, making your practice sessions incredibly efficient. |
 | 📚 **Personalized Collection**| Save any word with a single click. Organize your personal dictionary into custom topics to focus your learning on what's important to you. |
+
+---
+
+## Install on Windows (no technical knowledge needed)
+
+You download one folder, double-click one file, and wait. MyVocab installs
+everything it needs, shows a progress bar, and puts a **MyVocab** icon on your
+desktop. After that, you only click the icon.
+
+### The first time (about 5 minutes, with internet)
+
+**Step 1. Download MyVocab**
+
+1. Open <https://github.com/ntuanh/MyVocab>.
+2. Click the green **Code** button, then **Download ZIP**.
+3. Open your **Downloads** folder. Right-click **MyVocab-main.zip**, choose
+   **Extract All...**, pick **Documents** and click **Extract**.
+
+> [!IMPORTANT]
+> Keep the folder where you extracted it (for example *Documents\MyVocab-main*).
+> The desktop icon opens MyVocab from this folder, so do not delete or move it.
+
+**Step 2. Moving from another computer? Bring your words** (new users: skip this)
+
+1. On the **old** computer, double-click **backup** (`backup.bat`) in the
+   MyVocab folder. (On Linux: `python3 tools/local_db.py backup`.)
+2. Copy the **backup** folder from the old MyVocab folder into the new one.
+
+Do this before step 3: the first start loads your newest backup.
+
+**Step 3. Double-click `install`** (`install.bat`) in the MyVocab folder
+
+If a blue box says *Windows protected your PC*, click **More info**, then
+**Run anyway**. Then MyVocab installs itself:
+
+1. **Python** (only if this computer does not have Python 3.12 yet). A small
+   window with a progress bar downloads and installs it. You do not need to
+   click anything.
+2. **The setup page** opens in your browser. Its progress bar shows each step:
+   installing packages, preparing your database, and adding the desktop icon.
+
+<p align="center"><img src="./images/setup-progress.png" alt="The setup page: a progress bar at 46% while packages install" width="560"></p>
+
+If Windows Firewall asks about *Python* or *postgres*, click **Cancel**.
+MyVocab only talks to your own computer.
+
+**Step 4. Paste your free keys** into the box on the setup page, while the bar runs
+
+> [!TIP]
+> **Gemini key** (needed: meanings, examples, Vietnamese, marking your writing)
+> 1. Open **<https://aistudio.google.com/apikey>** and sign in with a Google account.
+> 2. Click **Create API key**, then copy it.
+> 3. Click **Paste** next to the Gemini box on the setup page.
+
+> [!TIP]
+> **Pexels key** (optional: a picture next to each word)
+> 1. Open **<https://www.pexels.com/api/>**, click **Get Started** and make a free account.
+> 2. Fill in the short form (for the website, write *personal English study*).
+> 3. Copy **Your API Key** and click **Paste** next to the Pexels box.
+
+Also choose a **password** for the *My Words* page, then click **Save keys**.
+MyVocab checks each key right away. A green tick means the key works. A red
+message means the key was copied wrong: copy it again and paste it.
+
+<p align="center"><img src="./images/setup-keys.png" alt="The keys box with Get a Gemini key and Get a Pexels key buttons, paste fields and a password" width="560"></p>
+
+No keys yet? Click **Skip for now**. Your saved words, Exam, Listening and
+Reading still work. To add the keys later, double-click **install** again.
+
+**Step 5. Done.** When the bar reaches 100%, MyVocab opens by itself.
+
+<p align="center"><img src="./images/setup-done.png" alt="All set: from now on double-click the MyVocab icon on your desktop" width="560"></p>
+
+### Every time
+
+1. Double-click the **MyVocab** icon on your desktop (it is in the Start menu too).
+2. A black window opens, then MyVocab opens in your browser.
+3. Keep the black window open while you study (you can minimise it).
+4. When you finish, close the black window. That stops MyVocab.
+
+Closed the browser tab by mistake? Double-click the icon again: it only
+opens the page again.
+
+**Once a week**, double-click **backup** (`backup.bat`) in the MyVocab folder.
+That keeps a copy of your words.
+
+### If something goes wrong
+
+| You see | Do this |
+| :--- | :--- |
+| *Python could not be installed automatically* | Install it yourself: <https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe>. Tick **Add python.exe to PATH**, click **Install Now**, then double-click **install** again. |
+| *Installing packages failed* | Check your internet and double-click **install** again. If it still fails: delete the **.venv** folder inside MyVocab and try once more. |
+| The setup page shows *Something went wrong* | Read the last lines in the black window: they say what is missing. Restarting the computer and trying again often helps. |
+| The browser says *This site can't be reached* | Wait 10 seconds and refresh the page. Make sure the black window is still open. |
+| No icon on the desktop | Double-click **install** again: it makes the icon again. |
+| Your old words are not there | You started MyVocab before copying the **backup** folder. If you have not saved anything new on this computer yet, close MyVocab and delete the **.localdb** folder inside MyVocab. Then double-click **install** again, and it loads the backup. |
+| *Out of quota*, or the AI marking stops | The free AI allows about 20 requests a day. Try again tomorrow. |
+
+### Getting a new version of MyVocab
+
+1. Double-click **backup** in your current MyVocab folder.
+2. Download and extract the new ZIP (step 1) into a **new** folder.
+3. Copy the **backup** folder and the **.env** file (your keys) into the new folder.
+4. Double-click **install** in the new folder. Your words are loaded and the
+   desktop icon now opens the new folder. You can then delete the old folder.
+
+---
+
+## Run it on your computer
+
+`run.py` sets everything up the first time and starts MyVocab after that, the
+same way on Linux, macOS and Windows. It needs **Python 3.12** (3.11 also
+works): the database it brings along has no build for 3.13 or newer yet.
+
+### Linux or macOS
+
+```bash
+git clone https://github.com/ntuanh/MyVocab.git
+cd MyVocab
+./run.sh                          # same as: python3 run.py
+python3 tools/make_shortcut.py    # once: a desktop icon to double-click instead
+```
+On Ubuntu or Linux Mint, also run `sudo apt install python3-venv` once.
+
+### Windows
+
+See [Install on Windows](#install-on-windows-no-technical-knowledge-needed):
+double-click **`install.bat`**. If Python 3.12 is missing, it installs it for
+this user (`tools/get_python.ps1`, no administrator rights needed). It makes
+desktop and Start menu icons that open `run.bat`. `backup.bat` saves your words.
+
+### What the first run does
+
+- creates `.venv` and installs the exact package versions from
+  `requirements.txt` and `requirements-local.txt` (again only when they change);
+- creates `.env` from `.env.example` and, if no database is set, gives MyVocab
+  its own database on this computer (a real PostgreSQL from the `pgserver`
+  package, nothing installed system-wide; data in `.localdb/`);
+- on a new computer, loads your newest backup from `backup/` into that database;
+- opens a setup page in the browser (`tools/setup.html`, served by `run.py` on
+  a random local port). It shows a progress bar and has a box for the keys
+  (`GEMINI_API_KEY`, `PEXELS_API_KEY`, `VIEW_DATA_PASSWORD`). Each key is checked
+  with its service before it is saved to `.env`;
+- starts the app at http://127.0.0.1:5000, and the setup page moves on to it.
+  If MyVocab is already running, the shortcut only opens the browser.
+
+To change the keys later, run `python3 run.py --setup` (Windows: `install.bat`),
+or edit `.env` (the [table below](#environment-variables) says what each key is
+for). Closing the window (or Ctrl+C) stops the app and its database.
+
+| To... | Do |
+| :--- | :--- |
+| use another port | `PORT=5001 ./run.sh` (Windows: `set PORT=5001` then `run.bat`) |
+| not open the browser (and no setup page) | `OPEN_BROWSER=0 ./run.sh` |
+| use the online database instead | put its `DATABASE_URL` in `.env` |
+
+### Moving your words to another computer
+
+Your words, topics, scores and writing live in the database on this computer.
+To take them with you:
+
+1. Here: `python3 tools/local_db.py backup` (Windows: `.venv\Scripts\python tools\local_db.py backup`).
+   It writes `backup/myvocab-<date>.sql` (about 200 KB).
+2. Copy the MyVocab folder (or a fresh clone) to the other computer, with that
+   `backup/` folder and your `.env`. Leave `.venv` and `.localdb` behind; they
+   are made for each computer.
+3. Start it there: the first run creates a new database and loads the backup.
+
+`backup/`, `.env` and `.localdb/` are in `.gitignore`: they never reach GitHub.
+`tools/local_db.py restore FILE` loads a backup by hand; it refuses to
+overwrite a database that already has words unless you add `--force`.
+
+### Filling a test database
+
+To fill a new, empty database with Destination B1 words:
+```bash
+.venv/bin/python tools/seed_words.py --limit 200 --commit --allow-no-image
+.venv/bin/python tools/fill_missing.py --commit
+```
+Leave out `--limit 200` for all 500 words in 25 topics, and `--allow-no-image`
+if `PEXELS_API_KEY` is set. `fill_missing.py` adds pictures (`PEXELS_API_KEY`),
+pronunciation and synonyms (free) and family words (`GEMINI_API_KEY`); run it
+again after adding a key.
+
+### How big is it?
+
+| Part | Size |
+| :--- | :--- |
+| The code and content (Python, pages, 500 words, 50 reading parts, prompts) | about 3 MB |
+| `.venv`: Python packages, including the database program | about 80 MB |
+| `.localdb`: the database (your data in it is about 8 MB; a backup is about 200 KB) | about 65 MB |
+| Memory while running: the app (two Python processes) and the database | about 160 MB |
+
 ---
 
 ## Tech Stack
@@ -51,10 +245,31 @@
 
 - **Search**: Enter an English word and press Enter.
 - **View Details**: See definition, translation, example, IPA, synonyms, related words, and image.
-- **Save**: Click "Save Word" and assign it to topics.
+- **Save**: Click "Save Word" and tick its topics, or click *Save, and let AI pick the topic*: the dialog closes at once, a small card in the corner follows the word while AI files it under the one topic it fits best (making a new topic only when none of yours fits), and you can keep searching meanwhile. Each AI pick is one Gemini request; the word is saved even if the AI fails.
 - **Manage Topics**: Add or remove topics as you like.
 - **Quiz**: Go to "Exam" to test yourself on saved words by topic.
-- **Data**: View and manage all your saved words (password-protected).
+- **Practice**: Go to "Practice" and pick a type:
+  - *Fill the blank*: AI writes a sentence with one of your words missing; type the word in the right form.
+  - *Fix the mistake*: rewrite a sentence that has one typical learner mistake.
+  - *Translate*: turn a Vietnamese sentence into English using your word.
+  - *Use it in a sentence*: write your own sentence with a saved word.
+  - *Check my writing*: paste any English and get it corrected.
+
+  Results feed the same priority score as the exam, so words you miss come back sooner.
+- **Vocab score**: set a weekly points goal (300 to start) on the Practice page. Weeks run Monday to Sunday, and whatever a week falls short of is added to the next week's goal until you make it up (points beyond a goal are not carried). The panel shows this week's points, what is carried over, about how many a day you still need, each day of the week, your streak of weeks that met the goal, and the last 4 weeks. A new goal counts from the current week on.
+- **Tracking**: the Tracking button in the top bar opens every skill's score, one band each: Vocab, Listening, Reading and Writing, each with its own weekly target (300 to start). **Set targets** sets all four at once; a band's *Change* sets just that one, and a new target counts from this week on. A tile per band shows this week at a glance; open one for its target, the last 8 weeks as columns against each week's target (hover or focus a week for its numbers, or open the table), and how many finished weeks met it. Link straight to a band with `/tracking#listening`. A band's tracking starts in the week of its first points, so a target set before you practise that skill never piles up a shortfall.
+- **Listening**: Practice → *Listening* plays 50 episodes of BBC Learning English's *6 Minute English* in the BBC's own YouTube player (newest first; filter by To do, Done or topic; link to one with `/listening#VIDEO_ID`). Watch an episode, do its BBC quiz or worksheet (the link is in the video's description on YouTube; from Vietnam the BBC site needs a UK VPN), then enter how many you got right. Each right answer wins 4 points and each wrong one loses 2 (5 out of 6 is +18). Only your first score for an episode counts; later ones are kept as practice. The points go to the Listening band on the Tracking page.
+- **Reading**: Practice → *Reading* is a 50-day plan of IELTS-style Academic Reading parts written for MyVocab, one a day (the real Cambridge tests are copyrighted). Each part is a passage in lettered paragraphs with 13 questions in the real test's formats: True/False/Not Given, sentence completion with a word limit, multiple choice, which paragraph contains…, and matching headings. Passages start at about 450 words and grow to full IELTS length (about 700) by day 50. A part opens with the passage beside the questions, as in the computer-based test, and a 20-minute timer; on a phone the two are tabs. Answers are kept on your device until you submit; the server marks them and shows the answer key, with a button that jumps to the paragraph each answer is in, and a rough band (the part's score scaled to 40 questions). Each right answer wins 3 points, each wrong one loses 1, a blank costs nothing, and only your first try at a part counts. The plan shows today's part, every day's score and your day streak; link to a part with `/reading#part-12`.
+  Every marked answer scores whole points by how hard its sentence is: the practice type (Fill the blank 1, Fix the mistake 2, Translate 3, Use it 3), plus 1 for every 4 words and 1 for each word of 7+ letters, up to 20. Right wins them all; *almost* loses a third and wrong (or *Show answer*) loses half, rounded down. Answers nothing could mark, and *Check my writing*, score nothing. Points and goals are kept per skill, ready for listening, reading and writing scores.
+- **My Words**: View and manage all your saved words. Online it asks for the password; on your own computer (`./run.sh`) it opens straight away.
+- **Getting around**: the bar at the top of every page links Dictionary, Exam, Practice and My Words, and lets you change the look.
+- **Writing**: Practice → *Writing*. Each time, choose a **daily diary** (an idea is suggested each day, with three of your saved words to try), **IELTS Writing Task 1** (16 charts and tables to describe: line graphs, bar charts, pie charts and tables, drawn on the page, with invented practice data) or **IELTS Writing Task 2** (40 essay questions in every common question type). Tasks have the real test's time (20 or 40 minutes) and word targets (150 or 250); a word meter shows your progress, and drafts are kept on your device. **Mark my writing** sends it to Gemini, which marks it like a teacher on four criteria out of 20, so **80 in all** (for IELTS tasks, the official criteria, with a band estimate): a score ring and a bar per criterion with comments, what you did well, every correction marked in your text with an explanation, better words, how you used your words to try, an improved version, one thing to practise next and a short summary in Vietnamese. **Revise this piece** lets you improve it and mark it again. Your score is your Writing points: one diary a day and each IELTS question once; revisions are practice. If the AI is busy or out of its daily quota, the piece is kept (with LanguageTool's grammar notes meanwhile) and **Mark it now** tries again later. Past writing is listed under *Your writing*; diaries are private, so online it needs the My Words password. `GEMINI_WRITING_MODEL` moves marking onto another model and its own quota.
+- **Today** (on the home page): a word of the day picked from your saved words, the same all day and new tomorrow (its Vietnamese stays hidden until you ask, and one click opens its full card), beside a ring for each skill showing how its week is going.
+- **Effects**: confetti and an achievement card when you reach a weekly target or score a perfect reading part or listening episode, points that float up from the answer that won them, numbers that count up, bars that shimmer and turn gold at the target, flickering streak flames, cards that rise into place, and on dry mornings and evenings a few leaves drifting down from the trees. All of it is off when your system asks for reduced motion.
+- **Live sky**: the button at the top right shows the place, temperature and weather. Open it to pick a place (search any city, scroll the list, or use your location). The page then looks like that place right now: a bright *morning*, a golden *evening* around sunset, or a calm *night*, taken from its real sunrise and sunset, with clouds, rain, snow, fog or a storm when the weather has them. Two big trees, a banyan and an Indian almond, frame every page: they lean in the wind (more in rain, most in a storm), hold snow when it snows, and fireflies come out around them on dry nights. *Live* follows the place; Morning, Evening or Night pins one look. The rain and snow animation can be switched off.
+  Weather comes from [Open-Meteo](https://open-meteo.com/) (free, no API key), straight from the browser, and is asked for again at most every 15 minutes. Only the chosen place's coordinates are sent.
+- **Keyboard shortcuts**: `/` search, `S` save the word, `R` reveal the meaning, `N` next question, `Esc` close a dialog.
+  Your recent searches and the topics you last ticked are remembered in your browser.
 
 ---
 
@@ -69,21 +284,73 @@ MyVocab/
 ├── app.py                # Flask app and routes
 ├── handle_request.py     # Gemini / Pexels / dictionary lookups
 ├── database.py           # PostgreSQL logic + schema migration
+├── practice.py           # Practice exercises and AI marking
+├── listening.py          # Listening episodes and how their scores become points
+├── reading.py            # Reading parts: loading and checking them, marking, the plan
+├── writing.py            # Writing: prompts, AI marking out of 80, points
 │
 ├── static/               # JS, CSS, client assets
 │   ├── style.css
 │   ├── script.js
 │   ├── data.js
 │   ├── exam.js
-│   └── manage_topics.js
+│   ├── practice.js
+│   ├── goals.js          # Weekly goal panel, shared by Practice and Tracking
+│   ├── tracking.js       # Tracking page: band tiles, the 8-week chart and table
+│   ├── listening.js      # Listening page: episode library, player, score entry
+│   ├── reading.js        # Reading page: the plan, the timed test, marking
+│   ├── home.js           # Home page: word of the day and the week at a glance
+│   ├── writing.js        # Writing page: the task, the editor, the teacher's marks, past writing
+│   ├── charts.js         # Draws Writing Task 1 charts (line, bar, pie, table)
+│   ├── fx.js             # Confetti, floating points, achievement cards, counting numbers
+│   ├── manage_topics.js
+│   ├── theme.js          # Applies the time-of-day look and weather before first paint
+│   ├── sky.js            # Open-Meteo weather + the place picker
+│   └── scene-*.svg, clouds.svg, fx-*.svg   # Scenery, rain and snow
 │
 ├── templates/            # HTML templates (Jinja2)
+│   ├── _nav.html         # Top bar shared by every page
+│   ├── _trees.html       # The two background trees (made by tools/draw_trees.py)
+│   ├── _goal_panel.html  # A skill's weekly goal (macro), used by Practice and Tracking
+│   ├── _vocab_rules.html # How Vocab points are won and lost
+│   ├── _listening_rules.html # How Listening points are won and lost
+│   ├── _reading_rules.html # How Reading points are won and lost
+│   ├── _writing_rules.html # How Writing points are won
+│   ├── _practice_tabs.html # Switch between the practice pages
 │   ├── index.html
 │   ├── exam.html
+│   ├── practice.html
+│   ├── tracking.html
+│   ├── listening.html
+│   ├── reading.html
+│   ├── writing.html
 │   ├── data.html
 │   └── manage_topics.html
 │
-├── requirements.txt      # Python dependencies
+├── data/
+│   ├── b1_words.json     # 500 Destination B1 words with meanings and examples
+│   ├── bbc_6min.json     # 50 BBC 6 Minute English episodes: YouTube IDs, titles, lengths, topics
+│   ├── reading/          # 50 IELTS-style reading parts with answers (parts_01-10.json)
+│   └── writing/          # Diary ideas, 16 Task 1 charts, 40 Task 2 questions
+│
+├── tools/
+│   ├── seed_words.py     # Loads b1_words.json into the database
+│   ├── fill_missing.py   # Adds missing pictures, IPA, synonyms, family words
+│   ├── draw_trees.py     # Draws templates/_trees.html
+│   ├── local_db.py       # The database on this computer: start, stop, backup, restore
+│   ├── local_db.sh       # Same, for the old command
+│   ├── make_shortcut.py  # Puts a MyVocab icon on the desktop and in the menu (Linux, Windows)
+│   ├── setup.html        # The setup page: progress bar and the box for your keys
+│   └── get_python.ps1    # Installs Python 3.12 on Windows when it is missing
+│
+├── run.py                # Sets up and starts the app on your computer (any system)
+├── run.sh                # Starts it on Linux and macOS
+├── install.bat           # Windows, the first time: installs and sets up everything (double-click)
+├── run.bat               # Starts it on Windows (what the desktop icon opens)
+├── backup.bat            # Saves your words to backup/ on Windows (double-click)
+├── .env.example          # Template for .env (your local keys)
+├── requirements.txt      # Python packages the app needs (pinned), here and online
+├── requirements-local.txt # Plus the database program, for your own computer
 ├── vercel.json           # Vercel build + routing config
 ├── LICENSE
 └── README.md
@@ -96,14 +363,41 @@ MyVocab/
 - `words`: id, word, vietnamese_meaning, vietnamese_keywords, english_definition, example, image_url, priority_score, pronunciation_ipa, synonyms_json, family_words_json
 - `topics`: id, name
 - `word_topics`: word_id, topic_id
+- `practice_points`: id, created_at, skill, word_id, mode, verdict, worth, points (one row per marked answer or counted listening score)
+- `listening_attempts`: id, created_at, episode_id, correct, total, points, counted (one row per listening score; only an episode's first counts)
+- `reading_attempts`: id, created_at, part_id, correct, total, points, counted, answers (one row per submitted reading part; only a part's first counts)
+- `writing_pieces`: id, created_at, kind, prompt_id, prompt, text, words, revision_of, status, score, band, feedback, counted, points, scored_at (one row per piece of writing and its marks)
+- `skill_goals`: skill, week_start, target (a skill's weekly goal from that Monday on)
 
 ---
 
 
 ## Deployment (Vercel)
 
+The online copy runs on [Vercel](https://vercel.com) (free Hobby plan) with its
+database on [Neon](https://neon.com) (free plan: 0.5 GB, plenty for MyVocab).
 The tables are created automatically on the first request, so a brand new
 PostgreSQL database needs no manual setup.
+
+1. **Database.** Create a free Neon project and copy its connection string
+   (`postgresql://...?sslmode=require`).
+2. **Your words** (optional). Load a backup into it, using the `psql` that
+   came with the local database:
+   ```bash
+   python3 tools/local_db.py backup
+   $(.venv/bin/python -c "import pgserver,os;print(os.path.dirname(pgserver.__file__))")/pginstall/bin/psql "<Neon connection string>" -f backup/myvocab-<date>.sql
+   ```
+3. **App.** In Vercel, *Add New -> Project*, import the GitHub repository, and
+   set the [environment variables](#environment-variables) below: at least
+   `DATABASE_URL` (from Neon), `FLASK_SECRET_KEY` (a long random value),
+   `VIEW_DATA_PASSWORD` and `GEMINI_API_KEY`. Deploy.
+4. **Updates.** Every push to GitHub deploys again.
+
+`vercel.json` sends every request to `api/index.py` and ships `templates/`,
+`static/` and `data/` with it. `.vercelignore` keeps the local database, your
+backups and the local launchers out of the upload. Online, *My Words*, past
+writing and diaries need `VIEW_DATA_PASSWORD`, and each AI lookup or marking
+uses the free Gemini quota (about 20 requests a day per model).
 
 ### Environment Variables
 
@@ -117,16 +411,25 @@ Set these in **Project Settings -> Environment Variables**:
 | `GEMINI_API_KEY` | Yes | Google AI Studio key. Without it lookups return no definition. |
 | `PEXELS_API_KEY` | No | Image lookups; word images are skipped if unset. |
 | `GEMINI_MODEL` | No | Defaults to `gemini-3.5-flash-lite`. Set this if that model is retired. Prefer a `-lite` model: the free tier allows only 20 requests a day per model, and the non-lite ones spend seconds reasoning before answering. |
+| `GEMINI_PRACTICE_MODEL` | No | Model for the Practice page; defaults to `GEMINI_MODEL`. The daily quota is per model, so a different model here keeps practice from using up dictionary lookups. |
+| `GEMINI_WRITING_MODEL` | No | Model that marks writing; defaults to `GEMINI_PRACTICE_MODEL`, then `GEMINI_MODEL`. Each piece marked is one request. |
+| `WRITING_TIMEOUT` | No | Seconds to wait for a piece to be marked (default 90; an essay takes longer than a word lookup). |
+| `LANGUAGETOOL_URL` | No | Grammar checker used when Gemini is unavailable. Defaults to LanguageTool's free public API. |
+| `LANGUAGETOOL_LANGUAGE` | No | Defaults to `en-GB`, matching the British spelling of the saved words. |
 
-### Local development
+### How Practice saves Gemini requests
 
-```bash
-python -m venv .venv
-.venv/Scripts/activate        # Windows;  source .venv/bin/activate on macOS/Linux
-pip install -r requirements.txt
-# export the variables above, then:
-flask --app app run --debug
-```
+- One request writes a whole batch of exercises.
+- An answer that matches the expected one is marked without a request.
+- *Fill the blank* falls back to the example sentences saved with your words when Gemini is unavailable, and *Use it in a sentence* never needs Gemini to start.
+- When Gemini cannot mark an answer, LanguageTool still checks grammar and spelling (its explanations are in English).
+
+### Local and online
+
+Both run the same code. To run a copy on your computer, see
+[Run it on your computer](#run-it-on-your-computer). To update the online
+copy, push to GitHub and Vercel deploys it. The two use different databases
+unless your `.env` points at the online one.
 
 ---
 

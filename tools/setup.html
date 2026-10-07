@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyVocab Setup</title>
+<link rel="icon" href="/static/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<!-- Served by run.py while MyVocab sets itself up: the progress, and a box for the keys. -->
+<style>
+:root {
+    color-scheme: light;
+    --sky: #cfe9fb;
+    --paper: #ffffff;
+    --paper-inset: #f1f7f3;
+    --line: #d5e3d9;
+    --ink: #1b2925;
+    --ink-soft: #44534d;
+    --ink-faint: #596862;
+    --accent: #1f7a3a;
+    --accent-hover: #17652f;
+    --accent-ink: #ffffff;
+    --accent-soft: #dcf2e1;
+    --track: #e3ece6;
+    --ok-bg: #dbf2e1;   --ok-ink: #1c5a2d;
+    --warn-bg: #fff0c0; --warn-ink: #674700;
+    --bad-bg: #fde0dc;  --bad-ink: #982b21;
+    --shadow: 0 12px 28px -14px rgba(28, 62, 92, 0.35), 0 2px 6px rgba(28, 62, 92, 0.08);
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --sky: #10202c;
+        --paper: #172630;
+        --paper-inset: #1e313c;
+        --line: #2d4552;
+        --ink: #e9f1ee;
+        --ink-soft: #bccbc6;
+        --ink-faint: #9fb0aa;
+        --accent: #5cc77a;
+        --accent-hover: #74d48f;
+        --accent-ink: #0d2416;
+        --accent-soft: #1d3a29;
+        --track: #263b46;
+        --ok-bg: #1d3a29;   --ok-ink: #9fe0b2;
+        --warn-bg: #3d3214; --warn-ink: #f3d27a;
+        --bad-bg: #45211d;  --bad-ink: #ffb4aa;
+        --shadow: 0 12px 28px -14px rgba(0, 0, 0, 0.7);
+    }
+}
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --sky: #10202c; --paper: #172630; --paper-inset: #1e313c; --line: #2d4552;
+    --ink: #e9f1ee; --ink-soft: #bccbc6; --ink-faint: #9fb0aa;
+    --accent: #5cc77a; --accent-hover: #74d48f; --accent-ink: #0d2416; --accent-soft: #1d3a29; --track: #263b46;
+    --ok-bg: #1d3a29; --ok-ink: #9fe0b2; --warn-bg: #3d3214; --warn-ink: #f3d27a; --bad-bg: #45211d; --bad-ink: #ffb4aa;
+    --shadow: 0 12px 28px -14px rgba(0, 0, 0, 0.7);
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--sky) url("/static/scene-morning.svg") bottom center / 100% auto no-repeat;
+    color: var(--ink);
+    font: 16px/1.55 Nunito, "Segoe UI", system-ui, sans-serif;
+    padding: 32px 16px 64px;
+}
+@media (prefers-color-scheme: dark) { body { background-image: none; } }
+main { max-width: 680px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+}
+.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.brand img { width: 40px; height: 40px; }
+h1, h2 { font-family: Fraunces, Georgia, serif; font-weight: 600; margin: 0; line-height: 1.2; }
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.3rem; margin-bottom: 4px; }
+p { margin: 6px 0; color: var(--ink-soft); }
+
+.bar-row { display: flex; align-items: center; gap: 14px; margin-top: 18px; }
+.bar {
+    flex: 1;
+    height: 18px;
+    border-radius: 999px;
+    background: var(--track);
+    overflow: hidden;
+}
+.bar-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: var(--accent);
+    background-image: linear-gradient(45deg, rgba(255,255,255,.22) 25%, transparent 25%, transparent 50%,
+                                      rgba(255,255,255,.22) 50%, rgba(255,255,255,.22) 75%, transparent 75%);
+    background-size: 28px 28px;
+    animation: stripes 1s linear infinite;
+    transition: width .6s ease;
+}
+.done .bar-fill { animation: none; background-image: none; }
+@keyframes stripes { to { background-position: 28px 0; } }
+.percent { font-weight: 800; font-size: 1.25rem; min-width: 3.5ch; text-align: right; font-variant-numeric: tabular-nums; }
+.now { margin-top: 8px; font-weight: 600; color: var(--ink-soft); min-height: 1.55em; }
+
+.steps { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 6px; }
+.steps li { display: flex; align-items: center; gap: 10px; color: var(--ink-faint); }
+.steps li::before {
+    content: "";
+    flex: none;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--line);
+}
+.steps li.now { color: var(--ink); font-weight: 700; }
+.steps li.now::before { border-color: var(--accent); border-right-color: transparent; animation: spin .8s linear infinite; }
+.steps li.done { color: var(--ink-soft); }
+.steps li.done::before {
+    content: "✓";
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: 12px; font-weight: 800;
+    display: grid; place-items: center;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.keys { border: 2px solid var(--accent); }
+.key { margin-top: 18px; padding: 16px; border-radius: 14px; background: var(--paper-inset); }
+.key-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 12px; }
+.key h3 { margin: 0; font-size: 1.05rem; }
+.tag { font-size: .8rem; font-weight: 800; padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.tag.optional { background: var(--track); color: var(--ink-soft); }
+.key ol { margin: 8px 0 10px; padding-left: 22px; color: var(--ink-soft); }
+.key ol li { margin: 2px 0; }
+.get-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin: 4px 0 2px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-weight: 800;
+    text-decoration: none;
+}
+.get-link:hover { background: var(--accent-hover); }
+.paste-row { display: flex; gap: 8px; }
+.paste-row input {
+    flex: 1; min-width: 0;
+    font: inherit;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+}
+.paste-row input:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+button {
+    font: inherit; font-weight: 800;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+}
+button:hover { background: var(--paper-inset); }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+button.primary:hover { background: var(--accent-hover); }
+button:disabled { opacity: .6; cursor: wait; }
+.saved, .status { font-size: .92rem; margin-top: 6px; }
+.saved { color: var(--ink-faint); }
+.status:empty { display: none; }
+.status { padding: 6px 10px; border-radius: 8px; }
+.status.ok { background: var(--ok-bg); color: var(--ok-ink); }
+.status.bad { background: var(--bad-bg); color: var(--bad-ink); }
+.status.unknown { background: var(--warn-bg); color: var(--warn-ink); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; align-items: center; }
+.answered-note { color: var(--ok-ink); background: var(--ok-bg); padding: 8px 12px; border-radius: 10px; font-weight: 700; }
+
+.finish h2 { font-size: 1.6rem; }
+.finish ol { padding-left: 22px; }
+.finish .big { font-size: 1.1rem; padding: 12px 22px; margin-top: 8px; }
+.error { background: var(--bad-bg); color: var(--bad-ink); border-color: transparent; }
+.error p { color: inherit; }
+.hidden { display: none !important; }
+@media (prefers-reduced-motion: reduce) {
+    .bar-fill, .steps li.now::before { animation: none; transition: none; }
+}
+</style>
+</head>
+<body>
+<main>
+    <section class="card" id="progress-card" aria-labelledby="title">
+        <div class="brand"><img src="/static/favicon.png" alt=""><h1 id="title">Setting up MyVocab</h1></div>
+        <p id="intro">This takes 1 to 3 minutes the first time. While you wait, get your free keys in the box below.</p>
+        <div class="bar-row">
+            <div class="bar" role="progressbar" aria-label="Setup progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="bar-fill" id="bar-fill"></div>
+            </div>
+            <span class="percent" id="percent">0%</span>
+        </div>
+        <div class="now" id="now" aria-live="polite">Starting …</div>
+        <ol class="steps" id="steps"></ol>
+    </section>
+
+    <section class="card error hidden" id="error-card" role="alert">
+        <h2>Something went wrong</h2>
+        <p id="error-text"></p>
+        <p>The black MyVocab window shows the details. Check your internet connection and double-click <b>install.bat</b> again.</p>
+    </section>
+
+    <section class="card keys" id="keys-card" aria-labelledby="keys-title">
+        <h2 id="keys-title">🔑 Your free keys</h2>
+        <p>MyVocab uses two free services. Get a key from each, then paste it here. No card or payment is needed.</p>
+
+        <div class="key">
+            <div class="key-head"><h3>Gemini key</h3><span class="tag">Needed</span></div>
+            <p>For meanings, examples, Vietnamese translations and marking your writing.</p>
+            <a class="get-link" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Get a Gemini key ↗</a>
+            <ol>
+                <li>Sign in with your Google account.</li>
+                <li>Click <b>Create API key</b>, then the copy button next to it.</li>
+                <li>Come back here and paste it below.</li>
+            </ol>
+            <div class="paste-row">
+                <input id="gemini" autocomplete="off" spellcheck="false" placeholder="Paste your Gemini key (it starts with AIza)" aria-label="Gemini key">
+                <button type="button" data-paste="gemini">Paste</button>
+            </div>
+            <div class="saved" id="gemini-saved"></div>
+            <div class="status" id="gemini-status" aria-live="polite"></div>
+        </div>
+
+        <div class="key">
+            <div class="key-head"><h3>Pexels key</h3><span class="tag optional">Optional</span></div>
+            <p>For a picture next to each word.</p>
+            <a class="get-link" href="https://www.pexels.com/api/" target="_blank" rel="noopener">Get a Pexels key ↗</a>
+            <ol>
+                <li>Click <b>Get Started</b> and make a free account.</li>
+                <li>Fill in the short form (for the website, write <i>personal English study</i>).</li>
+                <li>Copy <b>Your API Key</b> and paste it below.</li>
+            </ol>
+            <div class="paste-row">
+                <input id="pexels" autocomplete="off" spellcheck="false" placeholder="Paste your Pexels key" aria-label="Pexels key">
+                <button type="button" data-paste="pexels">Paste</button>
+            </div>
+            <div class="saved" id="pexels-saved"></div>
+            <div class="status" id="pexels-status" aria-live="polite"></div>
+        </div>
+
+        <div class="key">
+            <div class="key-head"><h3>Password for “My Words”</h3><span class="tag">Needed</span></div>
+            <p>Choose any password. It keeps your word list page private. Write it down somewhere.</p>
+            <div class="paste-row">
+                <input id="password" autocomplete="off" spellcheck="false" placeholder="Type a password you will remember" aria-label="Password for My Words">
+            </div>
+            <div class="saved" id="password-saved"></div>
+            <div class="status" id="password-status" aria-live="polite"></div>
+        </div>
+
+        <div class="actions">
+            <button type="button" class="primary" id="save">Save keys</button>
+            <button type="button" id="skip">Skip for now</button>
+            <span class="answered-note hidden" id="answered-note">✓ Saved. MyVocab opens as soon as the setup is done.</span>
+        </div>
+    </section>
+
+    <section class="card finish hidden" id="finish-card" aria-labelledby="finish-title">
+        <h2 id="finish-title">🎉 All set!</h2>
+        <p>MyVocab is ready. From now on:</p>
+        <ol>
+            <li>Double-click the <b>MyVocab</b> icon on your desktop (it is in the Start menu too).</li>
+            <li>A black window opens, then MyVocab opens in your browser. Keep that black window open while you study.</li>
+            <li>When you finish, close the black window.</li>
+        </ol>
+        <button type="button" class="primary big" id="open-app">Open MyVocab now</button>
+        <p id="redirect-note"></p>
+    </section>
+</main>
+
+<script>
+const TOKEN = "{{TOKEN}}";
+const $ = (id) => document.getElementById(id);
+const FIELDS = ["gemini", "pexels", "password"];
+const MESSAGES = {
+    ok: { gemini: "✓ Google accepted this key. Saved.", pexels: "✓ Pexels accepted this key. Saved.", password: "✓ Password saved." },
+    bad: { gemini: "✗ Google did not accept this key. Copy it again (the whole key) and paste it.",
+           pexels: "✗ Pexels did not accept this key. Copy it again and paste it.",
+           password: "✗ Use a password without spaces." },
+    unknown: "Saved, but it could not be checked (no internet?). It will be checked when you use MyVocab.",
+};
+let appUrl = null;
+let redirecting = false;
+
+function post(path, body) {
+    return fetch(path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Setup-Token": TOKEN },
+        body: JSON.stringify(body || {}),
+    }).then((r) => r.json());
+}
+
+function showSaved(keys) {
+    for (const field of FIELDS) {
+        const value = keys[field];
+        $(field + "-saved").textContent = value ? (field === "password" ? "A password is saved. Type a new one to change it." : `Saved: ${value}. Paste a new one to change it.`) : "";
+    }
+}
+
+function showAnswered(answered) {
+    $("answered-note").classList.toggle("hidden", !answered);
+}
+
+let stepsBuilt = false;
+function render(state) {
+    const fill = $("bar-fill");
+    fill.style.width = state.percent + "%";
+    fill.parentElement.setAttribute("aria-valuenow", state.percent);
+    $("percent").textContent = state.percent + "%";
+    const current = state.steps.find((s) => s.state === "now");
+    const waiting = current && current.name === "start" && !state.answered && state.detail.includes("keys");
+    $("now").textContent = state.error ? state.error
+        : waiting ? "Almost done: save your keys below, or press “Skip for now”."
+        : current ? current.label + (state.detail ? ": " + state.detail : " …")
+        : state.ready ? "MyVocab is running." : "Starting …";
+    if (!stepsBuilt) {
+        $("steps").innerHTML = state.steps.map((s) => `<li data-step="${s.name}">${s.label}</li>`).join("");
+        stepsBuilt = true;
+    }
+    for (const s of state.steps) document.querySelector(`[data-step="${s.name}"]`).className = s.state;
+    if (state.error) {
+        $("error-card").classList.remove("hidden");
+        $("error-text").textContent = state.error;
+    }
+    if (!document.activeElement || !FIELDS.includes(document.activeElement.id)) showSaved(state.keys);
+    showAnswered(state.answered);
+    if (state.ready) finish(state.app_url);
+}
+
+function finish(url) {
+    if (appUrl) return;
+    appUrl = url;
+    $("progress-card").classList.add("done");
+    $("title").textContent = "MyVocab is set up";
+    $("intro").textContent = "Everything is installed on this computer.";
+    $("keys-card").classList.add("hidden");
+    $("finish-card").classList.remove("hidden");
+    window.MyVocabSetupDone = true;
+    let seconds = 8;
+    const tick = () => {
+        if (redirecting) return;
+        if (seconds <= 0) return openApp();
+        $("redirect-note").textContent = `Opening MyVocab in ${seconds} s …`;
+        seconds -= 1;
+        setTimeout(tick, 1000);
+    };
+    tick();
+}
+
+function openApp() {
+    redirecting = true;
+    location.href = appUrl;
+}
+
+let failures = 0;
+async function poll() {
+    try {
+        const state = await fetch("/state", { cache: "no-store" }).then((r) => r.json());
+        failures = 0;
+        render(state);
+        if (state.error || appUrl) return;  // the setup has ended
+    } catch (e) {
+        failures += 1;
+        if (failures > 5) {
+            $("now").textContent = "The setup window was closed. Double-click install.bat to start again.";
+            return;
+        }
+    }
+    setTimeout(poll, 800);
+}
+
+$("save").addEventListener("click", async () => {
+    const body = {};
+    for (const field of FIELDS) body[field] = $(field).value.trim();
+    if (!FIELDS.some((f) => body[f])) {
+        $("gemini-status").className = "status bad";
+        $("gemini-status").textContent = "Paste a key first, or press “Skip for now”.";
+        return;
+    }
+    $("save").disabled = true;
+    $("save").textContent = "Checking …";
+    try {
+        const reply = await post("/keys", body);
+        for (const field of FIELDS) {
+            const result = reply.results[field];
+            const status = $(field + "-status");
+            status.className = "status" + (result ? " " + result : "");
+            status.textContent = !result ? "" : result === "unknown" ? MESSAGES.unknown : MESSAGES[result][field];
+            if (result && result !== "bad") $(field).value = "";
+        }
+        showSaved(reply.keys);
+        showAnswered(reply.answered);
+    } catch (e) {
+        $("gemini-status").className = "status bad";
+        $("gemini-status").textContent = "The setup is not answering. Is the black MyVocab window still open?";
+    } finally {
+        $("save").disabled = false;
+        $("save").textContent = "Save keys";
+    }
+});
+
+$("skip").addEventListener("click", async () => {
+    await post("/skip").catch(() => {});
+    $("answered-note").textContent = "OK. You can add the keys later: double-click install.bat again.";
+    showAnswered(true);
+});
+
+for (const button of document.querySelectorAll("[data-paste]")) {
+    button.addEventListener("click", async () => {
+        const input = $(button.dataset.paste);
+        try {
+            input.value = (await navigator.clipboard.readText()).trim();
+        } catch (e) {
+            input.focus();
+            $(button.dataset.paste + "-status").className = "status unknown";
+            $(button.dataset.paste + "-status").textContent = "Click in the box, then press Ctrl+V to paste.";
+        }
+    });
+}
+
+$("open-app").addEventListener("click", openApp);
+poll();
+</script>
+</body>
+</html>

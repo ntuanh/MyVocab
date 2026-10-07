@@ -4,3 +4,11 @@ images
 myvocab.db
 .idea
 README.md
+.localdb
+backup
+run.bat
+run.sh
+run.py
+requirements-local.txt
+backup.bat
+install.bat

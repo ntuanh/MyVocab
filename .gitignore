@@ -7,9 +7,17 @@ venv/
 # Secrets - never commit these
 .env
 .env.*
+!.env.example
 Debug/
 
 # Local database / editor / build output
 myvocab.db
 .idea/
 .vercel/
+
+# The database on this computer (tools/local_db.py) and its backups: your own words
+.localdb/
+backup/
+
+# Made by tools/make_shortcut.py on Windows
+static/favicon.ico
