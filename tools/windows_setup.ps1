@@ -8,7 +8,7 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'Continue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$ZipUrl = 'https://github.com/ntuanh/MyVocab/archive/refs/heads/main.zip'
+$Repo = 'ntuanh/MyVocab'
 $Dir = Join-Path $env:LOCALAPPDATA 'MyVocab'
 $Steps = 4
 
@@ -58,24 +58,34 @@ $python = Join-Path $Dir '.venv\Scripts\python.exe'
 $hasDatabase = Test-Path (Join-Path $Dir '.localdb\PG_VERSION')
 if ($hasDatabase -and (Test-Path $python)) {
     Show-Step 1 'Updating MyVocab (your words are saved to a backup first)'
-    & $python (Join-Path $Dir 'tools\local_db.py') backup
+    & $python (Join-Path $Dir 'tools\local_db.py') backup (Join-Path $Dir "backup\myvocab-$(Get-Date -Format yyyy-MM-dd)-before-update.sql")
     if ($LASTEXITCODE -ne 0) { throw 'The backup before the update failed, so nothing was changed.' }
 } else {
     Show-Step 1 'Downloading MyVocab'
 }
+# The newest release (what the Update button offers too); main if GitHub does not say.
+try {
+    $tag = (Invoke-RestMethod "https://api.github.com/repos/$Repo/releases/latest" -UseBasicParsing).tag_name
+} catch {
+    $tag = $null
+}
+$zipUrl = if ($tag) { "https://github.com/$Repo/archive/refs/tags/$tag.zip" } else { "https://github.com/$Repo/archive/refs/heads/main.zip" }
 $temp = Join-Path $env:TEMP ('myvocab-' + [guid]::NewGuid())
 New-Item -ItemType Directory -Path $temp | Out-Null
 $zip = Join-Path $temp 'myvocab.zip'
 $ProgressPreference = 'SilentlyContinue'  # PowerShell's own download bar makes downloads very slow
-Invoke-WebRequest $ZipUrl -OutFile $zip -UseBasicParsing
+Invoke-WebRequest $zipUrl -OutFile $zip -UseBasicParsing
 Expand-Archive -Path $zip -DestinationPath $temp
 $ProgressPreference = 'Continue'
 New-Item -ItemType Directory -Force -Path $Dir | Out-Null
 # Copies over the old files and leaves .env, .venv, .localdb and backup alone (they are not in the download).
-robocopy (Join-Path $temp 'MyVocab-main') $Dir /E /NFL /NDL /NJH /NJS /NP | Out-Null
+$source = (Get-ChildItem -Path $temp -Directory | Select-Object -First 1).FullName  # MyVocab-1.2 or MyVocab-main
+robocopy $source $Dir /E /NFL /NDL /NJH /NJS /NP | Out-Null
 if ($LASTEXITCODE -ge 8) { throw 'Copying MyVocab into its folder failed.' }
 Remove-Item $temp -Recurse -Force
-Write-Host 'MyVocab is downloaded.'
+# Which version this is, so the Update button knows when a newer one is out.
+if ($tag) { Set-Content -Path (Join-Path $Dir '.version') -Value $tag -Encoding ASCII }
+Write-Host "MyVocab $(if ($tag) { $tag } else { '(newest)' }) is downloaded."
 
 # --- 2. Find your words and keys from before -------------------------------------
 Show-Step 2 'Looking for your words and keys from before'

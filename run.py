@@ -41,6 +41,7 @@ LOCAL_DB_PORT = os.environ.get("MYVOCAB_DB_PORT", "5433")  # tools/local_db.py r
 LOCAL_DB_URL = f"postgresql://myvocab@127.0.0.1:{LOCAL_DB_PORT}/myvocab"
 REQUIREMENTS = ["requirements.txt", "requirements-local.txt"]
 OPEN_BROWSER = os.environ.get("OPEN_BROWSER", "1") != "0"
+UPDATE_DIR = os.path.join(ROOT, ".update")  # the Update button's requests (updates.py, tools/update.py)
 EXPECTED_PACKAGES = 30  # what requirements-local.txt pulls in, with everything those need
 
 # The setup, as the progress bar shows it: (name, what the learner reads, share of the bar).
@@ -479,8 +480,12 @@ def main():
 
         # Flask's reloader runs the server in a second process, so the app gets a
         # process group of its own (on Linux and macOS) and the whole group is stopped.
+        for leftover in ("request.json", "stop"):  # from a run that did not end cleanly
+            if os.path.exists(os.path.join(UPDATE_DIR, leftover)):
+                os.remove(os.path.join(UPDATE_DIR, leftover))
         app = subprocess.Popen([PYTHON, "-m", "flask", "--app", "app", "run", "--debug", "--port", PORT],
                                stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors="replace",
+                               env=dict(os.environ, MYVOCAB_LOCAL="1"),
                                **({} if WINDOWS else {"start_new_session": True}))
         threading.Thread(target=pass_on_log, args=(app, progress), daemon=True).start()
         # The setup page sends the browser on to the app; otherwise a new tab opens.
@@ -499,7 +504,12 @@ def main():
                 page.close_later()
         else:
             progress.fail("MyVocab stopped while starting. The black window says why.")
-        return app.wait()
+        while app.poll() is None:
+            if watch_for_update():
+                say("Closing for the update. MyVocab opens again by itself in a moment.")
+                return 0
+            time.sleep(1)
+        return app.returncode
     except KeyboardInterrupt:
         print(flush=True)
         say("Stopping ...")
@@ -510,6 +520,30 @@ def main():
         # The database stops with the app, unless it was already running before.
         if started_db:
             local_db("stop")
+
+
+def watch_for_update():
+    """Starts tools/update.py when the Update button asks, and returns True when
+    that script asks for MyVocab to close so it can put the new files in."""
+    request = os.path.join(UPDATE_DIR, "request.json")
+    if os.path.exists(request):
+        try:
+            with open(request, encoding="utf-8") as f:
+                tag = json.load(f)["tag"]
+        except (OSError, ValueError, KeyError):
+            tag = None
+        os.remove(request)
+        if tag:
+            say(f"Updating to {tag}: the page shows how far it has got.")
+            # On its own (not a child of this window), so it outlives the window it closes.
+            relaunch = "console" if WINDOWS else ("terminal" if sys.stdout.isatty() and os.environ.get("DISPLAY") else "background")
+            subprocess.Popen([PYTHON, os.path.join("tools", "update.py"), "--tag", tag, "--wait-pid", str(os.getpid()),
+                              "--relaunch", relaunch],
+                             stdout=open(os.path.join(UPDATE_DIR, "update.log"), "a"), stderr=subprocess.STDOUT,
+                             stdin=subprocess.DEVNULL,
+                             **({"creationflags": subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP}
+                                if WINDOWS else {"start_new_session": True}))
+    return os.path.exists(os.path.join(UPDATE_DIR, "stop"))
 
 
 def stop_app(app):

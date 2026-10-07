@@ -69,6 +69,27 @@
         </div>
     </div>
 </nav>
+{# A small Update button, shown by update.js only when a newer MyVocab is out (updates.py). #}
+<div id="update-box" class="update-box" hidden>
+    <button type="button" id="update-button" class="update-button" aria-expanded="false" aria-controls="update-panel">
+        <i class="fas fa-arrow-circle-up"></i><span id="update-button-label">Update</span>
+    </button>
+    <div id="update-panel" class="update-panel" role="dialog" aria-labelledby="update-title" hidden>
+        <p class="update-kicker">New version</p>
+        <h2 id="update-title" class="update-title">MyVocab is ready to update</h2>
+        <div id="update-notes" class="update-notes"></div>
+        <p class="update-safe"><i class="fas fa-shield-alt"></i> Your words are saved to a backup first. MyVocab closes and opens again by itself, in about a minute.</p>
+        <div id="update-progress" class="update-progress" hidden>
+            <div class="update-bar"><div id="update-bar-fill" class="update-bar-fill"></div></div>
+            <p id="update-message" class="update-message" role="status"></p>
+        </div>
+        <div class="update-actions">
+            <button type="button" id="update-now" class="update-now">Update now</button>
+            <button type="button" id="update-later" class="update-later">Later</button>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='update.js') }}" defer></script>
 <script src="{{ url_for('static', filename='sky.js') }}" defer></script>
 {# Confetti, floating points and achievement cards for every page (window.MyVocabFx). #}
 <script src="{{ url_for('static', filename='fx.js') }}"></script>

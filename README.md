@@ -122,8 +122,15 @@ The Start menu also has:
 
 ### Getting a new version
 
-Double-click **MyVocab-Setup** again. It saves a backup of your words first,
-then downloads the new version. Your words, keys and backups are kept.
+When a new version is out, a small **⬆ Update** button appears in the
+bottom-left corner of MyVocab (it checks about every half hour). Click it to
+see what is new, then click **Update now**:
+
+1. MyVocab downloads the new version and saves a backup of your words.
+2. The black window closes, and a new one opens by itself after a few seconds.
+3. The page reloads and says **Updated to v…**. Your words, keys and backups are kept.
+
+Running **MyVocab-Setup** again also updates MyVocab.
 
 ### If something goes wrong
 
@@ -308,6 +315,7 @@ MyVocab/
 ├── listening.py          # Listening episodes and how their scores become points
 ├── reading.py            # Reading parts: loading and checking them, marking, the plan
 ├── writing.py            # Writing: prompts, AI marking out of 80, points
+├── updates.py            # New versions: asks GitHub for the newest release, starts an update
 │
 ├── static/               # JS, CSS, client assets
 │   ├── style.css
@@ -362,6 +370,8 @@ MyVocab/
 │   ├── make_shortcut.py  # Puts a MyVocab icon on the desktop and in the menu (Linux, Windows)
 │   ├── setup.html        # The setup page: progress bar and the box for your keys
 │   ├── windows_setup.ps1 # What MyVocab-Setup.bat runs: download, find backup and keys, set up
+│   ├── update.py         # Puts a new release in: download, backup, close, copy, reopen
+│   ├── release.py        # For the developer: publish a new version (a GitHub release)
 │   └── get_python.ps1    # Installs Python 3.12 on Windows when it is missing
 │
 ├── run.py                # Sets up and starts the app on your computer (any system)
@@ -393,6 +403,43 @@ MyVocab/
 
 ---
 
+
+## Publishing a new version
+
+Installed copies of MyVocab update from **GitHub releases**, not from every
+push. That way, unfinished work on `main` never reaches anyone. When a set of
+changes is ready, run this on your computer:
+
+```bash
+git add -A && git commit -m "feat: what you added"   # commit as usual
+python3 tools/release.py                             # v1.1 -> v1.2: pushes main, publishes the release
+```
+
+It shows the new version number and a "What's new" list made from the commit
+messages since the last release, and asks before publishing. You can also give
+the version and notes yourself: `python3 tools/release.py 2.0 --notes "- Speaking practice"`.
+It needs the GitHub CLI (`gh auth login`).
+
+Within about half an hour, every installed MyVocab shows the **Update** button
+with that list:
+
+- `updates.py` asks GitHub for the newest release (`/api/update/status`);
+- `static/update.js` shows the button and follows the update;
+- `run.py` starts `tools/update.py`, which:
+  1. downloads the release;
+  2. saves a backup to `backup/myvocab-<date>-before-<version>.sql`;
+  3. closes MyVocab and puts the new files in;
+  4. opens MyVocab again, and `run.py` installs any new packages.
+
+`.env`, `.venv`, `.localdb` and `backup/` are not in a release, so they stay.
+The installed version is in `.version`. New installs from `MyVocab-Setup.bat`
+get the newest release too.
+
+The button only shows in a copy that `run.py` started and that is not a git
+clone. Your own clone updates with `git pull`, and Vercel deploys every push to
+`main` by itself.
+
+---
 
 ## Deployment (Vercel)
 

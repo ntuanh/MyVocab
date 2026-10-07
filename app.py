@@ -21,6 +21,7 @@ from reading import POINTS_RIGHT, WRONG_LOSES as READING_WRONG_LOSES, MINUTES_PE
 from reading import submit as submit_reading, SKILL as READING_SKILL
 from writing import KINDS as WRITING_KINDS, MAX_SCORE as WRITING_MAX, SKILL as WRITING_SKILL
 from writing import prompt_for as writing_prompt, check as check_writing, retry as retry_writing
+import updates
 from database import (
     get_writing_history,
     get_writing_piece,
@@ -521,3 +522,20 @@ def grammar_check_route():
     data = request.get_json(silent=True) or {}
     body, status = check_grammar(data.get('text'))
     return jsonify(body), status
+
+
+@app.route('/api/update/status', methods=['GET'])
+def update_status_route():
+    """Whether a newer MyVocab is out, and how far an update has got (static/update.js)."""
+    return jsonify(updates.status())
+
+
+@app.route('/api/update/start', methods=['POST'])
+def update_start_route():
+    """Starts the update to the newest release. JSON only, so another site cannot send it."""
+    if not request.is_json:
+        return jsonify({'error': 'Send JSON.'}), 400
+    error = updates.start(str((request.get_json(silent=True) or {}).get('tag') or ''))
+    if error:
+        return jsonify({'error': error}), 409
+    return jsonify({'ok': True}), 202

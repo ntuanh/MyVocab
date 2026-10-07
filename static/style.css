@@ -2290,6 +2290,72 @@ body.reading-testing { gap: 1rem; }
     100% { opacity: 0;    transform: translate(var(--drift), 72vh) rotate(540deg); }
 }
 
+/* --- 9b. UPDATE BUTTON (templates/_nav.html, driven by update.js) ---
+   Small and out of the way in the bottom-left corner, only when a new version is out. */
+
+.update-box { position: fixed; left: 1rem; bottom: 1rem; z-index: 1500; }
+.update-box[hidden] { display: none; }
+.update-button {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    padding: 0.45rem 0.9rem; border-radius: 999px;
+    border: 1px solid var(--accent);
+    background-color: var(--paper-raised); color: var(--ink);
+    font: inherit; font-size: 0.85rem; font-weight: 800; cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+}
+.update-button:hover { transform: translateY(-1px); }
+.update-button i { color: var(--accent); }
+.update-box:not(.busy):not(.done) .update-button i { animation: update-nudge 2.4s ease-in-out infinite; }
+.update-box.busy .update-button i { animation: spin 1s linear infinite; }
+.update-box.done .update-button { background-color: var(--ok-bg); color: var(--ok-ink); border-color: transparent; }
+.update-box.done .update-button i { color: inherit; }
+@keyframes update-nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.update-panel {
+    position: absolute; left: 0; bottom: calc(100% + 0.6rem);
+    box-sizing: border-box; width: min(340px, calc(100vw - 2rem)); padding: 1rem 1.1rem;
+    border-radius: 16px; border: 1px solid var(--line);
+    background-color: var(--paper-raised); color: var(--ink);
+    box-shadow: var(--shadow-lift);
+}
+.update-panel[hidden] { display: none; }
+.update-kicker {
+    margin: 0; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--accent);
+}
+.update-title { margin: 0.15rem 0 0.5rem; font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; }
+.update-notes { font-size: 0.88rem; color: var(--ink-soft); max-height: 35vh; overflow-y: auto; }
+.update-whats-new { margin: 0; font-weight: 800; color: var(--ink); }
+.update-notes ul { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+.update-notes li { margin: 0.1rem 0; }
+.update-safe { margin: 0.7rem 0; font-size: 0.8rem; color: var(--ink-faint); }
+.update-safe i { color: var(--accent); }
+.update-bar { height: 10px; border-radius: 999px; background-color: var(--paper-inset); overflow: hidden; }
+.update-bar-fill { height: 100%; width: 0; border-radius: 999px; background-color: var(--accent); transition: width 0.6s ease; }
+.update-message { margin: 0.45rem 0 0; font-size: 0.85rem; font-weight: 700; }
+.update-message.error { color: var(--danger); }
+.update-message.ok { color: var(--ok-ink); }
+.update-actions { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
+.update-actions button[hidden] { display: none; }
+.update-now, .update-later {
+    padding: 0.5rem 1rem; border-radius: 999px; font: inherit; font-size: 0.88rem; font-weight: 800; cursor: pointer;
+}
+.update-now { border: none; background-color: var(--accent); color: var(--accent-ink); }
+.update-now:hover { background-color: var(--accent-hover); }
+.update-now:disabled { opacity: 0.6; cursor: wait; }
+.update-later { border: 1px solid var(--line); background-color: transparent; color: var(--ink); }
+.update-later:hover { background-color: var(--paper-hover); }
+@media (prefers-reduced-motion: reduce) {
+    .update-box .update-button i { animation: none !important; }
+    .update-bar-fill, .update-button { transition: none; }
+}
+@media (max-width: 760px) {
+    .update-box { left: 12px; bottom: 12px; }
+    .update-panel { width: calc(100vw - 24px); }  /* the same 12px gap on both sides */
+}
+
 /* --- 10. NARROW SCREENS --- */
 
 @media (max-width: 760px) {
