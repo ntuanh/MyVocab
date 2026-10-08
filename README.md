@@ -293,6 +293,7 @@ again after adding a key.
 
 - **Search**: Enter an English word and press Enter.
 - **View Details**: See definition, translation, example, IPA, synonyms, related words, and image.
+- **Meanings on hover**: point at any word under *Similar* or *Family* (or focus it with Tab; on a phone, hold it) and a small box shows its English meaning and part of speech. It uses your own saved definition when you have the word, otherwise Wiktionary (free, no key, no AI quota), and each word is looked up only once (`word_glosses`).
 - **Save**: Click "Save Word" and tick its topics, or click *Save, and let AI pick the topic*: the dialog closes at once, a small card in the corner follows the word while AI files it under the one topic it fits best (making a new topic only when none of yours fits), and you can keep searching meanwhile. Each AI pick is one Gemini request; the word is saved even if the AI fails.
 - **Manage Topics**: Add or remove topics as you like.
 - **Quiz**: Go to "Exam" to test yourself on saved words by topic.
@@ -414,6 +415,7 @@ MyVocab/
 - `word_topics`: word_id, topic_id
 - `practice_points`: id, created_at, skill, word_id, mode, verdict, worth, points (one row per marked answer or counted listening score)
 - `listening_attempts`: id, created_at, episode_id, correct, total, points, counted (one row per listening score; only an episode's first counts)
+- `word_glosses`: word, definition, part_of_speech, source, fetched_at (meanings shown on hover; a miss is retried after 7 days)
 - `listening_docs`: id, uploaded_at, episode_id, filename, content_type, size, data (an episode's own files: worksheet, transcript, audio)
 - `reading_attempts`: id, created_at, part_id, correct, total, points, counted, answers (one row per submitted reading part; only a part's first counts)
 - `writing_pieces`: id, created_at, kind, prompt_id, prompt, text, words, revision_of, status, score, band, feedback, counted, points, scored_at (one row per piece of writing and its marks)

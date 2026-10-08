@@ -597,6 +597,40 @@ kbd {
 .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .tag { padding: 0.25rem 0.85rem; border-radius: 999px; font-size: 0.92rem; font-weight: 700; background-color: var(--tag); }
 #family-list .tag { background-color: var(--accent-soft); }
+/* A chip with a meaning to show (glosses.js): a dotted line hints that it has one. */
+.tag.has-gloss {
+    cursor: help; text-decoration: underline dotted; text-decoration-color: var(--ink-faint);
+    text-underline-offset: 3px; transition: transform 0.15s, box-shadow 0.15s;
+}
+.tag.has-gloss:hover, .tag.has-gloss:focus-visible, .tag.has-gloss[aria-describedby] {
+    transform: translateY(-1px); box-shadow: 0 0 0 2px var(--accent); outline: none;
+}
+
+/* The meaning box: a card that rises into place over the chip, with an arrow pointing at it. */
+.gloss-tip {
+    position: fixed; z-index: 3000; max-width: min(320px, calc(100vw - 16px)); padding: 0.7rem 0.9rem;
+    border-radius: 12px; background-color: var(--paper-raised); color: var(--ink);
+    border: 1px solid var(--line); box-shadow: var(--shadow-lift);
+    opacity: 0; transform: translateY(4px); transition: opacity 0.15s, transform 0.15s; pointer-events: none;
+}
+.gloss-tip.below { transform: translateY(-4px); }
+.gloss-tip.shown { opacity: 1; transform: none; }
+.gloss-tip[hidden] { display: none; }
+.gloss-tip::after {
+    content: ""; position: absolute; left: calc(var(--arrow, 50%) - 6px); top: 100%;
+    border: 6px solid transparent; border-top-color: var(--paper-raised);
+}
+.gloss-tip.below::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: var(--paper-raised); }
+.gloss-head { margin: 0 0 0.2rem; display: flex; align-items: baseline; gap: 0.45rem; }
+.gloss-word { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; }
+.gloss-pos { font-size: 0.78rem; font-style: italic; color: var(--accent); }
+.gloss-def { margin: 0; font-size: 0.9rem; line-height: 1.45; }
+.gloss-tip.gloss-empty .gloss-def { color: var(--ink-soft); font-style: italic; }
+.gloss-src { margin: 0.35rem 0 0; font-size: 0.72rem; color: var(--ink-faint); }
+.gloss-src:empty { display: none; }
+@media (prefers-reduced-motion: reduce) {
+    .gloss-tip, .gloss-tip.below, .tag.has-gloss { transition: none; transform: none; }
+}
 
 .action-btn {
     padding: 0.7rem 1.4rem; border: 1px solid var(--line); border-radius: 999px;

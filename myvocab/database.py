@@ -108,6 +108,15 @@ def initialize_schema(cursor):
             );
         ''')
         cursor.execute("CREATE INDEX IF NOT EXISTS listening_docs_episode ON listening_docs (episode_id);")
+        # Short definitions of the words shown as chips on a word card (myvocab/glosses.py),
+        # kept so each word is looked up once. definition is NULL for a word that
+        # was looked up and not found, so it is not asked about again for a while.
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS word_glosses (
+                word TEXT PRIMARY KEY, definition TEXT, part_of_speech TEXT, source TEXT,
+                fetched_at TIMESTAMPTZ NOT NULL DEFAULT now()
+            );
+        ''')
 
         cursor.execute("SELECT COUNT(*) FROM topics;")
         if cursor.fetchone()[0] == 0:
@@ -419,6 +428,34 @@ def save_listening_attempt(cur, episode_id, correct, total, worth, points):
         cur.execute("INSERT INTO practice_points (skill, word_id, mode, verdict, worth, points) "
                     "VALUES ('listening', NULL, 'bbc_6min', 'exam', %s, %s);", (worth, earned))
     return {"counted": counted, "points": earned}
+
+
+@db_transaction(on_error=None)
+def saved_definitions(cur, words):
+    """{word: its English definition} for the given words the learner has saved."""
+    cur.execute("SELECT lower(word) AS word, english_definition FROM words "
+                "WHERE lower(word) = ANY(%s) AND coalesce(english_definition, '') NOT IN ('', 'N/A');", (list(words),))
+    return {row['word']: row['english_definition'] for row in cur.fetchall()}
+
+
+@db_transaction(on_error=None)
+def cached_glosses(cur, words, keep_days, miss_days):
+    """The looked-up definitions still fresh enough: a found one for keep_days, a miss for miss_days."""
+    cur.execute("SELECT word, definition, part_of_speech, source FROM word_glosses WHERE word = ANY(%s) "
+                "AND fetched_at > now() - make_interval(days => CASE WHEN definition IS NULL THEN %s ELSE %s END);",
+                (list(words), miss_days, keep_days))
+    return {row['word']: dict(row) for row in cur.fetchall()}
+
+
+@db_transaction(on_error=False)
+def store_glosses(cur, rows):
+    """Keeps looked-up definitions (definition None for a word not found)."""
+    for row in rows:
+        cur.execute("INSERT INTO word_glosses (word, definition, part_of_speech, source) VALUES (%s, %s, %s, %s) "
+                    "ON CONFLICT (word) DO UPDATE SET definition = EXCLUDED.definition, "
+                    "part_of_speech = EXCLUDED.part_of_speech, source = EXCLUDED.source, fetched_at = now();",
+                    (row['word'], row.get('definition'), row.get('part_of_speech'), row.get('source')))
+    return True
 
 
 DOC_FIELDS = "id, episode_id, filename, content_type, size, uploaded_at"

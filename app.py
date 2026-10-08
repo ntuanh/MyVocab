@@ -26,6 +26,7 @@ from myvocab.reading import submit as submit_reading, SKILL as READING_SKILL
 from myvocab.writing import KINDS as WRITING_KINDS, MAX_SCORE as WRITING_MAX, SKILL as WRITING_SKILL
 from myvocab.writing import prompt_for as writing_prompt, check as check_writing, retry as retry_writing
 from myvocab import updates
+from myvocab.glosses import glosses, MAX_WORDS as MAX_GLOSS_WORDS
 from myvocab.database import (
     get_writing_history,
     get_writing_piece,
@@ -445,6 +446,15 @@ def listening_score_route():
     if status == 200:
         body['progress'] = get_progress(LISTENING_SKILL, _utc_offset(data.get('utc_offset')))
     return jsonify(body), status
+
+@app.route('/api/glosses', methods=['POST'])
+def glosses_route():
+    """Short English definitions for a word card's Similar and Family words (static/js/glosses.js)."""
+    words = (request.get_json(silent=True) or {}).get('words')
+    if not isinstance(words, list):
+        return jsonify({'error': 'Send {"words": [...]}.'}), 400
+    return jsonify({'glosses': glosses(words[:MAX_GLOSS_WORDS])})
+
 
 # --- An episode's own files (the BBC worksheet, transcript, audio) ---
 # Private like My Words: open on this computer, online only after the password.

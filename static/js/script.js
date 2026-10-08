@@ -70,11 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Returns whether there was anything to show.
+    // Each chip shows its English meaning when pointed at or focused (glosses.js).
     function fillTags(element, list) {
         element.replaceChildren(...(list || []).map(item => {
             const tag = document.createElement('span');
-            tag.className = 'tag';
+            tag.className = 'tag has-gloss';
             tag.textContent = item;
+            tag.dataset.gloss = item;
+            tag.tabIndex = 0;
             return tag;
         }));
         return Boolean(list && list.length);
@@ -115,6 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
         showRow('example-panel', present(data.example));
         showRow('synonym-panel', fillTags(synonymListEl, data.synonyms));
         showRow('family-panel', fillTags(familyListEl, data.family_words));
+        if (window.MyVocabGlosses) {
+            window.MyVocabGlosses.hide();
+            window.MyVocabGlosses.prepare([...(data.synonyms || []), ...(data.family_words || [])]);
+        }
 
         // Every new word starts with its meaning hidden, so you can test yourself first.
         setRevealed(false);
