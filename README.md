@@ -1,20 +1,9 @@
 # MyVocab
 
-<table>
-<tr>
-<td width="70%" style="vertical-align: top;">
+MyVocab is a modern, AI-powered app to help you learn English vocabulary efficiently. It provides definitions, Vietnamese translations, example sentences, pronunciation, synonyms, related words, and images for any English word. You can save words, organize them by topics, and test yourself with quizzes.
 
-[MyVocab](https://my-vocab-xi.vercel.app/) is a modern, AI-powered web app to help you learn English vocabulary efficiently. It provides definitions, Vietnamese translations, example sentences, pronunciation, synonyms, related words, and images for any English word. You can save words, organize them by topics, and test yourself with quizzes .
-[&rarr; Access it here](https://my-vocab-xi.vercel.app/)
-
-</td>
-<td width="30%" style="vertical-align: top; text-align: center;">
-
-<img src="./docs/images/MyVocabQR.png" alt="MyVocab QR" width="350" height="350" style="display: block; margin: 0 auto;">
-
-</td>
-</tr>
-</table>
+MyVocab runs on your own computer: see [Install on Windows](#install-on-windows-no-technical-knowledge-needed)
+or [Run it on your computer](#run-it-on-your-computer). There is no online copy.
 
 ---
 
@@ -150,6 +139,7 @@ Running **MyVocab-Setup** again also updates MyVocab.
 | The browser says *This site can't be reached* | Wait 10 seconds and refresh the page. Make sure the black window is still open. |
 | No icon on the desktop | Start menu → **MyVocab Setup** (or run **MyVocab-Setup** again): it makes the icons again. |
 | Your old words are not there | The backup was not found in step 2. Close MyVocab, delete the **.localdb** folder in the MyVocab folder, put the backup file on the Desktop, and run **MyVocab-Setup** again. Only do this if you have not saved new words on this computer yet. |
+| *You have not saved any words yet*, but you have | The database did not start. Close the black window and open MyVocab again. (Since v1.4 this fixes itself, even after the computer was switched off with MyVocab open.) |
 | *Out of quota*, or the AI marking stops | The free AI allows about 20 requests a day. Try again tomorrow. |
 
 **Where is the MyVocab folder?** Press **Windows + R**, type
@@ -207,14 +197,14 @@ The shortcuts open `run.bat` (MyVocab), `backup.bat` (MyVocab Backup) and
   If MyVocab is already running, the shortcut only opens the browser.
 
 To change the keys later, run `python3 run.py --setup` (Windows: *MyVocab Setup* in the Start menu),
-or edit `.env` (the [table below](#environment-variables) says what each key is
+or edit `.env` ([Settings](#settings-env) says what each key is
 for). Closing the window (or Ctrl+C) stops the app and its database.
 
 | To... | Do |
 | :--- | :--- |
 | use another port | `PORT=5001 ./run.sh` (Windows: `set PORT=5001` then `run.bat`) |
 | not open the browser (and no setup page) | `OPEN_BROWSER=0 ./run.sh` |
-| use the online database instead | put its `DATABASE_URL` in `.env` |
+| use another PostgreSQL database | put its `DATABASE_URL` in `.env` |
 
 ### Moving your words to another computer
 
@@ -288,7 +278,6 @@ again after adding a key.
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
 ---
 
@@ -320,9 +309,9 @@ again after adding a key.
 - **Listening**: Practice → *Listening* plays 50 episodes of BBC Learning English's *6 Minute English* in the BBC's own YouTube player (newest first; filter by To do, Done or topic; link to one with `/listening#VIDEO_ID`). Watch an episode, do its BBC quiz or worksheet (the link is in the video's description on YouTube; from Vietnam the BBC site needs a UK VPN), then enter how many you got right. Each right answer wins 4 points and each wrong one loses 2 (5 out of 6 is +18). Only your first score for an episode counts; later ones are kept as practice. The points go to the Listening band on the Tracking page.
 - **Reading**: Practice → *Reading* is a 50-day plan of IELTS-style Academic Reading parts written for MyVocab, one a day (the real Cambridge tests are copyrighted). Each part is a passage in lettered paragraphs with 13 questions in the real test's formats: True/False/Not Given, sentence completion with a word limit, multiple choice, which paragraph contains…, and matching headings. Passages start at about 450 words and grow to full IELTS length (about 700) by day 50. A part opens with the passage beside the questions, as in the computer-based test, and a 20-minute timer; on a phone the two are tabs. Answers are kept on your device until you submit; the server marks them and shows the answer key, with a button that jumps to the paragraph each answer is in, and a rough band (the part's score scaled to 40 questions). Each right answer wins 3 points, each wrong one loses 1, a blank costs nothing, and only your first try at a part counts. The plan shows today's part, every day's score and your day streak; link to a part with `/reading#part-12`.
   Every marked answer scores whole points by how hard its sentence is: the practice type (Fill the blank 1, Fix the mistake 2, Translate 3, Use it 3), plus 1 for every 4 words and 1 for each word of 7+ letters, up to 20. Right wins them all; *almost* loses a third and wrong (or *Show answer*) loses half, rounded down. Answers nothing could mark, and *Check my writing*, score nothing. Points and goals are kept per skill, ready for listening, reading and writing scores.
-- **My Words**: View and manage all your saved words. Online it asks for the password; on your own computer (`./run.sh`) it opens straight away.
+- **My Words**: View and manage all your saved words. It opens straight away on your own computer, so the password is optional.
 - **Getting around**: the bar at the top of every page links Dictionary, Exam, Practice and My Words, and lets you change the look.
-- **Writing**: Practice → *Writing*. Each time, choose a **daily diary** (an idea is suggested each day, with three of your saved words to try), **IELTS Writing Task 1** (16 charts and tables to describe: line graphs, bar charts, pie charts and tables, drawn on the page, with invented practice data) or **IELTS Writing Task 2** (40 essay questions in every common question type). Tasks have the real test's time (20 or 40 minutes) and word targets (150 or 250); a word meter shows your progress, and drafts are kept on your device. **Mark my writing** sends it to Gemini, which marks it like a teacher on four criteria out of 20, so **80 in all** (for IELTS tasks, the official criteria, with a band estimate): a score ring and a bar per criterion with comments, what you did well, every correction marked in your text with an explanation, better words, how you used your words to try, an improved version, one thing to practise next and a short summary in Vietnamese. **Revise this piece** lets you improve it and mark it again. Your score is your Writing points: one diary a day and each IELTS question once; revisions are practice. If the AI is busy or out of its daily quota, the piece is kept (with LanguageTool's grammar notes meanwhile) and **Mark it now** tries again later. Past writing is listed under *Your writing*; diaries are private, so online it needs the My Words password. `GEMINI_WRITING_MODEL` moves marking onto another model and its own quota.
+- **Writing**: Practice → *Writing*. Each time, choose a **daily diary** (an idea is suggested each day, with three of your saved words to try), **IELTS Writing Task 1** (16 charts and tables to describe: line graphs, bar charts, pie charts and tables, drawn on the page, with invented practice data) or **IELTS Writing Task 2** (40 essay questions in every common question type). Tasks have the real test's time (20 or 40 minutes) and word targets (150 or 250); a word meter shows your progress, and drafts are kept on your device. **Mark my writing** sends it to Gemini, which marks it like a teacher on four criteria out of 20, so **80 in all** (for IELTS tasks, the official criteria, with a band estimate): a score ring and a bar per criterion with comments, what you did well, every correction marked in your text with an explanation, better words, how you used your words to try, an improved version, one thing to practise next and a short summary in Vietnamese. **Revise this piece** lets you improve it and mark it again. Your score is your Writing points: one diary a day and each IELTS question once; revisions are practice. If the AI is busy or out of its daily quota, the piece is kept (with LanguageTool's grammar notes meanwhile) and **Mark it now** tries again later. Past writing is listed under *Your writing*. `GEMINI_WRITING_MODEL` moves marking onto another model and its own quota.
 - **Today** (on the home page): a word of the day picked from your saved words, the same all day and new tomorrow (its Vietnamese stays hidden until you ask, and one click opens its full card), beside a ring for each skill showing how its week is going.
 - **Effects**: confetti and an achievement card when you reach a weekly target or score a perfect reading part or listening episode, points that float up from the answer that won them, numbers that count up, bars that shimmer and turn gold at the target, flickering streak flames, cards that rise into place, and on dry mornings and evenings a few leaves drifting down from the trees. All of it is off when your system asks for reduced motion.
 - **Live sky**: the button at the top right shows the place, temperature and weather. Open it to pick a place (search any city, scroll the list, or use your location). The page then looks like that place right now: a bright *morning*, a golden *evening* around sunset, or a calm *night*, taken from its real sunrise and sunset, with clouds, rain, snow, fog or a storm when the weather has them. Two big trees, a banyan and an Indian almond, frame every page: they lean in the wind (more in rain, most in a storm), hold snow when it snows, and fireflies come out around them on dry nights. *Live* follows the place; Morning, Evening or Night pins one look. The rain and snow animation can be switched off.
@@ -355,11 +344,11 @@ MyVocab/
 ├── install.bat            # Windows: set this folder up / change the keys (Start menu: MyVocab Setup)
 ├── backup.bat             # Windows: save your words to backup/ (Start menu: MyVocab Backup)
 ├── MyVocab-Setup.bat      # Windows: the one file to download; installs or updates everything
-├── requirements.txt       # Python packages, here and online (pinned)
+├── requirements.txt       # Python packages (pinned)
 ├── requirements-local.txt # ... plus the database program, for a computer
 ├── requirements-dev.txt   # ... plus what the tests need (Playwright)
 ├── .env.example           # Template for .env (keys and settings; .env is never committed)
-├── vercel.json            # Vercel build and routing
+├── vercel.json            # Old Vercel build and routing (the online copy is switched off)
 │
 ├── myvocab/               # The app's Python code, used by app.py
 │   ├── database.py        # PostgreSQL: words, topics, points, targets, attempts (+ schema)
@@ -411,7 +400,7 @@ MyVocab/
 │   ├── fill_missing.py    # Add missing pictures, IPA, synonyms, family words
 │   └── draw_trees.py      # Draw templates/partials/trees.html
 │
-├── api/index.py           # Vercel entry point (exposes `app`)
+├── api/index.py           # Old Vercel entry point (exposes `app`)
 └── docs/images/           # Pictures for this README
 ```
 
@@ -466,8 +455,7 @@ The installed version is in `.version`. New installs from `MyVocab-Setup.bat`
 get the newest release too.
 
 The button only shows in a copy that `run.py` started and that is not a git
-clone. Your own clone updates with `git pull`, and Vercel deploys every push to
-`main` by itself.
+clone. Your own clone updates with `git pull`.
 
 ### Testing
 
@@ -489,42 +477,16 @@ own database, filled from your newest backup, so your words are never touched.
 
 ---
 
-## Deployment (Vercel)
+## Settings (.env)
 
-The online copy runs on [Vercel](https://vercel.com) (free Hobby plan) with its
-database on [Neon](https://neon.com) (free plan: 0.5 GB, plenty for MyVocab).
-The tables are created automatically on the first request, so a brand new
-PostgreSQL database needs no manual setup.
-
-1. **Database.** Create a free Neon project and copy its connection string
-   (`postgresql://...?sslmode=require`).
-2. **Your words** (optional). Load a backup into it, using the `psql` that
-   came with the local database:
-   ```bash
-   python3 tools/local_db.py backup
-   $(.venv/bin/python -c "import pgserver,os;print(os.path.dirname(pgserver.__file__))")/pginstall/bin/psql "<Neon connection string>" -f backup/myvocab-<date>.sql
-   ```
-3. **App.** In Vercel, *Add New -> Project*, import the GitHub repository, and
-   set the [environment variables](#environment-variables) below: at least
-   `DATABASE_URL` (from Neon), `FLASK_SECRET_KEY` (a long random value),
-   `VIEW_DATA_PASSWORD` and `GEMINI_API_KEY`. Deploy.
-4. **Updates.** Every push to GitHub deploys again.
-
-`vercel.json` sends every request to `api/index.py` and ships `templates/`,
-`static/` and `data/` with it. `.vercelignore` keeps the local database, your
-backups and the local launchers out of the upload. Online, *My Words*, past
-writing and diaries need `VIEW_DATA_PASSWORD`, and each AI lookup or marking
-uses the free Gemini quota (about 20 requests a day per model).
-
-### Environment Variables
-
-Set these in **Project Settings -> Environment Variables**:
+`run.py` makes `.env` from `.env.example` the first time, and the setup page
+fills in the keys. Edit `.env` to change any of these:
 
 | Variable | Required | Purpose |
 | :--- | :--- | :--- |
-| `DATABASE_URL` | Yes | PostgreSQL connection string (Neon, Supabase, Vercel Postgres...). |
-| `FLASK_SECRET_KEY` | Yes | Signs the session cookie. Without it every deployment shares a public default and the `/data` password can be bypassed. Use a long random value. |
-| `VIEW_DATA_PASSWORD` | Yes | Password for the `/data` page. `/api/verify_password` returns 500 if unset. |
+| `DATABASE_URL` | No | PostgreSQL connection string. `run.py` sets it to the database on this computer; put another one here to use that instead. |
+| `FLASK_SECRET_KEY` | No | Signs the session cookie. `run.py` sets a long random value the first time. |
+| `VIEW_DATA_PASSWORD` | No | Password for the `/data` page. On your own computer it opens without one. |
 | `GEMINI_API_KEY` | Yes | Google AI Studio key. Without it lookups return no definition. |
 | `PEXELS_API_KEY` | No | Image lookups; word images are skipped if unset. |
 | `GEMINI_MODEL` | No | Defaults to `gemini-3.5-flash-lite`. Set this if that model is retired. Prefer a `-lite` model: the free tier allows only 20 requests a day per model, and the non-lite ones spend seconds reasoning before answering. |
@@ -542,13 +504,6 @@ Set these in **Project Settings -> Environment Variables**:
 - An answer that matches the expected one is marked without a request.
 - *Fill the blank* falls back to the example sentences saved with your words when Gemini is unavailable, and *Use it in a sentence* never needs Gemini to start.
 - When Gemini cannot mark an answer, LanguageTool still checks grammar and spelling (its explanations are in English).
-
-### Local and online
-
-Both run the same code. To run a copy on your computer, see
-[Run it on your computer](#run-it-on-your-computer). To update the online
-copy, push to GitHub and Vercel deploys it. The two use different databases
-unless your `.env` points at the online one.
 
 ---
 

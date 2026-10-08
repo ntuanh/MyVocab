@@ -45,7 +45,34 @@ def run(tool, *args, quiet=True):
 
 
 def running():
-    return subprocess.run([bin_path("pg_ctl"), "-D", DATA, "status"], capture_output=True).returncode == 0
+    """True when the database answers on its port. Not `pg_ctl status`: that
+    trusts postmaster.pid, and a stale one can look alive (see stale_lock)."""
+    return subprocess.run([bin_path("pg_isready"), "-h", "127.0.0.1", "-p", PORT, "-q"],
+                          capture_output=True).returncode == 0
+
+
+def stale_lock():
+    """True when postmaster.pid is left over from a database that is gone. A
+    computer switched off with the database on leaves the file behind. After a
+    restart its process number may belong to another program, so pg_ctl would
+    take the database for running and never start it. The file only counts
+    while its process is a postgres."""
+    path = os.path.join(DATA, "postmaster.pid")
+    if not os.path.exists(path):
+        return False
+    try:
+        with open(path) as f:
+            pid = int(f.readline())
+    except (OSError, ValueError):
+        return True
+    try:
+        import psutil  # comes with pgserver
+    except ImportError:
+        return False  # cannot tell: leave the file alone
+    try:
+        return "postgres" not in psutil.Process(pid).name().lower()
+    except psutil.Error:  # no such process (or not ours to look at)
+        return not psutil.pid_exists(pid)
 
 
 def start():
@@ -58,6 +85,9 @@ def start():
         with open(os.path.join(DATA, "postgresql.conf"), "a", encoding="utf-8") as conf:
             conf.write(f"\nlisten_addresses = '127.0.0.1'\nport = {PORT}\nunix_socket_directories = ''\n")
     if not running():
+        if stale_lock():
+            os.remove(os.path.join(DATA, "postmaster.pid"))
+            print("Removed a lock file left when the computer was switched off with the database on.")
         run("pg_ctl", "-D", DATA, "-l", os.path.join(DATA, "server.log"), "-w", "start")
     if created:
         run("createdb", *CONNECT, NAME)
