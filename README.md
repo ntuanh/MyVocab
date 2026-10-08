@@ -263,10 +263,19 @@ again after adding a key.
 
 | Part | Size |
 | :--- | :--- |
-| The code and content (Python, pages, 700 words, 50 reading parts, prompts) | about 3 MB |
+| Download from GitHub (code, 706 words, 50 reading parts, prompts, pictures) | about 2 MB (5 MB unpacked) |
 | `.venv`: Python packages, including the database program | about 80 MB |
-| `.localdb`: the database (your data in it is about 8 MB; a backup is about 200 KB) | about 65 MB |
-| Memory while running: the app (two Python processes) and the database | about 160 MB |
+| `.localdb`: the database (your data in it is about 9 MB; a backup is about 250 KB) | about 30 MB |
+| Memory while running: the app and the database | about 75 MB (a git clone, in debug mode, about 105 MB) |
+| The browser tab, while you do nothing | under 1% of one processor core |
+
+Since v1.7 the database uses settings sized for one person (16 MB of shared
+memory, 30 connections, no replication) and 1 MB change-log files instead of
+16 MB. A database made by an older version is rebuilt once in that layout the
+next time MyVocab starts (`tools/local_db.py compact`), with a backup first.
+Every table's rows are checked before the old files go. On the pages, the
+clouds and fireflies are moved by the graphics card, and the Listening page
+loads YouTube's player (about 5 MB) only when you press play.
 
 ---
 

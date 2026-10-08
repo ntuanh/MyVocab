@@ -78,7 +78,11 @@ try:
 
         pg.click(f'.episode-card[data-id="{d}"]')
         check("choosing a card opens it", pg.inner_text("#episode-title") == ep[d]["title"]
-              and d in pg.get_attribute("#video-frame iframe", "src") and pg.evaluate("location.hash") == f"#{d}")
+              and d in pg.get_attribute("#video-frame .video-cover img", "src") and pg.evaluate("location.hash") == f"#{d}")
+        check("the YouTube player is not loaded before play", pg.locator("#video-frame iframe").count() == 0)
+        pg.click("#video-frame .video-cover")
+        check("play loads this episode's player, playing", d in pg.get_attribute("#video-frame iframe", "src")
+              and "autoplay=1" in pg.get_attribute("#video-frame iframe", "src"))
         check("YouTube link points at the episode", pg.get_attribute("#episode-youtube", "href").endswith(d))
         pg.fill("#score-correct", "4"); pg.fill("#score-total", "6")
         check("preview shows the points", pg.inner_text("#score-preview") == "4/6 is worth +12 points.", pg.inner_text("#score-preview"))

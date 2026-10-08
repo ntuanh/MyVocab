@@ -295,6 +295,14 @@ def start_local_db(progress):
     if local_db("status").stdout.startswith("running"):
         return False
     created = not os.path.exists(os.path.join(".localdb", "PG_VERSION"))
+    if not created:
+        # Databases made before v1.7 are rebuilt once in the lighter layout (about 30 MB
+        # smaller, same data; tools/local_db.py compact). If that fails, the old one stays.
+        progress.update(0.1, "checking its files")
+        compacted = local_db("compact", "--if-needed")
+        if compacted.returncode != 0:
+            print("\n" + (compacted.stdout + compacted.stderr).strip(), flush=True)
+            say("The database could not be made smaller; it is kept as it was.")
     progress.update(0.2, "creating it (only the first time)" if created else "starting")
     started = local_db("start")
     if started.returncode != 0:

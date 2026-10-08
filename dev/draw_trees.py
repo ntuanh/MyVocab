@@ -109,15 +109,17 @@ def grass(rng, x0, x1, ground_y):
     return "".join(parts)
 
 
-def fireflies(rng, count, box):
+def fireflies(rng, count, box, width):
+    """Plain HTML dots placed over the tree (in % of its box, which has the drawing's
+    proportions), not SVG: the browser animates HTML transform and opacity on the
+    graphics card, while SVG shapes made it lay the page out again every frame."""
     x0, y0, x1, y1 = box
     out = []
     for _ in range(count):
         x, y = rng.uniform(x0, x1), rng.uniform(y0, y1)
-        out.append(f'<g class="firefly" style="animation-delay:{-rng.uniform(0, 6):.1f}s">'
-                   f'<circle cx="{f(x)}" cy="{f(y)}" r="10" fill="url(#firefly-glow)"/>'
-                   f'<circle cx="{f(x)}" cy="{f(y)}" r="2.2" fill="#fff4c4"/></g>')
-    return "".join(out)
+        out.append(f'<i class="firefly" style="left:{100 * x / width:.2f}%;top:{y / 10:.2f}%;'
+                   f'animation-delay:{-rng.uniform(0, 6):.1f}s"></i>')
+    return '<div class="fireflies">' + "".join(out) + "</div>"
 
 
 # ---------- Banyan (left): broad dome, thick trunk, aerial roots ----------
@@ -163,8 +165,7 @@ def banyan():
     base.append(shape("bark", "".join(limb(*l) for l in flares)))
     base.append(shape("ground", "M-80,1000L-80,955C40,915 140,935 240,950C340,962 460,975 660,1000Z"))
     base.append(shape("ground", grass(rng, -60, 610, lambda x: 955 - 30 * math.exp(-((x - 120) / 150) ** 2) + 0.07 * max(0, x - 200))))
-    base.append(fireflies(random.Random(3), 7, (200, 560, 560, 890)))
-    return 640, sway, base
+    return 640, sway, base, fireflies(random.Random(3), 7, (200, 560, 560, 890), 640)
 
 
 # ---------- Indian almond (right): flat tiers of big leaves ----------
@@ -197,8 +198,7 @@ def almond():
     base.append(shape("bark", "".join(limb(*l) for l in flares)))
     base.append(shape("ground", "M-20,1000C160,975 300,945 420,940C520,936 600,945 700,955L700,1000Z"))
     base.append(shape("ground", grass(rng, 0, 690, lambda x: 945 + 55 * max(0, (380 - x) / 380) ** 1.5)))
-    base.append(fireflies(random.Random(5), 6, (60, 560, 400, 890)))
-    return 600, sway, base
+    return 600, sway, base, fireflies(random.Random(5), 6, (60, 560, 400, 890), 600)
 
 
 def svg(cls, width, inner, defs=""):
@@ -206,12 +206,10 @@ def svg(cls, width, inner, defs=""):
             f'focusable="false">{defs}{"".join(inner)}</svg>')
 
 
-DEFS = ('<defs>' + clump_def("clump-a", 1) + clump_def("clump-b", 2) + clump_def("clump-c", 4)
-        + '<radialGradient id="firefly-glow"><stop offset="0" stop-color="#ffe7a0" stop-opacity=".9"/>'
-          '<stop offset="1" stop-color="#ffe7a0" stop-opacity="0"/></radialGradient></defs>')
+DEFS = '<defs>' + clump_def("clump-a", 1) + clump_def("clump-b", 2) + clump_def("clump-c", 4) + '</defs>'
 
-bw, bsway, bbase = banyan()
-aw, asway, abase = almond()
+bw, bsway, bbase, bflies = banyan()
+aw, asway, abase, aflies = almond()
 OUT.write_text("\n".join([
     "{# The two big trees in front of the valley: a banyan on the left, an Indian",
     "   almond on the right. Made by dev/draw_trees.py: change the script and run",
@@ -222,10 +220,12 @@ OUT.write_text("\n".join([
     '    <div class="tree tree-banyan">',
     "        " + svg("tree-sway", bw, bsway, DEFS),
     "        " + svg("tree-base", bw, bbase),
+    "        " + bflies,
     "    </div>",
     '    <div class="tree tree-almond">',
     "        " + svg("tree-sway", aw, asway),
     "        " + svg("tree-base", aw, abase),
+    "        " + aflies,
     "    </div>",
     '    <div class="falling-leaves">' + "<i></i>" * 7 + "</div>",
     "</div>",

@@ -166,14 +166,28 @@ document.addEventListener('DOMContentLoaded', () => {
         metaEl.textContent = `${episode.duration} · ${episode.topic} · BBC Learning English`;
         youtubeLink.href = `https://www.youtube.com/watch?v=${episode.id}`;
 
-        // The BBC's own player, without cookies until it is played.
-        const frame = el('iframe');
-        frame.src = `https://www.youtube-nocookie.com/embed/${episode.id}?rel=0&hl=en&cc_lang_pref=en`;
-        frame.title = `${episode.title} (video)`;
-        frame.allow = 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen';
-        frame.allowFullscreen = true;
-        frame.referrerPolicy = 'strict-origin-when-cross-origin';
-        frameBox.replaceChildren(frame);
+        // The episode's picture with a play button. The BBC's own YouTube player (about
+        // 5 MB, and busy even when still) is only loaded when it is pressed.
+        const cover = el('button', 'video-cover');
+        cover.type = 'button';
+        cover.setAttribute('aria-label', `Play: ${episode.title}`);
+        const poster = el('img');
+        poster.src = `https://i.ytimg.com/vi/${episode.id}/hqdefault.jpg`;
+        poster.alt = '';
+        const play = el('span', 'video-play');
+        play.append(el('i', 'fas fa-play'));
+        cover.append(poster, play);
+        cover.addEventListener('click', () => {
+            const frame = el('iframe');
+            frame.src = `https://www.youtube-nocookie.com/embed/${episode.id}?rel=0&hl=en&cc_lang_pref=en&autoplay=1`;
+            frame.title = `${episode.title} (video)`;
+            frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+            frame.allowFullscreen = true;
+            frame.referrerPolicy = 'strict-origin-when-cross-origin';
+            frameBox.replaceChildren(frame);
+            frame.focus();
+        });
+        frameBox.replaceChildren(cover);
 
         renderDocs();
         correctInput.value = '';

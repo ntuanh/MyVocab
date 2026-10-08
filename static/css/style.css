@@ -208,14 +208,19 @@ body::before {
     opacity: var(--night-opacity);
     transition: opacity 1.2s ease;
 }
+/* The clouds slide as a whole strip, one cloud tile (1600px) wider than the screen,
+   moved by transform: the graphics card does that on its own, where moving the
+   background itself made the browser repaint the whole screen every frame. */
 body::after {
     z-index: -2;
+    left: -1600px; width: calc(100% + 1600px);
     background: url('../img/clouds.svg') 0 6vh / 1600px auto repeat-x;
     opacity: min(1, calc(var(--cloud-opacity) + var(--cloud-extra)));
     animation: drift 260s linear infinite;
+    will-change: transform;
     transition: opacity 1.2s ease;
 }
-@keyframes drift { to { background-position: 1600px 6vh; } }
+@keyframes drift { to { transform: translateX(1600px); } }
 @media (prefers-reduced-motion: reduce) {
     body::after, .fx-precip, .fx-fog { animation: none !important; }
     .fx-flash { display: none; }
@@ -356,7 +361,14 @@ body::after {
 :root[data-weather="snow"] { --tree-snow-opacity: 0.95; }
 
 /* Fireflies come out on dry nights. */
-.firefly { opacity: 0; transition: opacity 1.2s ease; }
+/* Fireflies are HTML dots over the trees (dev/draw_trees.py): a bright core in a soft glow. */
+.fireflies { position: absolute; inset: 0; }
+.firefly {
+    position: absolute; width: calc(var(--tree-height) * 0.02); aspect-ratio: 1; border-radius: 50%;
+    margin: calc(var(--tree-height) * -0.01) 0 0 calc(var(--tree-height) * -0.01);
+    background: radial-gradient(circle closest-side, #fff4c4 0 22%, rgba(255, 231, 160, 0.75) 26%, rgba(255, 231, 160, 0) 100%);
+    opacity: 0; transition: opacity 1.2s ease; will-change: transform, opacity;
+}
 :root[data-theme="night"]:is([data-weather="clear"], [data-weather="partly"], [data-weather="cloudy"]) .firefly { opacity: 0.7; }
 @media (prefers-reduced-motion: no-preference) {
     :root[data-theme="night"]:is([data-weather="clear"], [data-weather="partly"], [data-weather="cloudy"]) .firefly {
@@ -1396,6 +1408,21 @@ td:first-child { font-weight: 700; color: var(--accent); }
     background-color: #000;
 }
 .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+/* Before play: the episode's picture and a play button (the player loads on press). */
+.video-cover {
+    position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; cursor: pointer;
+    background-color: #000; display: block;
+}
+.video-cover img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.88; transition: opacity 0.2s; }
+.video-play {
+    position: absolute; left: 50%; top: 50%; width: 76px; height: 54px; margin: -27px 0 0 -38px;
+    display: grid; place-items: center; border-radius: 16px;
+    background-color: rgba(204, 0, 0, 0.92); color: #fff; font-size: 1.5rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35); transition: transform 0.2s;
+}
+.video-cover:hover img, .video-cover:focus-visible img { opacity: 1; }
+.video-cover:hover .video-play, .video-cover:focus-visible .video-play { transform: scale(1.08); }
+.video-cover:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 #listening-area .episode-links { margin: 0.6rem 0 0; font-size: 0.88rem; color: var(--ink-soft); }
 .episode-links a { color: var(--accent); font-weight: 800; text-decoration: none; }
 .episode-links a:hover { text-decoration: underline; }
