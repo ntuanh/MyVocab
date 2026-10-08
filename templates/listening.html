@@ -24,7 +24,8 @@
                 <li><strong>Watch an episode.</strong> Try it without subtitles first; the
                     <kbd>CC</kbd> button in the player turns them on for a second listen.</li>
                 <li><strong>Do its BBC quiz or worksheet.</strong> The link is in the video's
-                    description on YouTube. From Vietnam the BBC site needs a UK VPN.</li>
+                    description on YouTube. From Vietnam the BBC site needs a VPN or Tor Browser.
+                    Add the worksheet to the episode here, so it opens next to the video.</li>
                 <li><strong>Enter your score here</strong> to win listening points.</li>
             </ol>
 
@@ -46,6 +47,23 @@
                         <i class="fab fa-youtube" aria-hidden="true"></i> Open on YouTube</a>
                     to find the BBC worksheet link in its description.
                 </p>
+
+                <!-- This episode's own files: kept privately in the learner's database. -->
+                <section id="episode-docs" class="episode-docs" aria-labelledby="docs-title">
+                    <div class="docs-head">
+                        <h4 id="docs-title"><i class="fas fa-paperclip" aria-hidden="true"></i> Worksheet &amp; transcript</h4>
+                        <button type="button" id="docs-add" class="docs-add"><i class="fas fa-plus" aria-hidden="true"></i> Add a file</button>
+                        <input type="file" id="docs-input" class="visually-hidden" multiple tabindex="-1" aria-hidden="true"
+                               accept=".pdf,.docx,.doc,.txt,.png,.jpg,.jpeg,.webp,.mp3">
+                    </div>
+                    <p id="docs-hint" class="docs-hint">Download this episode's worksheet, transcript or audio
+                        from its BBC page, then drop it here or press <strong>Add a file</strong>. PDF, Word, text,
+                        pictures or MP3, up to 20 MB. Your files stay private in your own database, and your
+                        backups include them.</p>
+                    <ul id="docs-list" class="docs-list"></ul>
+                    <p id="docs-status" class="docs-status" role="status" aria-live="polite"></p>
+                    <div id="docs-viewer" class="docs-viewer hidden"></div>
+                </section>
 
                 <form id="score-form" class="score-form" novalidate
                       data-points-per-answer="{{ points_per_answer }}" data-wrong-loses="{{ wrong_loses }}">

@@ -1392,6 +1392,53 @@ td:first-child { font-weight: 700; color: var(--accent); }
 #listening-area .score-result.loss { background-color: var(--bad-bg); color: var(--bad-ink); }
 #listening-area .score-history { margin: 0.6rem 0 0; font-size: 0.85rem; color: var(--ink-soft); }
 
+/* The episode's own files (listening.js section 5): a drop zone with a list and a viewer. */
+.episode-docs {
+    margin-top: 1rem; padding: 0.85rem 1rem; border-radius: 14px;
+    border: 1.5px dashed var(--line); background-color: var(--paper-inset);
+    transition: border-color 0.2s, background-color 0.2s;
+}
+.episode-docs.dropping { border-color: var(--accent); background-color: var(--accent-soft); }
+.docs-head { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
+#listening-area .docs-head h4 { margin: 0; font-size: 1rem; }
+.docs-head h4 i { color: var(--accent); }
+.docs-add {
+    flex: none; white-space: nowrap; padding: 0.35rem 0.9rem; border-radius: 999px; cursor: pointer; font: inherit; font-size: 0.85rem; font-weight: 800;
+    border: 1.5px solid var(--accent); background-color: var(--paper-raised); color: var(--accent);
+}
+.docs-add:hover { background-color: var(--accent); color: var(--accent-ink); }
+.docs-add:disabled { opacity: 0.55; cursor: not-allowed; }
+#listening-area .docs-hint { margin: 0.45rem 0 0; font-size: 0.82rem; color: var(--ink-soft); }
+.docs-list { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 0.4rem; }
+.docs-list:empty { display: none; }
+.doc-item {
+    display: flex; align-items: center; gap: 0.6rem; padding: 0.45rem 0.6rem; border-radius: 10px;
+    background-color: var(--paper-raised); border: 1px solid var(--line);
+}
+.doc-icon { color: var(--accent); font-size: 1.15rem; flex: none; }
+.doc-text { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.doc-name { font-weight: 700; font-size: 0.9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.doc-meta { font-size: 0.75rem; color: var(--ink-faint); }
+.doc-actions { display: flex; align-items: center; gap: 0.35rem; flex: none; }
+.doc-open, .doc-download, .doc-delete {
+    padding: 0.25rem 0.65rem; border-radius: 999px; font: inherit; font-size: 0.8rem; font-weight: 800;
+    cursor: pointer; text-decoration: none; border: 1px solid var(--line); background-color: transparent; color: var(--ink);
+}
+.doc-open { background-color: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.doc-open[aria-expanded="true"] { background-color: var(--accent-hover); }
+.doc-download:hover, .doc-delete:hover { background-color: var(--paper-hover); }
+.doc-delete { color: var(--danger); }
+#listening-area .docs-status { margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--ink-soft); white-space: pre-line; }
+#listening-area .docs-status:empty { display: none; }
+#listening-area .docs-status.gain { color: var(--ok-ink); }
+#listening-area .docs-status.loss { color: var(--bad-ink); }
+.docs-status a { color: var(--accent); font-weight: 800; }
+.docs-viewer { margin-top: 0.6rem; border-radius: 10px; overflow: hidden; background-color: var(--paper-raised); }
+.docs-viewer iframe { display: block; width: 100%; height: 70vh; min-height: 420px; border: 0; background-color: #fff; }
+.docs-viewer img { display: block; max-width: 100%; margin: 0 auto; }
+.docs-viewer audio { display: block; width: 100%; }
+.episode-docs-count { color: var(--accent); font-weight: 800; white-space: nowrap; }
+
 .library-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; margin-bottom: 1rem; }
 #listening-area .library-head h3 { margin: 0; border: none; padding: 0; flex: 1; }
 .library-filters { display: flex; gap: 0.3rem; }
@@ -1436,6 +1483,9 @@ td:first-child { font-weight: 700; color: var(--accent); }
 @media (max-width: 760px) {
     /* On a phone the player comes first; the steps and the target follow. */
     #listening-area { order: -1; }
+    .doc-item { flex-wrap: wrap; }
+    .doc-actions { width: 100%; justify-content: flex-end; }
+    .docs-viewer iframe { height: 60vh; min-height: 320px; }
     .practice-tabs { margin-bottom: -0.25rem; }
     .practice-tabs a { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
     .episode-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.6rem; }

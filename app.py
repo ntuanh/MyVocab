@@ -11,13 +11,16 @@ try:
 except ImportError:
     pass
 
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for
+from urllib.parse import quote
+
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for, make_response
 
 from myvocab.handle_request import get_dictionary_data, choose_topic, OK, SKIPPED
 from myvocab.practice import DEFAULT_COUNT, MAX_COUNT, make_exercises, check_answer, check_grammar, give_up
 from myvocab.practice import SKILL as PRACTICE_SKILL
 from myvocab.listening import POINTS_PER_ANSWER, WRONG_LOSES, episodes_with_scores, save_score
 from myvocab.listening import SKILL as LISTENING_SKILL
+from myvocab.listening import MAX_DOC_BYTES, docs_by_episode, save_doc
 from myvocab.reading import POINTS_RIGHT, WRONG_LOSES as READING_WRONG_LOSES, MINUTES_PER_PART, PARTS_BY_ID, public_part, plan as reading_plan
 from myvocab.reading import submit as submit_reading, SKILL as READING_SKILL
 from myvocab.writing import KINDS as WRITING_KINDS, MAX_SCORE as WRITING_MAX, SKILL as WRITING_SKILL
@@ -39,7 +42,9 @@ from myvocab.database import (
     get_correct_answer_by_id,
     get_all_topics,
     add_new_topic,
-    delete_topic_by_id
+    delete_topic_by_id,
+    get_listening_doc,
+    delete_listening_doc,
 )
 
 # --- FLASK APP SETUP ---
@@ -52,6 +57,8 @@ app = Flask(__name__,
 # must sign cookies with the same key, so it has to come from the environment --
 # the fallback below is only good enough for a local run.
 app.secret_key = os.environ.get("FLASK_SECRET_KEY")
+# The largest upload: an episode's audio or worksheet (myvocab/listening.py), with room for the form.
+app.config['MAX_CONTENT_LENGTH'] = 21 * 1024 * 1024
 if not app.secret_key:
     print("WARN: FLASK_SECRET_KEY is not set. Using an insecure development key -- "
           "anyone could forge the /data session cookie. Set it in your Vercel "
@@ -438,6 +445,63 @@ def listening_score_route():
     if status == 200:
         body['progress'] = get_progress(LISTENING_SKILL, _utc_offset(data.get('utc_offset')))
     return jsonify(body), status
+
+# --- An episode's own files (the BBC worksheet, transcript, audio) ---
+# Private like My Words: open on this computer, online only after the password.
+DOCS_LOCKED = {'error': 'Your files are private. Unlock My Words to see them.', 'locked': True}
+# Shown in the page (PDF, text, pictures, audio); Word files are downloaded.
+DOCS_SHOWN = ('application/pdf', 'text/plain', 'image/png', 'image/jpeg', 'image/webp', 'audio/mpeg')
+
+
+@app.route('/api/listening/docs', methods=['GET'])
+def listening_docs_route():
+    """Every episode's files: {episode id: [name, type, size, date]}."""
+    if not has_data_access():
+        return jsonify(DOCS_LOCKED), 403
+    docs = docs_by_episode()
+    if docs is None:
+        return jsonify({'error': 'Could not read your files.'}), 500
+    return jsonify({'docs': docs, 'max_bytes': MAX_DOC_BYTES})
+
+
+@app.route('/api/listening/docs', methods=['POST'])
+def listening_doc_upload_route():
+    """Adds one file (form field "file") to an episode (form field "episode_id")."""
+    if not has_data_access():
+        return jsonify(DOCS_LOCKED), 403
+    upload = request.files.get('file')
+    if not upload:
+        return jsonify({'error': 'Choose a file to add.'}), 400
+    body, status = save_doc(request.form.get('episode_id'), upload.filename, upload.read(MAX_DOC_BYTES + 1))
+    return jsonify(body), status
+
+
+@app.route('/api/listening/docs/<int:doc_id>', methods=['GET'])
+def listening_doc_file_route(doc_id):
+    """The file itself: shown in the page when the browser can, otherwise downloaded."""
+    if not has_data_access():
+        return jsonify(DOCS_LOCKED), 403
+    doc = get_listening_doc(doc_id)
+    if not doc:
+        return jsonify({'error': 'That file is not here any more.'}), 404
+    shown = doc['content_type'].split(';')[0] in DOCS_SHOWN and request.args.get('download') != '1'
+    response = make_response(doc['data'])
+    response.headers['Content-Type'] = doc['content_type']
+    response.headers['Content-Disposition'] = (
+        f"{'inline' if shown else 'attachment'}; filename*=UTF-8''{quote(doc['filename'])}")
+    response.headers['X-Content-Type-Options'] = 'nosniff'  # never read as anything but its own type
+    response.headers['Cache-Control'] = 'private, max-age=3600'
+    return response
+
+
+@app.route('/api/listening/docs/<int:doc_id>', methods=['DELETE'])
+def listening_doc_delete_route(doc_id):
+    if not has_data_access():
+        return jsonify(DOCS_LOCKED), 403
+    if not delete_listening_doc(doc_id):
+        return jsonify({'error': 'That file is not here any more.'}), 404
+    return jsonify({'deleted': doc_id})
+
 
 @app.route('/api/reading/plan', methods=['GET'])
 def reading_plan_route():

@@ -97,6 +97,17 @@ def initialize_schema(cursor):
                 points INTEGER NOT NULL, counted BOOLEAN NOT NULL
             );
         ''')
+        # Files the learner adds to a listening episode: the BBC worksheet, the
+        # transcript, the audio. Kept in the database so a backup carries them; they
+        # are private (My Words access) and never go into the word pack or to GitHub.
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS listening_docs (
+                id SERIAL PRIMARY KEY, uploaded_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+                episode_id TEXT NOT NULL, filename TEXT NOT NULL, content_type TEXT NOT NULL,
+                size INTEGER NOT NULL, data BYTEA NOT NULL
+            );
+        ''')
+        cursor.execute("CREATE INDEX IF NOT EXISTS listening_docs_episode ON listening_docs (episode_id);")
 
         cursor.execute("SELECT COUNT(*) FROM topics;")
         if cursor.fetchone()[0] == 0:
@@ -408,6 +419,39 @@ def save_listening_attempt(cur, episode_id, correct, total, worth, points):
         cur.execute("INSERT INTO practice_points (skill, word_id, mode, verdict, worth, points) "
                     "VALUES ('listening', NULL, 'bbc_6min', 'exam', %s, %s);", (worth, earned))
     return {"counted": counted, "points": earned}
+
+
+DOC_FIELDS = "id, episode_id, filename, content_type, size, uploaded_at"
+
+
+@db_transaction(on_error=None)
+def add_listening_doc(cur, episode_id, filename, content_type, data):
+    """Saves a file for an episode; returns its details (without the bytes)."""
+    cur.execute(f"INSERT INTO listening_docs (episode_id, filename, content_type, size, data) "
+                f"VALUES (%s, %s, %s, %s, %s) RETURNING {DOC_FIELDS};",
+                (episode_id, filename, content_type, len(data), psycopg2.Binary(data)))
+    return dict(cur.fetchone())
+
+
+@db_transaction(on_error=None)
+def list_listening_docs(cur):
+    """Every episode's files, oldest first, without their bytes."""
+    cur.execute(f"SELECT {DOC_FIELDS} FROM listening_docs ORDER BY uploaded_at, id;")
+    return [dict(row) for row in cur.fetchall()]
+
+
+@db_transaction(on_error=None)
+def get_listening_doc(cur, doc_id):
+    """One file with its bytes, or None."""
+    cur.execute(f"SELECT {DOC_FIELDS}, data FROM listening_docs WHERE id = %s;", (doc_id,))
+    row = cur.fetchone()
+    return dict(row, data=bytes(row['data'])) if row else None
+
+
+@db_transaction(on_error=False)
+def delete_listening_doc(cur, doc_id):
+    cur.execute("DELETE FROM listening_docs WHERE id = %s;", (doc_id,))
+    return cur.rowcount == 1
 
 
 @db_transaction(on_error=None)

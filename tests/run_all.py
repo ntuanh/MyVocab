@@ -34,7 +34,7 @@ import urllib.request
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TESTS = os.path.join(ROOT, "tests")
 PYTHON = sys.executable
-SUITES = ["trees", "fx", "tracking", "listening", "reading", "writing_logic", "writing_ui", "update_ui"]
+SUITES = ["trees", "fx", "tracking", "listening", "listening_docs", "reading", "writing_logic", "writing_ui", "update_ui"]
 
 
 def free_port():

@@ -2,6 +2,8 @@
 // Listening practice: pick a BBC 6 Minute English episode, watch it in the
 // BBC's YouTube player, then enter your score on its BBC quiz or worksheet.
 // The first score of each episode becomes listening points (listening.py).
+// Each episode can also keep the learner's own files (worksheet, transcript,
+// audio), shown next to the video: see section 5.
 
 document.addEventListener('DOMContentLoaded', () => {
     const goals = window.MyVocabGoals;
@@ -23,6 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const emptyEl = document.getElementById('library-empty');
     const filterBtns = Array.from(document.querySelectorAll('[data-filter]'));
     const topicSelect = document.getElementById('topic-filter');
+    const docsBox = document.getElementById('episode-docs');
+    const docsList = document.getElementById('docs-list');
+    const docsInput = document.getElementById('docs-input');
+    const docsAdd = document.getElementById('docs-add');
+    const docsStatus = document.getElementById('docs-status');
+    const docsViewer = document.getElementById('docs-viewer');
 
     const PER_ANSWER = Number(form.dataset.pointsPerAnswer);
     const WRONG_LOSES = Number(form.dataset.wrongLoses);
@@ -31,6 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let episodes = [];
     let current = null;
     let filter = 'all';
+    let docs = {};          // episode id -> its files
+    let docsLocked = false; // online, before the My Words password
+    let maxDocBytes = 20 * 1024 * 1024;
 
     // --- 2. HELPERS ---
 
@@ -90,6 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
             : el('span', 'episode-status', 'To do');
         const meta = el('span', 'episode-card-meta');
         meta.append(el('span', '', episode.topic), status);
+        const files = (docs[episode.id] || []).length;
+        if (files) {
+            const clip = el('span', 'episode-docs-count');
+            clip.title = `${files} file${files === 1 ? '' : 's'} kept`;
+            clip.append(el('i', 'fas fa-paperclip'), ` ${files}`);
+            meta.append(clip);
+        }
 
         button.append(thumb, el('span', 'episode-card-title', episode.title), meta);
         button.style.setProperty('--i', Math.min(index, 20));  // cards appear one after another
@@ -157,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         frame.referrerPolicy = 'strict-origin-when-cross-origin';
         frameBox.replaceChildren(frame);
 
+        renderDocs();
         correctInput.value = '';
         totalInput.value = DEFAULT_TOTAL;
         show(resultEl, false);
@@ -211,7 +230,181 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 5. LOADING ---
+    // --- 5. THE EPISODE'S FILES ---
+
+    const ICONS = {
+        'application/pdf': 'fa-file-pdf', 'text/plain': 'fa-file-alt', 'audio/mpeg': 'fa-file-audio',
+        'image/png': 'fa-file-image', 'image/jpeg': 'fa-file-image', 'image/webp': 'fa-file-image',
+    };
+    const kind = doc => doc.content_type.split(';')[0];
+    const shownInPage = doc => kind(doc) in ICONS;  // Word files are downloaded instead
+
+    function sizeText(bytes) {
+        return bytes < 1024 * 1024 ? `${Math.max(1, Math.round(bytes / 1024))} KB` : `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+    }
+
+    function docsMessage(text, tone) {
+        docsStatus.textContent = text;
+        docsStatus.className = `docs-status${tone ? ' ' + tone : ''}`;
+    }
+
+    function closeViewer() {
+        docsViewer.replaceChildren();
+        show(docsViewer, false);
+        docsList.querySelectorAll('[data-open]').forEach(b => b.setAttribute('aria-expanded', 'false'));
+    }
+
+    function openViewer(doc, button) {
+        const wasOpen = button.getAttribute('aria-expanded') === 'true';
+        closeViewer();
+        if (wasOpen) return;
+        const url = `/api/listening/docs/${doc.id}`;
+        let view;
+        if (kind(doc) === 'audio/mpeg') {
+            view = el('audio');
+            view.controls = true;
+            view.src = url;
+        } else if (kind(doc).startsWith('image/')) {
+            view = el('img');
+            view.src = url;
+            view.alt = doc.filename;
+        } else {
+            view = el('iframe');
+            view.src = url;
+            view.title = doc.filename;
+        }
+        docsViewer.replaceChildren(view);
+        show(docsViewer, true);
+        button.setAttribute('aria-expanded', 'true');
+    }
+
+    function renderDocs() {
+        if (!current) return;
+        closeViewer();
+        if (docsLocked) {
+            docsList.replaceChildren();
+            docsAdd.disabled = true;
+            docsStatus.replaceChildren('Your files are private. ');
+            const link = el('a', '', 'Unlock My Words');
+            link.href = '/?unlock=1';
+            docsStatus.append(link, ' to see and add them.');
+            return;
+        }
+        docsAdd.disabled = false;
+        const files = docs[current.id] || [];
+        docsList.replaceChildren(...files.map(doc => {
+            const li = el('li', 'doc-item');
+            const icon = el('i', `fas ${ICONS[kind(doc)] || 'fa-file-word'} doc-icon`);
+            icon.setAttribute('aria-hidden', 'true');
+            const name = el('span', 'doc-name', doc.filename);
+            const meta = el('span', 'doc-meta', `${sizeText(doc.size)} · added ${new Date(doc.uploaded_at).toLocaleDateString()}`);
+            const actions = el('span', 'doc-actions');
+            if (shownInPage(doc)) {
+                const open = el('button', 'doc-open', kind(doc) === 'audio/mpeg' ? 'Play' : 'Open');
+                open.type = 'button';
+                open.dataset.open = doc.id;
+                open.setAttribute('aria-expanded', 'false');
+                open.addEventListener('click', () => openViewer(doc, open));
+                actions.append(open);
+            }
+            const download = el('a', 'doc-download', 'Download');
+            download.href = `/api/listening/docs/${doc.id}?download=1`;
+            const remove = el('button', 'doc-delete');
+            remove.type = 'button';
+            remove.setAttribute('aria-label', `Delete ${doc.filename}`);
+            remove.dataset.delete = doc.id;
+            remove.append(el('i', 'fas fa-trash-alt'));
+            remove.addEventListener('click', () => deleteDoc(doc));
+            actions.append(download, remove);
+            const text = el('span', 'doc-text');
+            text.append(name, meta);
+            li.append(icon, text, actions);
+            return li;
+        }));
+        if (!docsStatus.classList.contains('gain') && !docsStatus.classList.contains('loss')) docsMessage('');
+    }
+
+    async function loadDocs() {
+        try {
+            const data = await goals.requestJSON('/api/listening/docs');
+            docs = data.docs;
+            maxDocBytes = data.max_bytes || maxDocBytes;
+            docsLocked = false;
+        } catch (error) {
+            docs = {};
+            docsLocked = Boolean(error.data && error.data.locked);
+            if (!docsLocked) docsMessage('Could not load your files.', 'loss');
+        }
+    }
+
+    async function uploadFiles(fileList) {
+        if (!current || docsLocked) return;
+        const files = Array.from(fileList);
+        if (!files.length) return;
+        const episodeId = current.id;
+        const problems = [];
+        let added = 0;
+        docsAdd.disabled = true;
+        for (const [i, file] of files.entries()) {
+            docsMessage(files.length > 1 ? `Adding ${i + 1} of ${files.length}: ${file.name} …` : `Adding ${file.name} …`);
+            if (file.size > maxDocBytes) {
+                problems.push(`${file.name}: over ${Math.round(maxDocBytes / 1024 / 1024)} MB.`);
+                continue;
+            }
+            const form = new FormData();
+            form.append('episode_id', episodeId);
+            form.append('file', file);
+            try {
+                const response = await fetch('/api/listening/docs', { method: 'POST', body: form });
+                const body = await response.json().catch(() => ({}));
+                if (response.ok) added += 1;
+                else problems.push(`${file.name}: ${body.error || (response.status === 413 ? 'too big to send.' : `the server answered ${response.status}.`)}`);
+            } catch (error) {
+                problems.push(`${file.name}: MyVocab is not answering.`);
+            }
+        }
+        await loadDocs();
+        renderGrid();
+        if (current && current.id === episodeId) renderDocs();
+        docsAdd.disabled = docsLocked;
+        const done = added ? `Added ${added} file${added === 1 ? '' : 's'}.` : '';
+        docsMessage([done, ...problems].filter(Boolean).join('\n'), problems.length ? 'loss' : 'gain');  // one line each
+        docsInput.value = '';
+    }
+
+    async function deleteDoc(doc) {
+        if (!confirm(`Delete "${doc.filename}" from this episode?`)) return;
+        try {
+            const response = await fetch(`/api/listening/docs/${doc.id}`, { method: 'DELETE' });
+            if (!response.ok) throw new Error();
+            docsMessage(`Deleted ${doc.filename}.`, 'gain');
+        } catch (error) {
+            docsMessage(`Could not delete ${doc.filename}.`, 'loss');
+        }
+        await loadDocs();
+        renderGrid();
+        renderDocs();
+    }
+
+    docsAdd.addEventListener('click', () => docsInput.click());
+    docsInput.addEventListener('change', () => uploadFiles(docsInput.files));
+    // Files can also be dropped anywhere on the box.
+    ['dragenter', 'dragover'].forEach(type => docsBox.addEventListener(type, (e) => {
+        if (docsLocked || !e.dataTransfer || !Array.from(e.dataTransfer.types).includes('Files')) return;
+        e.preventDefault();
+        docsBox.classList.add('dropping');
+    }));
+    ['dragleave', 'drop'].forEach(type => docsBox.addEventListener(type, (e) => {
+        if (type === 'dragleave' && docsBox.contains(e.relatedTarget)) return;
+        docsBox.classList.remove('dropping');
+    }));
+    docsBox.addEventListener('drop', (e) => {
+        if (docsLocked || !e.dataTransfer || !e.dataTransfer.files.length) return;
+        e.preventDefault();
+        uploadFiles(e.dataTransfer.files);
+    });
+
+    // --- 6. LOADING ---
 
     async function loadEpisodes() {
         const data = await goals.requestJSON('/api/listening/episodes');
@@ -221,6 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function start() {
         try {
+            await loadDocs();
             await loadEpisodes();
         } catch (error) {
             titleEl.textContent = 'Could not load the episodes.';
